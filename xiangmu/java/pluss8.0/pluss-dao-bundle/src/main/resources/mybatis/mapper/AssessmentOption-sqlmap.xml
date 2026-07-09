@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.AssessmentOptionMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    question_id,
+    option_mark,
+    isuse,
+    option_content,
+    serial_number,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.questionId},
+    #{item.optionMark},
+    #{item.isuse},
+    #{item.optionContent},
+    #{item.serialNumber},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_assessment_option
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.AssessmentOption">
+        SELECT * from  tb_jiangyukeji_assessment_option
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="questionId!=null and questionId!=''">
+            and question_id = #{questionId}
+        </if>
+        <if test="optionMark!=null and optionMark!=''">
+            and option_mark = #{optionMark}
+        </if>
+        <if test="isuse!=null and isuse!=''">
+            and isuse = #{isuse}
+        </if>
+        <if test="optionContent!=null and optionContent!=''">
+            and option_content = #{optionContent}
+        </if>
+        <if test="serialNumber!=null and serialNumber!=''">
+            and serial_number = #{serialNumber}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_assessment_option
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="questionId!=null and questionId!=''">
+            and question_id = #{questionId}
+        </if>
+        <if test="optionMark!=null and optionMark!=''">
+            and option_mark = #{optionMark}
+        </if>
+        <if test="isuse!=null and isuse!=''">
+            and isuse = #{isuse}
+        </if>
+        <if test="optionContent!=null and optionContent!=''">
+            and option_content = #{optionContent}
+        </if>
+        <if test="serialNumber!=null and serialNumber!=''">
+            and serial_number = #{serialNumber}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+    <select id="selectByQuestionIds" resultType="cn.pluss.platform.model.entity.AssessmentOption">
+        SELECT * FROM tb_jiangyukeji_assessment_option
+        WHERE question_id IN
+        <foreach collection="list" item="questionId" open="(" separator="," close=")">
+            #{questionId}
+        </foreach>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartDeviceGrantMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    institution_code,
+    big_device_type,
+    pid,
+    type_id,
+    device_name,
+    device_serial,
+    is_online,
+    battery,
+    syn_status,
+    grant_type,
+    scene_type,
+    elder_id,
+    elder_name,
+    id_card,
+    room_id,
+    room_name,
+    bed_id,
+    bed_name,
+    grant_location,
+    img,
+    param,
+    device_version,
+    belong_institution_type,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    gsp_state
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.institutionCode},
+    #{item.bigDeviceType},
+    #{item.pid},
+    #{item.typeId},
+    #{item.deviceName},
+    #{item.deviceSerial},
+    #{item.isOnline},
+    #{item.battery},
+    #{item.synStatus},
+    #{item.grantType},
+    #{item.sceneType},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.roomId},
+    #{item.roomName},
+    #{item.bedId},
+    #{item.bedName},
+    #{item.grantLocation},
+    #{item.img},
+    #{item.param},
+    #{item.deviceVersion},
+    #{item.belongInstitutionType},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.gspState}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_device_grant
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.SmartDeviceGrant">
+        SELECT * from  tb_jiangyukeji_smart_device_grant
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="institutionCode!=null and institutionCode!=''">
+            and institution_code = #{institutionCode}
+        </if>
+        <if test="bigDeviceType!=null and bigDeviceType!=''">
+            and big_device_type = #{bigDeviceType}
+        </if>
+        <if test="pid!=null and pid!=''">
+            and pid = #{pid}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="isOnline!=null and isOnline!=''">
+            and is_online = #{isOnline}
+        </if>
+        <if test="battery!=null and battery!=''">
+            and battery = #{battery}
+        </if>
+        <if test="synStatus!=null and synStatus!=''">
+            and syn_status = #{synStatus}
+        </if>
+        <if test="grantType!=null and grantType!=''">
+            and grant_type = #{grantType}
+        </if>
+        <if test="sceneType!=null and sceneType!=''">
+            and scene_type = #{sceneType}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="roomId!=null and roomId!=''">
+            and room_id = #{roomId}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="bedId!=null and bedId!=''">
+            and bed_id = #{bedId}
+        </if>
+        <if test="bedName!=null and bedName!=''">
+            and bed_name = #{bedName}
+        </if>
+        <if test="grantLocation!=null and grantLocation!=''">
+            and grant_location = #{grantLocation}
+        </if>
+        <if test="img!=null and img!=''">
+            and img = #{img}
+        </if>
+        <if test="param!=null and param!=''">
+            and param = #{param}
+        </if>
+        <if test="deviceVersion!=null and deviceVersion!=''">
+            and device_version = #{deviceVersion}
+        </if>
+        <if test="belongInstitutionType!=null and belongInstitutionType!=''">
+            and belong_institution_type = #{belongInstitutionType}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="gspState!=null and gspState!=''">
+            and gsp_state = #{gspState}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_device_grant
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="institutionCode!=null and institutionCode!=''">
+            and institution_code = #{institutionCode}
+        </if>
+        <if test="bigDeviceType!=null and bigDeviceType!=''">
+            and big_device_type = #{bigDeviceType}
+        </if>
+        <if test="pid!=null and pid!=''">
+            and pid = #{pid}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="isOnline!=null and isOnline!=''">
+            and is_online = #{isOnline}
+        </if>
+        <if test="battery!=null and battery!=''">
+            and battery = #{battery}
+        </if>
+        <if test="synStatus!=null and synStatus!=''">
+            and syn_status = #{synStatus}
+        </if>
+        <if test="grantType!=null and grantType!=''">
+            and grant_type = #{grantType}
+        </if>
+        <if test="sceneType!=null and sceneType!=''">
+            and scene_type = #{sceneType}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="roomId!=null and roomId!=''">
+            and room_id = #{roomId}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="bedId!=null and bedId!=''">
+            and bed_id = #{bedId}
+        </if>
+        <if test="bedName!=null and bedName!=''">
+            and bed_name = #{bedName}
+        </if>
+        <if test="grantLocation!=null and grantLocation!=''">
+            and grant_location = #{grantLocation}
+        </if>
+        <if test="img!=null and img!=''">
+            and img = #{img}
+        </if>
+        <if test="param!=null and param!=''">
+            and param = #{param}
+        </if>
+        <if test="deviceVersion!=null and deviceVersion!=''">
+            and device_version = #{deviceVersion}
+        </if>
+        <if test="belongInstitutionType!=null and belongInstitutionType!=''">
+            and belong_institution_type = #{belongInstitutionType}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="gspState!=null and gspState!=''">
+            and gsp_state = #{gspState}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

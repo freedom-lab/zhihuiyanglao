@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.RoleInfoMapper">
+
+	   	<insert id="saveRoleInfo" parameterType="cn.pluss.platform.model.auth.RoleInfo">
+        	insert into tb_yunlankeji_role_info(roleCode,name,creator,createTime,updator,updateTime,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{roleCode},#{name},#{creator},#{createTime},#{updator},#{updateTime},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    	</insert>
+
+	   	<insert id="saveRoleInfoBatch">
+        	insert into tb_yunlankeji_role_info(roleCode,name,creator,createTime,updator,updateTime,tenant_id,corp_id,corp_name,institution_id,institution_name) VALUES
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{roleCode},#{name},#{creator},#{createTime},#{updator},#{updateTime},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+				</foreach>
+    	</insert>
+
+		<select id="queryRoleInfo" parameterType="cn.pluss.platform.model.auth.RoleInfo" resultType="cn.pluss.platform.model.auth.RoleInfo">
+			SELECT * from tb_yunlankeji_role_info 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="roleCode!= null and roleCode!='' "> 
+					 	and roleCode = #{roleCode}
+					 </if> 
+					<if test="name!= null and name!='' "> 
+					 	and name = #{name}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 	and creator = #{creator}
+					 </if> 
+					<if test="createTime!= null and createTime!='' "> 
+					 	and createTime = #{createTime}
+					 </if> 
+					<if test="updator!= null and updator!='' "> 
+					 	and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null and updateTime!='' "> 
+					 	and updateTime = #{updateTime}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<select id="queryRoleInfoList" parameterType="cn.pluss.platform.model.auth.RoleInfo" resultType="cn.pluss.platform.model.auth.RoleInfo">
+			SELECT * from tb_yunlankeji_role_info 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="roleCode!= null and roleCode!='' "> 
+					 and 	roleCode = #{roleCode}
+					 </if> 
+					<if test="name!= null and name!='' "> 
+					 and name LIKE CONCAT('%',#{name},'%')
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 and 	creator = #{creator}
+					 </if> 
+					<if test="createTime!= null and createTime!='' "> 
+					 and 	createTime = #{createTime}
+					 </if> 
+					<if test="updator!= null and updator!='' "> 
+					 and 	updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null and updateTime!='' "> 
+					 and 	updateTime = #{updateTime}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<update id="updateRoleInfo" parameterType="cn.pluss.platform.model.auth.RoleInfo" >
+			update tb_yunlankeji_role_info 
+				  <set> 
+					<if test="roleCode!= null  and roleCode!='' "> 
+					 	roleCode = #{roleCode},
+					 </if> 
+					<if test="name!= null  and name!='' "> 
+					 	name = #{name},
+					 </if> 
+					<if test="creator!= null  and creator!='' "> 
+					 	creator = #{creator},
+					 </if> 
+					<if test="tenantId!= null  and tenantId!='' ">
+					 	tenant_id = #{tenantId},
+					 </if>
+					<if test="corpId!= null  and corpId!='' ">
+					 	corp_id = #{corpId},
+					 </if>
+					<if test="corpName!= null  and corpName!='' ">
+					 	corp_name = #{corpName},
+					 </if>
+					<if test="institutionId!= null  and institutionId!='' ">
+					 	institution_id = #{institutionId},
+					 </if>
+					<if test="institutionName!= null  and institutionName!='' ">
+					 	institution_name = #{institutionName},
+					 </if>
+					<if test="createTime!= null  ">
+					 	createTime = #{createTime},
+					 </if> 
+					<if test="updator!= null  and updator!='' "> 
+					 	updator = #{updator},
+					 </if> 
+					<if test="updateTime!= null  "> 
+					 	updateTime = #{updateTime}
+					 </if> 
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deleteRoleInfo" parameterType="cn.pluss.platform.model.auth.RoleInfo" >
+			DELETE FROM tb_yunlankeji_role_info where id=#{id}
+		</delete>
+
+		<delete id="deleteRoleInfoBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_role_info where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryRoleInfoPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.RoleInfo">
+			SELECT * from tb_yunlankeji_role_info 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="roleCode!= null  and roleCode!=''   "> 
+					and roleCode = #{roleCode}
+					 </if> 
+					<if test="name!= null  and name!=''   "> 
+					and name = #{name}
+					 </if> 
+					<if test="creator!= null  and creator!=''   "> 
+					and creator = #{creator}
+					 </if> 
+					<if test="createTime!= null  and createTime!=''   "> 
+					and createTime = #{createTime}
+					 </if> 
+					<if test="updator!= null  and updator!=''   "> 
+					and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null  and updateTime!=''   "> 
+					and updateTime = #{updateTime}
+					 </if>
+					<if test="tenantId!= null  and tenantId!=''   ">
+					and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!=''   ">
+					and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!=''   ">
+					and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!=''   ">
+					and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!=''   ">
+					and institution_name = #{institutionName}
+					 </if>
+				 </where> 
+			order by id desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryRoleInfoPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_role_info 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="roleCode!= null  and roleCode!=''  "> 
+					 and roleCode = #{roleCode}
+					 </if> 
+					<if test="name!= null  and name!=''  "> 
+					 and name = #{name}
+					 </if> 
+					<if test="creator!= null  and creator!=''  "> 
+					 and creator = #{creator}
+					 </if> 
+					<if test="createTime!= null  and createTime!=''  "> 
+					 and createTime = #{createTime}
+					 </if> 
+					<if test="updator!= null  and updator!=''  "> 
+					 and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null  and updateTime!=''  "> 
+					 and updateTime = #{updateTime}
+					 </if>
+					<if test="tenantId!= null  and tenantId!=''  ">
+					 and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!=''  ">
+					 and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!=''  ">
+					 and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!=''  ">
+					 and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!=''  ">
+					 and institution_name = #{institutionName}
+					 </if>
+				</where>
+		</select>
+
+</mapper>

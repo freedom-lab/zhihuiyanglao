@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthAiAnalysisMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    age,
+    health_indicator_type,
+    analysis_type,
+    data_source_id,
+    data_start_time,
+    data_end_time,
+    raw_data_json,
+    risk_level,
+    trend_analysis,
+    prediction_result,
+    diet_advice,
+    exercise_advice,
+    health_guidance,
+    warning_message,
+    intervention_suggestions,
+    indicator_specific_json,
+    ai_raw_response,
+    ai_model,
+    ai_prompt_version,
+    analysis_date,
+    analysis_duration_ms,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.age},
+    #{item.healthIndicatorType},
+    #{item.analysisType},
+    #{item.dataSourceId},
+    #{item.dataStartTime},
+    #{item.dataEndTime},
+    #{item.rawDataJson},
+    #{item.riskLevel},
+    #{item.trendAnalysis},
+    #{item.predictionResult},
+    #{item.dietAdvice},
+    #{item.exerciseAdvice},
+    #{item.healthGuidance},
+    #{item.warningMessage},
+    #{item.interventionSuggestions},
+    #{item.indicatorSpecificJson},
+    #{item.aiRawResponse},
+    #{item.aiModel},
+    #{item.aiPromptVersion},
+    #{item.analysisDate},
+    #{item.analysisDurationMs},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_ai_analysis
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthAiAnalysis">
+        SELECT * from  tb_jiangyukeji_health_ai_analysis
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="healthIndicatorType!=null and healthIndicatorType!=''">
+            and health_indicator_type = #{healthIndicatorType}
+        </if>
+        <if test="analysisType!=null and analysisType!=''">
+            and analysis_type = #{analysisType}
+        </if>
+        <if test="dataSourceId!=null and dataSourceId!=''">
+            and data_source_id = #{dataSourceId}
+        </if>
+        <if test="dataStartTime!=null and dataStartTime!=''">
+            and data_start_time = #{dataStartTime}
+        </if>
+        <if test="dataEndTime!=null and dataEndTime!=''">
+            and data_end_time = #{dataEndTime}
+        </if>
+        <if test="rawDataJson!=null and rawDataJson!=''">
+            and raw_data_json = #{rawDataJson}
+        </if>
+        <if test="riskLevel!=null and riskLevel!=''">
+            and risk_level = #{riskLevel}
+        </if>
+        <if test="trendAnalysis!=null and trendAnalysis!=''">
+            and trend_analysis = #{trendAnalysis}
+        </if>
+        <if test="predictionResult!=null and predictionResult!=''">
+            and prediction_result = #{predictionResult}
+        </if>
+        <if test="dietAdvice!=null and dietAdvice!=''">
+            and diet_advice = #{dietAdvice}
+        </if>
+        <if test="exerciseAdvice!=null and exerciseAdvice!=''">
+            and exercise_advice = #{exerciseAdvice}
+        </if>
+        <if test="healthGuidance!=null and healthGuidance!=''">
+            and health_guidance = #{healthGuidance}
+        </if>
+        <if test="warningMessage!=null and warningMessage!=''">
+            and warning_message = #{warningMessage}
+        </if>
+        <if test="interventionSuggestions!=null and interventionSuggestions!=''">
+            and intervention_suggestions = #{interventionSuggestions}
+        </if>
+        <if test="indicatorSpecificJson!=null and indicatorSpecificJson!=''">
+            and indicator_specific_json = #{indicatorSpecificJson}
+        </if>
+        <if test="aiRawResponse!=null and aiRawResponse!=''">
+            and ai_raw_response = #{aiRawResponse}
+        </if>
+        <if test="aiModel!=null and aiModel!=''">
+            and ai_model = #{aiModel}
+        </if>
+        <if test="aiPromptVersion!=null and aiPromptVersion!=''">
+            and ai_prompt_version = #{aiPromptVersion}
+        </if>
+        <if test="analysisDate!=null and analysisDate!=''">
+            and analysis_date = #{analysisDate}
+        </if>
+        <if test="analysisDurationMs!=null and analysisDurationMs!=''">
+            and analysis_duration_ms = #{analysisDurationMs}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_ai_analysis
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="healthIndicatorType!=null and healthIndicatorType!=''">
+            and health_indicator_type = #{healthIndicatorType}
+        </if>
+        <if test="analysisType!=null and analysisType!=''">
+            and analysis_type = #{analysisType}
+        </if>
+        <if test="dataSourceId!=null and dataSourceId!=''">
+            and data_source_id = #{dataSourceId}
+        </if>
+        <if test="dataStartTime!=null and dataStartTime!=''">
+            and data_start_time = #{dataStartTime}
+        </if>
+        <if test="dataEndTime!=null and dataEndTime!=''">
+            and data_end_time = #{dataEndTime}
+        </if>
+        <if test="rawDataJson!=null and rawDataJson!=''">
+            and raw_data_json = #{rawDataJson}
+        </if>
+        <if test="riskLevel!=null and riskLevel!=''">
+            and risk_level = #{riskLevel}
+        </if>
+        <if test="trendAnalysis!=null and trendAnalysis!=''">
+            and trend_analysis = #{trendAnalysis}
+        </if>
+        <if test="predictionResult!=null and predictionResult!=''">
+            and prediction_result = #{predictionResult}
+        </if>
+        <if test="dietAdvice!=null and dietAdvice!=''">
+            and diet_advice = #{dietAdvice}
+        </if>
+        <if test="exerciseAdvice!=null and exerciseAdvice!=''">
+            and exercise_advice = #{exerciseAdvice}
+        </if>
+        <if test="healthGuidance!=null and healthGuidance!=''">
+            and health_guidance = #{healthGuidance}
+        </if>
+        <if test="warningMessage!=null and warningMessage!=''">
+            and warning_message = #{warningMessage}
+        </if>
+        <if test="interventionSuggestions!=null and interventionSuggestions!=''">
+            and intervention_suggestions = #{interventionSuggestions}
+        </if>
+        <if test="indicatorSpecificJson!=null and indicatorSpecificJson!=''">
+            and indicator_specific_json = #{indicatorSpecificJson}
+        </if>
+        <if test="aiRawResponse!=null and aiRawResponse!=''">
+            and ai_raw_response = #{aiRawResponse}
+        </if>
+        <if test="aiModel!=null and aiModel!=''">
+            and ai_model = #{aiModel}
+        </if>
+        <if test="aiPromptVersion!=null and aiPromptVersion!=''">
+            and ai_prompt_version = #{aiPromptVersion}
+        </if>
+        <if test="analysisDate!=null and analysisDate!=''">
+            and analysis_date = #{analysisDate}
+        </if>
+        <if test="analysisDurationMs!=null and analysisDurationMs!=''">
+            and analysis_duration_ms = #{analysisDurationMs}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

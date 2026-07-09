@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsNursingExecutionRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    check_id,
+    check_date,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    nursing_date,
+    nursing_level_id,
+    nursing_level_name,
+    type_id,
+    type_name,
+    item_id,
+    item_name,
+    item_code,
+    plan_start_time,
+    plan_end_time,
+    nursing_state,
+    service_start_time,
+    service_end_time,
+    service_time,
+    nursing_group_id,
+    nursing_group_name,
+    nursing_staff_id,
+    nursing_staff_name,
+    revocation_reason,
+    img_path,
+    recorder_id,
+    nursing_member_card,
+    audio_path,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.checkId},
+    #{item.checkDate},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.nursingDate},
+    #{item.nursingLevelId},
+    #{item.nursingLevelName},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.itemId},
+    #{item.itemName},
+    #{item.itemCode},
+    #{item.planStartTime},
+    #{item.planEndTime},
+    #{item.nursingState},
+    #{item.serviceStartTime},
+    #{item.serviceEndTime},
+    #{item.serviceTime},
+    #{item.nursingGroupId},
+    #{item.nursingGroupName},
+    #{item.nursingStaffId},
+    #{item.nursingStaffName},
+    #{item.revocationReason},
+    #{item.imgPath},
+    #{item.recorderId},
+    #{item.nursingMemberCard},
+    #{item.audioPath},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_nursing_execution_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsNursingExecutionRecord">
+        SELECT * from  tb_jiangyukeji_ins_nursing_execution_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="nursingDate!=null and nursingDate!=''">
+            and nursing_date = #{nursingDate}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemCode!=null and itemCode!=''">
+            and item_code = #{itemCode}
+        </if>
+        <if test="planStartTime!=null and planStartTime!=''">
+            and plan_start_time = #{planStartTime}
+        </if>
+        <if test="planEndTime!=null and planEndTime!=''">
+            and plan_end_time = #{planEndTime}
+        </if>
+        <if test="nursingState!=null and nursingState!=''">
+            and nursing_state = #{nursingState}
+        </if>
+        <if test="serviceStartTime!=null and serviceStartTime!=''">
+            and service_start_time = #{serviceStartTime}
+        </if>
+        <if test="serviceEndTime!=null and serviceEndTime!=''">
+            and service_end_time = #{serviceEndTime}
+        </if>
+        <if test="serviceTime!=null and serviceTime!=''">
+            and service_time = #{serviceTime}
+        </if>
+        <if test="nursingGroupId!=null and nursingGroupId!=''">
+            and nursing_group_id = #{nursingGroupId}
+        </if>
+        <if test="nursingGroupName!=null and nursingGroupName!=''">
+            and nursing_group_name = #{nursingGroupName}
+        </if>
+        <if test="nursingStaffId!=null and nursingStaffId!=''">
+            and nursing_staff_id = #{nursingStaffId}
+        </if>
+        <if test="nursingStaffName!=null and nursingStaffName!=''">
+            and nursing_staff_name = #{nursingStaffName}
+        </if>
+        <if test="revocationReason!=null and revocationReason!=''">
+            and revocation_reason = #{revocationReason}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="recorderId!=null and recorderId!=''">
+            and recorder_id = #{recorderId}
+        </if>
+        <if test="nursingMemberCard!=null and nursingMemberCard!=''">
+            and nursing_member_card = #{nursingMemberCard}
+        </if>
+        <if test="audioPath!=null and audioPath!=''">
+            and audio_path = #{audioPath}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_nursing_execution_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="nursingDate!=null and nursingDate!=''">
+            and nursing_date = #{nursingDate}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemCode!=null and itemCode!=''">
+            and item_code = #{itemCode}
+        </if>
+        <if test="planStartTime!=null and planStartTime!=''">
+            and plan_start_time = #{planStartTime}
+        </if>
+        <if test="planEndTime!=null and planEndTime!=''">
+            and plan_end_time = #{planEndTime}
+        </if>
+        <if test="nursingState!=null and nursingState!=''">
+            and nursing_state = #{nursingState}
+        </if>
+        <if test="serviceStartTime!=null and serviceStartTime!=''">
+            and service_start_time = #{serviceStartTime}
+        </if>
+        <if test="serviceEndTime!=null and serviceEndTime!=''">
+            and service_end_time = #{serviceEndTime}
+        </if>
+        <if test="serviceTime!=null and serviceTime!=''">
+            and service_time = #{serviceTime}
+        </if>
+        <if test="nursingGroupId!=null and nursingGroupId!=''">
+            and nursing_group_id = #{nursingGroupId}
+        </if>
+        <if test="nursingGroupName!=null and nursingGroupName!=''">
+            and nursing_group_name = #{nursingGroupName}
+        </if>
+        <if test="nursingStaffId!=null and nursingStaffId!=''">
+            and nursing_staff_id = #{nursingStaffId}
+        </if>
+        <if test="nursingStaffName!=null and nursingStaffName!=''">
+            and nursing_staff_name = #{nursingStaffName}
+        </if>
+        <if test="revocationReason!=null and revocationReason!=''">
+            and revocation_reason = #{revocationReason}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="recorderId!=null and recorderId!=''">
+            and recorder_id = #{recorderId}
+        </if>
+        <if test="nursingMemberCard!=null and nursingMemberCard!=''">
+            and nursing_member_card = #{nursingMemberCard}
+        </if>
+        <if test="audioPath!=null and audioPath!=''">
+            and audio_path = #{audioPath}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

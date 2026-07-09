@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsElderContractInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    check_id,
+    check_date,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    contract_code,
+    contract_name,
+    template_id,
+    template_name,
+    sign_time,
+    start_date,
+    end_date,
+    deposit_amount,
+    cost_type,
+    bed_type,
+    bed_amount,
+    bed_deposit_amount,
+    nursing_level_id,
+    nursing_level_name,
+    nursing_amount,
+    nursing_deposit_amount,
+    food_amount,
+    food_deposit_amount,
+    is_subsidy,
+    contract_desp,
+    party_name_a,
+    link_tel_a,
+    address_a,
+    party_name_b,
+    link_tel_b,
+    address_b,
+    party_name_c,
+    link_tel_c,
+    address_c,
+    template_content,
+    contract_path,
+    invoice_path,
+    contract_state,
+    submit_state,
+    signing_state,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    code_path,
+    staffer_sign,
+    staffer_date,
+    guardian_sign,
+    guardian_date,
+    other_sign,
+    other_date,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo,
+    send_state
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.checkId},
+    #{item.checkDate},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.contractCode},
+    #{item.contractName},
+    #{item.templateId},
+    #{item.templateName},
+    #{item.signTime},
+    #{item.startDate},
+    #{item.endDate},
+    #{item.depositAmount},
+    #{item.costType},
+    #{item.bedType},
+    #{item.bedAmount},
+    #{item.bedDepositAmount},
+    #{item.nursingLevelId},
+    #{item.nursingLevelName},
+    #{item.nursingAmount},
+    #{item.nursingDepositAmount},
+    #{item.foodAmount},
+    #{item.foodDepositAmount},
+    #{item.isSubsidy},
+    #{item.contractDesp},
+    #{item.partyNameA},
+    #{item.linkTelA},
+    #{item.addressA},
+    #{item.partyNameB},
+    #{item.linkTelB},
+    #{item.addressB},
+    #{item.partyNameC},
+    #{item.linkTelC},
+    #{item.addressC},
+    #{item.templateContent},
+    #{item.contractPath},
+    #{item.invoicePath},
+    #{item.contractState},
+    #{item.submitState},
+    #{item.signingState},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.codePath},
+    #{item.stafferSign},
+    #{item.stafferDate},
+    #{item.guardianSign},
+    #{item.guardianDate},
+    #{item.otherSign},
+    #{item.otherDate},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo},
+    #{item.sendState}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_elder_contract_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsElderContractInfo">
+        SELECT * from  tb_jiangyukeji_ins_elder_contract_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="contractCode!=null and contractCode!=''">
+            and contract_code = #{contractCode}
+        </if>
+        <if test="contractName!=null and contractName!=''">
+            and contract_name = #{contractName}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="templateName!=null and templateName!=''">
+            and template_name = #{templateName}
+        </if>
+        <if test="signTime!=null and signTime!=''">
+            and sign_time = #{signTime}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="depositAmount!=null and depositAmount!=''">
+            and deposit_amount = #{depositAmount}
+        </if>
+        <if test="costType!=null and costType!=''">
+            and cost_type = #{costType}
+        </if>
+        <if test="bedType!=null and bedType!=''">
+            and bed_type = #{bedType}
+        </if>
+        <if test="bedAmount!=null and bedAmount!=''">
+            and bed_amount = #{bedAmount}
+        </if>
+        <if test="bedDepositAmount!=null and bedDepositAmount!=''">
+            and bed_deposit_amount = #{bedDepositAmount}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="nursingAmount!=null and nursingAmount!=''">
+            and nursing_amount = #{nursingAmount}
+        </if>
+        <if test="nursingDepositAmount!=null and nursingDepositAmount!=''">
+            and nursing_deposit_amount = #{nursingDepositAmount}
+        </if>
+        <if test="foodAmount!=null and foodAmount!=''">
+            and food_amount = #{foodAmount}
+        </if>
+        <if test="foodDepositAmount!=null and foodDepositAmount!=''">
+            and food_deposit_amount = #{foodDepositAmount}
+        </if>
+        <if test="isSubsidy!=null and isSubsidy!=''">
+            and is_subsidy = #{isSubsidy}
+        </if>
+        <if test="contractDesp!=null and contractDesp!=''">
+            and contract_desp = #{contractDesp}
+        </if>
+        <if test="partyNameA!=null and partyNameA!=''">
+            and party_name_a = #{partyNameA}
+        </if>
+        <if test="linkTelA!=null and linkTelA!=''">
+            and link_tel_a = #{linkTelA}
+        </if>
+        <if test="addressA!=null and addressA!=''">
+            and address_a = #{addressA}
+        </if>
+        <if test="partyNameB!=null and partyNameB!=''">
+            and party_name_b = #{partyNameB}
+        </if>
+        <if test="linkTelB!=null and linkTelB!=''">
+            and link_tel_b = #{linkTelB}
+        </if>
+        <if test="addressB!=null and addressB!=''">
+            and address_b = #{addressB}
+        </if>
+        <if test="partyNameC!=null and partyNameC!=''">
+            and party_name_c = #{partyNameC}
+        </if>
+        <if test="linkTelC!=null and linkTelC!=''">
+            and link_tel_c = #{linkTelC}
+        </if>
+        <if test="addressC!=null and addressC!=''">
+            and address_c = #{addressC}
+        </if>
+        <if test="templateContent!=null and templateContent!=''">
+            and template_content = #{templateContent}
+        </if>
+        <if test="contractPath!=null and contractPath!=''">
+            and contract_path = #{contractPath}
+        </if>
+        <if test="invoicePath!=null and invoicePath!=''">
+            and invoice_path = #{invoicePath}
+        </if>
+        <if test="contractState!=null and contractState!=''">
+            and contract_state = #{contractState}
+        </if>
+        <if test="submitState!=null and submitState!=''">
+            and submit_state = #{submitState}
+        </if>
+        <if test="signingState!=null and signingState!=''">
+            and signing_state = #{signingState}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="codePath!=null and codePath!=''">
+            and code_path = #{codePath}
+        </if>
+        <if test="stafferSign!=null and stafferSign!=''">
+            and staffer_sign = #{stafferSign}
+        </if>
+        <if test="stafferDate!=null and stafferDate!=''">
+            and staffer_date = #{stafferDate}
+        </if>
+        <if test="guardianSign!=null and guardianSign!=''">
+            and guardian_sign = #{guardianSign}
+        </if>
+        <if test="guardianDate!=null and guardianDate!=''">
+            and guardian_date = #{guardianDate}
+        </if>
+        <if test="otherSign!=null and otherSign!=''">
+            and other_sign = #{otherSign}
+        </if>
+        <if test="otherDate!=null and otherDate!=''">
+            and other_date = #{otherDate}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="sendState!=null and sendState!=''">
+            and send_state = #{sendState}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_elder_contract_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="contractCode!=null and contractCode!=''">
+            and contract_code = #{contractCode}
+        </if>
+        <if test="contractName!=null and contractName!=''">
+            and contract_name = #{contractName}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="templateName!=null and templateName!=''">
+            and template_name = #{templateName}
+        </if>
+        <if test="signTime!=null and signTime!=''">
+            and sign_time = #{signTime}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="depositAmount!=null and depositAmount!=''">
+            and deposit_amount = #{depositAmount}
+        </if>
+        <if test="costType!=null and costType!=''">
+            and cost_type = #{costType}
+        </if>
+        <if test="bedType!=null and bedType!=''">
+            and bed_type = #{bedType}
+        </if>
+        <if test="bedAmount!=null and bedAmount!=''">
+            and bed_amount = #{bedAmount}
+        </if>
+        <if test="bedDepositAmount!=null and bedDepositAmount!=''">
+            and bed_deposit_amount = #{bedDepositAmount}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="nursingAmount!=null and nursingAmount!=''">
+            and nursing_amount = #{nursingAmount}
+        </if>
+        <if test="nursingDepositAmount!=null and nursingDepositAmount!=''">
+            and nursing_deposit_amount = #{nursingDepositAmount}
+        </if>
+        <if test="foodAmount!=null and foodAmount!=''">
+            and food_amount = #{foodAmount}
+        </if>
+        <if test="foodDepositAmount!=null and foodDepositAmount!=''">
+            and food_deposit_amount = #{foodDepositAmount}
+        </if>
+        <if test="isSubsidy!=null and isSubsidy!=''">
+            and is_subsidy = #{isSubsidy}
+        </if>
+        <if test="contractDesp!=null and contractDesp!=''">
+            and contract_desp = #{contractDesp}
+        </if>
+        <if test="partyNameA!=null and partyNameA!=''">
+            and party_name_a = #{partyNameA}
+        </if>
+        <if test="linkTelA!=null and linkTelA!=''">
+            and link_tel_a = #{linkTelA}
+        </if>
+        <if test="addressA!=null and addressA!=''">
+            and address_a = #{addressA}
+        </if>
+        <if test="partyNameB!=null and partyNameB!=''">
+            and party_name_b = #{partyNameB}
+        </if>
+        <if test="linkTelB!=null and linkTelB!=''">
+            and link_tel_b = #{linkTelB}
+        </if>
+        <if test="addressB!=null and addressB!=''">
+            and address_b = #{addressB}
+        </if>
+        <if test="partyNameC!=null and partyNameC!=''">
+            and party_name_c = #{partyNameC}
+        </if>
+        <if test="linkTelC!=null and linkTelC!=''">
+            and link_tel_c = #{linkTelC}
+        </if>
+        <if test="addressC!=null and addressC!=''">
+            and address_c = #{addressC}
+        </if>
+        <if test="templateContent!=null and templateContent!=''">
+            and template_content = #{templateContent}
+        </if>
+        <if test="contractPath!=null and contractPath!=''">
+            and contract_path = #{contractPath}
+        </if>
+        <if test="invoicePath!=null and invoicePath!=''">
+            and invoice_path = #{invoicePath}
+        </if>
+        <if test="contractState!=null and contractState!=''">
+            and contract_state = #{contractState}
+        </if>
+        <if test="submitState!=null and submitState!=''">
+            and submit_state = #{submitState}
+        </if>
+        <if test="signingState!=null and signingState!=''">
+            and signing_state = #{signingState}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="codePath!=null and codePath!=''">
+            and code_path = #{codePath}
+        </if>
+        <if test="stafferSign!=null and stafferSign!=''">
+            and staffer_sign = #{stafferSign}
+        </if>
+        <if test="stafferDate!=null and stafferDate!=''">
+            and staffer_date = #{stafferDate}
+        </if>
+        <if test="guardianSign!=null and guardianSign!=''">
+            and guardian_sign = #{guardianSign}
+        </if>
+        <if test="guardianDate!=null and guardianDate!=''">
+            and guardian_date = #{guardianDate}
+        </if>
+        <if test="otherSign!=null and otherSign!=''">
+            and other_sign = #{otherSign}
+        </if>
+        <if test="otherDate!=null and otherDate!=''">
+            and other_date = #{otherDate}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="sendState!=null and sendState!=''">
+            and send_state = #{sendState}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

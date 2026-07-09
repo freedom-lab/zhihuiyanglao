@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthLungFunctionMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    age,
+    gauge_time,
+    gauge_type,
+    fVC_Data,
+    vC_Data,
+    mVV_Data,
+    result,
+    fVC_Real,
+    fVC_Plan,
+    fVC_Percent,
+    fVC1_Real,
+    fVC1_Plan,
+    fVC1_Percent,
+    fVC2_Real,
+    fVC3_Real,
+    fEV1_Real,
+    fEV1_Plan,
+    fEV1_Percent,
+    fEV2_Real,
+    fEV3_Real,
+    mMF_Real,
+    mMF_Plan,
+    mMF_Percent,
+    mVV1_Real,
+    mVV1_Plan,
+    mVV1_Percent,
+    bSA1_Real,
+    mVV1_BSA_Real,
+    mVV1_BSA_Plan,
+    mVV1_BSA_Percent,
+    pEF_Real,
+    pEF_Plan,
+    pEF_Percent,
+    v75_Real,
+    v75_Plan,
+    v75_Percent,
+    v50_Real,
+    v50_Plan,
+    v50_Percent,
+    v25_Real,
+    v25_Plan,
+    v25_Percent,
+    v50_V25_Real,
+    v50_V25_Plan,
+    v50_V25_Percent,
+    v25_H_Real,
+    v25_H_Plan,
+    v25_H_Percent,
+    vC_Real,
+    vC_Plan,
+    vC_Percent,
+    tV_Real,
+    iRV_Real,
+    eRV_Real,
+    iC_Real,
+    mV_Real,
+    opinion,
+    warn_flag,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    data_source
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.age},
+    #{item.gaugeTime},
+    #{item.gaugeType},
+    #{item.fVCData},
+    #{item.vCData},
+    #{item.mVVData},
+    #{item.result},
+    #{item.fVCReal},
+    #{item.fVCPlan},
+    #{item.fVCPercent},
+    #{item.fVC1Real},
+    #{item.fVC1Plan},
+    #{item.fVC1Percent},
+    #{item.fVC2Real},
+    #{item.fVC3Real},
+    #{item.fEV1Real},
+    #{item.fEV1Plan},
+    #{item.fEV1Percent},
+    #{item.fEV2Real},
+    #{item.fEV3Real},
+    #{item.mMFReal},
+    #{item.mMFPlan},
+    #{item.mMFPercent},
+    #{item.mVV1Real},
+    #{item.mVV1Plan},
+    #{item.mVV1Percent},
+    #{item.bSA1Real},
+    #{item.mVV1BSAReal},
+    #{item.mVV1BSAPlan},
+    #{item.mVV1BSAPercent},
+    #{item.pEFReal},
+    #{item.pEFPlan},
+    #{item.pEFPercent},
+    #{item.v75Real},
+    #{item.v75Plan},
+    #{item.v75Percent},
+    #{item.v50Real},
+    #{item.v50Plan},
+    #{item.v50Percent},
+    #{item.v25Real},
+    #{item.v25Plan},
+    #{item.v25Percent},
+    #{item.v50V25Real},
+    #{item.v50V25Plan},
+    #{item.v50V25Percent},
+    #{item.v25HReal},
+    #{item.v25HPlan},
+    #{item.v25HPercent},
+    #{item.vCReal},
+    #{item.vCPlan},
+    #{item.vCPercent},
+    #{item.tVReal},
+    #{item.iRVReal},
+    #{item.eRVReal},
+    #{item.iCReal},
+    #{item.mVReal},
+    #{item.opinion},
+    #{item.warnFlag},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.dataSource}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_lung_function
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthLungFunction">
+        SELECT * from  tb_jiangyukeji_health_lung_function
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="gaugeTime!=null and gaugeTime!=''">
+            and gauge_time = #{gaugeTime}
+        </if>
+        <if test="gaugeType!=null and gaugeType!=''">
+            and gauge_type = #{gaugeType}
+        </if>
+        <if test="fVCData!=null and fVCData!=''">
+            and fVC_Data = #{fVCData}
+        </if>
+        <if test="vCData!=null and vCData!=''">
+            and vC_Data = #{vCData}
+        </if>
+        <if test="mVVData!=null and mVVData!=''">
+            and mVV_Data = #{mVVData}
+        </if>
+        <if test="result!=null and result!=''">
+            and result = #{result}
+        </if>
+        <if test="fVCReal!=null and fVCReal!=''">
+            and fVC_Real = #{fVCReal}
+        </if>
+        <if test="fVCPlan!=null and fVCPlan!=''">
+            and fVC_Plan = #{fVCPlan}
+        </if>
+        <if test="fVCPercent!=null and fVCPercent!=''">
+            and fVC_Percent = #{fVCPercent}
+        </if>
+        <if test="fVC1Real!=null and fVC1Real!=''">
+            and fVC1_Real = #{fVC1Real}
+        </if>
+        <if test="fVC1Plan!=null and fVC1Plan!=''">
+            and fVC1_Plan = #{fVC1Plan}
+        </if>
+        <if test="fVC1Percent!=null and fVC1Percent!=''">
+            and fVC1_Percent = #{fVC1Percent}
+        </if>
+        <if test="fVC2Real!=null and fVC2Real!=''">
+            and fVC2_Real = #{fVC2Real}
+        </if>
+        <if test="fVC3Real!=null and fVC3Real!=''">
+            and fVC3_Real = #{fVC3Real}
+        </if>
+        <if test="fEV1Real!=null and fEV1Real!=''">
+            and fEV1_Real = #{fEV1Real}
+        </if>
+        <if test="fEV1Plan!=null and fEV1Plan!=''">
+            and fEV1_Plan = #{fEV1Plan}
+        </if>
+        <if test="fEV1Percent!=null and fEV1Percent!=''">
+            and fEV1_Percent = #{fEV1Percent}
+        </if>
+        <if test="fEV2Real!=null and fEV2Real!=''">
+            and fEV2_Real = #{fEV2Real}
+        </if>
+        <if test="fEV3Real!=null and fEV3Real!=''">
+            and fEV3_Real = #{fEV3Real}
+        </if>
+        <if test="mMFReal!=null and mMFReal!=''">
+            and mMF_Real = #{mMFReal}
+        </if>
+        <if test="mMFPlan!=null and mMFPlan!=''">
+            and mMF_Plan = #{mMFPlan}
+        </if>
+        <if test="mMFPercent!=null and mMFPercent!=''">
+            and mMF_Percent = #{mMFPercent}
+        </if>
+        <if test="mVV1Real!=null and mVV1Real!=''">
+            and mVV1_Real = #{mVV1Real}
+        </if>
+        <if test="mVV1Plan!=null and mVV1Plan!=''">
+            and mVV1_Plan = #{mVV1Plan}
+        </if>
+        <if test="mVV1Percent!=null and mVV1Percent!=''">
+            and mVV1_Percent = #{mVV1Percent}
+        </if>
+        <if test="bSA1Real!=null and bSA1Real!=''">
+            and bSA1_Real = #{bSA1Real}
+        </if>
+        <if test="mVV1BSAReal!=null and mVV1BSAReal!=''">
+            and mVV1_BSA_Real = #{mVV1BSAReal}
+        </if>
+        <if test="mVV1BSAPlan!=null and mVV1BSAPlan!=''">
+            and mVV1_BSA_Plan = #{mVV1BSAPlan}
+        </if>
+        <if test="mVV1BSAPercent!=null and mVV1BSAPercent!=''">
+            and mVV1_BSA_Percent = #{mVV1BSAPercent}
+        </if>
+        <if test="pEFReal!=null and pEFReal!=''">
+            and pEF_Real = #{pEFReal}
+        </if>
+        <if test="pEFPlan!=null and pEFPlan!=''">
+            and pEF_Plan = #{pEFPlan}
+        </if>
+        <if test="pEFPercent!=null and pEFPercent!=''">
+            and pEF_Percent = #{pEFPercent}
+        </if>
+        <if test="v75Real!=null and v75Real!=''">
+            and v75_Real = #{v75Real}
+        </if>
+        <if test="v75Plan!=null and v75Plan!=''">
+            and v75_Plan = #{v75Plan}
+        </if>
+        <if test="v75Percent!=null and v75Percent!=''">
+            and v75_Percent = #{v75Percent}
+        </if>
+        <if test="v50Real!=null and v50Real!=''">
+            and v50_Real = #{v50Real}
+        </if>
+        <if test="v50Plan!=null and v50Plan!=''">
+            and v50_Plan = #{v50Plan}
+        </if>
+        <if test="v50Percent!=null and v50Percent!=''">
+            and v50_Percent = #{v50Percent}
+        </if>
+        <if test="v25Real!=null and v25Real!=''">
+            and v25_Real = #{v25Real}
+        </if>
+        <if test="v25Plan!=null and v25Plan!=''">
+            and v25_Plan = #{v25Plan}
+        </if>
+        <if test="v25Percent!=null and v25Percent!=''">
+            and v25_Percent = #{v25Percent}
+        </if>
+        <if test="v50V25Real!=null and v50V25Real!=''">
+            and v50_V25_Real = #{v50V25Real}
+        </if>
+        <if test="v50V25Plan!=null and v50V25Plan!=''">
+            and v50_V25_Plan = #{v50V25Plan}
+        </if>
+        <if test="v50V25Percent!=null and v50V25Percent!=''">
+            and v50_V25_Percent = #{v50V25Percent}
+        </if>
+        <if test="v25HReal!=null and v25HReal!=''">
+            and v25_H_Real = #{v25HReal}
+        </if>
+        <if test="v25HPlan!=null and v25HPlan!=''">
+            and v25_H_Plan = #{v25HPlan}
+        </if>
+        <if test="v25HPercent!=null and v25HPercent!=''">
+            and v25_H_Percent = #{v25HPercent}
+        </if>
+        <if test="vCReal!=null and vCReal!=''">
+            and vC_Real = #{vCReal}
+        </if>
+        <if test="vCPlan!=null and vCPlan!=''">
+            and vC_Plan = #{vCPlan}
+        </if>
+        <if test="vCPercent!=null and vCPercent!=''">
+            and vC_Percent = #{vCPercent}
+        </if>
+        <if test="tVReal!=null and tVReal!=''">
+            and tV_Real = #{tVReal}
+        </if>
+        <if test="iRVReal!=null and iRVReal!=''">
+            and iRV_Real = #{iRVReal}
+        </if>
+        <if test="eRVReal!=null and eRVReal!=''">
+            and eRV_Real = #{eRVReal}
+        </if>
+        <if test="iCReal!=null and iCReal!=''">
+            and iC_Real = #{iCReal}
+        </if>
+        <if test="mVReal!=null and mVReal!=''">
+            and mV_Real = #{mVReal}
+        </if>
+        <if test="opinion!=null and opinion!=''">
+            and opinion = #{opinion}
+        </if>
+        <if test="warnFlag!=null and warnFlag!=''">
+            and warn_flag = #{warnFlag}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_lung_function
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="gaugeTime!=null and gaugeTime!=''">
+            and gauge_time = #{gaugeTime}
+        </if>
+        <if test="gaugeType!=null and gaugeType!=''">
+            and gauge_type = #{gaugeType}
+        </if>
+        <if test="fVCData!=null and fVCData!=''">
+            and fVC_Data = #{fVCData}
+        </if>
+        <if test="vCData!=null and vCData!=''">
+            and vC_Data = #{vCData}
+        </if>
+        <if test="mVVData!=null and mVVData!=''">
+            and mVV_Data = #{mVVData}
+        </if>
+        <if test="result!=null and result!=''">
+            and result = #{result}
+        </if>
+        <if test="fVCReal!=null and fVCReal!=''">
+            and fVC_Real = #{fVCReal}
+        </if>
+        <if test="fVCPlan!=null and fVCPlan!=''">
+            and fVC_Plan = #{fVCPlan}
+        </if>
+        <if test="fVCPercent!=null and fVCPercent!=''">
+            and fVC_Percent = #{fVCPercent}
+        </if>
+        <if test="fVC1Real!=null and fVC1Real!=''">
+            and fVC1_Real = #{fVC1Real}
+        </if>
+        <if test="fVC1Plan!=null and fVC1Plan!=''">
+            and fVC1_Plan = #{fVC1Plan}
+        </if>
+        <if test="fVC1Percent!=null and fVC1Percent!=''">
+            and fVC1_Percent = #{fVC1Percent}
+        </if>
+        <if test="fVC2Real!=null and fVC2Real!=''">
+            and fVC2_Real = #{fVC2Real}
+        </if>
+        <if test="fVC3Real!=null and fVC3Real!=''">
+            and fVC3_Real = #{fVC3Real}
+        </if>
+        <if test="fEV1Real!=null and fEV1Real!=''">
+            and fEV1_Real = #{fEV1Real}
+        </if>
+        <if test="fEV1Plan!=null and fEV1Plan!=''">
+            and fEV1_Plan = #{fEV1Plan}
+        </if>
+        <if test="fEV1Percent!=null and fEV1Percent!=''">
+            and fEV1_Percent = #{fEV1Percent}
+        </if>
+        <if test="fEV2Real!=null and fEV2Real!=''">
+            and fEV2_Real = #{fEV2Real}
+        </if>
+        <if test="fEV3Real!=null and fEV3Real!=''">
+            and fEV3_Real = #{fEV3Real}
+        </if>
+        <if test="mMFReal!=null and mMFReal!=''">
+            and mMF_Real = #{mMFReal}
+        </if>
+        <if test="mMFPlan!=null and mMFPlan!=''">
+            and mMF_Plan = #{mMFPlan}
+        </if>
+        <if test="mMFPercent!=null and mMFPercent!=''">
+            and mMF_Percent = #{mMFPercent}
+        </if>
+        <if test="mVV1Real!=null and mVV1Real!=''">
+            and mVV1_Real = #{mVV1Real}
+        </if>
+        <if test="mVV1Plan!=null and mVV1Plan!=''">
+            and mVV1_Plan = #{mVV1Plan}
+        </if>
+        <if test="mVV1Percent!=null and mVV1Percent!=''">
+            and mVV1_Percent = #{mVV1Percent}
+        </if>
+        <if test="bSA1Real!=null and bSA1Real!=''">
+            and bSA1_Real = #{bSA1Real}
+        </if>
+        <if test="mVV1BSAReal!=null and mVV1BSAReal!=''">
+            and mVV1_BSA_Real = #{mVV1BSAReal}
+        </if>
+        <if test="mVV1BSAPlan!=null and mVV1BSAPlan!=''">
+            and mVV1_BSA_Plan = #{mVV1BSAPlan}
+        </if>
+        <if test="mVV1BSAPercent!=null and mVV1BSAPercent!=''">
+            and mVV1_BSA_Percent = #{mVV1BSAPercent}
+        </if>
+        <if test="pEFReal!=null and pEFReal!=''">
+            and pEF_Real = #{pEFReal}
+        </if>
+        <if test="pEFPlan!=null and pEFPlan!=''">
+            and pEF_Plan = #{pEFPlan}
+        </if>
+        <if test="pEFPercent!=null and pEFPercent!=''">
+            and pEF_Percent = #{pEFPercent}
+        </if>
+        <if test="v75Real!=null and v75Real!=''">
+            and v75_Real = #{v75Real}
+        </if>
+        <if test="v75Plan!=null and v75Plan!=''">
+            and v75_Plan = #{v75Plan}
+        </if>
+        <if test="v75Percent!=null and v75Percent!=''">
+            and v75_Percent = #{v75Percent}
+        </if>
+        <if test="v50Real!=null and v50Real!=''">
+            and v50_Real = #{v50Real}
+        </if>
+        <if test="v50Plan!=null and v50Plan!=''">
+            and v50_Plan = #{v50Plan}
+        </if>
+        <if test="v50Percent!=null and v50Percent!=''">
+            and v50_Percent = #{v50Percent}
+        </if>
+        <if test="v25Real!=null and v25Real!=''">
+            and v25_Real = #{v25Real}
+        </if>
+        <if test="v25Plan!=null and v25Plan!=''">
+            and v25_Plan = #{v25Plan}
+        </if>
+        <if test="v25Percent!=null and v25Percent!=''">
+            and v25_Percent = #{v25Percent}
+        </if>
+        <if test="v50V25Real!=null and v50V25Real!=''">
+            and v50_V25_Real = #{v50V25Real}
+        </if>
+        <if test="v50V25Plan!=null and v50V25Plan!=''">
+            and v50_V25_Plan = #{v50V25Plan}
+        </if>
+        <if test="v50V25Percent!=null and v50V25Percent!=''">
+            and v50_V25_Percent = #{v50V25Percent}
+        </if>
+        <if test="v25HReal!=null and v25HReal!=''">
+            and v25_H_Real = #{v25HReal}
+        </if>
+        <if test="v25HPlan!=null and v25HPlan!=''">
+            and v25_H_Plan = #{v25HPlan}
+        </if>
+        <if test="v25HPercent!=null and v25HPercent!=''">
+            and v25_H_Percent = #{v25HPercent}
+        </if>
+        <if test="vCReal!=null and vCReal!=''">
+            and vC_Real = #{vCReal}
+        </if>
+        <if test="vCPlan!=null and vCPlan!=''">
+            and vC_Plan = #{vCPlan}
+        </if>
+        <if test="vCPercent!=null and vCPercent!=''">
+            and vC_Percent = #{vCPercent}
+        </if>
+        <if test="tVReal!=null and tVReal!=''">
+            and tV_Real = #{tVReal}
+        </if>
+        <if test="iRVReal!=null and iRVReal!=''">
+            and iRV_Real = #{iRVReal}
+        </if>
+        <if test="eRVReal!=null and eRVReal!=''">
+            and eRV_Real = #{eRVReal}
+        </if>
+        <if test="iCReal!=null and iCReal!=''">
+            and iC_Real = #{iCReal}
+        </if>
+        <if test="mVReal!=null and mVReal!=''">
+            and mV_Real = #{mVReal}
+        </if>
+        <if test="opinion!=null and opinion!=''">
+            and opinion = #{opinion}
+        </if>
+        <if test="warnFlag!=null and warnFlag!=''">
+            and warn_flag = #{warnFlag}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

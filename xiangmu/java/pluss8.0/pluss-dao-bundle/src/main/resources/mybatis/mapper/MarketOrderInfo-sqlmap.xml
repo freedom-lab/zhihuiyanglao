@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketOrderInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    goods_name,
+    order_code,
+    total,
+    discount_amount,
+    coupon_amount,
+    integral_amount,
+    reduce_amount,
+    actual_total,
+    pay_type,
+    order_state,
+    express_type,
+    express_code,
+    express_id,
+    express_name,
+    express_fee,
+    address_id,
+    address,
+    link_tel,
+    goods_nums,
+    is_new_order,
+    person_type,
+    person_id,
+    person_name,
+    recipient_type,
+    recipient_id,
+    recipient_name,
+    reservation_time,
+    server_id,
+    server_name,
+    server_tel,
+    pay_time,
+    send_time,
+    end_time,
+    cancel_time,
+    pay_state,
+    delete_status,
+    category_type,
+    close_type,
+    data_source,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    area_code,
+    area_name,
+    start_img,
+    end_img,
+    video_url,
+    out_trade_no,
+    is_assign,
+    assign_time,
+    accept_time,
+    confirm_state,
+    confirm_time
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.goodsName},
+    #{item.orderCode},
+    #{item.total},
+    #{item.discountAmount},
+    #{item.couponAmount},
+    #{item.integralAmount},
+    #{item.reduceAmount},
+    #{item.actualTotal},
+    #{item.payType},
+    #{item.orderState},
+    #{item.expressType},
+    #{item.expressCode},
+    #{item.expressId},
+    #{item.expressName},
+    #{item.expressFee},
+    #{item.addressId},
+    #{item.address},
+    #{item.linkTel},
+    #{item.goodsNums},
+    #{item.isNewOrder},
+    #{item.personType},
+    #{item.personId},
+    #{item.personName},
+    #{item.recipientType},
+    #{item.recipientId},
+    #{item.recipientName},
+    #{item.reservationTime},
+    #{item.serverId},
+    #{item.serverName},
+    #{item.serverTel},
+    #{item.payTime},
+    #{item.sendTime},
+    #{item.endTime},
+    #{item.cancelTime},
+    #{item.payState},
+    #{item.deleteStatus},
+    #{item.categoryType},
+    #{item.closeType},
+    #{item.dataSource},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.startImg},
+    #{item.endImg},
+    #{item.videoUrl},
+    #{item.outTradeNo},
+    #{item.isAssign},
+    #{item.assignTime},
+    #{item.acceptTime},
+    #{item.confirmState},
+    #{item.confirmTime}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_order_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketOrderInfo">
+        SELECT * from  tb_jiangyukeji_market_order_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="total!=null and total!=''">
+            and total = #{total}
+        </if>
+        <if test="discountAmount!=null and discountAmount!=''">
+            and discount_amount = #{discountAmount}
+        </if>
+        <if test="couponAmount!=null and couponAmount!=''">
+            and coupon_amount = #{couponAmount}
+        </if>
+        <if test="integralAmount!=null and integralAmount!=''">
+            and integral_amount = #{integralAmount}
+        </if>
+        <if test="reduceAmount!=null and reduceAmount!=''">
+            and reduce_amount = #{reduceAmount}
+        </if>
+        <if test="actualTotal!=null and actualTotal!=''">
+            and actual_total = #{actualTotal}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="orderState!=null and orderState!=''">
+            and order_state = #{orderState}
+        </if>
+        <if test="expressType!=null and expressType!=''">
+            and express_type = #{expressType}
+        </if>
+        <if test="expressCode!=null and expressCode!=''">
+            and express_code = #{expressCode}
+        </if>
+        <if test="expressId!=null and expressId!=''">
+            and express_id = #{expressId}
+        </if>
+        <if test="expressName!=null and expressName!=''">
+            and express_name = #{expressName}
+        </if>
+        <if test="expressFee!=null and expressFee!=''">
+            and express_fee = #{expressFee}
+        </if>
+        <if test="addressId!=null and addressId!=''">
+            and address_id = #{addressId}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="goodsNums!=null and goodsNums!=''">
+            and goods_nums = #{goodsNums}
+        </if>
+        <if test="isNewOrder!=null and isNewOrder!=''">
+            and is_new_order = #{isNewOrder}
+        </if>
+        <if test="personType!=null and personType!=''">
+            and person_type = #{personType}
+        </if>
+        <if test="personId!=null and personId!=''">
+            and person_id = #{personId}
+        </if>
+        <if test="personName!=null and personName!=''">
+            and person_name = #{personName}
+        </if>
+        <if test="recipientType!=null and recipientType!=''">
+            and recipient_type = #{recipientType}
+        </if>
+        <if test="recipientId!=null and recipientId!=''">
+            and recipient_id = #{recipientId}
+        </if>
+        <if test="recipientName!=null and recipientName!=''">
+            and recipient_name = #{recipientName}
+        </if>
+        <if test="reservationTime!=null and reservationTime!=''">
+            and reservation_time = #{reservationTime}
+        </if>
+        <if test="serverId!=null and serverId!=''">
+            and server_id = #{serverId}
+        </if>
+        <if test="serverName!=null and serverName!=''">
+            and server_name = #{serverName}
+        </if>
+        <if test="serverTel!=null and serverTel!=''">
+            and server_tel = #{serverTel}
+        </if>
+        <if test="payTime!=null and payTime!=''">
+            and pay_time = #{payTime}
+        </if>
+        <if test="sendTime!=null and sendTime!=''">
+            and send_time = #{sendTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and end_time = #{endTime}
+        </if>
+        <if test="cancelTime!=null and cancelTime!=''">
+            and cancel_time = #{cancelTime}
+        </if>
+        <if test="payState!=null and payState!=''">
+            and pay_state = #{payState}
+        </if>
+        <if test="deleteStatus!=null and deleteStatus!=''">
+            and delete_status = #{deleteStatus}
+        </if>
+        <if test="categoryType!=null and categoryType!=''">
+            and category_type = #{categoryType}
+        </if>
+        <if test="closeType!=null and closeType!=''">
+            and close_type = #{closeType}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="startImg!=null and startImg!=''">
+            and start_img = #{startImg}
+        </if>
+        <if test="endImg!=null and endImg!=''">
+            and end_img = #{endImg}
+        </if>
+        <if test="videoUrl!=null and videoUrl!=''">
+            and video_url = #{videoUrl}
+        </if>
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and out_trade_no = #{outTradeNo}
+        </if>
+        <if test="isAssign!=null and isAssign!=''">
+            and is_assign = #{isAssign}
+        </if>
+        <if test="assignTime!=null and assignTime!=''">
+            and assign_time = #{assignTime}
+        </if>
+        <if test="acceptTime!=null and acceptTime!=''">
+            and accept_time = #{acceptTime}
+        </if>
+        <if test="confirmState!=null and confirmState!=''">
+            and confirm_state = #{confirmState}
+        </if>
+        <if test="confirmTime!=null and confirmTime!=''">
+            and confirm_time = #{confirmTime}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_order_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="total!=null and total!=''">
+            and total = #{total}
+        </if>
+        <if test="discountAmount!=null and discountAmount!=''">
+            and discount_amount = #{discountAmount}
+        </if>
+        <if test="couponAmount!=null and couponAmount!=''">
+            and coupon_amount = #{couponAmount}
+        </if>
+        <if test="integralAmount!=null and integralAmount!=''">
+            and integral_amount = #{integralAmount}
+        </if>
+        <if test="reduceAmount!=null and reduceAmount!=''">
+            and reduce_amount = #{reduceAmount}
+        </if>
+        <if test="actualTotal!=null and actualTotal!=''">
+            and actual_total = #{actualTotal}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="orderState!=null and orderState!=''">
+            and order_state = #{orderState}
+        </if>
+        <if test="expressType!=null and expressType!=''">
+            and express_type = #{expressType}
+        </if>
+        <if test="expressCode!=null and expressCode!=''">
+            and express_code = #{expressCode}
+        </if>
+        <if test="expressId!=null and expressId!=''">
+            and express_id = #{expressId}
+        </if>
+        <if test="expressName!=null and expressName!=''">
+            and express_name = #{expressName}
+        </if>
+        <if test="expressFee!=null and expressFee!=''">
+            and express_fee = #{expressFee}
+        </if>
+        <if test="addressId!=null and addressId!=''">
+            and address_id = #{addressId}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="goodsNums!=null and goodsNums!=''">
+            and goods_nums = #{goodsNums}
+        </if>
+        <if test="isNewOrder!=null and isNewOrder!=''">
+            and is_new_order = #{isNewOrder}
+        </if>
+        <if test="personType!=null and personType!=''">
+            and person_type = #{personType}
+        </if>
+        <if test="personId!=null and personId!=''">
+            and person_id = #{personId}
+        </if>
+        <if test="personName!=null and personName!=''">
+            and person_name = #{personName}
+        </if>
+        <if test="recipientType!=null and recipientType!=''">
+            and recipient_type = #{recipientType}
+        </if>
+        <if test="recipientId!=null and recipientId!=''">
+            and recipient_id = #{recipientId}
+        </if>
+        <if test="recipientName!=null and recipientName!=''">
+            and recipient_name = #{recipientName}
+        </if>
+        <if test="reservationTime!=null and reservationTime!=''">
+            and reservation_time = #{reservationTime}
+        </if>
+        <if test="serverId!=null and serverId!=''">
+            and server_id = #{serverId}
+        </if>
+        <if test="serverName!=null and serverName!=''">
+            and server_name = #{serverName}
+        </if>
+        <if test="serverTel!=null and serverTel!=''">
+            and server_tel = #{serverTel}
+        </if>
+        <if test="payTime!=null and payTime!=''">
+            and pay_time = #{payTime}
+        </if>
+        <if test="sendTime!=null and sendTime!=''">
+            and send_time = #{sendTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and end_time = #{endTime}
+        </if>
+        <if test="cancelTime!=null and cancelTime!=''">
+            and cancel_time = #{cancelTime}
+        </if>
+        <if test="payState!=null and payState!=''">
+            and pay_state = #{payState}
+        </if>
+        <if test="deleteStatus!=null and deleteStatus!=''">
+            and delete_status = #{deleteStatus}
+        </if>
+        <if test="categoryType!=null and categoryType!=''">
+            and category_type = #{categoryType}
+        </if>
+        <if test="closeType!=null and closeType!=''">
+            and close_type = #{closeType}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="startImg!=null and startImg!=''">
+            and start_img = #{startImg}
+        </if>
+        <if test="endImg!=null and endImg!=''">
+            and end_img = #{endImg}
+        </if>
+        <if test="videoUrl!=null and videoUrl!=''">
+            and video_url = #{videoUrl}
+        </if>
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and out_trade_no = #{outTradeNo}
+        </if>
+        <if test="isAssign!=null and isAssign!=''">
+            and is_assign = #{isAssign}
+        </if>
+        <if test="assignTime!=null and assignTime!=''">
+            and assign_time = #{assignTime}
+        </if>
+        <if test="acceptTime!=null and acceptTime!=''">
+            and accept_time = #{acceptTime}
+        </if>
+        <if test="confirmState!=null and confirmState!=''">
+            and confirm_state = #{confirmState}
+        </if>
+        <if test="confirmTime!=null and confirmTime!=''">
+            and confirm_time = #{confirmTime}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

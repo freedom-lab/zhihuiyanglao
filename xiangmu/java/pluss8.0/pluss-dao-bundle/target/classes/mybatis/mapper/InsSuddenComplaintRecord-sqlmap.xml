@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsSuddenComplaintRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    complaint_type,
+    complaint_name,
+    link_tel,
+    complaint_time,
+    complaint_content,
+    handle_state,
+    handle_id,
+    handle_name,
+    handle_results,
+    handle_time,
+    remark,
+    file_path,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.complaintType},
+    #{item.complaintName},
+    #{item.linkTel},
+    #{item.complaintTime},
+    #{item.complaintContent},
+    #{item.handleState},
+    #{item.handleId},
+    #{item.handleName},
+    #{item.handleResults},
+    #{item.handleTime},
+    #{item.remark},
+    #{item.filePath},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_sudden_complaint_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsSuddenComplaintRecord">
+        SELECT * from  tb_jiangyukeji_ins_sudden_complaint_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="complaintType!=null and complaintType!=''">
+            and complaint_type = #{complaintType}
+        </if>
+        <if test="complaintName!=null and complaintName!=''">
+            and complaint_name = #{complaintName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="complaintTime!=null and complaintTime!=''">
+            and complaint_time = #{complaintTime}
+        </if>
+        <if test="complaintContent!=null and complaintContent!=''">
+            and complaint_content = #{complaintContent}
+        </if>
+        <if test="handleState!=null and handleState!=''">
+            and handle_state = #{handleState}
+        </if>
+        <if test="handleId!=null and handleId!=''">
+            and handle_id = #{handleId}
+        </if>
+        <if test="handleName!=null and handleName!=''">
+            and handle_name = #{handleName}
+        </if>
+        <if test="handleResults!=null and handleResults!=''">
+            and handle_results = #{handleResults}
+        </if>
+        <if test="handleTime!=null and handleTime!=''">
+            and handle_time = #{handleTime}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            and file_path = #{filePath}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_sudden_complaint_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="complaintType!=null and complaintType!=''">
+            and complaint_type = #{complaintType}
+        </if>
+        <if test="complaintName!=null and complaintName!=''">
+            and complaint_name = #{complaintName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="complaintTime!=null and complaintTime!=''">
+            and complaint_time = #{complaintTime}
+        </if>
+        <if test="complaintContent!=null and complaintContent!=''">
+            and complaint_content = #{complaintContent}
+        </if>
+        <if test="handleState!=null and handleState!=''">
+            and handle_state = #{handleState}
+        </if>
+        <if test="handleId!=null and handleId!=''">
+            and handle_id = #{handleId}
+        </if>
+        <if test="handleName!=null and handleName!=''">
+            and handle_name = #{handleName}
+        </if>
+        <if test="handleResults!=null and handleResults!=''">
+            and handle_results = #{handleResults}
+        </if>
+        <if test="handleTime!=null and handleTime!=''">
+            and handle_time = #{handleTime}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            and file_path = #{filePath}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsSecurityInspectionRecordDetailMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    record_id,
+    point_id,
+    point_name,
+    sort_num,
+    point_position,
+    inspection_time,
+    staff_id,
+    staff_name,
+    inspection_state,
+    patrol_illustrate,
+    img_path,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.recordId},
+    #{item.pointId},
+    #{item.pointName},
+    #{item.sortNum},
+    #{item.pointPosition},
+    #{item.inspectionTime},
+    #{item.staffId},
+    #{item.staffName},
+    #{item.inspectionState},
+    #{item.patrolIllustrate},
+    #{item.imgPath},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_security_inspection_record_detail
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsSecurityInspectionRecordDetail">
+        SELECT * from  tb_jiangyukeji_ins_security_inspection_record_detail
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="recordId!=null and recordId!=''">
+            and record_id = #{recordId}
+        </if>
+        <if test="pointId!=null and pointId!=''">
+            and point_id = #{pointId}
+        </if>
+        <if test="pointName!=null and pointName!=''">
+            and point_name = #{pointName}
+        </if>
+        <if test="sortNum!=null and sortNum!=''">
+            and sort_num = #{sortNum}
+        </if>
+        <if test="pointPosition!=null and pointPosition!=''">
+            and point_position = #{pointPosition}
+        </if>
+        <if test="inspectionTime!=null and inspectionTime!=''">
+            and inspection_time = #{inspectionTime}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="inspectionState!=null and inspectionState!=''">
+            and inspection_state = #{inspectionState}
+        </if>
+        <if test="patrolIllustrate!=null and patrolIllustrate!=''">
+            and patrol_illustrate = #{patrolIllustrate}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_security_inspection_record_detail
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="recordId!=null and recordId!=''">
+            and record_id = #{recordId}
+        </if>
+        <if test="pointId!=null and pointId!=''">
+            and point_id = #{pointId}
+        </if>
+        <if test="pointName!=null and pointName!=''">
+            and point_name = #{pointName}
+        </if>
+        <if test="sortNum!=null and sortNum!=''">
+            and sort_num = #{sortNum}
+        </if>
+        <if test="pointPosition!=null and pointPosition!=''">
+            and point_position = #{pointPosition}
+        </if>
+        <if test="inspectionTime!=null and inspectionTime!=''">
+            and inspection_time = #{inspectionTime}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="inspectionState!=null and inspectionState!=''">
+            and inspection_state = #{inspectionState}
+        </if>
+        <if test="patrolIllustrate!=null and patrolIllustrate!=''">
+            and patrol_illustrate = #{patrolIllustrate}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

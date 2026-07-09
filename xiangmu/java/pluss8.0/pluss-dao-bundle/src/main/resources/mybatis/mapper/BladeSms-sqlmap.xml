@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.BladeSmsMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    category,
+    sms_code,
+    template_id,
+    access_key,
+    secret_key,
+    region_id,
+    sign_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.category},
+    #{item.smsCode},
+    #{item.templateId},
+    #{item.accessKey},
+    #{item.secretKey},
+    #{item.regionId},
+    #{item.signName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_blade_sms
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.BladeSms">
+        SELECT * from  tb_jiangyukeji_blade_sms
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="category!=null and category!=''">
+            and category = #{category}
+        </if>
+        <if test="smsCode!=null and smsCode!=''">
+            and sms_code = #{smsCode}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="accessKey!=null and accessKey!=''">
+            and access_key = #{accessKey}
+        </if>
+        <if test="secretKey!=null and secretKey!=''">
+            and secret_key = #{secretKey}
+        </if>
+        <if test="regionId!=null and regionId!=''">
+            and region_id = #{regionId}
+        </if>
+        <if test="signName!=null and signName!=''">
+            and sign_name = #{signName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_blade_sms
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="category!=null and category!=''">
+            and category = #{category}
+        </if>
+        <if test="smsCode!=null and smsCode!=''">
+            and sms_code = #{smsCode}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="accessKey!=null and accessKey!=''">
+            and access_key = #{accessKey}
+        </if>
+        <if test="secretKey!=null and secretKey!=''">
+            and secret_key = #{secretKey}
+        </if>
+        <if test="regionId!=null and regionId!=''">
+            and region_id = #{regionId}
+        </if>
+        <if test="signName!=null and signName!=''">
+            and sign_name = #{signName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

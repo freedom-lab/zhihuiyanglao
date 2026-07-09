@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MemberChargeLogMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    serial_number,
+    elder_id,
+    elder_name,
+    sex,
+    age,
+    id_card,
+    link_tel,
+    member_card,
+    member_level,
+    change_type,
+    pay_type,
+    last_amount,
+    charge_amount,
+    give_amount,
+    newest_amount,
+    create_name,
+    charge_time,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    out_trade_no,
+    data_source
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.serialNumber},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.sex},
+    #{item.age},
+    #{item.idCard},
+    #{item.linkTel},
+    #{item.memberCard},
+    #{item.memberLevel},
+    #{item.changeType},
+    #{item.payType},
+    #{item.lastAmount},
+    #{item.chargeAmount},
+    #{item.giveAmount},
+    #{item.newestAmount},
+    #{item.createName},
+    #{item.chargeTime},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.outTradeNo},
+    #{item.dataSource}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_member_charge_log
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MemberChargeLog">
+        SELECT * from  tb_jiangyukeji_member_charge_log
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="serialNumber!=null and serialNumber!=''">
+            and serial_number = #{serialNumber}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="memberCard!=null and memberCard!=''">
+            and member_card = #{memberCard}
+        </if>
+        <if test="memberLevel!=null and memberLevel!=''">
+            and member_level = #{memberLevel}
+        </if>
+        <if test="changeType!=null and changeType!=''">
+            and change_type = #{changeType}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="lastAmount!=null and lastAmount!=''">
+            and last_amount = #{lastAmount}
+        </if>
+        <if test="chargeAmount!=null and chargeAmount!=''">
+            and charge_amount = #{chargeAmount}
+        </if>
+        <if test="giveAmount!=null and giveAmount!=''">
+            and give_amount = #{giveAmount}
+        </if>
+        <if test="newestAmount!=null and newestAmount!=''">
+            and newest_amount = #{newestAmount}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="chargeTime!=null and chargeTime!=''">
+            and charge_time = #{chargeTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and out_trade_no = #{outTradeNo}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_member_charge_log
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="serialNumber!=null and serialNumber!=''">
+            and serial_number = #{serialNumber}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="memberCard!=null and memberCard!=''">
+            and member_card = #{memberCard}
+        </if>
+        <if test="memberLevel!=null and memberLevel!=''">
+            and member_level = #{memberLevel}
+        </if>
+        <if test="changeType!=null and changeType!=''">
+            and change_type = #{changeType}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="lastAmount!=null and lastAmount!=''">
+            and last_amount = #{lastAmount}
+        </if>
+        <if test="chargeAmount!=null and chargeAmount!=''">
+            and charge_amount = #{chargeAmount}
+        </if>
+        <if test="giveAmount!=null and giveAmount!=''">
+            and give_amount = #{giveAmount}
+        </if>
+        <if test="newestAmount!=null and newestAmount!=''">
+            and newest_amount = #{newestAmount}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="chargeTime!=null and chargeTime!=''">
+            and charge_time = #{chargeTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and out_trade_no = #{outTradeNo}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,209 @@
+package cn.pluss.platform.model.entity;
+
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@TableName("tb_jiangyukeji_care_nursing_execution_record")
+@Data
+public class CareNursingExecutionRecord implements Serializable, Cloneable {
+
+    /***** 主键 ***/
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private Long id;
+
+    /***** 租户id ***/
+    @TableField(value = "tenant_id")
+    private String tenantId;
+
+    /***** 所属运营公司id ***/
+    @TableField(value = "corp_id")
+    private Long corpId;
+
+    /***** 机构id ***/
+    @TableField(value = "institution_id")
+    private Long institutionId;
+
+    /***** 机构名称 ***/
+    @TableField(value = "institution_name")
+    private String institutionName;
+
+    /***** 入托id ***/
+    @TableField(value = "enroll_id")
+    private Long enrollId;
+
+    /***** 入托日期 ***/
+    @TableField(value = "enroll_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date enrollDate;
+
+    /***** 老人id ***/
+    @TableField(value = "elder_id")
+    private Long elderId;
+
+    /***** 老人姓名 ***/
+    @TableField(value = "elder_name")
+    private String elderName;
+
+    /***** 身份证号 ***/
+    @TableField(value = "id_card")
+    private String idCard;
+
+    /***** 性别(1男，2女) ***/
+    @TableField(value = "sex")
+    private String sex;
+
+    /***** 护理日期 ***/
+    @TableField(value = "nursing_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date nursingDate;
+
+    /***** 照护等级id ***/
+    @TableField(value = "nursing_level_id")
+    private Long nursingLevelId;
+
+    /***** 照护等级名称 ***/
+    @TableField(value = "nursing_level_name")
+    private String nursingLevelName;
+
+    /***** 大类id ***/
+    @TableField(value = "type_id")
+    private Long typeId;
+
+    /***** 大类名称 ***/
+    @TableField(value = "type_name")
+    private String typeName;
+
+    /***** 项目id ***/
+    @TableField(value = "item_id")
+    private Long itemId;
+
+    /***** 项目名称 ***/
+    @TableField(value = "item_name")
+    private String itemName;
+
+    /***** 项目编号 ***/
+    @TableField(value = "item_code")
+    private String itemCode;
+
+    /***** 计划开始时间(hh:mm) ***/
+    @TableField(value = "plan_start_time")
+    private String planStartTime;
+
+    /***** 计划结束时间(hh:mm) ***/
+    @TableField(value = "plan_end_time")
+    private String planEndTime;
+
+    /***** 护理状态(1未开始 ***/
+    @TableField(value = "nursing_state")
+    private Integer nursingState;
+
+    /***** 服务开始时间 ***/
+    @TableField(value = "service_start_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date serviceStartTime;
+
+    /***** 服务结束时间 ***/
+    @TableField(value = "service_end_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date serviceEndTime;
+
+    /***** 服务时长(分钟) ***/
+    @TableField(value = "service_time")
+    private Integer serviceTime;
+
+    /***** 护理组id ***/
+    @TableField(value = "nursing_group_id")
+    private Long nursingGroupId;
+
+    /***** 护理组名称 ***/
+    @TableField(value = "nursing_group_name")
+    private String nursingGroupName;
+
+    /***** 护理人员id ***/
+    @TableField(value = "nursing_staff_id")
+    private Long nursingStaffId;
+
+    /***** 护理人员名称 ***/
+    @TableField(value = "nursing_staff_name")
+    private String nursingStaffName;
+
+    /***** 撤销原因 ***/
+    @TableField(value = "revocation_reason")
+    private String revocationReason;
+
+    /***** 护理图片路径(多个逗号分隔) ***/
+    @TableField(value = "img_path")
+    private String imgPath;
+
+    /***** 服务记录仪分机id ***/
+    @TableField(value = "recorder_id")
+    private Long recorderId;
+
+    /***** 护理人员卡号 ***/
+    @TableField(value = "nursing_member_card")
+    private String nursingMemberCard;
+
+    /***** 行政区划编码 ***/
+    @TableField(value = "area_code")
+    private String areaCode;
+
+    /***** 行政区划名称 ***/
+    @TableField(value = "area_name")
+    private String areaName;
+
+    /***** 备注 ***/
+    @TableField(value = "remark")
+    private String remark;
+
+    /***** 创建人id ***/
+    @TableField(value = "create_user")
+    private Long createUser;
+
+    /***** 创建人名称 ***/
+    @TableField(value = "create_name")
+    private String createName;
+
+    /***** 创建部门id ***/
+    @TableField(value = "create_dept")
+    private Long createDept;
+
+    /***** 创建时间 ***/
+    @TableField(value = "create_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    /***** 修改人id ***/
+    @TableField(value = "update_user")
+    private Long updateUser;
+
+    /***** 修改时间 ***/
+    @TableField(value = "update_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
+    /***** 是否已删除 ***/
+    @TableField(value = "is_deleted")
+    private Integer isDeleted;
+
+    /***** 是否启用(1启用 ***/
+    @TableField(value = "status")
+    private Integer status;
+
+
+}
+
+

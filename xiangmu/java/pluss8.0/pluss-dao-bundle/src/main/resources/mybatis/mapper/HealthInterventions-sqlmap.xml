@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthInterventionsMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    age,
+    birthday,
+    disease_id,
+    disease_name,
+    meddle_time,
+    control_plan,
+    diet_guide,
+    sport_guide,
+    reference_recipe,
+    traditional_medicine,
+    other_tips,
+    make_name,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    link_tel
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.age},
+    #{item.birthday},
+    #{item.diseaseId},
+    #{item.diseaseName},
+    #{item.meddleTime},
+    #{item.controlPlan},
+    #{item.dietGuide},
+    #{item.sportGuide},
+    #{item.referenceRecipe},
+    #{item.traditionalMedicine},
+    #{item.otherTips},
+    #{item.makeName},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.linkTel}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_interventions
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthInterventions">
+        SELECT * from  tb_jiangyukeji_health_interventions
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="diseaseId!=null and diseaseId!=''">
+            and disease_id = #{diseaseId}
+        </if>
+        <if test="diseaseName!=null and diseaseName!=''">
+            and disease_name = #{diseaseName}
+        </if>
+        <if test="meddleTime!=null and meddleTime!=''">
+            and meddle_time = #{meddleTime}
+        </if>
+        <if test="controlPlan!=null and controlPlan!=''">
+            and control_plan = #{controlPlan}
+        </if>
+        <if test="dietGuide!=null and dietGuide!=''">
+            and diet_guide = #{dietGuide}
+        </if>
+        <if test="sportGuide!=null and sportGuide!=''">
+            and sport_guide = #{sportGuide}
+        </if>
+        <if test="referenceRecipe!=null and referenceRecipe!=''">
+            and reference_recipe = #{referenceRecipe}
+        </if>
+        <if test="traditionalMedicine!=null and traditionalMedicine!=''">
+            and traditional_medicine = #{traditionalMedicine}
+        </if>
+        <if test="otherTips!=null and otherTips!=''">
+            and other_tips = #{otherTips}
+        </if>
+        <if test="makeName!=null and makeName!=''">
+            and make_name = #{makeName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_interventions
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="diseaseId!=null and diseaseId!=''">
+            and disease_id = #{diseaseId}
+        </if>
+        <if test="diseaseName!=null and diseaseName!=''">
+            and disease_name = #{diseaseName}
+        </if>
+        <if test="meddleTime!=null and meddleTime!=''">
+            and meddle_time = #{meddleTime}
+        </if>
+        <if test="controlPlan!=null and controlPlan!=''">
+            and control_plan = #{controlPlan}
+        </if>
+        <if test="dietGuide!=null and dietGuide!=''">
+            and diet_guide = #{dietGuide}
+        </if>
+        <if test="sportGuide!=null and sportGuide!=''">
+            and sport_guide = #{sportGuide}
+        </if>
+        <if test="referenceRecipe!=null and referenceRecipe!=''">
+            and reference_recipe = #{referenceRecipe}
+        </if>
+        <if test="traditionalMedicine!=null and traditionalMedicine!=''">
+            and traditional_medicine = #{traditionalMedicine}
+        </if>
+        <if test="otherTips!=null and otherTips!=''">
+            and other_tips = #{otherTips}
+        </if>
+        <if test="makeName!=null and makeName!=''">
+            and make_name = #{makeName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsSchedulingTableChangeRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    change_type,
+    staff_id_one,
+    staff_name_one,
+    table_id_one,
+    table_date_one,
+    classes_id_one,
+    classes_name_one,
+    staff_id_two,
+    staff_name_two,
+    table_id_two,
+    table_date_two,
+    classes_id_two,
+    classes_name_two,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.changeType},
+    #{item.staffIdOne},
+    #{item.staffNameOne},
+    #{item.tableIdOne},
+    #{item.tableDateOne},
+    #{item.classesIdOne},
+    #{item.classesNameOne},
+    #{item.staffIdTwo},
+    #{item.staffNameTwo},
+    #{item.tableIdTwo},
+    #{item.tableDateTwo},
+    #{item.classesIdTwo},
+    #{item.classesNameTwo},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_scheduling_table_change_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsSchedulingTableChangeRecord">
+        SELECT * from  tb_jiangyukeji_ins_scheduling_table_change_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="changeType!=null and changeType!=''">
+            and change_type = #{changeType}
+        </if>
+        <if test="staffIdOne!=null and staffIdOne!=''">
+            and staff_id_one = #{staffIdOne}
+        </if>
+        <if test="staffNameOne!=null and staffNameOne!=''">
+            and staff_name_one = #{staffNameOne}
+        </if>
+        <if test="tableIdOne!=null and tableIdOne!=''">
+            and table_id_one = #{tableIdOne}
+        </if>
+        <if test="tableDateOne!=null and tableDateOne!=''">
+            and table_date_one = #{tableDateOne}
+        </if>
+        <if test="classesIdOne!=null and classesIdOne!=''">
+            and classes_id_one = #{classesIdOne}
+        </if>
+        <if test="classesNameOne!=null and classesNameOne!=''">
+            and classes_name_one = #{classesNameOne}
+        </if>
+        <if test="staffIdTwo!=null and staffIdTwo!=''">
+            and staff_id_two = #{staffIdTwo}
+        </if>
+        <if test="staffNameTwo!=null and staffNameTwo!=''">
+            and staff_name_two = #{staffNameTwo}
+        </if>
+        <if test="tableIdTwo!=null and tableIdTwo!=''">
+            and table_id_two = #{tableIdTwo}
+        </if>
+        <if test="tableDateTwo!=null and tableDateTwo!=''">
+            and table_date_two = #{tableDateTwo}
+        </if>
+        <if test="classesIdTwo!=null and classesIdTwo!=''">
+            and classes_id_two = #{classesIdTwo}
+        </if>
+        <if test="classesNameTwo!=null and classesNameTwo!=''">
+            and classes_name_two = #{classesNameTwo}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_scheduling_table_change_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="changeType!=null and changeType!=''">
+            and change_type = #{changeType}
+        </if>
+        <if test="staffIdOne!=null and staffIdOne!=''">
+            and staff_id_one = #{staffIdOne}
+        </if>
+        <if test="staffNameOne!=null and staffNameOne!=''">
+            and staff_name_one = #{staffNameOne}
+        </if>
+        <if test="tableIdOne!=null and tableIdOne!=''">
+            and table_id_one = #{tableIdOne}
+        </if>
+        <if test="tableDateOne!=null and tableDateOne!=''">
+            and table_date_one = #{tableDateOne}
+        </if>
+        <if test="classesIdOne!=null and classesIdOne!=''">
+            and classes_id_one = #{classesIdOne}
+        </if>
+        <if test="classesNameOne!=null and classesNameOne!=''">
+            and classes_name_one = #{classesNameOne}
+        </if>
+        <if test="staffIdTwo!=null and staffIdTwo!=''">
+            and staff_id_two = #{staffIdTwo}
+        </if>
+        <if test="staffNameTwo!=null and staffNameTwo!=''">
+            and staff_name_two = #{staffNameTwo}
+        </if>
+        <if test="tableIdTwo!=null and tableIdTwo!=''">
+            and table_id_two = #{tableIdTwo}
+        </if>
+        <if test="tableDateTwo!=null and tableDateTwo!=''">
+            and table_date_two = #{tableDateTwo}
+        </if>
+        <if test="classesIdTwo!=null and classesIdTwo!=''">
+            and classes_id_two = #{classesIdTwo}
+        </if>
+        <if test="classesNameTwo!=null and classesNameTwo!=''">
+            and classes_name_two = #{classesNameTwo}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

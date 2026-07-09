@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketGoodsBrandMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    goods_type,
+    goods_type_name,
+    brand_name,
+    brand_pic,
+    memo,
+    sort,
+    brief,
+    content,
+    first_char,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.goodsType},
+    #{item.goodsTypeName},
+    #{item.brandName},
+    #{item.brandPic},
+    #{item.memo},
+    #{item.sort},
+    #{item.brief},
+    #{item.content},
+    #{item.firstChar},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_goods_brand
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketGoodsBrand">
+        SELECT * from  tb_jiangyukeji_market_goods_brand
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="goodsType!=null and goodsType!=''">
+            and goods_type = #{goodsType}
+        </if>
+        <if test="goodsTypeName!=null and goodsTypeName!=''">
+            and goods_type_name = #{goodsTypeName}
+        </if>
+        <if test="brandName!=null and brandName!=''">
+            and brand_name = #{brandName}
+        </if>
+        <if test="brandPic!=null and brandPic!=''">
+            and brand_pic = #{brandPic}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="sort!=null and sort!=''">
+            and sort = #{sort}
+        </if>
+        <if test="brief!=null and brief!=''">
+            and brief = #{brief}
+        </if>
+        <if test="content!=null and content!=''">
+            and content = #{content}
+        </if>
+        <if test="firstChar!=null and firstChar!=''">
+            and first_char = #{firstChar}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_goods_brand
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="goodsType!=null and goodsType!=''">
+            and goods_type = #{goodsType}
+        </if>
+        <if test="goodsTypeName!=null and goodsTypeName!=''">
+            and goods_type_name = #{goodsTypeName}
+        </if>
+        <if test="brandName!=null and brandName!=''">
+            and brand_name = #{brandName}
+        </if>
+        <if test="brandPic!=null and brandPic!=''">
+            and brand_pic = #{brandPic}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="sort!=null and sort!=''">
+            and sort = #{sort}
+        </if>
+        <if test="brief!=null and brief!=''">
+            and brief = #{brief}
+        </if>
+        <if test="content!=null and content!=''">
+            and content = #{content}
+        </if>
+        <if test="firstChar!=null and firstChar!=''">
+            and first_char = #{firstChar}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

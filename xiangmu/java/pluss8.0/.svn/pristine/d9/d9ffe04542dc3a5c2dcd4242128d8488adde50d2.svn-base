@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsNursingServiceOrderMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    order_code,
+    check_id,
+    check_date,
+    elder_id,
+    elder_name,
+    id_card,
+    link_tel,
+    sex,
+    service_time,
+    type_id,
+    type_name,
+    item_id,
+    item_name,
+    item_price,
+    buy_number,
+    total_amount,
+    service_state,
+    service_start_time,
+    service_end_time,
+    pay_state,
+    pay_method,
+    staff_id,
+    staff_name,
+    revocation_reason,
+    img_path,
+    area_code,
+    area_name,
+    next_date,
+    service_duration,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.orderCode},
+    #{item.checkId},
+    #{item.checkDate},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.linkTel},
+    #{item.sex},
+    #{item.serviceTime},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.itemId},
+    #{item.itemName},
+    #{item.itemPrice},
+    #{item.buyNumber},
+    #{item.totalAmount},
+    #{item.serviceState},
+    #{item.serviceStartTime},
+    #{item.serviceEndTime},
+    #{item.payState},
+    #{item.payMethod},
+    #{item.staffId},
+    #{item.staffName},
+    #{item.revocationReason},
+    #{item.imgPath},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.nextDate},
+    #{item.serviceDuration},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_nursing_service_order
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsNursingServiceOrder">
+        SELECT * from  tb_jiangyukeji_ins_nursing_service_order
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="serviceTime!=null and serviceTime!=''">
+            and service_time = #{serviceTime}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemPrice!=null and itemPrice!=''">
+            and item_price = #{itemPrice}
+        </if>
+        <if test="buyNumber!=null and buyNumber!=''">
+            and buy_number = #{buyNumber}
+        </if>
+        <if test="totalAmount!=null and totalAmount!=''">
+            and total_amount = #{totalAmount}
+        </if>
+        <if test="serviceState!=null and serviceState!=''">
+            and service_state = #{serviceState}
+        </if>
+        <if test="serviceStartTime!=null and serviceStartTime!=''">
+            and service_start_time = #{serviceStartTime}
+        </if>
+        <if test="serviceEndTime!=null and serviceEndTime!=''">
+            and service_end_time = #{serviceEndTime}
+        </if>
+        <if test="payState!=null and payState!=''">
+            and pay_state = #{payState}
+        </if>
+        <if test="payMethod!=null and payMethod!=''">
+            and pay_method = #{payMethod}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="revocationReason!=null and revocationReason!=''">
+            and revocation_reason = #{revocationReason}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="nextDate!=null and nextDate!=''">
+            and next_date = #{nextDate}
+        </if>
+        <if test="serviceDuration!=null and serviceDuration!=''">
+            and service_duration = #{serviceDuration}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_nursing_service_order
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="serviceTime!=null and serviceTime!=''">
+            and service_time = #{serviceTime}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemPrice!=null and itemPrice!=''">
+            and item_price = #{itemPrice}
+        </if>
+        <if test="buyNumber!=null and buyNumber!=''">
+            and buy_number = #{buyNumber}
+        </if>
+        <if test="totalAmount!=null and totalAmount!=''">
+            and total_amount = #{totalAmount}
+        </if>
+        <if test="serviceState!=null and serviceState!=''">
+            and service_state = #{serviceState}
+        </if>
+        <if test="serviceStartTime!=null and serviceStartTime!=''">
+            and service_start_time = #{serviceStartTime}
+        </if>
+        <if test="serviceEndTime!=null and serviceEndTime!=''">
+            and service_end_time = #{serviceEndTime}
+        </if>
+        <if test="payState!=null and payState!=''">
+            and pay_state = #{payState}
+        </if>
+        <if test="payMethod!=null and payMethod!=''">
+            and pay_method = #{payMethod}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="revocationReason!=null and revocationReason!=''">
+            and revocation_reason = #{revocationReason}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="nextDate!=null and nextDate!=''">
+            and next_date = #{nextDate}
+        </if>
+        <if test="serviceDuration!=null and serviceDuration!=''">
+            and service_duration = #{serviceDuration}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

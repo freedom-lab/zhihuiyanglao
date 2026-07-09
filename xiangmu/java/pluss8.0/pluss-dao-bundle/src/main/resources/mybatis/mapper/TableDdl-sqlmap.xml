@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.coding.TableDdlMapper">
+
+    <insert id="saveTableDdl" parameterType="cn.pluss.platform.model.coding.TableDdl">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_yunlankeji_table_ddl(id,tableCode,tableName,ddl,createDt,status)VALUES(#{id},#{tableCode},#{tableName},#{ddl},#{createDt},#{status})
+    </insert>
+
+    <insert id="saveTableDdlBatch">
+        insert into tb_yunlankeji_table_ddl(id,tableCode,tableName,ddl,createDt,status)VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.tableCode},#{item.tableName},#{item.ddl},#{item.createDt},#{item.status})
+        </foreach>
+    </insert>
+
+
+    <select id="queryTableDdl" parameterType="cn.pluss.platform.model.coding.TableDdl" resultType="cn.pluss.platform.model.coding.TableDdl">
+        SELECT * from  tb_yunlankeji_table_ddl
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="ddl!= null and ddl!='' ">
+                    and  ddl = #{ ddl}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+        </where>
+		limit 1
+    </select>
+
+    <select id="queryTableDdlList" parameterType="cn.pluss.platform.model.coding.TableDdl" resultType="cn.pluss.platform.model.coding.TableDdl">
+        SELECT * from  tb_yunlankeji_table_ddl
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="ddl!= null and ddl!='' ">
+                    and  ddl = #{ ddl}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+        </where>
+		order by id desc
+    </select>
+
+    <select id="queryTableDdlListOrderByIdAsc" parameterType="cn.pluss.platform.model.coding.TableDdl" resultType="cn.pluss.platform.model.coding.TableDdl">
+        SELECT * from  tb_yunlankeji_table_ddl
+        <where>
+            <if test="id!= null and id!='' ">
+                and  id = #{ id}
+            </if>
+            <if test="tableCode!= null and tableCode!='' ">
+                and  tableCode = #{ tableCode}
+            </if>
+            <if test="tableName!= null and tableName!='' ">
+                and  tableName = #{ tableName}
+            </if>
+            <if test="ddl!= null and ddl!='' ">
+                and  ddl = #{ ddl}
+            </if>
+            <if test="createDt!= null and createDt!='' ">
+                and  createDt = #{ createDt}
+            </if>
+            <if test="status!= null and status!='' ">
+                and  status = #{ status}
+            </if>
+        </where>
+        order by id
+    </select>
+    <update id="updateTableDdl" parameterType="cn.pluss.platform.model.coding.TableDdl" >
+        update tb_yunlankeji_table_ddl
+        <set>
+				 <if test="id!= null  and id!='' ">
+				 id= #{id},
+				 </if>
+				 <if test="tableCode!= null  and tableCode!='' ">
+				 tableCode= #{tableCode},
+				 </if>
+				 <if test="tableName!= null  and tableName!='' ">
+				 tableName= #{tableName},
+				 </if>
+				 <if test="ddl!= null  and ddl!='' ">
+				 ddl= #{ddl},
+				 </if>
+                <if test="createDt!= null">
+                createDt= #{createDt},
+                </if>
+				 <if test="status!= null  and status!='' ">
+				 status= #{status}
+				 </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteTableDdl" parameterType="cn.pluss.platform.model.coding.TableDdl" >
+        DELETE FROM tb_yunlankeji_table_ddl where id=#{id}
+    </delete>
+
+    <delete id="deleteTableDdlBatch" parameterType="java.util.List" >
+        DELETE FROM tb_yunlankeji_table_ddl where  1>2 or id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="queryTableDdlPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.coding.TableDdl">
+        SELECT * from  tb_yunlankeji_table_ddl
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="ddl!= null and ddl!='' ">
+                    and  ddl = #{ ddl}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+        </where>
+        order by id desc  limit #{pageSize}  offset  #{offset}
+    </select>
+
+    <select id="queryTableDdlPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_yunlankeji_table_ddl
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="ddl!= null and ddl!='' ">
+                    and  ddl = #{ ddl}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+        </where>
+    </select>
+
+    <update id="execSql" parameterType="cn.pluss.platform.model.coding.TableDdl" >
+        ${ddl}
+    </update>
+</mapper>
+

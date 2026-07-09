@@ -1,0 +1,1166 @@
+<template>
+  <div>
+    <div class="page">
+      <!-- 左侧 -->
+      <div class="page-left">
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>评估概览</span>
+            </h4>
+          </div>
+          <div class="oneCon">
+            <div class="evaluation-container">
+              <div class="evaluation-row er-bj">
+                <div class="info-left">
+                  <div class="title-block">
+                    <div class="main-title text-cyan">能力评估</div>
+                    <div class="decor-dots"></div>
+                  </div>
+                </div>
+                <div class="counter-right">
+                  <span class="number text-white">0</span>
+                  <span class="unit text-white">人次</span>
+                </div>
+              </div>
+              <div class="special-section">
+                <div class="evaluation-row">
+                  <div class="info-left">
+                    <div class="title-block">
+                      <div class="main-title text-orange">专项评估</div>
+                      <div class="decor-dots" style="height: 17px;"></div>
+                    </div>
+                  </div>
+                  <div class="counter-right">
+                    <span class="number">0</span>
+                    <span class="unit">人次</span>
+                  </div>
+                </div>
+                <div class="special-grid">
+                  <div class="grid-item">
+                    <div class="grid-num text-orange">0</div>
+                    <div class="grid-label text-light-blue">跌倒风险评估</div>
+                  </div>
+                  <div class="grid-item">
+                    <div class="grid-num text-orange">0</div>
+                    <div class="grid-label text-light-blue">噎食风险评估</div>
+                  </div>
+                  <div class="grid-item">
+                    <div class="grid-num text-orange">0</div>
+                    <div class="grid-label text-light-blue">坠床风险评估</div>
+                  </div>
+                  <div class="grid-item">
+                    <div class="grid-num text-orange">0</div>
+                    <div class="grid-label text-light-blue">压疮风险评估</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>能力评估风险等级统计</span>
+            </h4>
+          </div>
+          <div class="twoCon">
+            <div class="data-list-container">
+              <div class="header-unit">单位：人</div>
+              <div class="list-item">
+                <div class="item-info">
+                  <span class="item-name">能力完好</span>
+                  <div class="item-value-box">
+                    <span class="current-value">0</span>
+                    <span class="split-line">/</span>
+                    <span class="total-value">0</span>
+                  </div>
+                </div>
+                <div style="padding: 5px; border-radius: 2px; border: 1px solid rgb(32, 53, 112);">
+                  <div class="progress-track">
+                    <div class="progress-bar">
+                      <div class="progress-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="item-info">
+                  <span class="item-name">轻度失能</span>
+                  <div class="item-value-box">
+                    <span class="current-value">0</span>
+                    <span class="split-line">/</span>
+                    <span class="total-value">0</span>
+                  </div>
+                </div>
+                <div style="padding: 5px; border-radius: 2px; border: 1px solid rgb(32, 53, 112);">
+                  <div class="progress-track">
+                    <div class="progress-bar">
+                      <div class="progress-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="item-info">
+                  <span class="item-name">中度失能</span>
+                  <div class="item-value-box">
+                    <span class="current-value">0</span>
+                    <span class="split-line">/</span>
+                    <span class="total-value">0</span>
+                  </div>
+                </div>
+                <div style="padding: 5px; border-radius: 2px; border: 1px solid rgb(32, 53, 112);">
+                  <div class="progress-track">
+                    <div class="progress-bar">
+                      <div class="progress-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="item-info">
+                  <span class="item-name">重度失能</span>
+                  <div class="item-value-box">
+                    <span class="current-value">0</span>
+                    <span class="split-line">/</span>
+                    <span class="total-value">0</span>
+                  </div>
+                </div>
+                <div style="padding: 5px; border-radius: 2px; border: 1px solid rgb(32, 53, 112);">
+                  <div class="progress-track">
+                    <div class="progress-bar">
+                      <div class="progress-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="item-info">
+                  <span class="item-name">完全失能</span>
+                  <div class="item-value-box">
+                    <span class="current-value">0</span>
+                    <span class="split-line">/</span>
+                    <span class="total-value">0</span>
+                  </div>
+                </div>
+                <div style="padding: 5px; border-radius: 2px; border: 1px solid rgb(32, 53, 112);">
+                  <div class="progress-track">
+                    <div class="progress-bar">
+                      <div class="progress-dot"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中间 -->
+      <div class="page-center">
+        <div class="topNum">
+          <div class="li">
+            <!-- <img src="img/pglrs.2e66797f.png"> -->
+            <img :src="fwlrs">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">0</span>
+              </h4>
+              <p>评估老人数</p>
+            </div>
+          </div>
+          <div class="li">
+            <!-- <img src="img/nnpgrc.5fc9e142.png"> -->
+            <img :src="hlrys">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">0</span>
+              </h4>
+              <p>本年能力评估人次</p>
+            </div>
+          </div>
+          <div class="li">
+            <!-- <img src="img/zxpg.8fdd43bb.png"> -->
+            <img :src="fwpb">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">0</span>
+              </h4>
+              <p>本年专项评估人次</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map">
+          <div class="nomap">
+            <img :src="ch">
+          </div>
+        </div>
+
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>评估对象记录</span>
+            </h4>
+            <div role="radiogroup" class="el-radio-group radioA">
+              <label role="radio" aria-checked="true" tabindex="0" class="el-radio-button el-radio-button--small is-active">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="1">
+                <span class="el-radio-button__inner">能力评估</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="2">
+                <span class="el-radio-button__inner">专项评估</span>
+              </label>
+            </div>
+          </div>
+          <div class="fourCon">
+            <div class="warning">
+              <div class="m-t-5" style="height: 220px;">
+                <div style="width: 100%; height: 100%;">
+                  <el-table class="tableView" border fit height="100%" :data="evalTableData">
+                    <el-table-column type="index" label="序号" width="100" align="center"></el-table-column>
+                    <el-table-column label="老人姓名" prop="name" width="140" align="center"></el-table-column>
+                    <el-table-column label="评估模板" prop="template" width="260" align="center"></el-table-column>
+                    <el-table-column label="评估状态" prop="status" width="110" align="center"></el-table-column>
+                    <el-table-column label="评估人员" prop="evalUser" width="110" align="center"></el-table-column>
+                    <el-table-column label="评估结果" prop="result" width="130" align="center"></el-table-column>
+                    <el-table-column label="评估时间" prop="evalTime" width="160" align="center"></el-table-column>
+                  </el-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧 -->
+      <div class="page-right">
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>专项评估风险等级统计</span>
+            </h4>
+          </div>
+
+          <!-- 噎食风险评估 环形饼图 -->
+          <div>
+            <div class="chart-header">
+              <div style="display: flex; align-items: center;">
+                <span class="blue-bar"></span>
+                <div class="title-tab">
+                  <span class="title-text">噎食风险评估等级统计</span>
+                </div>
+              </div>
+              <div class="unit-text">单位：人</div>
+            </div>
+            <div class="content">
+              <img :src="WQ" alt="" class="pei-outer">
+              <img :src="NQ" alt="" class="pei-inside">
+              <div id="zheng-box" style="width: 100%; height: 180px;"></div>
+            </div>
+          </div>
+
+          <!-- 跌倒风险评估图表 -->
+          <div class="chart-wrapper">
+            <div class="chart-header">
+              <div style="display: flex; align-items: center;">
+                <span class="blue-bar"></span>
+                <div class="title-tab">
+                  <span class="title-text">跌倒风险评估等级统计</span>
+                </div>
+              </div>
+              <div class="unit-text">单位：人</div>
+            </div>
+            <div class="content">
+              <!-- <div id="fall" style="width: 100%; height: 180px;"></div> -->
+              <div ref="orderChartRef" class="chart-content chart-content1" style="width: 100%; height: 180px;"></div>
+            </div>
+          </div>
+
+          <!-- 坠床风险评估图表 -->
+          <div class="chart-wrapper">
+            <div class="chart-header">
+              <div style="display: flex; align-items: center;">
+                <span class="blue-bar"></span>
+                <div class="title-tab">
+                  <span class="title-text">坠床风险评估等级统计</span>
+                </div>
+              </div>
+              <div class="unit-text">单位：人</div>
+            </div>
+            <div class="content">
+              <!-- <div id="heartCharts" style="width: 100%; height: 180px; margin: 0px auto;"></div> -->
+               <div ref="orderChartRef2" class="chart-content chart-content1" style="width: 100%; height: 180px;"></div>
+            </div>
+          </div>
+
+          <!-- 压疮风险评估图表 -->
+          <div>
+            <div class="chart-header">
+              <div style="display: flex; align-items: center;">
+                <span class="blue-bar"></span>
+                <div class="title-tab">
+                  <span class="title-text">压疮风险评估等级统计</span>
+                </div>
+              </div>
+              <div class="unit-text">单位：人</div>
+            </div>
+            <div class="content">
+              <!-- <div id="pressureSoreCharts" style="width: 100%; height: 160px; margin: 0px auto;"></div> -->
+               <div ref="orderChartRef3" class="chart-content chart-content1" style="width: 100%; height: 180px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// 引入echarts
+import * as echarts from 'echarts'
+export default {
+  name: 'menuRight2',
+  data() {
+    return {
+        titico: require('@/assets/images/visualization/insScreen/img/tit-ico.png'),
+        JRHL: require('@/assets/images/visualization/insScreen/img/JRHL.png'),
+        fwlrs: require('@/assets/images/visualization/insScreen/img/fwlrs.png'),
+        hlrys: require('@/assets/images/visualization/insScreen/img/hlrys.png'),
+        fwpb: require('@/assets/images/visualization/insScreen/img/fwpb.png'),
+        ch: require('@/assets/images/visualization/insScreen/img/ch.png'),
+        WQ: require('@/assets/images/visualization/insScreen/img/WQ.png'),
+        NQ: require('@/assets/images/visualization/insScreen/img/NQ.png'),
+
+        // 1.护理人员排行榜表格数据（暂无数据为空数组）
+        staffRankTableData: [],
+        // 2.自选服务实时工单模拟数据（和截图一致）
+        serviceOrderTableData: [
+          { num: 1, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+          { num: 2, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 3, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 4, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-09' },
+          { num: 5, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 6, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+        ],
+        // 3.自选服务项目排行榜数据
+        projectRankTableData: [
+          { projectName: '助餐', orderCount: 6, duration: '-分钟', totalPrice: '48.00' }
+        ],
+
+        // echarts实例缓存
+        orderChart: null,
+        typeChart: null,
+        orderChart2: null,
+        orderChart3: null,
+    }
+  },
+  mounted() {
+    // 等待dom渲染完成初始化图表
+    this.$nextTick(() => {
+      this.initOrderChart()
+      this.initTypeChart()
+      this.initOrderChart2()
+      this.initOrderChart3()
+    })
+    // 窗口缩放自适应图表
+    window.addEventListener('resize', this.resizeAllChart)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeAllChart)
+    // 销毁echarts实例释放内存
+    if(this.orderChart) this.orderChart.dispose()
+    if(this.orderChart2) this.orderChart2.dispose()
+    if(this.orderChart3) this.orderChart3.dispose()
+    if(this.typeChart) this.typeChart.dispose()
+  },
+  methods: {
+    // 工单统计 双轴柱状折线图
+    initOrderChart() {
+      const dom = this.$refs.orderChartRef
+      this.orderChart = echarts.init(dom)
+      const option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'cross', crossStyle: { color: '#0ff' } }
+        },
+        legend: {
+          data: ['服务工单', '服务金额'],
+          textStyle: { color: '#a0dfff' },
+          right: 10
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' }
+          }
+        ],
+        yAxis: [
+          {
+            name: '单位：单',
+            type: 'value',
+            max: 500,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { lineStyle: { color: 'rgba(75,159,255,0.1)' } }
+          },
+          {
+            name: '单位：元',
+            type: 'value',
+            max: 50,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { show: false }
+          }
+        ],
+        series: [
+          {
+            name: '服务工单',
+            type: 'line',
+            yAxisIndex: 0,
+            data: [0,0,0,0,0,6,0,0,0,0,0,0],
+            itemStyle: { color: '#ff9900' }
+          },
+          {
+            name: '服务金额',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [0,0,0,0,0,48,0,0,0,0,0,0],
+            itemStyle: { color: '#00ccff' }
+          }
+        ]
+      }
+      this.orderChart.setOption(option)
+    },
+    
+    initOrderChart2() {
+      const dom = this.$refs.orderChartRef2
+      this.orderChart2 = echarts.init(dom)
+      const option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'cross', crossStyle: { color: '#0ff' } }
+        },
+        legend: {
+          data: ['服务工单', '服务金额'],
+          textStyle: { color: '#a0dfff' },
+          right: 10
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' }
+          }
+        ],
+        yAxis: [
+          {
+            name: '单位：单',
+            type: 'value',
+            max: 500,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { lineStyle: { color: 'rgba(75,159,255,0.1)' } }
+          },
+          {
+            name: '单位：元',
+            type: 'value',
+            max: 50,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { show: false }
+          }
+        ],
+        series: [
+          {
+            name: '服务工单',
+            type: 'line',
+            yAxisIndex: 0,
+            data: [0,0,0,0,0,6,0,0,0,0,0,0],
+            itemStyle: { color: '#ff9900' }
+          },
+          {
+            name: '服务金额',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [0,0,0,0,0,48,0,0,0,0,0,0],
+            itemStyle: { color: '#00ccff' }
+          }
+        ]
+      }
+      this.orderChart2.setOption(option)
+    },
+    
+    initOrderChart3() {
+      const dom = this.$refs.orderChartRef3
+      this.orderChart3 = echarts.init(dom)
+      const option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'cross', crossStyle: { color: '#0ff' } }
+        },
+        legend: {
+          data: ['服务工单', '服务金额'],
+          textStyle: { color: '#a0dfff' },
+          right: 10
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' }
+          }
+        ],
+        yAxis: [
+          {
+            name: '单位：单',
+            type: 'value',
+            max: 500,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { lineStyle: { color: 'rgba(75,159,255,0.1)' } }
+          },
+          {
+            name: '单位：元',
+            type: 'value',
+            max: 50,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { show: false }
+          }
+        ],
+        series: [
+          {
+            name: '服务工单',
+            type: 'line',
+            yAxisIndex: 0,
+            data: [0,0,0,0,0,6,0,0,0,0,0,0],
+            itemStyle: { color: '#ff9900' }
+          },
+          {
+            name: '服务金额',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [0,0,0,0,0,48,0,0,0,0,0,0],
+            itemStyle: { color: '#00ccff' }
+          }
+        ]
+      }
+      this.orderChart3.setOption(option)
+    },
+    // 服务类别统计 环形饼图
+    initTypeChart() {
+      const dom = this.$refs.typeChartRef
+      this.typeChart = echarts.init(dom)
+      const option = {
+        tooltip: { trigger: 'item' },
+        series: [
+          {
+            name: '服务类别',
+            type: 'pie',
+            radius: ['60%', '85%'], // 环形
+            legend: {
+              orient: 'vertical',
+              left: '0',
+              top: 'center',
+              textStyle: { color: '#a0dfff' }
+            },
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'outside',
+              color: '#a0dfff',
+              formatter: '{b} {c}项 {d}%'
+            },
+            data: [
+              { value: 6, name: '生活护理' }
+            ],
+            itemStyle: {
+              color: '#00ccff',
+              borderColor: '#06214a',
+              borderWidth: 3
+            }
+          }
+        ]
+      }
+      this.typeChart.setOption(option)
+    },
+    // 窗口缩放所有图表自适应
+    resizeAllChart() {
+      if(this.orderChart) this.orderChart.resize()
+      if(this.typeChart) this.typeChart.resize()
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+@font-face {
+    font-family: dy;
+    src: url('../../../../assets/fonts/dy.TTF') format("truetype");
+}
+/* 左侧评估概览模块样式 */
+.evaluation-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px 20px 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 24px
+}
+
+.evaluation-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 20px;
+    height: 97px
+}
+
+.er-bj {
+    background: url('../../../../assets/images/visualization/insScreen/img/count-item-bg.png') no-repeat;
+    background-size: 100% 100%
+}
+
+.info-left {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.info-left .icon {
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50%
+}
+
+.info-left .icon.icon-capacity {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABACAYAAABFqxrgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjMyRDhDRjc5NUUyMTExRjE5NzRGOUE2NzI4RUMwOUU2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjMyRDhDRjdBNUUyMTExRjE5NzRGOUE2NzI4RUMwOUU2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzJEOENGNzc1RTIxMTFGMTk3NEY5QTY3MjhFQzA5RTYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzJEOENGNzg1RTIxMTFGMTk3NEY5QTY3MjhFQzA5RTYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Ffuc5AAAGGUlEQVR42uyae0wURxzHZ3Zv9467A0oQBFFQ8QGi5akCRaqijaZaU0OjFRPbIrUaE21U+rCNSmJr0gap1TbRqm00GvuHlEppfdUm+AgtYn3UREGDVbAI8rrX7u3OTmeRw3tsqwi0i+wkc/x+w9zvd/u57/xuZu9g8MtvRgIAQsDAbXU6+ZGrq2+zXa+xD7Sr958Q588OCgYU0JoGQYOgQdAgaBA0CBoEDYIGQYOgQVAhhBPf7U3mGy6dEhovV8id2D8fL96T9H9C0P3XCROTnn0PQWoMwp0DEIKk5Ph1xHr1qYZwaN8X8TFjoieZTMZhgGLSHE7JS49MZs2V8k02m/12ZdWl8tzl6649VRDi4mKYyemphyGEBtm3OpHiPMZoXvqM0QymzZjeQNykfgchJSVJ//aalSl+BoO/7EsYi9nzc07I9hu5S0banJKhG+EG5y5dErz7q2/uy87h4gOzXP9wOLi2rYXbqyorq3hVQdiweWP0zNkvHKIoKtw1JopirVwDZTssKmpUGy92K2ZyWupoF4TQqOFbSOyu239FO7fXHys7uqDgg003VQMhIW3K+xYeEwAIOHn+7N26+q9v1lR3rem6huYmc3DYWVIA4WMFxBj9WXev2eUePfbLwmFRUbHhERFLdQyTQIaGJKZnrid/c1UDwY5ALM+JwGG3F58sPbI5a87cd8dPDl1o9g9YYrW0S/krVlaQaa88SWwSgxqdkPIhQqi5tPTHFc9Nz9rM6vXTEMmpquXQyks0JYj4yP4Dm2YtWLSLg+xEQIp/wZ79W6svX9zZ0tTY/iRxgwaFBIyJT1hmk+ipANJgfMb0kWdOn1uTkJ4xTZIkWl0QHKKs9Mayg/sap2QvTgGOzvVP6bMj4ydlR/YgNid3R1c9SdhX9On14YmpgEBQ16dD24MX6ewEAkEfNrvVIsnQsdogtNoFRbuvmpxDfRAeytXD9iz4uAU5uVOQokNphs3oaT7VQWjjREW7CwBCt1puXVt98eDn5/n2FjRlbWG2KWTIZz3Jpz4IDkHRdjW+tWk3GzqiIHFVISXYLN9bOMddwcrVQJoe5SUXm6wY9yFScIPIg8k7n+ogWNx2gxYFJSCsC3cKYEKHw/rHYdrvssAJAqSxx7zmqpNZ9cf233YfC5+ZMzQ4eUaFRz5ZCVhlEOxuEGwK22OMdc9ji7WEYg3ziGdFtvYy2hT4Dtlbex6golNyh74ee9XjcKk3xnrH7PDVBsEmIEXbTdTjAKBNkqV9DymMgZA1rQFK82hDHjApnLO85nbkUBsEzu1ozHkfkzG2oPt3VgAk8nTIsALMceXCldPpzNi0fMgYsrvmSaiaXFiT730vOhJAKsInn9ogSIKoaHfUg8baPEfp1vJON6vrQipKVptzPg4FNJNJQLXYvt2Qhe1tPvJgU14KYydknffJpzYIQETKNhLOuQHwqpYCRndvfEKHjc6UjwnGufkfEbXc873Toh/rEdOVQ30QREUb21p/+LenOY5/WWVeuOUvIvcwSDGLAcU8Or7L7y8QIGPMMc8vePERKjICKHU/n+ogIFHZBo9x5pfQk+VTHwT0TxAeLg2nY5dkbTra3dCUX+B46Bew0RcC7jdKeAiBs/zhKN97rruh/VIX8TRrBE8FBMoQUGSenV/U4/iqhSCJyjbG7WTt3ulRbHmjBGGgTz71QUCKtrO2cqqz+kxDT0Kzo9JD2RETL/jkUx0ELCrazJCY5bqQEVd7JARGP84jviuHSpVAeysB0kwe6aBXlaZqJUAYQgdFGMjG/haxo0BfNIxvs9GTwvpCCVSvvFMS0hnGZryGWupXk3NBbedY73USk8RexQyOzusaU5cSkFVmCVnDegrgQv7Gb3Mwb3OS9dwrX5BggUeUKchEasxbUMcu69gtYsmqKgjYaS+BrF+MrCrIsGv1I5PWyvc+em9vC2WYxk7grh1oibpur10o22FMmCVX8nnkBZtB37TOL2ixlSijxP77TztUpgQHsv1avI2Y20A/bdqv1zQIGgQNggZBg6BB0CBoEDQIGoTHOztAmoaUwQAH2sVD6sGvbGUIkj5ssEnuA1QI0t8CDABmexIfxcl2BwAAAABJRU5ErkJggg==)
+}
+
+.info-left .icon.icon-special {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABACAYAAABFqxrgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjNCOEY5QzE2NUUyMTExRjE4QkEyQzZBRTE0NEI3NTFFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjNCOEY5QzE3NUUyMTExRjE4QkEyQzZBRTE0NEI3NTFFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0I4RjlDMTQ1RTIxMTFGMThCQTJDNkFFMTQ0Qjc1MUUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0I4RjlDMTU1RTIxMTFGMThCQTJDNkFFMTQ0Qjc1MUUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5xWo1fAAAKgUlEQVR42uyaCVhT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)
+}
+
+.info-left .title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: 60px
+}
+
+.info-left .title-block .main-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px
+}
+
+.info-left .title-block .decor-dots {
+    height: 10px;
+    width: 60px
+}
+
+.counter-right {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-left: 50px
+}
+
+.counter-right .number {
+    font-size: 28px;
+    font-family: DIN Alternate,Arial,sans-serif;
+    font-weight: 700
+}
+
+.counter-right .unit {
+    font-size: 13px
+}
+
+.special-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    // background: url(../img/zxpgbj.6ce49520.png) no-repeat;
+    // background: url('../../../../assets/images/visualization/insScreen/img/amount-item-bg.png') no-repeat;
+    background-size: 100% 100%;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+.special-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px
+}
+
+.special-grid .grid-item {
+    height: 75px;
+    // background: url(../img/item-bj.f7c3e3fa.png) no-repeat 50%;
+    // background: url('../../../../assets/images/visualization/insScreen/img/el-table__row-bg.png') no-repeat 50%;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    box-sizing: border-box
+}
+
+.special-grid .grid-item .grid-num {
+    font-size: 24px;
+    font-family: DIN Alternate,Arial,sans-serif;
+    font-weight: 700
+}
+
+.special-grid .grid-item .grid-label {
+    font-size: 13px;
+    letter-spacing: .5px
+}
+
+.text-cyan {
+    color: #00f0ff
+}
+
+.text-orange {
+    color: #f90
+}
+
+.text-white {
+    color: #fff
+}
+
+.text-light-blue {
+    color: #a5c8ff
+}
+
+/* 左侧进度列表模块 */
+.data-list-container {
+    width: 430px;
+    box-sizing: border-box
+}
+
+.header-unit {
+    text-align: right;
+    color: #a3b8cc;
+    font-size: 13px
+}
+
+.list-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,102,204,.3)
+}
+
+.list-item:last-child {
+    border-bottom: none
+}
+
+.item-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: #00f6ff
+}
+
+.item-value-box {
+    display: flex;
+    align-items: flex-end
+}
+
+.current-value {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    font-style: italic
+}
+
+.split-line {
+    color: #4b628a;
+    margin: 0 6px;
+    font-size: 14px
+}
+
+.total-value {
+    color: #7d7d5a;
+    font-size: 14px;
+    font-weight: 700;
+    bottom: 2px;
+    position: relative
+}
+
+.progress-track {
+    width: 100%;
+    height: 5px;
+    background: #1e4c93;
+    border-radius: 2px;
+    box-sizing: border-box;
+    position: relative
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg,#05a 0,#00f0ff);
+    position: relative;
+    border-radius: 1px;
+    transition: width .8s ease-out
+}
+
+.progress-dot {
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00f0ff,0 0 20px #00f0ff
+}
+
+/* 表格容器 */
+.warning {
+    box-sizing: border-box
+}
+
+/* 环形饼图旋转动画 统一keyframe名称 */
+.content {
+    position: relative
+}
+
+.content .pei-inside {
+    position: absolute;
+    top: 55px;
+    left: 55px;
+    width: 70px;
+    height: 70px;
+    animation: rotateImage 8s linear infinite reverse
+}
+
+.content .pei-outer {
+    width: 170px;
+    height: 170px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    -webkit-animation: rotateImage 15s linear infinite;
+    animation: rotateImage 15s linear infinite
+}
+
+@-webkit-keyframes rotateImage {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes rotateImage {
+    0% {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+/* 图表头部通用 */
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px
+}
+
+.chart-header .blue-bar {
+    width: 4px;
+    height: 25px;
+    background-color: #00a8ff;
+    border-radius: 2px;
+    margin-right: 2px
+}
+
+.chart-header .title-tab {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg,#003680,rgba(0,85,255,0));
+    border-radius: 4px 16px 16px 4px;
+    padding: 6px 24px 6px 0;
+    position: relative;
+    padding-left: 8px
+}
+
+.chart-header .title-tab .title-text {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .5px
+}
+
+.chart-header .unit-text {
+    color: #fff;
+    font-size: 13px
+}
+
+.chart-wrapper {
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box
+}
+
+/* 页面全局布局公共样式 */
+.nomap {
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    height: 650px;
+    display: flex
+}
+
+.page {
+    position: relative;
+    padding: 0 20px;
+    display: flex
+}
+
+.page .page-left {
+    width: 470px
+}
+
+.page .page-center {
+    position: relative;
+    flex: 1;
+    margin: 0 20px
+}
+
+.page .page-right {
+    width: 470px
+}
+
+.oldBox {
+    margin-top: 20px
+}
+
+.oldBox .tit {
+    position: relative;
+    display: flex;
+    align-items: center
+}
+
+.oldBox .tit img {
+    width: 30px;
+    height: 30px
+}
+
+.oldBox .tit h4 {
+    flex: 1;
+    height: 46px;
+    line-height: 46px;
+    padding-left: 15px;
+    background-image: url('../../../../assets/images/visualization/insScreen/img/line1.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    font-size: 20px;
+    font-family: dy;
+    font-weight: 400;
+    color: #fff
+}
+
+.oldBox .tit h4 span {
+    background: linear-gradient(90deg,#8bc7ff,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.oldBox .tit .radioA {
+    position: absolute;
+    top: 8px;
+    right: 0
+}
+
+.twoCon .ul {
+    display: flex;
+    align-items: center;
+    margin-top: 10px
+}
+
+.twoCon .ul .li {
+    position: relative;
+    width: 33.3%;
+    height: 46px;
+    padding-left: 14px;
+    padding-top: 5px
+}
+
+.twoCon .ul .li .h3 {
+    font-size: 20px;
+    font-family: dy
+}
+
+.twoCon .ul .li .p {
+    font-size: 16px;
+    font-family: dy
+}
+
+.twoCon .ul .li.li1:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #fc0;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li1 {
+    background: linear-gradient(90deg,rgba(255,204,0,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li1 .h3 {
+    color: #ffcc30
+}
+
+.twoCon .ul .li.li2:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #00cbff;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li2 {
+    background: linear-gradient(90deg,rgba(0,203,255,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li2 .h3 {
+    color: #00ccfd
+}
+
+.twoCon .ul .li.li3:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #00cbff;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li3 {
+    background: linear-gradient(90deg,rgba(0,203,255,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li3 .h3 {
+    color: #00ccfd
+}
+
+.twoCon .title {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 30px;
+    background: linear-gradient(-90deg,rgba(0,19,38,0),rgba(0,86,163,.55) 43%,rgba(0,86,163,.59) 87%,rgba(129,189,255,0));
+    font-size: 16px;
+    color: #d9eaf5
+}
+
+.twoCon .title:before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(0deg,#015eea,#00c0fa);
+    border-radius: 2px;
+    margin-right: 10px
+}
+
+.topNum {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly
+}
+
+.topNum .li {
+    width: 25%;
+    display: flex
+}
+
+.topNum .li img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px
+}
+
+.topNum .li .con {
+    flex: 1
+}
+
+.topNum .li .con h4 {
+    margin-top: 5px;
+    font-size: 28px;
+    font-family: dy;
+    background: linear-gradient(0deg,#61dffe,#44a5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.topNum .li .con p {
+    margin-top: 8px;
+    line-height: 1.5;
+    font-size: 16px;
+    color: #fff
+}
+
+/* 单选按钮全局覆盖 */
+.el-radio-button__inner {
+    background: transparent;
+    border: 1px solid #00519d;
+    color: #b2dbff
+}
+
+.el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    background: #00519d
+}
+
+.el-radio-button:first-child .el-radio-button__inner {
+    border-left: 1px solid #00519d
+}
+</style>

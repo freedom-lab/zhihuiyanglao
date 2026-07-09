@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.CarePaymentInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    enroll_id,
+    payment_code,
+    payment_type,
+    receivable_amount,
+    amount,
+    is_bill_confirm,
+    handler,
+    handler_time,
+    bill_explain,
+    pay_type,
+    account_pay_amount,
+    offline_pay_amount,
+    pay_state,
+    payee_name,
+    payee_time,
+    payee_explain,
+    payment_name,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.enrollId},
+    #{item.paymentCode},
+    #{item.paymentType},
+    #{item.receivableAmount},
+    #{item.amount},
+    #{item.isBillConfirm},
+    #{item.handler},
+    #{item.handlerTime},
+    #{item.billExplain},
+    #{item.payType},
+    #{item.accountPayAmount},
+    #{item.offlinePayAmount},
+    #{item.payState},
+    #{item.payeeName},
+    #{item.payeeTime},
+    #{item.payeeExplain},
+    #{item.paymentName},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_care_payment_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.CarePaymentInfo">
+        SELECT * from  tb_jiangyukeji_care_payment_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="enrollId!=null and enrollId!=''">
+            and enroll_id = #{enrollId}
+        </if>
+        <if test="paymentCode!=null and paymentCode!=''">
+            and payment_code = #{paymentCode}
+        </if>
+        <if test="paymentType!=null and paymentType!=''">
+            and payment_type = #{paymentType}
+        </if>
+        <if test="receivableAmount!=null and receivableAmount!=''">
+            and receivable_amount = #{receivableAmount}
+        </if>
+        <if test="amount!=null and amount!=''">
+            and amount = #{amount}
+        </if>
+        <if test="isBillConfirm!=null and isBillConfirm!=''">
+            and is_bill_confirm = #{isBillConfirm}
+        </if>
+        <if test="handler!=null and handler!=''">
+            and handler = #{handler}
+        </if>
+        <if test="handlerTime!=null and handlerTime!=''">
+            and handler_time = #{handlerTime}
+        </if>
+        <if test="billExplain!=null and billExplain!=''">
+            and bill_explain = #{billExplain}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="accountPayAmount!=null and accountPayAmount!=''">
+            and account_pay_amount = #{accountPayAmount}
+        </if>
+        <if test="offlinePayAmount!=null and offlinePayAmount!=''">
+            and offline_pay_amount = #{offlinePayAmount}
+        </if>
+        <if test="payState!=null and payState!=''">
+            and pay_state = #{payState}
+        </if>
+        <if test="payeeName!=null and payeeName!=''">
+            and payee_name = #{payeeName}
+        </if>
+        <if test="payeeTime!=null and payeeTime!=''">
+            and payee_time = #{payeeTime}
+        </if>
+        <if test="payeeExplain!=null and payeeExplain!=''">
+            and payee_explain = #{payeeExplain}
+        </if>
+        <if test="paymentName!=null and paymentName!=''">
+            and payment_name = #{paymentName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_care_payment_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="enrollId!=null and enrollId!=''">
+            and enroll_id = #{enrollId}
+        </if>
+        <if test="paymentCode!=null and paymentCode!=''">
+            and payment_code = #{paymentCode}
+        </if>
+        <if test="paymentType!=null and paymentType!=''">
+            and payment_type = #{paymentType}
+        </if>
+        <if test="receivableAmount!=null and receivableAmount!=''">
+            and receivable_amount = #{receivableAmount}
+        </if>
+        <if test="amount!=null and amount!=''">
+            and amount = #{amount}
+        </if>
+        <if test="isBillConfirm!=null and isBillConfirm!=''">
+            and is_bill_confirm = #{isBillConfirm}
+        </if>
+        <if test="handler!=null and handler!=''">
+            and handler = #{handler}
+        </if>
+        <if test="handlerTime!=null and handlerTime!=''">
+            and handler_time = #{handlerTime}
+        </if>
+        <if test="billExplain!=null and billExplain!=''">
+            and bill_explain = #{billExplain}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="accountPayAmount!=null and accountPayAmount!=''">
+            and account_pay_amount = #{accountPayAmount}
+        </if>
+        <if test="offlinePayAmount!=null and offlinePayAmount!=''">
+            and offline_pay_amount = #{offlinePayAmount}
+        </if>
+        <if test="payState!=null and payState!=''">
+            and pay_state = #{payState}
+        </if>
+        <if test="payeeName!=null and payeeName!=''">
+            and payee_name = #{payeeName}
+        </if>
+        <if test="payeeTime!=null and payeeTime!=''">
+            and payee_time = #{payeeTime}
+        </if>
+        <if test="payeeExplain!=null and payeeExplain!=''">
+            and payee_explain = #{payeeExplain}
+        </if>
+        <if test="paymentName!=null and paymentName!=''">
+            and payment_name = #{paymentName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

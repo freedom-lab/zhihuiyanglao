@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.AssessmentAppointMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    age,
+    address,
+    link_tel,
+    plan_date,
+    assess_code,
+    assess_memo,
+    assess_way,
+    allocation_state,
+    assess_state,
+    assess_time,
+    next_assess_time,
+    initial_level,
+    assess_result,
+    special_result,
+    assess_address,
+    total_points,
+    question_types,
+    data_source,
+    option_ids,
+    question_ids,
+    assess_type,
+    template_id,
+    assessment_criteria,
+    assess_file,
+    assess_sign_img,
+    elder_sign_img,
+    assess_process_img,
+    assess_process_video,
+    provide_sign_img,
+    assign_org_id,
+    assign_org_name,
+    assign_staff_id,
+    assign_staff_name,
+    assign_staff_tel,
+    assign_time,
+    accept_order_time,
+    assess_start_time,
+    assess_end_time,
+    institution_aduit_state,
+    institution_aduit_time,
+    institution_aduit_id,
+    institution_aduit_name,
+    institution_aduit_reason,
+    civil_audit_state,
+    civil_audit_name,
+    civil_audit_time,
+    civil_aduit_reason,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    area_code,
+    area_name,
+    assess_uses,
+    guardian_contact,
+    guardian_contact_tel,
+    is_wish_care_bed,
+    is_install_care_bed,
+    elder_type,
+    live_state,
+    disability_level,
+    disability_type,
+    economic_sources
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.age},
+    #{item.address},
+    #{item.linkTel},
+    #{item.planDate},
+    #{item.assessCode},
+    #{item.assessMemo},
+    #{item.assessWay},
+    #{item.allocationState},
+    #{item.assessState},
+    #{item.assessTime},
+    #{item.nextAssessTime},
+    #{item.initialLevel},
+    #{item.assessResult},
+    #{item.specialResult},
+    #{item.assessAddress},
+    #{item.totalPoints},
+    #{item.questionTypes},
+    #{item.dataSource},
+    #{item.optionIds},
+    #{item.questionIds},
+    #{item.assessType},
+    #{item.templateId},
+    #{item.assessmentCriteria},
+    #{item.assessFile},
+    #{item.assessSignImg},
+    #{item.elderSignImg},
+    #{item.assessProcessImg},
+    #{item.assessProcessVideo},
+    #{item.provideSignImg},
+    #{item.assignOrgId},
+    #{item.assignOrgName},
+    #{item.assignStaffId},
+    #{item.assignStaffName},
+    #{item.assignStaffTel},
+    #{item.assignTime},
+    #{item.acceptOrderTime},
+    #{item.assessStartTime},
+    #{item.assessEndTime},
+    #{item.institutionAduitState},
+    #{item.institutionAduitTime},
+    #{item.institutionAduitId},
+    #{item.institutionAduitName},
+    #{item.institutionAduitReason},
+    #{item.civilAuditState},
+    #{item.civilAuditName},
+    #{item.civilAuditTime},
+    #{item.civilAduitReason},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.assessUses},
+    #{item.guardianContact},
+    #{item.guardianContactTel},
+    #{item.isWishCareBed},
+    #{item.isInstallCareBed},
+    #{item.elderType},
+    #{item.liveState},
+    #{item.disabilityLevel},
+    #{item.disabilityType},
+    #{item.economicSources}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_assessment_appoint
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.AssessmentAppoint">
+        SELECT * from  tb_jiangyukeji_assessment_appoint
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="planDate!=null and planDate!=''">
+            and plan_date = #{planDate}
+        </if>
+        <if test="assessCode!=null and assessCode!=''">
+            and assess_code = #{assessCode}
+        </if>
+        <if test="assessMemo!=null and assessMemo!=''">
+            and assess_memo = #{assessMemo}
+        </if>
+        <if test="assessWay!=null and assessWay!=''">
+            and assess_way = #{assessWay}
+        </if>
+        <if test="allocationState!=null and allocationState!=''">
+            and allocation_state = #{allocationState}
+        </if>
+        <if test="assessState!=null and assessState!=''">
+            and assess_state = #{assessState}
+        </if>
+        <if test="assessTime!=null and assessTime!=''">
+            and assess_time = #{assessTime}
+        </if>
+        <if test="nextAssessTime!=null and nextAssessTime!=''">
+            and next_assess_time = #{nextAssessTime}
+        </if>
+        <if test="initialLevel!=null and initialLevel!=''">
+            and initial_level = #{initialLevel}
+        </if>
+        <if test="assessResult!=null and assessResult!=''">
+            and assess_result = #{assessResult}
+        </if>
+        <if test="specialResult!=null and specialResult!=''">
+            and special_result = #{specialResult}
+        </if>
+        <if test="assessAddress!=null and assessAddress!=''">
+            and assess_address = #{assessAddress}
+        </if>
+        <if test="totalPoints!=null and totalPoints!=''">
+            and total_points = #{totalPoints}
+        </if>
+        <if test="questionTypes!=null and questionTypes!=''">
+            and question_types = #{questionTypes}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="optionIds!=null and optionIds!=''">
+            and option_ids = #{optionIds}
+        </if>
+        <if test="questionIds!=null and questionIds!=''">
+            and question_ids = #{questionIds}
+        </if>
+        <if test="assessType!=null and assessType!=''">
+            and assess_type = #{assessType}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="assessmentCriteria!=null and assessmentCriteria!=''">
+            and assessment_criteria = #{assessmentCriteria}
+        </if>
+        <if test="assessFile!=null and assessFile!=''">
+            and assess_file = #{assessFile}
+        </if>
+        <if test="assessSignImg!=null and assessSignImg!=''">
+            and assess_sign_img = #{assessSignImg}
+        </if>
+        <if test="elderSignImg!=null and elderSignImg!=''">
+            and elder_sign_img = #{elderSignImg}
+        </if>
+        <if test="assessProcessImg!=null and assessProcessImg!=''">
+            and assess_process_img = #{assessProcessImg}
+        </if>
+        <if test="assessProcessVideo!=null and assessProcessVideo!=''">
+            and assess_process_video = #{assessProcessVideo}
+        </if>
+        <if test="provideSignImg!=null and provideSignImg!=''">
+            and provide_sign_img = #{provideSignImg}
+        </if>
+        <if test="assignOrgId!=null and assignOrgId!=''">
+            and assign_org_id = #{assignOrgId}
+        </if>
+        <if test="assignOrgName!=null and assignOrgName!=''">
+            and assign_org_name = #{assignOrgName}
+        </if>
+        <if test="assignStaffId!=null and assignStaffId!=''">
+            and assign_staff_id = #{assignStaffId}
+        </if>
+        <if test="assignStaffName!=null and assignStaffName!=''">
+            and assign_staff_name = #{assignStaffName}
+        </if>
+        <if test="assignStaffTel!=null and assignStaffTel!=''">
+            and assign_staff_tel = #{assignStaffTel}
+        </if>
+        <if test="assignTime!=null and assignTime!=''">
+            and assign_time = #{assignTime}
+        </if>
+        <if test="acceptOrderTime!=null and acceptOrderTime!=''">
+            and accept_order_time = #{acceptOrderTime}
+        </if>
+        <if test="assessStartTime!=null and assessStartTime!=''">
+            and assess_start_time = #{assessStartTime}
+        </if>
+        <if test="assessEndTime!=null and assessEndTime!=''">
+            and assess_end_time = #{assessEndTime}
+        </if>
+        <if test="institutionAduitState!=null and institutionAduitState!=''">
+            and institution_aduit_state = #{institutionAduitState}
+        </if>
+        <if test="institutionAduitTime!=null and institutionAduitTime!=''">
+            and institution_aduit_time = #{institutionAduitTime}
+        </if>
+        <if test="institutionAduitId!=null and institutionAduitId!=''">
+            and institution_aduit_id = #{institutionAduitId}
+        </if>
+        <if test="institutionAduitName!=null and institutionAduitName!=''">
+            and institution_aduit_name = #{institutionAduitName}
+        </if>
+        <if test="institutionAduitReason!=null and institutionAduitReason!=''">
+            and institution_aduit_reason = #{institutionAduitReason}
+        </if>
+        <if test="civilAuditState!=null and civilAuditState!=''">
+            and civil_audit_state = #{civilAuditState}
+        </if>
+        <if test="civilAuditName!=null and civilAuditName!=''">
+            and civil_audit_name = #{civilAuditName}
+        </if>
+        <if test="civilAuditTime!=null and civilAuditTime!=''">
+            and civil_audit_time = #{civilAuditTime}
+        </if>
+        <if test="civilAduitReason!=null and civilAduitReason!=''">
+            and civil_aduit_reason = #{civilAduitReason}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="assessUses!=null and assessUses!=''">
+            and assess_uses = #{assessUses}
+        </if>
+        <if test="guardianContact!=null and guardianContact!=''">
+            and guardian_contact = #{guardianContact}
+        </if>
+        <if test="guardianContactTel!=null and guardianContactTel!=''">
+            and guardian_contact_tel = #{guardianContactTel}
+        </if>
+        <if test="isWishCareBed!=null and isWishCareBed!=''">
+            and is_wish_care_bed = #{isWishCareBed}
+        </if>
+        <if test="isInstallCareBed!=null and isInstallCareBed!=''">
+            and is_install_care_bed = #{isInstallCareBed}
+        </if>
+        <if test="elderType!=null and elderType!=''">
+            and elder_type = #{elderType}
+        </if>
+        <if test="liveState!=null and liveState!=''">
+            and live_state = #{liveState}
+        </if>
+        <if test="disabilityLevel!=null and disabilityLevel!=''">
+            and disability_level = #{disabilityLevel}
+        </if>
+        <if test="disabilityType!=null and disabilityType!=''">
+            and disability_type = #{disabilityType}
+        </if>
+        <if test="economicSources!=null and economicSources!=''">
+            and economic_sources = #{economicSources}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_assessment_appoint
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="planDate!=null and planDate!=''">
+            and plan_date = #{planDate}
+        </if>
+        <if test="assessCode!=null and assessCode!=''">
+            and assess_code = #{assessCode}
+        </if>
+        <if test="assessMemo!=null and assessMemo!=''">
+            and assess_memo = #{assessMemo}
+        </if>
+        <if test="assessWay!=null and assessWay!=''">
+            and assess_way = #{assessWay}
+        </if>
+        <if test="allocationState!=null and allocationState!=''">
+            and allocation_state = #{allocationState}
+        </if>
+        <if test="assessState!=null and assessState!=''">
+            and assess_state = #{assessState}
+        </if>
+        <if test="assessTime!=null and assessTime!=''">
+            and assess_time = #{assessTime}
+        </if>
+        <if test="nextAssessTime!=null and nextAssessTime!=''">
+            and next_assess_time = #{nextAssessTime}
+        </if>
+        <if test="initialLevel!=null and initialLevel!=''">
+            and initial_level = #{initialLevel}
+        </if>
+        <if test="assessResult!=null and assessResult!=''">
+            and assess_result = #{assessResult}
+        </if>
+        <if test="specialResult!=null and specialResult!=''">
+            and special_result = #{specialResult}
+        </if>
+        <if test="assessAddress!=null and assessAddress!=''">
+            and assess_address = #{assessAddress}
+        </if>
+        <if test="totalPoints!=null and totalPoints!=''">
+            and total_points = #{totalPoints}
+        </if>
+        <if test="questionTypes!=null and questionTypes!=''">
+            and question_types = #{questionTypes}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="optionIds!=null and optionIds!=''">
+            and option_ids = #{optionIds}
+        </if>
+        <if test="questionIds!=null and questionIds!=''">
+            and question_ids = #{questionIds}
+        </if>
+        <if test="assessType!=null and assessType!=''">
+            and assess_type = #{assessType}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="assessmentCriteria!=null and assessmentCriteria!=''">
+            and assessment_criteria = #{assessmentCriteria}
+        </if>
+        <if test="assessFile!=null and assessFile!=''">
+            and assess_file = #{assessFile}
+        </if>
+        <if test="assessSignImg!=null and assessSignImg!=''">
+            and assess_sign_img = #{assessSignImg}
+        </if>
+        <if test="elderSignImg!=null and elderSignImg!=''">
+            and elder_sign_img = #{elderSignImg}
+        </if>
+        <if test="assessProcessImg!=null and assessProcessImg!=''">
+            and assess_process_img = #{assessProcessImg}
+        </if>
+        <if test="assessProcessVideo!=null and assessProcessVideo!=''">
+            and assess_process_video = #{assessProcessVideo}
+        </if>
+        <if test="provideSignImg!=null and provideSignImg!=''">
+            and provide_sign_img = #{provideSignImg}
+        </if>
+        <if test="assignOrgId!=null and assignOrgId!=''">
+            and assign_org_id = #{assignOrgId}
+        </if>
+        <if test="assignOrgName!=null and assignOrgName!=''">
+            and assign_org_name = #{assignOrgName}
+        </if>
+        <if test="assignStaffId!=null and assignStaffId!=''">
+            and assign_staff_id = #{assignStaffId}
+        </if>
+        <if test="assignStaffName!=null and assignStaffName!=''">
+            and assign_staff_name = #{assignStaffName}
+        </if>
+        <if test="assignStaffTel!=null and assignStaffTel!=''">
+            and assign_staff_tel = #{assignStaffTel}
+        </if>
+        <if test="assignTime!=null and assignTime!=''">
+            and assign_time = #{assignTime}
+        </if>
+        <if test="acceptOrderTime!=null and acceptOrderTime!=''">
+            and accept_order_time = #{acceptOrderTime}
+        </if>
+        <if test="assessStartTime!=null and assessStartTime!=''">
+            and assess_start_time = #{assessStartTime}
+        </if>
+        <if test="assessEndTime!=null and assessEndTime!=''">
+            and assess_end_time = #{assessEndTime}
+        </if>
+        <if test="institutionAduitState!=null and institutionAduitState!=''">
+            and institution_aduit_state = #{institutionAduitState}
+        </if>
+        <if test="institutionAduitTime!=null and institutionAduitTime!=''">
+            and institution_aduit_time = #{institutionAduitTime}
+        </if>
+        <if test="institutionAduitId!=null and institutionAduitId!=''">
+            and institution_aduit_id = #{institutionAduitId}
+        </if>
+        <if test="institutionAduitName!=null and institutionAduitName!=''">
+            and institution_aduit_name = #{institutionAduitName}
+        </if>
+        <if test="institutionAduitReason!=null and institutionAduitReason!=''">
+            and institution_aduit_reason = #{institutionAduitReason}
+        </if>
+        <if test="civilAuditState!=null and civilAuditState!=''">
+            and civil_audit_state = #{civilAuditState}
+        </if>
+        <if test="civilAuditName!=null and civilAuditName!=''">
+            and civil_audit_name = #{civilAuditName}
+        </if>
+        <if test="civilAuditTime!=null and civilAuditTime!=''">
+            and civil_audit_time = #{civilAuditTime}
+        </if>
+        <if test="civilAduitReason!=null and civilAduitReason!=''">
+            and civil_aduit_reason = #{civilAduitReason}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="assessUses!=null and assessUses!=''">
+            and assess_uses = #{assessUses}
+        </if>
+        <if test="guardianContact!=null and guardianContact!=''">
+            and guardian_contact = #{guardianContact}
+        </if>
+        <if test="guardianContactTel!=null and guardianContactTel!=''">
+            and guardian_contact_tel = #{guardianContactTel}
+        </if>
+        <if test="isWishCareBed!=null and isWishCareBed!=''">
+            and is_wish_care_bed = #{isWishCareBed}
+        </if>
+        <if test="isInstallCareBed!=null and isInstallCareBed!=''">
+            and is_install_care_bed = #{isInstallCareBed}
+        </if>
+        <if test="elderType!=null and elderType!=''">
+            and elder_type = #{elderType}
+        </if>
+        <if test="liveState!=null and liveState!=''">
+            and live_state = #{liveState}
+        </if>
+        <if test="disabilityLevel!=null and disabilityLevel!=''">
+            and disability_level = #{disabilityLevel}
+        </if>
+        <if test="disabilityType!=null and disabilityType!=''">
+            and disability_type = #{disabilityType}
+        </if>
+        <if test="economicSources!=null and economicSources!=''">
+            and economic_sources = #{economicSources}
+        </if>
+        </where>
+    </select>
+    <select id="queryTaskPage" resultType="cn.pluss.platform.model.entity.AssessmentAppoint">
+        select * from tb_jiangyukeji_assessment_appoint
+        where assess_state != 5
+        <if test="assessType!=null and assessType!=''">
+            and assess_type = #{assessType}
+        </if>
+
+    </select>
+    <select id="queryTaskPageCount" resultType="java.lang.Integer">
+        select count(*) from tb_jiangyukeji_assessment_appoint
+        where assess_state != 5
+        <if test="assessType!=null and assessType!=''">
+            and assess_type = #{assessType}
+        </if>
+    </select>
+    <select id="queryResultPage" resultType="cn.pluss.platform.model.entity.AssessmentAppoint">
+        select * from tb_jiangyukeji_assessment_appoint
+        where assess_state = 5
+        <if test="assessType!=null and assessType!=''">
+            and assess_type = #{assessType}
+        </if>
+    </select>
+    <select id="queryResultPageCount" resultType="java.lang.Integer">
+        select count(*) from tb_jiangyukeji_assessment_appoint
+        where assess_state = 5
+        <if test="assessType!=null and assessType!=''">
+            and assess_type = #{assessType}
+        </if>
+    </select>
+
+</mapper>
+

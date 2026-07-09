@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsRegisterVisitInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    visit_name,
+    visit_link_tel,
+    document_type,
+    document_code,
+    visit_time,
+    visit_num,
+    plan_leave_time,
+    relation_type,
+    elder_id,
+    elder_name,
+    id_card,
+    link_tel,
+    sex,
+    bed_info,
+    belongings,
+    file_path,
+    from_risk,
+    temperature,
+    is_agree,
+    agree_explain,
+    agree_name,
+    agree_time,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.visitName},
+    #{item.visitLinkTel},
+    #{item.documentType},
+    #{item.documentCode},
+    #{item.visitTime},
+    #{item.visitNum},
+    #{item.planLeaveTime},
+    #{item.relationType},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.linkTel},
+    #{item.sex},
+    #{item.bedInfo},
+    #{item.belongings},
+    #{item.filePath},
+    #{item.fromRisk},
+    #{item.temperature},
+    #{item.isAgree},
+    #{item.agreeExplain},
+    #{item.agreeName},
+    #{item.agreeTime},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_register_visit_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsRegisterVisitInfo">
+        SELECT * from  tb_jiangyukeji_ins_register_visit_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="visitName!=null and visitName!=''">
+            and visit_name = #{visitName}
+        </if>
+        <if test="visitLinkTel!=null and visitLinkTel!=''">
+            and visit_link_tel = #{visitLinkTel}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="documentCode!=null and documentCode!=''">
+            and document_code = #{documentCode}
+        </if>
+        <if test="visitTime!=null and visitTime!=''">
+            and visit_time = #{visitTime}
+        </if>
+        <if test="visitNum!=null and visitNum!=''">
+            and visit_num = #{visitNum}
+        </if>
+        <if test="planLeaveTime!=null and planLeaveTime!=''">
+            and plan_leave_time = #{planLeaveTime}
+        </if>
+        <if test="relationType!=null and relationType!=''">
+            and relation_type = #{relationType}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="bedInfo!=null and bedInfo!=''">
+            and bed_info = #{bedInfo}
+        </if>
+        <if test="belongings!=null and belongings!=''">
+            and belongings = #{belongings}
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            and file_path = #{filePath}
+        </if>
+        <if test="fromRisk!=null and fromRisk!=''">
+            and from_risk = #{fromRisk}
+        </if>
+        <if test="temperature!=null and temperature!=''">
+            and temperature = #{temperature}
+        </if>
+        <if test="isAgree!=null and isAgree!=''">
+            and is_agree = #{isAgree}
+        </if>
+        <if test="agreeExplain!=null and agreeExplain!=''">
+            and agree_explain = #{agreeExplain}
+        </if>
+        <if test="agreeName!=null and agreeName!=''">
+            and agree_name = #{agreeName}
+        </if>
+        <if test="agreeTime!=null and agreeTime!=''">
+            and agree_time = #{agreeTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_register_visit_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="visitName!=null and visitName!=''">
+            and visit_name = #{visitName}
+        </if>
+        <if test="visitLinkTel!=null and visitLinkTel!=''">
+            and visit_link_tel = #{visitLinkTel}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="documentCode!=null and documentCode!=''">
+            and document_code = #{documentCode}
+        </if>
+        <if test="visitTime!=null and visitTime!=''">
+            and visit_time = #{visitTime}
+        </if>
+        <if test="visitNum!=null and visitNum!=''">
+            and visit_num = #{visitNum}
+        </if>
+        <if test="planLeaveTime!=null and planLeaveTime!=''">
+            and plan_leave_time = #{planLeaveTime}
+        </if>
+        <if test="relationType!=null and relationType!=''">
+            and relation_type = #{relationType}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="bedInfo!=null and bedInfo!=''">
+            and bed_info = #{bedInfo}
+        </if>
+        <if test="belongings!=null and belongings!=''">
+            and belongings = #{belongings}
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            and file_path = #{filePath}
+        </if>
+        <if test="fromRisk!=null and fromRisk!=''">
+            and from_risk = #{fromRisk}
+        </if>
+        <if test="temperature!=null and temperature!=''">
+            and temperature = #{temperature}
+        </if>
+        <if test="isAgree!=null and isAgree!=''">
+            and is_agree = #{isAgree}
+        </if>
+        <if test="agreeExplain!=null and agreeExplain!=''">
+            and agree_explain = #{agreeExplain}
+        </if>
+        <if test="agreeName!=null and agreeName!=''">
+            and agree_name = #{agreeName}
+        </if>
+        <if test="agreeTime!=null and agreeTime!=''">
+            and agree_time = #{agreeTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsActivityRoomInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    room_name,
+    room_code,
+    room_pic,
+    show_pics,
+    room_facilities,
+    room_introduce,
+    manager,
+    link_tel,
+    place_area,
+    open_time,
+    close_time,
+    capacity,
+    use_state,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.roomName},
+    #{item.roomCode},
+    #{item.roomPic},
+    #{item.showPics},
+    #{item.roomFacilities},
+    #{item.roomIntroduce},
+    #{item.manager},
+    #{item.linkTel},
+    #{item.placeArea},
+    #{item.openTime},
+    #{item.closeTime},
+    #{item.capacity},
+    #{item.useState},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_activity_room_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsActivityRoomInfo">
+        SELECT * from  tb_jiangyukeji_ins_activity_room_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="roomCode!=null and roomCode!=''">
+            and room_code = #{roomCode}
+        </if>
+        <if test="roomPic!=null and roomPic!=''">
+            and room_pic = #{roomPic}
+        </if>
+        <if test="showPics!=null and showPics!=''">
+            and show_pics = #{showPics}
+        </if>
+        <if test="roomFacilities!=null and roomFacilities!=''">
+            and room_facilities = #{roomFacilities}
+        </if>
+        <if test="roomIntroduce!=null and roomIntroduce!=''">
+            and room_introduce = #{roomIntroduce}
+        </if>
+        <if test="manager!=null and manager!=''">
+            and manager = #{manager}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="placeArea!=null and placeArea!=''">
+            and place_area = #{placeArea}
+        </if>
+        <if test="openTime!=null and openTime!=''">
+            and open_time = #{openTime}
+        </if>
+        <if test="closeTime!=null and closeTime!=''">
+            and close_time = #{closeTime}
+        </if>
+        <if test="capacity!=null and capacity!=''">
+            and capacity = #{capacity}
+        </if>
+        <if test="useState!=null and useState!=''">
+            and use_state = #{useState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_activity_room_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="roomCode!=null and roomCode!=''">
+            and room_code = #{roomCode}
+        </if>
+        <if test="roomPic!=null and roomPic!=''">
+            and room_pic = #{roomPic}
+        </if>
+        <if test="showPics!=null and showPics!=''">
+            and show_pics = #{showPics}
+        </if>
+        <if test="roomFacilities!=null and roomFacilities!=''">
+            and room_facilities = #{roomFacilities}
+        </if>
+        <if test="roomIntroduce!=null and roomIntroduce!=''">
+            and room_introduce = #{roomIntroduce}
+        </if>
+        <if test="manager!=null and manager!=''">
+            and manager = #{manager}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="placeArea!=null and placeArea!=''">
+            and place_area = #{placeArea}
+        </if>
+        <if test="openTime!=null and openTime!=''">
+            and open_time = #{openTime}
+        </if>
+        <if test="closeTime!=null and closeTime!=''">
+            and close_time = #{closeTime}
+        </if>
+        <if test="capacity!=null and capacity!=''">
+            and capacity = #{capacity}
+        </if>
+        <if test="useState!=null and useState!=''">
+            and use_state = #{useState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

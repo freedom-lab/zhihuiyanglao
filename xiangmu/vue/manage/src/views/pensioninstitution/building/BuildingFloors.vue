@@ -1,0 +1,324 @@
+<template>
+  <div class="three-table-layout">
+    <!-- 左侧：楼栋楼层面板 -->
+    <div class="panel left-panel">
+      <div class="panel-header">
+        <h3>楼栋 - 楼层</h3>
+        <div class="header-btn-group">
+          <el-button circle icon="el-icon-plus" size="mini"></el-button>
+          <el-button circle icon="el-icon-delete" size="mini" type="danger"></el-button>
+        </div>
+      </div>
+      <el-table
+        :data="buildingList"
+        border
+        width="100%"
+        empty-text="暂无楼栋数据"
+        height="calc(100% - 40px)"
+        :default-sort="{prop: 'buildingName', order: 'ascending'}"
+      >
+        <el-table-column type="selection" width="40" />
+        <el-table-column label="楼栋" prop="buildingName" min-width="100">
+          <template slot-scope="scope">
+            <div v-if="scope.row.isBuilding" class="building-row">
+              <i class="el-icon-office-building"></i>
+              <span>{{ scope.row.buildingName }}</span>
+            </div>
+            <div v-else class="floor-row">
+              <span>{{ scope.row.floorName }}</span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="120" fixed="right">
+          <template slot-scope="scope">
+            <el-button icon="el-icon-setting" size="mini" circle title="配置"></el-button>
+            <el-button v-if="scope.row.isBuilding" icon="el-icon-plus" size="mini" circle title="添加楼层"></el-button>
+            <el-button v-if="!scope.row.isBuilding" icon="el-icon-edit" size="mini" circle title="编辑"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+    <!-- 中间：房间面板 -->
+    <div class="panel center-panel">
+      <div class="panel-header">
+        <h3>房间</h3>
+        <div class="header-btn-group">
+          <el-button circle icon="el-icon-plus" size="mini"></el-button>
+          <el-button circle icon="el-icon-edit" size="mini" type="warning"></el-button>
+          <el-button circle icon="el-icon-delete" size="mini" type="danger"></el-button>
+        </div>
+      </div>
+      <el-table
+        :data="roomList"
+        border
+        width="100%"
+        empty-text="暂无数据"
+        height="calc(100% - 40px)"
+        :default-sort="{prop: 'roomName', order: 'ascending'}"
+      >
+        <el-table-column type="selection" width="40" />
+        <el-table-column label="序号" type="index" :index="indexMethod" width="60" />
+        <el-table-column label="房间名称" prop="roomName" min-width="120" sortable>
+          <template slot-scope="scope">
+            <span>{{ scope.row.roomName }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="房间面积 (m²)" prop="area" min-width="100" sortable />
+        <el-table-column label="房间类型" prop="roomType" min-width="100">
+          <template slot-scope="scope">
+            <el-tag :type="getRoomTypeTag(scope.row.roomType)" size="mini">
+              {{ scope.row.roomType }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="100" fixed="right">
+          <template slot-scope="scope">
+            <el-button icon="el-icon-plus" size="mini" circle title="添加床位"></el-button>
+            <el-button icon="el-icon-edit" size="mini" circle title="编辑"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+    <!-- 右侧：床位面板 -->
+    <div class="panel right-panel">
+      <div class="panel-header">
+        <h3>床位</h3>
+        <el-button circle icon="el-icon-plus" size="mini"></el-button>
+      </div>
+      <el-table
+        :data="bedList"
+        border
+        width="100%"
+        empty-text="暂无床位数据"
+        height="calc(100% - 40px)"
+      >
+        <el-table-column label="床位编号" prop="bedNo" min-width="100" />
+        <el-table-column label="床位状态" prop="bedStatus" min-width="80">
+          <template slot-scope="scope">
+            <el-tag :type="getBedStatusTag(scope.row.bedStatus)" size="mini">
+              {{ scope.row.bedStatus }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="80" fixed="right">
+          <template slot-scope="scope">
+            <el-button icon="el-icon-edit" size="mini" circle title="编辑"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'BuildingFloors',
+  data() {
+    return {
+      // 表格模拟数据
+      buildingList: [
+        { buildingName: '1 号楼', isBuilding: true, id: 1 },
+        { floorName: '1F', isBuilding: false, parentId: 1 },
+        { floorName: '2F', isBuilding: false, parentId: 1 },
+        { floorName: '3F', isBuilding: false, parentId: 1 },
+        { floorName: '4F', isBuilding: false, parentId: 1 },
+        { floorName: '5F', isBuilding: false, parentId: 1 },
+        { floorName: '6F', isBuilding: false, parentId: 1 },
+        { buildingName: '2 号楼', isBuilding: true, id: 2 }
+      ],
+      roomList: [
+        { roomName: '101', area: 25.5, roomType: '单人间', id: 1 },
+        { roomName: '102', area: 30.0, roomType: '双人间', id: 2 },
+        { roomName: '103', area: 45.0, roomType: '三人间', id: 3 }
+      ],
+      bedList: [
+        { bedNo: '101-A', bedStatus: '空闲', id: 1 },
+        { bedNo: '101-B', bedStatus: '已入住', id: 2 },
+        { bedNo: '102-A', bedStatus: '空闲', id: 3 },
+        { bedNo: '102-B', bedStatus: '预定', id: 4 }
+      ]
+    }
+  },
+  methods: {
+    // 序号方法
+    indexMethod(index) {
+      return index + 1
+    },
+    // 获取房间类型标签颜色
+    getRoomTypeTag(type) {
+      const typeMap = {
+        '单人间': '',
+        '双人间': 'success',
+        '三人间': 'warning',
+        'VIP 间': 'danger'
+      }
+      return typeMap[type] || ''
+    },
+    // 获取床位状态标签颜色
+    getBedStatusTag(status) {
+      const statusMap = {
+        '空闲': 'success',
+        '已入住': 'danger',
+        '预定': 'warning',
+        '维修中': 'info'
+      }
+      return statusMap[status] || ''
+    }
+  },
+  mounted() {
+    // 初始化数据加载
+    console.log('页面已加载')
+  }
+}
+</script>
+
+<style scoped>
+/* 三栏弹性布局核心 */
+.three-table-layout {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  height: calc(100vh - 120px);
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+/* 统一面板样式 */
+.panel {
+  border: 1px solid #e4e7ed;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panel-header h3::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  background: #409EFF;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+
+.header-btn-group {
+  display: flex;
+  gap: 6px;
+}
+
+/* 左面板：固定最小宽度，不拉伸 */
+.left-panel {
+  min-width: 280px;
+  flex: 0 0 auto;
+}
+
+/* 中间面板：弹性自适应剩余宽度，核心区域 */
+.center-panel {
+  flex: 1;
+  min-width: 450px;
+}
+
+/* 右面板：固定最小宽度，不拉伸 */
+.right-panel {
+  min-width: 260px;
+  flex: 0 0 auto;
+}
+
+/* 表格高度适配父容器 */
+.el-table {
+  flex: 1;
+}
+
+/* 楼栋和楼层行样式 */
+.building-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.floor-row {
+  padding-left: 24px;
+  color: #606266;
+}
+
+/* 表格行选中样式 */
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: #f5f7fa;
+}
+
+/* 按钮圆形样式 */
+.el-button--circle {
+  padding: 8px;
+}
+
+/* 空状态样式 */
+:deep .el-table__empty-text {
+  color: #909399;
+  font-size: 14px;
+}
+
+/* 滚动条样式优化 */
+:deep .el-table__body-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+:deep .el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background: #c0c4cc;
+  border-radius: 3px;
+}
+
+:deep .el-table__body-wrapper::-webkit-scrollbar-track {
+  background: #f5f7fa;
+}
+
+/* 响应式适配 */
+@media screen and (max-width: 1400px) {
+  .left-panel {
+    min-width: 260px;
+  }
+  .center-panel {
+    min-width: 400px;
+  }
+  .right-panel {
+    min-width: 240px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .three-table-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .panel {
+    min-height: 400px;
+  }
+}
+</style>

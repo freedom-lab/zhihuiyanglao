@@ -1,0 +1,942 @@
+<template>
+  <div class="organizationManagement positionr" v-loading="loading">
+    <!-- 面包屑导航区 -->
+    <el-breadcrumb>
+      <!-- <el-breadcrumb-item class="pointer" :to="{ path: '/employeeManagement' }"
+        >人员管理</el-breadcrumb-item
+      > -->
+      <el-breadcrumb-item>权限组管理 /</el-breadcrumb-item>
+    </el-breadcrumb>
+    <!-- 菜单设置按钮 -->
+    <div class="positiona menuBtn pointer" @click="gotoMenu">
+      <i class="el-icon-link iconblue f18"></i>
+      <span class="textblue f13"> 菜单设置</span>
+    </div>
+    <!-- 内容主体 -->
+    <div class="bgwhite bort">
+      <el-row>
+        <!-- 左侧树结构 -->
+        <el-col :xs="6" :sm="6" :md="5" :lg="5" class="tree-left">
+          <aside class="left-box">
+            <div class="left-list-box">
+              <div class="tree">
+                <!-- 搜索框 -->
+                <el-form>
+                  <el-form-item class="left-search">
+                    <el-row type="flex" class="row-bg" justify="space-between">
+                      <el-input placeholder="权限组名称" v-model="name">
+                        <el-button @click="getPostData"
+                          slot="append"
+                          icon="el-icon-search"
+                        ></el-button>
+                      </el-input>
+                      <el-tooltip
+                        class="item"
+                        effect="dark"
+                        content="新增权限组"
+                        placement="bottom"
+                      >
+                        <el-button
+                          type="primary"
+                          size="small"
+                          plain
+                          class="is-circle"
+                          @click="openOrganization"
+                          ><i class="el-icon-plus fw900 f16"></i
+                        ></el-button>
+                      </el-tooltip>
+                    </el-row>
+                  </el-form-item>
+                </el-form>
+
+                <div class="syste-list tree-editor mt20">
+                  <div class="tabList">
+                    <div
+                      :class="
+                        isActive == i
+                          ? 'flex align-center justify-between pointer tabItem active'
+                          : 'flex align-center justify-between pointer tabItem'
+                      "
+                      v-for="(item, i) in postListData"
+                      :key="item.id"
+                      @click="handlePostInfo(i, item)"
+                    >
+                      <span>{{ item.name }}</span>
+                      <i
+                        class="el-icon-close iconblue f18 fw900"
+                        @click="delPost(item.id)"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </el-col>
+        <!-- 右侧对应内容 -->
+        <el-col :xs="18" :sm="18" :md="19" :lg="19" class="tree-right">
+          <div class="right-box">
+            <!-- 基本信息 -->
+            <div class="right-info-box">
+              <div class="header-search">
+                <div class="title">
+                  <el-row>
+                    <el-col :span="12">
+                      <span class="line"></span>
+                      基本信息
+                    </el-col>
+                    <el-col :span="12">
+                      <div class="flex align-center justify-end h50">
+                        <el-tooltip
+                          class="item"
+                          effect="dark"
+                          content="保存基本信息"
+                          placement="bottom"
+                        >
+                          <el-button
+                            type="primary"
+                            size="small"
+                            @click="submitForm('ruleForm')"
+                            >保存</el-button
+                          >
+                        </el-tooltip>
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
+              </div>
+              <div class="header-input">
+                <el-form
+                  :model="ruleForm"
+                  :rules="rules"
+                  ref="ruleForm"
+                  label-width="150px"
+                  class="ruleForm"
+                  size="mini"
+                >
+                  <el-row>
+                    <el-col :sm="24" :md="24" :lg="12">
+                      <el-form-item label="名称" prop="displayName">
+                        <el-input v-model="ruleForm.displayName"></el-input>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :sm="24" :md="24" :lg="12">
+                      <el-form-item label="描述" prop="description">
+                        <el-input v-model="ruleForm.description"></el-input>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-form>
+              </div>
+            </div>
+            <!-- 扩展属性 -->
+            <!-- <div class="right-info-box">
+              <div class="header-search">
+                <div class="title">
+                  <el-row>
+                    <el-col :span="12">
+                      <span class="line"></span>
+                      扩展属性
+                    </el-col>
+                    <el-col :span="12">
+                      <div class="flex align-center justify-end h50">
+                        <el-tooltip
+                          class="item"
+                          effect="dark"
+                          content="扩展属性"
+                          placement="bottom"
+                        >
+                          <el-button
+                            type="primary"
+                            size="small"
+                            plain
+                            class="is-circle"
+                            ><i class="el-icon-plus fw900 f16"></i
+                          ></el-button>
+                        </el-tooltip>
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
+              </div>
+              <div class="header-input"></div>
+            </div> -->
+            <!-- 下属人员 -->
+            <div class="mb20">
+              <div class="header-search">
+                <div class="title">
+                  <el-row>
+                    <el-col :span="12">
+                      <span class="line"></span>
+                      下属人员
+                    </el-col>
+                    <el-col :span="12">
+                      <div class="flex align-center justify-end h50">
+                        <el-tooltip
+                          class="item"
+                          effect="dark"
+                          content="下属人员"
+                          placement="bottom"
+                        >
+                          <el-button
+                            type="primary"
+                            size="small"
+                            plain
+                            class="is-circle"
+                            @click="addUser()"
+                            ><i class="el-icon-plus fw900 f16"></i
+                          ></el-button>
+                        </el-tooltip>
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
+              </div>
+              <div class="header-input">
+                <!-- 表格 -->
+                <el-table
+                  :data="userData"
+                  border
+                  fit
+                  height="397px"
+                  highlight-current-row
+                  style="width: 100%"
+                >
+                  <el-table-column
+                    label="姓名"
+                    prop="name"
+                    sortable="custom"
+                    align="center"
+                  >
+                    <template slot-scope="scope">
+                      <span>{{scope.row.familyName}}{{ scope.row.name }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="AD" align="center">
+                    <template slot-scope="scope">
+                      <span>{{ scope.row.ad }}</span>
+                    </template>
+                  </el-table-column>
+
+                  <el-table-column label="邮箱" align="center">
+                    <template slot-scope="scope">
+                      <span>{{ scope.row.email }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="操作"
+                    align="center"
+                    class-name="small-padding fixed-width" fixed="right"
+                  >
+                    <!-- <el-tooltip
+                      class="item"
+                      effect="dark"
+                      content="保存"
+                      placement="bottom"
+                    >
+                      <i class="el-icon-edit textblue f16"></i>
+                    </el-tooltip> -->
+                     <template slot-scope="scope">
+                      <el-tooltip 
+                        class="item"
+                        effect="dark"
+                        content="删除"
+                        placement="bottom"
+                      >
+                        <i
+                          class="el-icon-delete textblue f16 ml20" 
+                          @click="delUser(scope.row.id)"
+                        ></i>
+                    </el-tooltip>
+                    </template>
+                  </el-table-column>
+                </el-table>
+                <!-- 新增按钮 -->
+                <div class="handle-btn wp100">
+                  <el-button
+                    plain
+                    class="add-column-btn"
+                    @click="addUser()"
+                    ><i class="el-icon-plus fw900 f16"></i> 新增</el-button
+                  >
+                </div>
+                <!-- 分页区域 -->
+                <!-- <el-pagination
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="queryInfo.pagenum"
+                  :page-sizes="[2, 5, 10, 15]"
+                  :page-size="queryInfo.pagesize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="totle"
+                ></el-pagination> -->
+              </div>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+
+      <!-- 新建组织架构弹出框 -->
+      <el-dialog title="新建权限组" :visible.sync="organizationDialog">
+        <el-form
+          :model="orgDialogForm"
+          :rules="orgDialogRules"
+          ref="orgDialogForm"
+          label-width="100px"
+          class="dia-gap"
+          size="mini"
+        >
+          <el-form-item label="名称" prop="name">
+            <el-input
+              v-model="orgDialogForm.name"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="描述">
+            <el-input
+              v-model="orgDialogForm.relationDesc"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="submitForm('orgDialogForm')"
+            >确 认</el-button
+          >
+          <el-button @click="organizationDialog = false">取 消</el-button>
+        </div>
+      </el-dialog>
+
+      <!-- 人员选择 -->
+      <el-dialog
+        title="人员选择"
+        :visible.sync="selectPersonDialog"
+        class="selectorDialog"
+      >
+        <div class="search-condition box">
+          <el-row type="flex" justify="end">
+            <el-col :span="16">
+              <el-input placeholder="" class="mr10">
+                <el-button slot="append" icon="el-icon-search"></el-button>
+              </el-input>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="org-selected">
+          <el-row>
+            <el-col :xs="24" :sm="16" :md="16" :lg="16">
+              <el-table
+                ref="multipleTable"
+                :data="selectTableData"
+                tooltip-effect="dark"
+                style="width: 100%; margin-top: 0"
+                @selection-change="handleSelectionChange"
+                fit
+                border
+                height="354px"
+                highlight-current-row
+              >
+              
+                <el-table-column type="selection" align="center" width="50">
+                  
+                </el-table-column>
+                <el-table-column prop="name" label="姓名" align="center">
+                   <template slot-scope="scope"><span>{{scope.row.familyName}}{{ scope.row.name }}</span></template>
+                </el-table-column>
+                 <el-table-column prop="ad" label="AD" align="center">
+                </el-table-column>
+                 <el-table-column prop="email" label="邮箱" align="center">
+                </el-table-column>
+              </el-table>
+              <!-- 分页 -->
+              <!-- <el-pagination
+                @size-change="handleSizeChange2"
+                @current-change="handleCurrentChange2"
+                :current-page="queryInfo2.pagenum"
+                :page-size="queryInfo2.pagesize"
+                layout="total, prev, pager, next"
+                :total="totle2"
+                class="ml10"
+                style="margin-bottom: 15px"
+              ></el-pagination> -->
+            </el-col>
+            <el-col
+              :xs="24"
+              :sm="8"
+              :md="8"
+              :lg="8"
+              class="selectedUl pr10 bbox"
+            >
+              <p class="wp100 bbox flex justify-between textblue">
+                <span>已选择</span>
+                <span class="pointer" @click="empty"
+                  ><i class="el-icon-delete"></i> 清空</span
+                >
+              </p>
+              <div class="selectedUl-box">
+                <ul>
+                  <li
+                    class="clearfix"
+                    v-for="(item, i) in multipleSelection"
+                    :key="item.id"
+                  >
+                    <span class="floatLeft rightOrderBox">
+                      {{item.familyName}}{{item.name}}</span>
+                    <i
+                      class="el-icon-close floatRight iconOrganization iconblue fw700 f15"
+                      @click="del(item.id, i)"
+                    ></i>
+                  </li>
+                </ul>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="confirm">确 认</el-button>
+          <el-button @click="selectPersonDialog = false">取 消</el-button>
+        </div>
+      </el-dialog>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      name:"",
+      loading: true,
+      userData:[],
+      postListData: [], // 职位列表
+      isActive: 0, //控制选中样式
+      ruleForm: {
+        displayName: "",
+        description: "",
+        id: "",
+        
+      }, //基本信息
+      rules: {
+        displayName: [
+          { required: true, message: "【名称】不能为空", trigger: "blur" },
+        ],
+        // description: [
+        //   { required: true, message: "【描述】不能为空", trigger: "blur" },
+        // ],
+      }, // 基本信息校验规则
+      tableData: [],
+      // 获取用户列表查询参数对象
+      queryInfo: {
+        query: "",
+        // 当前页数
+        pagenum: 1,
+        // 每页显示多少数据
+        pagesize: 5,
+      },
+      totle: 40,
+      organizationDialog: false, // 控制新建组织架构弹窗
+      orgDialogForm: {
+        name: "",
+        relationDesc: "",
+      }, //新建权限组
+      orgDialogRules: {
+        name: [
+          {
+            required: true,
+            message: "【组织结构别名】不能为空",
+            trigger: "blur",
+          },
+        ],
+        // relationDesc: [
+        //   {
+        //     required: true,
+        //     message: "【组织结构描述】不能为空",
+        //     trigger: "blur",
+        //   },
+        // ],
+      }, // 基本信息校验规则
+      rootNodeDialog: false, //控制添加根节点弹窗
+      rootDialogForm: {
+        displayName: "",
+        orgType: "",
+        orderIndex: "",
+        orgDesc: "",
+      }, //添加根节点表单
+      rootDialogRules: {
+        displayName: [
+          {
+            required: true,
+            message: "【组织名称】不能为空",
+            trigger: "blur",
+          },
+        ],
+        orgType: [
+          {
+            required: true,
+            message: "【组织类型】不能为空",
+            trigger: "change",
+          },
+        ],
+      }, // 基本信息校验规则
+      userName: "admin",
+      selectTableData: [], //岗位选择列表
+      multipleSelection: [], // 选中列表
+      selectPersonDialog: false, //人员选择弹窗
+      queryInfo2: {
+        // 当前页数
+        pagenum: 1,
+        // 每页显示多少数据
+        pagesize: 5,
+      },
+      totle2: 40,
+      roleCode:'',
+    };
+  },
+  created() {
+    this.getPostData();
+    this.userName = JSON.parse(localStorage.getItem('userName'));
+  },
+  mounted() {
+    this.loading = false;
+  },
+  methods: {
+    //跳转到菜单管理
+    gotoMenu() {
+      this.$router.push({ path: "/menuPermission" });
+    },
+    // 树形结构选择
+    handleNodeClick(data) {
+      console.log(data);
+    },
+
+    // 组织排序
+    handleSortChange(value) {
+      console.log(value);
+    },
+
+    // 保存
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          // 弹窗的确定事件
+          if (formName == "orgDialogForm") {
+            this.organizationDialog = false;
+            var saveData = {};
+            saveData.name = this.orgDialogForm.name;
+            saveData.creator = this.userName;
+            saveData.roleCode = this.randomString(15);
+            var that = this;
+            that.$http
+              .post("/roleInfo", saveData)
+              .then(function (response) {
+                //console.log(response);
+                that.$notify.success({
+                  title: "提示",
+                  message: "添加权限成功",
+                  showClose: true,
+                });
+                that.orgDialogForm = {
+                  name: "",
+                  relationDesc: "",
+                };
+                that.postListData = [];
+                that.getPostData();
+              })
+              .catch(function (error) {
+                this.$notify.info({
+                  title: "提示",
+                  message: "添加权限失败",
+                  showClose: true,
+                });
+                // console.log(error);
+              });
+          }
+
+          // 基本信息的保存事件
+          if (formName == "ruleForm") {
+            var saveData = {};
+            saveData.name = this.ruleForm.displayName;
+            saveData.id = this.ruleForm.id;
+            //console.log(this.saveAddData);
+            var that = this;
+            that.$http
+              .put("/roleInfo", saveData)
+              .then(function (response) {
+                //console.log(response);
+                that.$notify.success({
+                  title: "提示",
+                  message: "更改成功",
+                  showClose: true,
+                });
+                that.postListData = [];
+                that.getPostData();
+              })
+              .catch(function (error) {
+                this.$notify.info({
+                  title: "提示",
+                  message: "更改失败",
+                  showClose: true,
+                });
+                // console.log(error);
+              });
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+
+    // 监听 pagesize改变的事件
+    handleSizeChange(newSize) {
+      // console.log(newSize)
+      this.queryInfo.pagesize = newSize;
+    },
+    // 监听 页码值 改变事件
+    handleCurrentChange(newSize) {
+      // console.log(newSize)
+      this.queryInfo.pagenum = newSize;
+      // this.getUserList();
+    },
+
+    openOrganization() {
+      this.organizationDialog = true;
+    },
+
+    //点击职位事件
+    handlePostInfo(i, data) {
+      this.isActive = i;
+      this.ruleForm.displayName = data.name;
+      this.ruleForm.id = data.id;
+      this.roleCode = data.roleCode;
+      //alert(this.roleCode);
+      this.getUserData();
+    },
+    //删除职位
+    async delPost(id) {
+      var that = this;
+      const confirmResult = await that
+        .$confirm("确定删除吗?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+        .catch((err) => err);
+      // 点击确定 返回值为：confirm
+      // 点击取消 返回值为： cancel
+      if (confirmResult !== "confirm") {
+        return that.$notify.info({
+          title: "提示",
+          message: "已取消删除",
+          showClose: true,
+        });
+      } else {
+        that.$http.delete("/roleInfo/" + id).then(function (response) {
+          that.$notify.success({
+            title: "提示",
+            message: "删除权限成功",
+            showClose: true,
+          });
+          that.postListData = [];
+          that.getPostData();
+        });
+      }
+    },
+    // 获取职位数据
+    getPostData() {
+      var that = this;
+      that.$http
+        .post("/roleInfo/queryList", { name: that.name})
+        .then(function (response) {
+          //console.log(response.data.data);
+          console.log(response.data.data);
+          if (response.data.code == 200) {
+            that.postListData = response.data.data;
+            that.ruleForm.displayName = that.postListData[0].name;
+            that.ruleForm.id = that.postListData[0].id;
+             that.roleCode = that.postListData[0].roleCode;
+             that.getUserData();
+          }
+        });
+    },
+
+    // 获取随机字符串
+    randomString(e) {
+      e = e || 32;
+      var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
+        a = t.length,
+        n = "";
+      for (var i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+      return n;
+    },
+
+    // 人员选择器选择事件
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+      console.log(this.multipleSelection);
+    },
+    // 清空
+    empty() {
+      this.multipleSelection = [];
+      this.$refs.multipleTable.clearSelection();
+    },
+    //删除
+    del(id, i) {
+      this.selectTableData.forEach((row) => {
+        if (row.id == id) {
+          this.$refs.multipleTable.toggleRowSelection(row, false);
+        }
+      });
+      this.multipleSelection.slice(i, 1);
+    },
+     // 监听 pagesize改变的事件
+    handleSizeChange2(newSize) {
+      // console.log(newSize)
+      this.queryInfo2.pagesize = newSize;
+    },
+    // 监听 页码值 改变事件
+    handleCurrentChange2(newSize) {
+      // console.log(newSize)
+      this.queryInfo2.pagenum = newSize;
+      // this.getUserList();
+    },
+   
+
+    // 获取人员数据
+    getUserData() {
+      var that = this;
+      that.$http
+        .post("/roleUserInfo/queryListByRoleCode", { roleCode: that.roleCode})
+        .then(function (response) {
+          // console.log(response);
+          // console.log(response.data.data);
+          if (response.data.code == 200) {
+           that.userData=response.data.data;
+          //  console.log(that.userData);
+          }
+        });
+    },
+
+
+    async delUser(id){
+      var that = this;
+      
+       const confirmResult = await that
+        .$confirm("确定删除吗?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+        .catch((err) => err);
+      // 点击确定 返回值为：confirm
+      // 点击取消 返回值为： cancel
+      if (confirmResult !== "confirm") {
+        return that.$notify.info({
+          title: "提示",
+          message: "已取消删除",
+          showClose: true,
+        });
+      } else {
+        that.$http.delete("/roleUserInfo/" + id).then(function (response) {
+          that.$notify.success({
+            title: "提示",
+            message: "删除成功",
+            showClose: true,
+          });
+         
+          that.getUserData();
+        });
+      }
+    },
+
+
+
+    //打开弹窗
+  addUser(){
+    this.selectPersonDialog = true;
+    this.getUserList();
+  },
+
+  //查询用户列表
+  getUserList(){
+     var that = this;
+      that.$http
+        .post("/userInfo/queryList", {})
+        .then(function (response) {
+          //  console.log(response);
+          // console.log(response.data.data);
+          if (response.data.code == 200) {
+             that.selectTableData=response.data.data;;
+          // var selectTableData= that.selectTableData;
+          //  for(var i=0;i<selectTableData.length;i++){
+          //    var row=selectTableData[i]
+          //     that.$refs.multipleTable.toggleRowSelection(row, true);
+          //  }
+          //   that.selectTableData=selectTableData;
+           console.log(that.userData);
+          }
+        });
+  },
+
+
+   // 确认
+    confirm(){
+      // alert(111);
+       // console.log(this.multipleSelection);
+      var that = this;
+      var multipleSelection= this.multipleSelection
+      var userCode="";
+      if(multipleSelection.length==0){
+        this.$message('请选择人员');
+      }
+
+      for(var i=0;i<multipleSelection.length;i++){
+        userCode+=multipleSelection[i].userCode+",";
+      }
+      
+      that.$http
+        .post("/roleUserInfo/addUser", { 
+          roleCode: that.roleCode,
+          userCode:userCode
+          })
+        .then(function (response) {
+          // console.log(response);
+          // console.log(response.data.data);
+          if (response.data.code == 200) {
+          that.$message({ message: '保存成功', type: 'success' });
+          //  console.log(that.userData);
+         
+          }
+           that.getUserData();
+           that.selectPersonDialog = false;
+        });
+      
+    },
+//定义方法结束
+  },
+
+};
+</script>
+
+<style lang="less" scope>
+.h50 {
+  height: 50px;
+}
+.handle-btn .el-button.add-column-btn {
+  width: 100%;
+  font-size: 13px;
+  background-color: transparent;
+  color: #008eff;
+  margin-top: -1px;
+  position: relative;
+  z-index: 100;
+}
+.menuBtn {
+  right: 20px;
+  top: 0;
+}
+.menuBtn:hover span {
+  text-decoration: underline;
+}
+.organizationManagement {
+  .tree-left {
+    // width: 280px;
+    .left-list-box {
+      padding: 20px 10px;
+      height: calc(100vh - 110px);
+      .el-form-item {
+        margin-bottom: 0;
+        .el-form-item__content {
+          line-height: 30px;
+        }
+      }
+      .selma {
+        width: 72%;
+      }
+      .el-button.is-circle {
+        margin-left: 7px;
+      }
+      .syste-list {
+        height: calc(100vh - 195px);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: auto;
+        .tabList {
+          .tabItem {
+            padding: 0 15px;
+            font-size: 13px;
+            height: 40px;
+            line-height: 40px;
+            span {
+              display: inline-block;
+              color: #51637f;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 100%;
+            }
+          }
+          .tabItem:hover {
+            background-color: #e0effa;
+          }
+          .active {
+            background-color: #f6f7f8;
+          }
+        }
+      }
+    }
+  }
+  .tree-right {
+    // width: calc(100% - 280px);
+    .right-box {
+      padding-left: 16px;
+      padding-right: 16px;
+      height: calc(100vh - 110px);
+      overflow: auto;
+      border-left: 2px solid #eff4f8;
+      .header-search {
+        .title {
+          height: 50px;
+          line-height: 49px;
+          font-size: 15px;
+          color: #2f405b;
+          padding-left: 10px;
+          border-bottom: 1px solid #e3eaf0;
+          margin-bottom: 18px;
+          .line {
+            display: inline-block;
+            width: 3px;
+            height: 15px;
+            background-color: #2f91df;
+            margin-right: 5px;
+            border-radius: 2px;
+            margin-bottom: -2px;
+          }
+        }
+      }
+      .header-input {
+        font-size: 13px;
+      }
+    }
+  }
+  @media screen and (max-width: 1600px) {
+    .tree-left {
+      width: 280px;
+    }
+    .tree-right {
+      width: calc(100% - 280px);
+    }
+  }
+  .el-dialog {
+    margin-top: 15vh;
+    width: 600px;
+  }
+  .el-input-number--mini {
+    width: 100%;
+  }
+  .el-input-number .el-input__inner {
+    text-align: left;
+  }
+}
+</style>

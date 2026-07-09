@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsCanteenFoodInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    type_id,
+    type_name,
+    is_package,
+    food_name,
+    food_price,
+    food_unit,
+    food_taste,
+    food_avoid,
+    pungency_degree,
+    nutrition_desp,
+    ingredient_desp,
+    food_img,
+    package_desp,
+    recipe_type,
+    meal_time_type,
+    cooking_method,
+    portion_weight,
+    serving_size,
+    total_calorie,
+    total_protein,
+    total_fat,
+    total_carbohydrate,
+    total_dietary_fiber,
+    total_sodium,
+    total_potassium,
+    total_calcium,
+    total_magnesium,
+    total_phosphorus,
+    total_iron,
+    total_purine,
+    is_high_purine,
+    is_high_sugar,
+    is_high_fat,
+    taboo_explain,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.isPackage},
+    #{item.foodName},
+    #{item.foodPrice},
+    #{item.foodUnit},
+    #{item.foodTaste},
+    #{item.foodAvoid},
+    #{item.pungencyDegree},
+    #{item.nutritionDesp},
+    #{item.ingredientDesp},
+    #{item.foodImg},
+    #{item.packageDesp},
+    #{item.recipeType},
+    #{item.mealTimeType},
+    #{item.cookingMethod},
+    #{item.portionWeight},
+    #{item.servingSize},
+    #{item.totalCalorie},
+    #{item.totalProtein},
+    #{item.totalFat},
+    #{item.totalCarbohydrate},
+    #{item.totalDietaryFiber},
+    #{item.totalSodium},
+    #{item.totalPotassium},
+    #{item.totalCalcium},
+    #{item.totalMagnesium},
+    #{item.totalPhosphorus},
+    #{item.totalIron},
+    #{item.totalPurine},
+    #{item.isHighPurine},
+    #{item.isHighSugar},
+    #{item.isHighFat},
+    #{item.tabooExplain},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_canteen_food_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsCanteenFoodInfo">
+        SELECT * from  tb_jiangyukeji_ins_canteen_food_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="isPackage!=null and isPackage!=''">
+            and is_package = #{isPackage}
+        </if>
+        <if test="foodName!=null and foodName!=''">
+            and food_name = #{foodName}
+        </if>
+        <if test="foodPrice!=null and foodPrice!=''">
+            and food_price = #{foodPrice}
+        </if>
+        <if test="foodUnit!=null and foodUnit!=''">
+            and food_unit = #{foodUnit}
+        </if>
+        <if test="foodTaste!=null and foodTaste!=''">
+            and food_taste = #{foodTaste}
+        </if>
+        <if test="foodAvoid!=null and foodAvoid!=''">
+            and food_avoid = #{foodAvoid}
+        </if>
+        <if test="pungencyDegree!=null and pungencyDegree!=''">
+            and pungency_degree = #{pungencyDegree}
+        </if>
+        <if test="nutritionDesp!=null and nutritionDesp!=''">
+            and nutrition_desp = #{nutritionDesp}
+        </if>
+        <if test="ingredientDesp!=null and ingredientDesp!=''">
+            and ingredient_desp = #{ingredientDesp}
+        </if>
+        <if test="foodImg!=null and foodImg!=''">
+            and food_img = #{foodImg}
+        </if>
+        <if test="packageDesp!=null and packageDesp!=''">
+            and package_desp = #{packageDesp}
+        </if>
+        <if test="recipeType!=null and recipeType!=''">
+            and recipe_type = #{recipeType}
+        </if>
+        <if test="mealTimeType!=null and mealTimeType!=''">
+            and meal_time_type = #{mealTimeType}
+        </if>
+        <if test="cookingMethod!=null and cookingMethod!=''">
+            and cooking_method = #{cookingMethod}
+        </if>
+        <if test="portionWeight!=null and portionWeight!=''">
+            and portion_weight = #{portionWeight}
+        </if>
+        <if test="servingSize!=null and servingSize!=''">
+            and serving_size = #{servingSize}
+        </if>
+        <if test="totalCalorie!=null and totalCalorie!=''">
+            and total_calorie = #{totalCalorie}
+        </if>
+        <if test="totalProtein!=null and totalProtein!=''">
+            and total_protein = #{totalProtein}
+        </if>
+        <if test="totalFat!=null and totalFat!=''">
+            and total_fat = #{totalFat}
+        </if>
+        <if test="totalCarbohydrate!=null and totalCarbohydrate!=''">
+            and total_carbohydrate = #{totalCarbohydrate}
+        </if>
+        <if test="totalDietaryFiber!=null and totalDietaryFiber!=''">
+            and total_dietary_fiber = #{totalDietaryFiber}
+        </if>
+        <if test="totalSodium!=null and totalSodium!=''">
+            and total_sodium = #{totalSodium}
+        </if>
+        <if test="totalPotassium!=null and totalPotassium!=''">
+            and total_potassium = #{totalPotassium}
+        </if>
+        <if test="totalCalcium!=null and totalCalcium!=''">
+            and total_calcium = #{totalCalcium}
+        </if>
+        <if test="totalMagnesium!=null and totalMagnesium!=''">
+            and total_magnesium = #{totalMagnesium}
+        </if>
+        <if test="totalPhosphorus!=null and totalPhosphorus!=''">
+            and total_phosphorus = #{totalPhosphorus}
+        </if>
+        <if test="totalIron!=null and totalIron!=''">
+            and total_iron = #{totalIron}
+        </if>
+        <if test="totalPurine!=null and totalPurine!=''">
+            and total_purine = #{totalPurine}
+        </if>
+        <if test="isHighPurine!=null and isHighPurine!=''">
+            and is_high_purine = #{isHighPurine}
+        </if>
+        <if test="isHighSugar!=null and isHighSugar!=''">
+            and is_high_sugar = #{isHighSugar}
+        </if>
+        <if test="isHighFat!=null and isHighFat!=''">
+            and is_high_fat = #{isHighFat}
+        </if>
+        <if test="tabooExplain!=null and tabooExplain!=''">
+            and taboo_explain = #{tabooExplain}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_canteen_food_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="isPackage!=null and isPackage!=''">
+            and is_package = #{isPackage}
+        </if>
+        <if test="foodName!=null and foodName!=''">
+            and food_name = #{foodName}
+        </if>
+        <if test="foodPrice!=null and foodPrice!=''">
+            and food_price = #{foodPrice}
+        </if>
+        <if test="foodUnit!=null and foodUnit!=''">
+            and food_unit = #{foodUnit}
+        </if>
+        <if test="foodTaste!=null and foodTaste!=''">
+            and food_taste = #{foodTaste}
+        </if>
+        <if test="foodAvoid!=null and foodAvoid!=''">
+            and food_avoid = #{foodAvoid}
+        </if>
+        <if test="pungencyDegree!=null and pungencyDegree!=''">
+            and pungency_degree = #{pungencyDegree}
+        </if>
+        <if test="nutritionDesp!=null and nutritionDesp!=''">
+            and nutrition_desp = #{nutritionDesp}
+        </if>
+        <if test="ingredientDesp!=null and ingredientDesp!=''">
+            and ingredient_desp = #{ingredientDesp}
+        </if>
+        <if test="foodImg!=null and foodImg!=''">
+            and food_img = #{foodImg}
+        </if>
+        <if test="packageDesp!=null and packageDesp!=''">
+            and package_desp = #{packageDesp}
+        </if>
+        <if test="recipeType!=null and recipeType!=''">
+            and recipe_type = #{recipeType}
+        </if>
+        <if test="mealTimeType!=null and mealTimeType!=''">
+            and meal_time_type = #{mealTimeType}
+        </if>
+        <if test="cookingMethod!=null and cookingMethod!=''">
+            and cooking_method = #{cookingMethod}
+        </if>
+        <if test="portionWeight!=null and portionWeight!=''">
+            and portion_weight = #{portionWeight}
+        </if>
+        <if test="servingSize!=null and servingSize!=''">
+            and serving_size = #{servingSize}
+        </if>
+        <if test="totalCalorie!=null and totalCalorie!=''">
+            and total_calorie = #{totalCalorie}
+        </if>
+        <if test="totalProtein!=null and totalProtein!=''">
+            and total_protein = #{totalProtein}
+        </if>
+        <if test="totalFat!=null and totalFat!=''">
+            and total_fat = #{totalFat}
+        </if>
+        <if test="totalCarbohydrate!=null and totalCarbohydrate!=''">
+            and total_carbohydrate = #{totalCarbohydrate}
+        </if>
+        <if test="totalDietaryFiber!=null and totalDietaryFiber!=''">
+            and total_dietary_fiber = #{totalDietaryFiber}
+        </if>
+        <if test="totalSodium!=null and totalSodium!=''">
+            and total_sodium = #{totalSodium}
+        </if>
+        <if test="totalPotassium!=null and totalPotassium!=''">
+            and total_potassium = #{totalPotassium}
+        </if>
+        <if test="totalCalcium!=null and totalCalcium!=''">
+            and total_calcium = #{totalCalcium}
+        </if>
+        <if test="totalMagnesium!=null and totalMagnesium!=''">
+            and total_magnesium = #{totalMagnesium}
+        </if>
+        <if test="totalPhosphorus!=null and totalPhosphorus!=''">
+            and total_phosphorus = #{totalPhosphorus}
+        </if>
+        <if test="totalIron!=null and totalIron!=''">
+            and total_iron = #{totalIron}
+        </if>
+        <if test="totalPurine!=null and totalPurine!=''">
+            and total_purine = #{totalPurine}
+        </if>
+        <if test="isHighPurine!=null and isHighPurine!=''">
+            and is_high_purine = #{isHighPurine}
+        </if>
+        <if test="isHighSugar!=null and isHighSugar!=''">
+            and is_high_sugar = #{isHighSugar}
+        </if>
+        <if test="isHighFat!=null and isHighFat!=''">
+            and is_high_fat = #{isHighFat}
+        </if>
+        <if test="tabooExplain!=null and tabooExplain!=''">
+            and taboo_explain = #{tabooExplain}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

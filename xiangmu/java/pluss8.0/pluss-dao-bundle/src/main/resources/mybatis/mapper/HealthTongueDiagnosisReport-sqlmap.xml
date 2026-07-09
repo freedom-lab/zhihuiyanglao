@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthTongueDiagnosisReportMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    device_code,
+    device_name,
+    login_user_code,
+    login_user_name,
+    name,
+    sex,
+    age,
+    height,
+    weight,
+    time,
+    pdf,
+    health_index,
+    constitution_names,
+    symptom_name,
+    color_of_tongue_names,
+    color_of_moss_names,
+    moss_names,
+    bodyfluid_names,
+    shape_of_tongue_names,
+    vein_names,
+    disease_risks,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    diet_suggestion,
+    exercise_suggestion
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.deviceCode},
+    #{item.deviceName},
+    #{item.loginUserCode},
+    #{item.loginUserName},
+    #{item.name},
+    #{item.sex},
+    #{item.age},
+    #{item.height},
+    #{item.weight},
+    #{item.time},
+    #{item.pdf},
+    #{item.healthIndex},
+    #{item.constitutionNames},
+    #{item.symptomName},
+    #{item.colorOfTongueNames},
+    #{item.colorOfMossNames},
+    #{item.mossNames},
+    #{item.bodyfluidNames},
+    #{item.shapeOfTongueNames},
+    #{item.veinNames},
+    #{item.diseaseRisks},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.dietSuggestion},
+    #{item.exerciseSuggestion}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_tongue_diagnosis_report
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthTongueDiagnosisReport">
+        SELECT * from  tb_jiangyukeji_health_tongue_diagnosis_report
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="deviceCode!=null and deviceCode!=''">
+            and device_code = #{deviceCode}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="loginUserCode!=null and loginUserCode!=''">
+            and login_user_code = #{loginUserCode}
+        </if>
+        <if test="loginUserName!=null and loginUserName!=''">
+            and login_user_name = #{loginUserName}
+        </if>
+        <if test="name!=null and name!=''">
+            and name = #{name}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="height!=null and height!=''">
+            and height = #{height}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="time!=null and time!=''">
+            and time = #{time}
+        </if>
+        <if test="pdf!=null and pdf!=''">
+            and pdf = #{pdf}
+        </if>
+        <if test="healthIndex!=null and healthIndex!=''">
+            and health_index = #{healthIndex}
+        </if>
+        <if test="constitutionNames!=null and constitutionNames!=''">
+            and constitution_names = #{constitutionNames}
+        </if>
+        <if test="symptomName!=null and symptomName!=''">
+            and symptom_name = #{symptomName}
+        </if>
+        <if test="colorOfTongueNames!=null and colorOfTongueNames!=''">
+            and color_of_tongue_names = #{colorOfTongueNames}
+        </if>
+        <if test="colorOfMossNames!=null and colorOfMossNames!=''">
+            and color_of_moss_names = #{colorOfMossNames}
+        </if>
+        <if test="mossNames!=null and mossNames!=''">
+            and moss_names = #{mossNames}
+        </if>
+        <if test="bodyfluidNames!=null and bodyfluidNames!=''">
+            and bodyfluid_names = #{bodyfluidNames}
+        </if>
+        <if test="shapeOfTongueNames!=null and shapeOfTongueNames!=''">
+            and shape_of_tongue_names = #{shapeOfTongueNames}
+        </if>
+        <if test="veinNames!=null and veinNames!=''">
+            and vein_names = #{veinNames}
+        </if>
+        <if test="diseaseRisks!=null and diseaseRisks!=''">
+            and disease_risks = #{diseaseRisks}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="dietSuggestion!=null and dietSuggestion!=''">
+            and diet_suggestion = #{dietSuggestion}
+        </if>
+        <if test="exerciseSuggestion!=null and exerciseSuggestion!=''">
+            and exercise_suggestion = #{exerciseSuggestion}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_tongue_diagnosis_report
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="deviceCode!=null and deviceCode!=''">
+            and device_code = #{deviceCode}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="loginUserCode!=null and loginUserCode!=''">
+            and login_user_code = #{loginUserCode}
+        </if>
+        <if test="loginUserName!=null and loginUserName!=''">
+            and login_user_name = #{loginUserName}
+        </if>
+        <if test="name!=null and name!=''">
+            and name = #{name}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="height!=null and height!=''">
+            and height = #{height}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="time!=null and time!=''">
+            and time = #{time}
+        </if>
+        <if test="pdf!=null and pdf!=''">
+            and pdf = #{pdf}
+        </if>
+        <if test="healthIndex!=null and healthIndex!=''">
+            and health_index = #{healthIndex}
+        </if>
+        <if test="constitutionNames!=null and constitutionNames!=''">
+            and constitution_names = #{constitutionNames}
+        </if>
+        <if test="symptomName!=null and symptomName!=''">
+            and symptom_name = #{symptomName}
+        </if>
+        <if test="colorOfTongueNames!=null and colorOfTongueNames!=''">
+            and color_of_tongue_names = #{colorOfTongueNames}
+        </if>
+        <if test="colorOfMossNames!=null and colorOfMossNames!=''">
+            and color_of_moss_names = #{colorOfMossNames}
+        </if>
+        <if test="mossNames!=null and mossNames!=''">
+            and moss_names = #{mossNames}
+        </if>
+        <if test="bodyfluidNames!=null and bodyfluidNames!=''">
+            and bodyfluid_names = #{bodyfluidNames}
+        </if>
+        <if test="shapeOfTongueNames!=null and shapeOfTongueNames!=''">
+            and shape_of_tongue_names = #{shapeOfTongueNames}
+        </if>
+        <if test="veinNames!=null and veinNames!=''">
+            and vein_names = #{veinNames}
+        </if>
+        <if test="diseaseRisks!=null and diseaseRisks!=''">
+            and disease_risks = #{diseaseRisks}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="dietSuggestion!=null and dietSuggestion!=''">
+            and diet_suggestion = #{dietSuggestion}
+        </if>
+        <if test="exerciseSuggestion!=null and exerciseSuggestion!=''">
+            and exercise_suggestion = #{exerciseSuggestion}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

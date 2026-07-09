@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsBaseRoomInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    room_name,
+    building_id,
+    building_name,
+    floor_id,
+    floor_name,
+    room_area,
+    share_area,
+    indoor_area,
+    balcony_area,
+    room_type,
+    room_orientation,
+    room_lighted,
+    room_airness,
+    house_type,
+    room_day_price,
+    room_month_price,
+    room_state,
+    sort_num,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    indoor_positioning_id,
+    indoor_map_id
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.roomName},
+    #{item.buildingId},
+    #{item.buildingName},
+    #{item.floorId},
+    #{item.floorName},
+    #{item.roomArea},
+    #{item.shareArea},
+    #{item.indoorArea},
+    #{item.balconyArea},
+    #{item.roomType},
+    #{item.roomOrientation},
+    #{item.roomLighted},
+    #{item.roomAirness},
+    #{item.houseType},
+    #{item.roomDayPrice},
+    #{item.roomMonthPrice},
+    #{item.roomState},
+    #{item.sortNum},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.indoorPositioningId},
+    #{item.indoorMapId}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_base_room_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsBaseRoomInfo">
+        SELECT * from  tb_jiangyukeji_ins_base_room_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="buildingId!=null and buildingId!=''">
+            and building_id = #{buildingId}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="floorId!=null and floorId!=''">
+            and floor_id = #{floorId}
+        </if>
+        <if test="floorName!=null and floorName!=''">
+            and floor_name = #{floorName}
+        </if>
+        <if test="roomArea!=null and roomArea!=''">
+            and room_area = #{roomArea}
+        </if>
+        <if test="shareArea!=null and shareArea!=''">
+            and share_area = #{shareArea}
+        </if>
+        <if test="indoorArea!=null and indoorArea!=''">
+            and indoor_area = #{indoorArea}
+        </if>
+        <if test="balconyArea!=null and balconyArea!=''">
+            and balcony_area = #{balconyArea}
+        </if>
+        <if test="roomType!=null and roomType!=''">
+            and room_type = #{roomType}
+        </if>
+        <if test="roomOrientation!=null and roomOrientation!=''">
+            and room_orientation = #{roomOrientation}
+        </if>
+        <if test="roomLighted!=null and roomLighted!=''">
+            and room_lighted = #{roomLighted}
+        </if>
+        <if test="roomAirness!=null and roomAirness!=''">
+            and room_airness = #{roomAirness}
+        </if>
+        <if test="houseType!=null and houseType!=''">
+            and house_type = #{houseType}
+        </if>
+        <if test="roomDayPrice!=null and roomDayPrice!=''">
+            and room_day_price = #{roomDayPrice}
+        </if>
+        <if test="roomMonthPrice!=null and roomMonthPrice!=''">
+            and room_month_price = #{roomMonthPrice}
+        </if>
+        <if test="roomState!=null and roomState!=''">
+            and room_state = #{roomState}
+        </if>
+        <if test="sortNum!=null and sortNum!=''">
+            and sort_num = #{sortNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="indoorPositioningId!=null and indoorPositioningId!=''">
+            and indoor_positioning_id = #{indoorPositioningId}
+        </if>
+        <if test="indoorMapId!=null and indoorMapId!=''">
+            and indoor_map_id = #{indoorMapId}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_base_room_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="buildingId!=null and buildingId!=''">
+            and building_id = #{buildingId}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="floorId!=null and floorId!=''">
+            and floor_id = #{floorId}
+        </if>
+        <if test="floorName!=null and floorName!=''">
+            and floor_name = #{floorName}
+        </if>
+        <if test="roomArea!=null and roomArea!=''">
+            and room_area = #{roomArea}
+        </if>
+        <if test="shareArea!=null and shareArea!=''">
+            and share_area = #{shareArea}
+        </if>
+        <if test="indoorArea!=null and indoorArea!=''">
+            and indoor_area = #{indoorArea}
+        </if>
+        <if test="balconyArea!=null and balconyArea!=''">
+            and balcony_area = #{balconyArea}
+        </if>
+        <if test="roomType!=null and roomType!=''">
+            and room_type = #{roomType}
+        </if>
+        <if test="roomOrientation!=null and roomOrientation!=''">
+            and room_orientation = #{roomOrientation}
+        </if>
+        <if test="roomLighted!=null and roomLighted!=''">
+            and room_lighted = #{roomLighted}
+        </if>
+        <if test="roomAirness!=null and roomAirness!=''">
+            and room_airness = #{roomAirness}
+        </if>
+        <if test="houseType!=null and houseType!=''">
+            and house_type = #{houseType}
+        </if>
+        <if test="roomDayPrice!=null and roomDayPrice!=''">
+            and room_day_price = #{roomDayPrice}
+        </if>
+        <if test="roomMonthPrice!=null and roomMonthPrice!=''">
+            and room_month_price = #{roomMonthPrice}
+        </if>
+        <if test="roomState!=null and roomState!=''">
+            and room_state = #{roomState}
+        </if>
+        <if test="sortNum!=null and sortNum!=''">
+            and sort_num = #{sortNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="indoorPositioningId!=null and indoorPositioningId!=''">
+            and indoor_positioning_id = #{indoorPositioningId}
+        </if>
+        <if test="indoorMapId!=null and indoorMapId!=''">
+            and indoor_map_id = #{indoorMapId}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

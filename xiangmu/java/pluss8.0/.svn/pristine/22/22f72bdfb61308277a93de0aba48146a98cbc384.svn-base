@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartAlarmRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    grant_id,
+    big_device_type,
+    type_id,
+    device_name,
+    device_serial,
+    scene_type,
+    elder_id,
+    elder_name,
+    link_tel,
+    id_card,
+    lon,
+    lat,
+    address,
+    alarm_code,
+    alarm_level,
+    alarm_type,
+    sleep_alarm_type,
+    alarm_time,
+    alarm_content,
+    read_state,
+    handle_type,
+    handle_state,
+    handle_result,
+    handle_img,
+    handle_id,
+    handle_user,
+    handle_time,
+    belong_institution_type,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    audio_url,
+    call_phones,
+    call_task_ids,
+    call_count
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.grantId},
+    #{item.bigDeviceType},
+    #{item.typeId},
+    #{item.deviceName},
+    #{item.deviceSerial},
+    #{item.sceneType},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.linkTel},
+    #{item.idCard},
+    #{item.lon},
+    #{item.lat},
+    #{item.address},
+    #{item.alarmCode},
+    #{item.alarmLevel},
+    #{item.alarmType},
+    #{item.sleepAlarmType},
+    #{item.alarmTime},
+    #{item.alarmContent},
+    #{item.readState},
+    #{item.handleType},
+    #{item.handleState},
+    #{item.handleResult},
+    #{item.handleImg},
+    #{item.handleId},
+    #{item.handleUser},
+    #{item.handleTime},
+    #{item.belongInstitutionType},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.audioUrl},
+    #{item.callPhones},
+    #{item.callTaskIds},
+    #{item.callCount}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_alarm_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.SmartAlarmRecord">
+        SELECT * from  tb_jiangyukeji_smart_alarm_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="bigDeviceType!=null and bigDeviceType!=''">
+            and big_device_type = #{bigDeviceType}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="sceneType!=null and sceneType!=''">
+            and scene_type = #{sceneType}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="lon!=null and lon!=''">
+            and lon = #{lon}
+        </if>
+        <if test="lat!=null and lat!=''">
+            and lat = #{lat}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="alarmCode!=null and alarmCode!=''">
+            and alarm_code = #{alarmCode}
+        </if>
+        <if test="alarmLevel!=null and alarmLevel!=''">
+            and alarm_level = #{alarmLevel}
+        </if>
+        <if test="alarmType!=null and alarmType!=''">
+            and alarm_type = #{alarmType}
+        </if>
+        <if test="sleepAlarmType!=null and sleepAlarmType!=''">
+            and sleep_alarm_type = #{sleepAlarmType}
+        </if>
+        <if test="alarmTime!=null and alarmTime!=''">
+            and alarm_time = #{alarmTime}
+        </if>
+        <if test="alarmContent!=null and alarmContent!=''">
+            and alarm_content = #{alarmContent}
+        </if>
+        <if test="readState!=null and readState!=''">
+            and read_state = #{readState}
+        </if>
+        <if test="handleType!=null and handleType!=''">
+            and handle_type = #{handleType}
+        </if>
+        <if test="handleState!=null and handleState!=''">
+            and handle_state = #{handleState}
+        </if>
+        <if test="handleResult!=null and handleResult!=''">
+            and handle_result = #{handleResult}
+        </if>
+        <if test="handleImg!=null and handleImg!=''">
+            and handle_img = #{handleImg}
+        </if>
+        <if test="handleId!=null and handleId!=''">
+            and handle_id = #{handleId}
+        </if>
+        <if test="handleUser!=null and handleUser!=''">
+            and handle_user = #{handleUser}
+        </if>
+        <if test="handleTime!=null and handleTime!=''">
+            and handle_time = #{handleTime}
+        </if>
+        <if test="belongInstitutionType!=null and belongInstitutionType!=''">
+            and belong_institution_type = #{belongInstitutionType}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="audioUrl!=null and audioUrl!=''">
+            and audio_url = #{audioUrl}
+        </if>
+        <if test="callPhones!=null and callPhones!=''">
+            and call_phones = #{callPhones}
+        </if>
+        <if test="callTaskIds!=null and callTaskIds!=''">
+            and call_task_ids = #{callTaskIds}
+        </if>
+        <if test="callCount!=null and callCount!=''">
+            and call_count = #{callCount}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_alarm_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="bigDeviceType!=null and bigDeviceType!=''">
+            and big_device_type = #{bigDeviceType}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="sceneType!=null and sceneType!=''">
+            and scene_type = #{sceneType}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="lon!=null and lon!=''">
+            and lon = #{lon}
+        </if>
+        <if test="lat!=null and lat!=''">
+            and lat = #{lat}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="alarmCode!=null and alarmCode!=''">
+            and alarm_code = #{alarmCode}
+        </if>
+        <if test="alarmLevel!=null and alarmLevel!=''">
+            and alarm_level = #{alarmLevel}
+        </if>
+        <if test="alarmType!=null and alarmType!=''">
+            and alarm_type = #{alarmType}
+        </if>
+        <if test="sleepAlarmType!=null and sleepAlarmType!=''">
+            and sleep_alarm_type = #{sleepAlarmType}
+        </if>
+        <if test="alarmTime!=null and alarmTime!=''">
+            and alarm_time = #{alarmTime}
+        </if>
+        <if test="alarmContent!=null and alarmContent!=''">
+            and alarm_content = #{alarmContent}
+        </if>
+        <if test="readState!=null and readState!=''">
+            and read_state = #{readState}
+        </if>
+        <if test="handleType!=null and handleType!=''">
+            and handle_type = #{handleType}
+        </if>
+        <if test="handleState!=null and handleState!=''">
+            and handle_state = #{handleState}
+        </if>
+        <if test="handleResult!=null and handleResult!=''">
+            and handle_result = #{handleResult}
+        </if>
+        <if test="handleImg!=null and handleImg!=''">
+            and handle_img = #{handleImg}
+        </if>
+        <if test="handleId!=null and handleId!=''">
+            and handle_id = #{handleId}
+        </if>
+        <if test="handleUser!=null and handleUser!=''">
+            and handle_user = #{handleUser}
+        </if>
+        <if test="handleTime!=null and handleTime!=''">
+            and handle_time = #{handleTime}
+        </if>
+        <if test="belongInstitutionType!=null and belongInstitutionType!=''">
+            and belong_institution_type = #{belongInstitutionType}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="audioUrl!=null and audioUrl!=''">
+            and audio_url = #{audioUrl}
+        </if>
+        <if test="callPhones!=null and callPhones!=''">
+            and call_phones = #{callPhones}
+        </if>
+        <if test="callTaskIds!=null and callTaskIds!=''">
+            and call_task_ids = #{callTaskIds}
+        </if>
+        <if test="callCount!=null and callCount!=''">
+            and call_count = #{callCount}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

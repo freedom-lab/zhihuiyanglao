@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.UserOrganMapper">
+
+	   	<insert id="saveUserOrgan" parameterType="cn.pluss.platform.model.auth.UserOrgan">
+        	insert into tb_yunlankeji_user_organ(userCode,organCode,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{userCode},#{organCode},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    	</insert>
+
+	   	<insert id="saveUserOrganBatch">
+        	insert into tb_yunlankeji_user_organ(userCode,organCode,tenant_id,corp_id,corp_name,institution_id,institution_name) VALUES
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.userCode},#{item.organCode},#{item.tenantId},#{item.corpId},#{item.corpName},#{item.institutionId},#{item.institutionName})
+				</foreach>
+    	</insert>
+
+		<select id="queryUserOrgan" parameterType="cn.pluss.platform.model.auth.UserOrgan" resultType="cn.pluss.platform.model.auth.UserOrgan">
+			SELECT * from tb_yunlankeji_user_organ 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="userCode!= null and userCode!='' "> 
+					 	and userCode = #{userCode}
+					 </if> 
+					<if test="organCode!= null and organCode!='' "> 
+					 	and organCode = #{organCode}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+
+				 </where> 
+		</select>
+
+		<select id="queryUserOrganList" parameterType="cn.pluss.platform.model.auth.UserOrgan" resultType="cn.pluss.platform.model.auth.UserOrgan">
+			SELECT * from tb_yunlankeji_user_organ 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="userCode!= null and userCode!='' "> 
+					 and 	userCode = #{userCode}
+					 </if> 
+					<if test="organCode!= null and organCode!='' "> 
+					 and 	organCode = #{organCode}
+					 </if> 
+					<if test="tenantId!= null and tenantId!='' ">
+					 and 	tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 and 	corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 and 	corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 and 	institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 and 	institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<update id="updateUserOrgan" parameterType="cn.pluss.platform.model.auth.UserOrgan" >
+			update tb_yunlankeji_user_organ 
+				  <set> 
+					<if test="userCode!= null  and userCode!='' "> 
+					 	userCode = #{userCode},
+					 </if> 
+					<if test="organCode!= null  and organCode!='' "> 
+					 	organCode = #{organCode}
+					 </if> 
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deleteUserOrgan" parameterType="cn.pluss.platform.model.auth.UserOrgan" >
+			DELETE FROM tb_yunlankeji_user_organ where id=#{id}
+		</delete>
+
+		<delete id="deleteUserOrganBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_user_organ where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryUserOrganPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.UserOrgan">
+			SELECT * from tb_yunlankeji_user_organ 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="userCode!= null  and userCode!=''   "> 
+					and userCode = #{userCode}
+					 </if> 
+					<if test="organCode!= null  and organCode!=''   "> 
+					and organCode = #{organCode}
+					 </if>
+					<if test="tenantId!= null  and tenantId!=''   ">
+					and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!=''   ">
+					and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!=''   ">
+					and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!=''   ">
+					and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!=''   ">
+					and institution_name = #{institutionName}
+					 </if>
+				 </where> 
+			order by id desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryUserOrganPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_user_organ 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="userCode!= null  and userCode!=''  "> 
+					 and userCode = #{userCode}
+					 </if> 
+					<if test="organCode!= null  and organCode!=''  "> 
+					 and organCode = #{organCode}
+					 </if> 
+					<if test="tenantId!= null  and tenantId!=''   ">
+					and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!=''   ">
+					and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!=''   ">
+					and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!=''   ">
+					and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!=''   ">
+					and institution_name = #{institutionName}
+					 </if>
+				</where>
+		</select>
+
+</mapper>

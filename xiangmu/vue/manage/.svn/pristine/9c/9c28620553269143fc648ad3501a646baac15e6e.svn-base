@@ -1,0 +1,1053 @@
+<template>
+  <div>
+    <div class="page">
+      <!-- 【已替换+清除data-v-】左侧区域 -->
+      <div class="page-left">
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>实时数据</span>
+            </h4>
+          </div>
+          <div class="oneCon">
+            <div class="day">
+              <div class="li1"> 今日在院老人数 <span></span></div>
+              <div class="li2">
+                <div class="h3"></div>
+                <div class="p">核定床位数</div>
+              </div>
+              <div class="li3">
+                <div class="h3">%</div>
+                <div class="p">入住率</div>
+              </div>
+            </div>
+            <div class="year">
+              <div class="title">今日数据</div>
+              <div class="ul">
+                <div class="li">
+                  <img :src="sjico1">
+                  <div class="con">
+                    <div class="h3">入住</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+                <div class="li">
+                  <img :src="sjico2">
+                  <div class="con">
+                    <div class="h3">预约</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+                <div class="li">
+                  <img :src="sjico3">
+                  <div class="con">
+                    <div class="h3">探访</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+                <div class="li">
+                  <img :src="sjico4">
+                  <div class="con">
+                    <div class="h3">离院</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="year">
+              <div class="title">本月数据</div>
+              <div class="ul">
+                <div class="li">
+                  <img :src="sjico1">
+                  <div class="con">
+                    <div class="h3">入住</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+                <div class="li">
+                  <img :src="sjico2">
+                  <div class="con">
+                    <div class="h3">预约</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+                <div class="li">
+                  <img :src="sjico3">
+                  <div class="con">
+                    <div class="h3">探访</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+                <div class="li">
+                  <img :src="sjico4">
+                  <div class="con">
+                    <div class="h3">离院</div>
+                    <div class="p"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>员工统计</span>
+            </h4>
+          </div>
+          <div class="twoCon">
+            <div class="ul">
+              <div class="li li1">
+                <div class="h3"></div>
+                <div class="p">员工总数</div>
+              </div>
+              <div class="li li2">
+                <div class="h3"></div>
+                <div class="p">护理人员</div>
+              </div>
+              <div class="li li3">
+                <div class="h3">%</div>
+                <div class="p">护理员持证率</div>
+              </div>
+            </div>
+            <div class="title">员工岗位统计</div>
+            <div>
+              <div class="content">
+                <img :src="WQ" alt="" class="pei-outer">
+                <img :src="NQ" alt="" class="pei-inside">
+                <div id="zheng-box" style="width: 100%; height: 180px;"></div>
+              </div>
+            </div>
+            <div class="title">护理员证书等级统计</div>
+            <div>
+              <div class="content">
+                <div id="live-box" style="width: 450px; height: 180px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中间区域【已全部清除data-v属性，完整替换】 -->
+      <div class="page-center">
+        <div class="topNum">
+          <div class="li">
+            <img :src="topico1">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">2017</span>
+              </h4>
+              <p>总床位数</p>
+            </div>
+          </div>
+          <div class="li">
+            <img :src="topico2">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">2017</span>
+              </h4>
+              <p>入住人数</p>
+            </div>
+          </div>
+          <div class="li">
+            <img :src="topico3">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">2017</span>
+              </h4>
+              <p>试住人数</p>
+            </div>
+          </div>
+          <div class="li">
+            <img :src="topico4">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">2017</span>
+              </h4>
+              <p>预订床位</p>
+            </div>
+          </div>
+          <div class="li">
+            <img :src="topico5">
+            <div class="con">
+              <h4>
+                <span class="count m-t-10">2017</span>
+              </h4>
+              <p>空闲床位</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map">
+          <div class="nomap">
+            <img :src="nomapimg4">
+          </div>
+        </div>
+
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>老人出入院统计</span>
+            </h4>
+            <div role="radiogroup" class="el-radio-group radioA">
+              <label role="radio" aria-checked="true" tabindex="0" class="el-radio-button el-radio-button--small is-active">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="本周">
+                <span class="el-radio-button__inner">本周</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="本月">
+                <span class="el-radio-button__inner">本月</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="本年">
+                <span class="el-radio-button__inner">本年</span>
+              </label>
+            </div>
+          </div>
+          <div class="fourCon">
+            <div>
+              <div class="content">
+                <!-- 折线图容器id保留不变 -->
+                <div id="region-box" style="width: 100%; height: 240px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧区域【已清除全部data-v属性，完整替换】 -->
+      <div class="page-right">
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>本月营收统计</span>
+            </h4>
+          </div>
+          <div class="serveCon">
+            <div class="li li1">
+              <div class="h3">应收费用</div>
+              <div class="p"></div>
+            </div>
+            <div class="li li2">
+              <div class="h3">实收金额</div>
+              <div class="p"></div>
+            </div>
+            <div class="li li3">
+              <div class="h3">欠费金额</div>
+              <div class="p"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>本月营收分类统计</span>
+            </h4>
+          </div>
+          <div class="sexCon">
+            <div>
+              <div class="content">
+                <div id="grade-box" style="width: 100%; height: 250px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>增值服务统计</span>
+            </h4>
+          </div>
+          <div class="fireCon">
+            <div class="li">
+              <img :src="shiico1">
+              <div class="con">
+                <h4>本月物品订单</h4>
+                <p><span class="count m-t-10">2017</span></p>
+              </div>
+            </div>
+            <div class="li">
+              <img :src="shiico2">
+              <div class="con">
+                <h4>累计物品订单</h4>
+                <p><span class="count m-t-10">2017</span></p>
+              </div>
+            </div>
+            <div class="li">
+              <img :src="shiico3">
+              <div class="con">
+                <h4>本月餐饮订单</h4>
+                <p><span class="count m-t-10">2017</span></p>
+              </div>
+            </div>
+            <div class="li">
+              <img :src="shiico4">
+              <div class="con">
+                <h4>累计餐饮订单</h4>
+                <p><span class="count m-t-10">2017</span></p>
+              </div>
+            </div>
+            <div class="li">
+              <img :src="shiico5">
+              <div class="con">
+                <h4>本月自选服务订单</h4>
+                <p><span class="count m-t-10">2017</span></p>
+              </div>
+            </div>
+            <div class="li">
+              <img :src="shiico6">
+              <div class="con">
+                <h4>累计自选服务订单</h4>
+                <p><span class="count m-t-10">2017</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// 引入echarts
+import * as echarts from 'echarts'
+export default {
+  name: 'menuRight2',
+  data() {
+    return {
+        titico: require('@/assets/images/visualization/insScreen/img/tit-ico.png'),
+        sjico1: require('@/assets/images/visualization/insScreen/img/sj-ico1.png'),
+        sjico2: require('@/assets/images/visualization/insScreen/img/sj-ico2.png'),
+        sjico3: require('@/assets/images/visualization/insScreen/img/sj-ico3.png'),
+        sjico4: require('@/assets/images/visualization/insScreen/img/sj-ico4.png'),
+        WQ: require('@/assets/images/visualization/insScreen/img/WQ.png'),
+        NQ: require('@/assets/images/visualization/insScreen/img/NQ.png'),
+        topico1: require('@/assets/images/visualization/insScreen/img/top-ico1.png'),
+        topico2: require('@/assets/images/visualization/insScreen/img/top-ico2.png'),
+        topico3: require('@/assets/images/visualization/insScreen/img/top-ico3.png'),
+        topico4: require('@/assets/images/visualization/insScreen/img/top-ico4.png'),
+        topico5: require('@/assets/images/visualization/insScreen/img/top-ico5.png'),
+        nomapimg4: require('@/assets/images/visualization/insScreen/img/nomap-img4.png'),
+        shiico1: require('@/assets/images/visualization/insScreen/img/shi-ico1.png'),
+        shiico2: require('@/assets/images/visualization/insScreen/img/shi-ico2.png'),
+        shiico3: require('@/assets/images/visualization/insScreen/img/shi-ico3.png'),
+        shiico4: require('@/assets/images/visualization/insScreen/img/shi-ico4.png'),
+        shiico5: require('@/assets/images/visualization/insScreen/img/shi-ico5.png'),
+        shiico6: require('@/assets/images/visualization/insScreen/img/shi-ico6.png'),
+
+        // 1.护理人员排行榜表格数据（暂无数据为空数组）
+        staffRankTableData: [],
+        // 2.自选服务实时工单模拟数据（和截图一致）
+        serviceOrderTableData: [
+          { num: 1, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+          { num: 2, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 3, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 4, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-09' },
+          { num: 5, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 6, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+        ],
+        // 3.自选服务项目排行榜数据
+        projectRankTableData: [
+          { projectName: '助餐', orderCount: 6, duration: '-分钟', totalPrice: '48.00' }
+        ],
+
+        // echarts实例缓存
+        orderChart: null,
+        typeChart: null,
+    }
+  },
+  mounted() {
+    // 等待dom渲染完成初始化图表
+    this.$nextTick(() => {
+      this.initOrderChart()
+      this.initTypeChart()
+    })
+    // 窗口缩放自适应图表
+    window.addEventListener('resize', this.resizeAllChart)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeAllChart)
+    // 销毁echarts实例释放内存
+    if(this.orderChart) this.orderChart.dispose()
+    if(this.typeChart) this.typeChart.dispose()
+  },
+  methods: {
+    // 工单统计 双轴柱状折线图
+    initOrderChart() {
+      const dom = this.$refs.orderChartRef
+      this.orderChart = echarts.init(dom)
+      const option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'cross', crossStyle: { color: '#0ff' } }
+        },
+        legend: {
+          data: ['服务工单', '服务金额'],
+          textStyle: { color: '#a0dfff' },
+          right: 10
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' }
+          }
+        ],
+        yAxis: [
+          {
+            name: '单位：单',
+            type: 'value',
+            max: 500,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { lineStyle: { color: 'rgba(75,159,255,0.1)' } }
+          },
+          {
+            name: '单位：元',
+            type: 'value',
+            max: 50,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { show: false }
+          }
+        ],
+        series: [
+          {
+            name: '服务工单',
+            type: 'line',
+            yAxisIndex: 0,
+            data: [0,0,0,0,0,6,0,0,0,0,0,0],
+            itemStyle: { color: '#ff9900' }
+          },
+          {
+            name: '服务金额',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [0,0,0,0,0,48,0,0,0,0,0,0],
+            itemStyle: { color: '#00ccff' }
+          }
+        ]
+      }
+      this.orderChart.setOption(option)
+    },
+    // 服务类别统计 环形饼图
+    initTypeChart() {
+      const dom = this.$refs.typeChartRef
+      this.typeChart = echarts.init(dom)
+      const option = {
+        tooltip: { trigger: 'item' },
+        series: [
+          {
+            name: '服务类别',
+            type: 'pie',
+            radius: ['60%', '85%'], // 环形
+            legend: {
+              orient: 'vertical',
+              left: '0',
+              top: 'center',
+              textStyle: { color: '#a0dfff' }
+            },
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'outside',
+              color: '#a0dfff',
+              formatter: '{b} {c}项 {d}%'
+            },
+            data: [
+              { value: 6, name: '生活护理' }
+            ],
+            itemStyle: {
+              color: '#00ccff',
+              borderColor: '#06214a',
+              borderWidth: 3
+            }
+          }
+        ]
+      }
+      this.typeChart.setOption(option)
+    },
+    // 窗口缩放所有图表自适应
+    resizeAllChart() {
+      if(this.orderChart) this.orderChart.resize()
+      if(this.typeChart) this.typeChart.resize()
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+@font-face {
+    font-family: dy;
+    src: url('../../../../assets/fonts/dy.TTF') format("truetype");
+}
+.content {
+    position: relative
+}
+
+.content .pei-inside {
+    position: absolute;
+    top: 55px;
+    left: 55px;
+    width: 70px;
+    height: 70px;
+    animation: rotateImage 8s linear infinite reverse
+}
+
+.content .pei-outer {
+    width: 170px;
+    height: 170px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    -webkit-animation: rotateImage 15s linear infinite;
+    animation: rotateImage 15s linear infinite
+}
+
+@-webkit-keyframes rotateImage {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes rotateImage {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+.nomap {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 100px;
+    height: 650px
+}
+
+.nomap,.page {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.page {
+    position: relative;
+    padding: 0 20px
+}
+
+.page .page-left {
+    width: 470px
+}
+
+.page .page-center {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0 20px
+}
+
+.page .page-right {
+    width: 470px
+}
+
+.oldBox {
+    margin-top: 20px
+}
+
+.oldBox .tit {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.oldBox .tit img {
+    width: 30px;
+    height: 30px
+}
+
+.oldBox .tit h4 {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 46px;
+    line-height: 46px;
+    padding-left: 15px;
+    background-image: url('../../../../assets/images/visualization/insScreen/img/line1.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    font-size: 20px;
+    font-family: dy;
+    font-weight: 400;
+    color: #fff
+}
+
+.oldBox .tit h4 span {
+    background: -webkit-gradient(linear,left top,right top,from(#8bc7ff),to(#fff));
+    background: linear-gradient(90deg,#8bc7ff,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.oldBox .tit .radioA {
+    position: absolute;
+    top: 8px;
+    right: 0
+}
+
+.oneCon .day {
+    position: relative;
+    width: 400px;
+    height: 110px;
+    background-image: url('../../../../assets/images/visualization/insScreen/img/one-ico.png');
+    background-size: 100% 100%
+}
+
+.oneCon .day .li1 {
+    position: absolute;
+    top: 18px;
+    left: 123px;
+    font-size: 18px;
+    font-family: dy;
+    color: #fff
+}
+
+.oneCon .day .li1 span {
+    font-size: 24px
+}
+
+.oneCon .day .li2 {
+    position: absolute;
+    top: 58px;
+    left: 123px
+}
+
+.oneCon .day .li2 .h3 {
+    font-size: 20px;
+    font-family: dy;
+    color: #ff8a00
+}
+
+.oneCon .day .li2 .p {
+    font-size: 16px;
+    font-family: dy;
+    color: #fff
+}
+
+.oneCon .day .li3 {
+    position: absolute;
+    top: 58px;
+    left: 262px
+}
+
+.oneCon .day .li3 .h3 {
+    font-size: 20px;
+    font-family: dy;
+    color: #ff8a00
+}
+
+.oneCon .day .li3 .p {
+    font-size: 16px;
+    font-family: dy;
+    color: #fff
+}
+
+.oneCon .year {
+    border: 1px solid #0c3d5d;
+    margin-top: 10px
+}
+
+.oneCon .year .title {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    background: rgba(0,28,57,.3);
+    font-family: dy;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    text-align: center
+}
+
+.oneCon .year .ul {
+    background: rgba(0,28,57,.1);
+    border-top: 1px solid #0c3d5d;
+    padding: 10px 0
+}
+
+.oneCon .year .ul .li,.oneCon .year .ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.oneCon .year .ul .li {
+    width: 25%
+}
+
+.oneCon .year .ul .li img {
+    width: 31px;
+    height: 32px;
+    margin: 0 8px
+}
+
+.oneCon .year .ul .li .con .h3 {
+    font-size: 16px;
+    color: #fff
+}
+
+.oneCon .year .ul .li .con .p {
+    margin-top: 5px;
+    font-size: 18px;
+    color: #fff
+}
+
+.twoCon .ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 10px
+}
+
+.twoCon .ul .li {
+    position: relative;
+    width: 33.3%;
+    height: 46px;
+    padding-left: 14px;
+    padding-top: 5px
+}
+
+.twoCon .ul .li .h3 {
+    font-size: 20px;
+    font-family: dy
+}
+
+.twoCon .ul .li .p {
+    font-size: 16px;
+    font-family: dy
+}
+
+.twoCon .ul .li.li1:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #fc0;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li1 {
+    background: -webkit-gradient(linear,left top,right top,color-stop(64%,rgba(255,204,0,.36)),to(transparent));
+    background: linear-gradient(90deg,rgba(255,204,0,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li1 .h3 {
+    color: #ffcc30
+}
+
+.twoCon .ul .li.li2:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #00cbff;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li2 {
+    background: -webkit-gradient(linear,left top,right top,color-stop(64%,rgba(0,203,255,.36)),to(transparent));
+    background: linear-gradient(90deg,rgba(0,203,255,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li2 .h3 {
+    color: #00ccfd
+}
+
+.twoCon .ul .li.li3:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #00cbff;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li3 {
+    background: -webkit-gradient(linear,left top,right top,color-stop(64%,rgba(0,203,255,.36)),to(transparent));
+    background: linear-gradient(90deg,rgba(0,203,255,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li3 .h3 {
+    color: #00ccfd
+}
+
+.twoCon .title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 30px;
+    background: -webkit-gradient(linear,right top,left top,from(rgba(0,19,38,0)),color-stop(43%,rgba(0,86,163,.55)),color-stop(87%,rgba(0,86,163,.59)),to(rgba(129,189,255,0)));
+    background: linear-gradient(-90deg,rgba(0,19,38,0),rgba(0,86,163,.55) 43%,rgba(0,86,163,.59) 87%,rgba(129,189,255,0));
+    font-size: 16px;
+    color: #d9eaf5
+}
+
+.twoCon .title:before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: -webkit-gradient(linear,left bottom,left top,from(#015eea),to(#00c0fa));
+    background: linear-gradient(0deg,#015eea,#00c0fa);
+    border-radius: 2px;
+    margin-right: 10px
+}
+
+.topNum {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.topNum .li {
+    width: 20%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.topNum .li img {
+    width: 72px;
+    height: 63px
+}
+
+.topNum .li .con {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+.topNum .li .con h4 {
+    margin-top: 5px;
+    font-size: 28px;
+    font-family: dy;
+    background: -webkit-gradient(linear,left bottom,left top,from(#61dffe),to(#44a5ff));
+    background: linear-gradient(0deg,#61dffe,#44a5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.topNum .li .con p {
+    line-height: 1.5;
+    font-size: 16px;
+    color: #fff
+}
+
+.serveCon .li {
+    width: 365px;
+    height: 54px;
+    padding-left: 70px;
+    padding-top: 6px;
+    margin: 14px auto 0
+}
+
+.serveCon .li.li1 {
+    background-image: url('../../../../assets/images/visualization/insScreen/img/yh-bg1.png');
+    background-size: 100% 100%
+}
+
+.serveCon .li.li1 .h3 {
+    font-size: 16px;
+    color: #3f8afc;
+    background: -webkit-gradient(linear,left bottom,left top,from(#5bb8ed),to(#fff));
+    background: linear-gradient(0deg,#5bb8ed,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li1 .p {
+    font-family: dy;
+    font-size: 24px;
+    color: #fff;
+    background: -webkit-gradient(linear,left bottom,left top,from(#d5f6ff),to(#6ac5ff));
+    background: linear-gradient(0deg,#d5f6ff,#6ac5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li2 {
+    background-image: url('../../../../assets/images/visualization/insScreen/img/yh-bg2.png');
+    background-size: 100% 100%
+}
+
+.serveCon .li.li2 .h3 {
+    font-size: 16px;
+    color: #3f8afc;
+    background: -webkit-gradient(linear,left bottom,left top,from(#46e87b),to(#fff));
+    background: linear-gradient(0deg,#46e87b,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li2 .p {
+    font-family: dy;
+    font-size: 24px;
+    color: #fff;
+    background: -webkit-gradient(linear,left bottom,left top,from(#8bffb1),to(#33e26c));
+    background: linear-gradient(0deg,#8bffb1,#33e26c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li3 {
+    background-image: url('../../../../assets/images/visualization/insScreen/img/yh-bg3.png');
+    background-size: 100% 100%
+}
+
+.serveCon .li.li3 .h3 {
+    font-size: 16px;
+    color: #3f8afc;
+    background: -webkit-gradient(linear,left bottom,left top,from(#ffd791),to(#fff));
+    background: linear-gradient(0deg,#ffd791,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li3 .p {
+    font-family: dy;
+    font-size: 24px;
+    color: #fff;
+    background: -webkit-gradient(linear,left bottom,left top,from(#fff3d5),to(#ffb640));
+    background: linear-gradient(0deg,#fff3d5,#ffb640);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.fireCon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.fireCon .li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 50%;
+    margin-top: 20px
+}
+
+.fireCon .li img {
+    width: 55px;
+    height: 55px;
+    margin-right: 8px
+}
+
+.fireCon .li .con {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+.fireCon .li .con h4 {
+    height: 26px;
+    line-height: 26px;
+    padding-left: 10px;
+    background: -webkit-gradient(linear,left top,right top,from(rgba(128,197,240,.51)),to(rgba(128,197,240,0)));
+    background: linear-gradient(90deg,rgba(128,197,240,.51),rgba(128,197,240,0));
+    margin-top: 15px;
+    font-size: 14px;
+    color: #d9f3ff;
+    border-left: 2px solid #80c5f0
+}
+
+.fireCon .li .con p {
+    line-height: 1.5;
+    font-size: 22px;
+    color: #86d9ff
+}
+
+.sexCon {
+    position: relative
+}
+
+.sexCon img {
+    position: absolute;
+    top: 26px;
+    left: 61px
+}
+
+.el-radio-button__inner {
+    background: transparent;
+    border: 1px solid #00519d;
+    color: #b2dbff
+}
+
+.el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    background: #00519d
+}
+
+.el-radio-button:first-child .el-radio-button__inner {
+    border-left: 1px solid #00519d
+}
+</style>

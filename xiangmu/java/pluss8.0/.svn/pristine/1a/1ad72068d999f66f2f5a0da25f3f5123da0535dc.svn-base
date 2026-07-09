@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthDiseaseFollowMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    interventions_id,
+    elder_id,
+    medication_condition,
+    diet_condition,
+    sport_condition,
+    psychology_condition,
+    health_context,
+    memo,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    record_name,
+    record_datetime,
+    tenant_id
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.interventionsId},
+    #{item.elderId},
+    #{item.medicationCondition},
+    #{item.dietCondition},
+    #{item.sportCondition},
+    #{item.psychologyCondition},
+    #{item.healthContext},
+    #{item.memo},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.recordName},
+    #{item.recordDatetime},
+    #{item.tenantId}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_disease_follow
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthDiseaseFollow">
+        SELECT * from  tb_jiangyukeji_health_disease_follow
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="interventionsId!=null and interventionsId!=''">
+            and interventions_id = #{interventionsId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="medicationCondition!=null and medicationCondition!=''">
+            and medication_condition = #{medicationCondition}
+        </if>
+        <if test="dietCondition!=null and dietCondition!=''">
+            and diet_condition = #{dietCondition}
+        </if>
+        <if test="sportCondition!=null and sportCondition!=''">
+            and sport_condition = #{sportCondition}
+        </if>
+        <if test="psychologyCondition!=null and psychologyCondition!=''">
+            and psychology_condition = #{psychologyCondition}
+        </if>
+        <if test="healthContext!=null and healthContext!=''">
+            and health_context = #{healthContext}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="recordName!=null and recordName!=''">
+            and record_name = #{recordName}
+        </if>
+        <if test="recordDatetime!=null and recordDatetime!=''">
+            and record_datetime = #{recordDatetime}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_disease_follow
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="interventionsId!=null and interventionsId!=''">
+            and interventions_id = #{interventionsId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="medicationCondition!=null and medicationCondition!=''">
+            and medication_condition = #{medicationCondition}
+        </if>
+        <if test="dietCondition!=null and dietCondition!=''">
+            and diet_condition = #{dietCondition}
+        </if>
+        <if test="sportCondition!=null and sportCondition!=''">
+            and sport_condition = #{sportCondition}
+        </if>
+        <if test="psychologyCondition!=null and psychologyCondition!=''">
+            and psychology_condition = #{psychologyCondition}
+        </if>
+        <if test="healthContext!=null and healthContext!=''">
+            and health_context = #{healthContext}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="recordName!=null and recordName!=''">
+            and record_name = #{recordName}
+        </if>
+        <if test="recordDatetime!=null and recordDatetime!=''">
+            and record_datetime = #{recordDatetime}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

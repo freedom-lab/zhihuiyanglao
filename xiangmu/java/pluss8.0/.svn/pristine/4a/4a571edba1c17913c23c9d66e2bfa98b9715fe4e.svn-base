@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketGoodsInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    attribute_category_id,
+    goods_name,
+    goods_sn,
+    sub_good_name,
+    goods_code,
+    brand_id,
+    brand_name,
+    original_price,
+    price,
+    brief,
+    description,
+    pic,
+    imgs,
+    big_type_id,
+    big_type_name,
+    type_id,
+    type_name,
+    sale_num,
+    total_stock,
+    category_type,
+    delivery_type,
+    is_free_ship,
+    express_fee,
+    is_new,
+    is_suggest,
+    is_use_integral,
+    is_use_member,
+    is_use_coupon,
+    unit,
+    audit_state,
+    putaway_time,
+    click_num,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    service_ids
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.attributeCategoryId},
+    #{item.goodsName},
+    #{item.goodsSn},
+    #{item.subGoodName},
+    #{item.goodsCode},
+    #{item.brandId},
+    #{item.brandName},
+    #{item.originalPrice},
+    #{item.price},
+    #{item.brief},
+    #{item.description},
+    #{item.pic},
+    #{item.imgs},
+    #{item.bigTypeId},
+    #{item.bigTypeName},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.saleNum},
+    #{item.totalStock},
+    #{item.categoryType},
+    #{item.deliveryType},
+    #{item.isFreeShip},
+    #{item.expressFee},
+    #{item.isNew},
+    #{item.isSuggest},
+    #{item.isUseIntegral},
+    #{item.isUseMember},
+    #{item.isUseCoupon},
+    #{item.unit},
+    #{item.auditState},
+    #{item.putawayTime},
+    #{item.clickNum},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.serviceIds}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_goods_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketGoodsInfo">
+        SELECT * from  tb_jiangyukeji_market_goods_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="attributeCategoryId!=null and attributeCategoryId!=''">
+            and attribute_category_id = #{attributeCategoryId}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="goodsSn!=null and goodsSn!=''">
+            and goods_sn = #{goodsSn}
+        </if>
+        <if test="subGoodName!=null and subGoodName!=''">
+            and sub_good_name = #{subGoodName}
+        </if>
+        <if test="goodsCode!=null and goodsCode!=''">
+            and goods_code = #{goodsCode}
+        </if>
+        <if test="brandId!=null and brandId!=''">
+            and brand_id = #{brandId}
+        </if>
+        <if test="brandName!=null and brandName!=''">
+            and brand_name = #{brandName}
+        </if>
+        <if test="originalPrice!=null and originalPrice!=''">
+            and original_price = #{originalPrice}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="brief!=null and brief!=''">
+            and brief = #{brief}
+        </if>
+        <if test="description!=null and description!=''">
+            and description = #{description}
+        </if>
+        <if test="pic!=null and pic!=''">
+            and pic = #{pic}
+        </if>
+        <if test="imgs!=null and imgs!=''">
+            and imgs = #{imgs}
+        </if>
+        <if test="bigTypeId!=null and bigTypeId!=''">
+            and big_type_id = #{bigTypeId}
+        </if>
+        <if test="bigTypeName!=null and bigTypeName!=''">
+            and big_type_name = #{bigTypeName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="saleNum!=null and saleNum!=''">
+            and sale_num = #{saleNum}
+        </if>
+        <if test="totalStock!=null and totalStock!=''">
+            and total_stock = #{totalStock}
+        </if>
+        <if test="categoryType!=null and categoryType!=''">
+            and category_type = #{categoryType}
+        </if>
+        <if test="deliveryType!=null and deliveryType!=''">
+            and delivery_type = #{deliveryType}
+        </if>
+        <if test="isFreeShip!=null and isFreeShip!=''">
+            and is_free_ship = #{isFreeShip}
+        </if>
+        <if test="expressFee!=null and expressFee!=''">
+            and express_fee = #{expressFee}
+        </if>
+        <if test="isNew!=null and isNew!=''">
+            and is_new = #{isNew}
+        </if>
+        <if test="isSuggest!=null and isSuggest!=''">
+            and is_suggest = #{isSuggest}
+        </if>
+        <if test="isUseIntegral!=null and isUseIntegral!=''">
+            and is_use_integral = #{isUseIntegral}
+        </if>
+        <if test="isUseMember!=null and isUseMember!=''">
+            and is_use_member = #{isUseMember}
+        </if>
+        <if test="isUseCoupon!=null and isUseCoupon!=''">
+            and is_use_coupon = #{isUseCoupon}
+        </if>
+        <if test="unit!=null and unit!=''">
+            and unit = #{unit}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="putawayTime!=null and putawayTime!=''">
+            and putaway_time = #{putawayTime}
+        </if>
+        <if test="clickNum!=null and clickNum!=''">
+            and click_num = #{clickNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="serviceIds!=null and serviceIds!=''">
+            and service_ids = #{serviceIds}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_goods_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="attributeCategoryId!=null and attributeCategoryId!=''">
+            and attribute_category_id = #{attributeCategoryId}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="goodsSn!=null and goodsSn!=''">
+            and goods_sn = #{goodsSn}
+        </if>
+        <if test="subGoodName!=null and subGoodName!=''">
+            and sub_good_name = #{subGoodName}
+        </if>
+        <if test="goodsCode!=null and goodsCode!=''">
+            and goods_code = #{goodsCode}
+        </if>
+        <if test="brandId!=null and brandId!=''">
+            and brand_id = #{brandId}
+        </if>
+        <if test="brandName!=null and brandName!=''">
+            and brand_name = #{brandName}
+        </if>
+        <if test="originalPrice!=null and originalPrice!=''">
+            and original_price = #{originalPrice}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="brief!=null and brief!=''">
+            and brief = #{brief}
+        </if>
+        <if test="description!=null and description!=''">
+            and description = #{description}
+        </if>
+        <if test="pic!=null and pic!=''">
+            and pic = #{pic}
+        </if>
+        <if test="imgs!=null and imgs!=''">
+            and imgs = #{imgs}
+        </if>
+        <if test="bigTypeId!=null and bigTypeId!=''">
+            and big_type_id = #{bigTypeId}
+        </if>
+        <if test="bigTypeName!=null and bigTypeName!=''">
+            and big_type_name = #{bigTypeName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="saleNum!=null and saleNum!=''">
+            and sale_num = #{saleNum}
+        </if>
+        <if test="totalStock!=null and totalStock!=''">
+            and total_stock = #{totalStock}
+        </if>
+        <if test="categoryType!=null and categoryType!=''">
+            and category_type = #{categoryType}
+        </if>
+        <if test="deliveryType!=null and deliveryType!=''">
+            and delivery_type = #{deliveryType}
+        </if>
+        <if test="isFreeShip!=null and isFreeShip!=''">
+            and is_free_ship = #{isFreeShip}
+        </if>
+        <if test="expressFee!=null and expressFee!=''">
+            and express_fee = #{expressFee}
+        </if>
+        <if test="isNew!=null and isNew!=''">
+            and is_new = #{isNew}
+        </if>
+        <if test="isSuggest!=null and isSuggest!=''">
+            and is_suggest = #{isSuggest}
+        </if>
+        <if test="isUseIntegral!=null and isUseIntegral!=''">
+            and is_use_integral = #{isUseIntegral}
+        </if>
+        <if test="isUseMember!=null and isUseMember!=''">
+            and is_use_member = #{isUseMember}
+        </if>
+        <if test="isUseCoupon!=null and isUseCoupon!=''">
+            and is_use_coupon = #{isUseCoupon}
+        </if>
+        <if test="unit!=null and unit!=''">
+            and unit = #{unit}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="putawayTime!=null and putawayTime!=''">
+            and putaway_time = #{putawayTime}
+        </if>
+        <if test="clickNum!=null and clickNum!=''">
+            and click_num = #{clickNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="serviceIds!=null and serviceIds!=''">
+            and service_ids = #{serviceIds}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

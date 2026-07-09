@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartDeviceParamCameraMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    grant_id,
+    device_name,
+    device_serial,
+    camera_type,
+    camera_account,
+    camera_password,
+    pc_camera_url,
+    camera_url,
+    pc_playback_url,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.grantId},
+    #{item.deviceName},
+    #{item.deviceSerial},
+    #{item.cameraType},
+    #{item.cameraAccount},
+    #{item.cameraPassword},
+    #{item.pcCameraUrl},
+    #{item.cameraUrl},
+    #{item.pcPlaybackUrl},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_device_param_camera
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.SmartDeviceParamCamera">
+        SELECT * from  tb_jiangyukeji_smart_device_param_camera
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="cameraType!=null and cameraType!=''">
+            and camera_type = #{cameraType}
+        </if>
+        <if test="cameraAccount!=null and cameraAccount!=''">
+            and camera_account = #{cameraAccount}
+        </if>
+        <if test="cameraPassword!=null and cameraPassword!=''">
+            and camera_password = #{cameraPassword}
+        </if>
+        <if test="pcCameraUrl!=null and pcCameraUrl!=''">
+            and pc_camera_url = #{pcCameraUrl}
+        </if>
+        <if test="cameraUrl!=null and cameraUrl!=''">
+            and camera_url = #{cameraUrl}
+        </if>
+        <if test="pcPlaybackUrl!=null and pcPlaybackUrl!=''">
+            and pc_playback_url = #{pcPlaybackUrl}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_device_param_camera
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="cameraType!=null and cameraType!=''">
+            and camera_type = #{cameraType}
+        </if>
+        <if test="cameraAccount!=null and cameraAccount!=''">
+            and camera_account = #{cameraAccount}
+        </if>
+        <if test="cameraPassword!=null and cameraPassword!=''">
+            and camera_password = #{cameraPassword}
+        </if>
+        <if test="pcCameraUrl!=null and pcCameraUrl!=''">
+            and pc_camera_url = #{pcCameraUrl}
+        </if>
+        <if test="cameraUrl!=null and cameraUrl!=''">
+            and camera_url = #{cameraUrl}
+        </if>
+        <if test="pcPlaybackUrl!=null and pcPlaybackUrl!=''">
+            and pc_playback_url = #{pcPlaybackUrl}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

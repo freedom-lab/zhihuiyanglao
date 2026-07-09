@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthVisitRecordsMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    age,
+    check_date,
+    hospital,
+    office,
+    doctor,
+    main_content,
+    present_illness,
+    past_history,
+    family_history,
+    body_check,
+    auxiliary_check,
+    mien,
+    auxe,
+    nutrition,
+    skin_mucosa,
+    lymph_node,
+    head_organ,
+    chest,
+    abdomen,
+    check_result,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    record_name
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.age},
+    #{item.checkDate},
+    #{item.hospital},
+    #{item.office},
+    #{item.doctor},
+    #{item.mainContent},
+    #{item.presentIllness},
+    #{item.pastHistory},
+    #{item.familyHistory},
+    #{item.bodyCheck},
+    #{item.auxiliaryCheck},
+    #{item.mien},
+    #{item.auxe},
+    #{item.nutrition},
+    #{item.skinMucosa},
+    #{item.lymphNode},
+    #{item.headOrgan},
+    #{item.chest},
+    #{item.abdomen},
+    #{item.checkResult},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.recordName}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_visit_records
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthVisitRecords">
+        SELECT * from  tb_jiangyukeji_health_visit_records
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="hospital!=null and hospital!=''">
+            and hospital = #{hospital}
+        </if>
+        <if test="office!=null and office!=''">
+            and office = #{office}
+        </if>
+        <if test="doctor!=null and doctor!=''">
+            and doctor = #{doctor}
+        </if>
+        <if test="mainContent!=null and mainContent!=''">
+            and main_content = #{mainContent}
+        </if>
+        <if test="presentIllness!=null and presentIllness!=''">
+            and present_illness = #{presentIllness}
+        </if>
+        <if test="pastHistory!=null and pastHistory!=''">
+            and past_history = #{pastHistory}
+        </if>
+        <if test="familyHistory!=null and familyHistory!=''">
+            and family_history = #{familyHistory}
+        </if>
+        <if test="bodyCheck!=null and bodyCheck!=''">
+            and body_check = #{bodyCheck}
+        </if>
+        <if test="auxiliaryCheck!=null and auxiliaryCheck!=''">
+            and auxiliary_check = #{auxiliaryCheck}
+        </if>
+        <if test="mien!=null and mien!=''">
+            and mien = #{mien}
+        </if>
+        <if test="auxe!=null and auxe!=''">
+            and auxe = #{auxe}
+        </if>
+        <if test="nutrition!=null and nutrition!=''">
+            and nutrition = #{nutrition}
+        </if>
+        <if test="skinMucosa!=null and skinMucosa!=''">
+            and skin_mucosa = #{skinMucosa}
+        </if>
+        <if test="lymphNode!=null and lymphNode!=''">
+            and lymph_node = #{lymphNode}
+        </if>
+        <if test="headOrgan!=null and headOrgan!=''">
+            and head_organ = #{headOrgan}
+        </if>
+        <if test="chest!=null and chest!=''">
+            and chest = #{chest}
+        </if>
+        <if test="abdomen!=null and abdomen!=''">
+            and abdomen = #{abdomen}
+        </if>
+        <if test="checkResult!=null and checkResult!=''">
+            and check_result = #{checkResult}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="recordName!=null and recordName!=''">
+            and record_name = #{recordName}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_visit_records
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="hospital!=null and hospital!=''">
+            and hospital = #{hospital}
+        </if>
+        <if test="office!=null and office!=''">
+            and office = #{office}
+        </if>
+        <if test="doctor!=null and doctor!=''">
+            and doctor = #{doctor}
+        </if>
+        <if test="mainContent!=null and mainContent!=''">
+            and main_content = #{mainContent}
+        </if>
+        <if test="presentIllness!=null and presentIllness!=''">
+            and present_illness = #{presentIllness}
+        </if>
+        <if test="pastHistory!=null and pastHistory!=''">
+            and past_history = #{pastHistory}
+        </if>
+        <if test="familyHistory!=null and familyHistory!=''">
+            and family_history = #{familyHistory}
+        </if>
+        <if test="bodyCheck!=null and bodyCheck!=''">
+            and body_check = #{bodyCheck}
+        </if>
+        <if test="auxiliaryCheck!=null and auxiliaryCheck!=''">
+            and auxiliary_check = #{auxiliaryCheck}
+        </if>
+        <if test="mien!=null and mien!=''">
+            and mien = #{mien}
+        </if>
+        <if test="auxe!=null and auxe!=''">
+            and auxe = #{auxe}
+        </if>
+        <if test="nutrition!=null and nutrition!=''">
+            and nutrition = #{nutrition}
+        </if>
+        <if test="skinMucosa!=null and skinMucosa!=''">
+            and skin_mucosa = #{skinMucosa}
+        </if>
+        <if test="lymphNode!=null and lymphNode!=''">
+            and lymph_node = #{lymphNode}
+        </if>
+        <if test="headOrgan!=null and headOrgan!=''">
+            and head_organ = #{headOrgan}
+        </if>
+        <if test="chest!=null and chest!=''">
+            and chest = #{chest}
+        </if>
+        <if test="abdomen!=null and abdomen!=''">
+            and abdomen = #{abdomen}
+        </if>
+        <if test="checkResult!=null and checkResult!=''">
+            and check_result = #{checkResult}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="recordName!=null and recordName!=''">
+            and record_name = #{recordName}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

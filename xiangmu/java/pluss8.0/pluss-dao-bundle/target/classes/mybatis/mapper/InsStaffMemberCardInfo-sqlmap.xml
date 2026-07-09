@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsStaffMemberCardInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    staff_id,
+    staff_name,
+    sex,
+    age,
+    id_card,
+    link_tel,
+    member_card,
+    card_pass,
+    member_level,
+    member_state,
+    card_deposit,
+    member_amount,
+    member_integral,
+    create_name,
+    referee_name,
+    effective_date,
+    expiration_date,
+    max_consumption,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.staffId},
+    #{item.staffName},
+    #{item.sex},
+    #{item.age},
+    #{item.idCard},
+    #{item.linkTel},
+    #{item.memberCard},
+    #{item.cardPass},
+    #{item.memberLevel},
+    #{item.memberState},
+    #{item.cardDeposit},
+    #{item.memberAmount},
+    #{item.memberIntegral},
+    #{item.createName},
+    #{item.refereeName},
+    #{item.effectiveDate},
+    #{item.expirationDate},
+    #{item.maxConsumption},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_staff_member_card_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsStaffMemberCardInfo">
+        SELECT * from  tb_jiangyukeji_ins_staff_member_card_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="memberCard!=null and memberCard!=''">
+            and member_card = #{memberCard}
+        </if>
+        <if test="cardPass!=null and cardPass!=''">
+            and card_pass = #{cardPass}
+        </if>
+        <if test="memberLevel!=null and memberLevel!=''">
+            and member_level = #{memberLevel}
+        </if>
+        <if test="memberState!=null and memberState!=''">
+            and member_state = #{memberState}
+        </if>
+        <if test="cardDeposit!=null and cardDeposit!=''">
+            and card_deposit = #{cardDeposit}
+        </if>
+        <if test="memberAmount!=null and memberAmount!=''">
+            and member_amount = #{memberAmount}
+        </if>
+        <if test="memberIntegral!=null and memberIntegral!=''">
+            and member_integral = #{memberIntegral}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="refereeName!=null and refereeName!=''">
+            and referee_name = #{refereeName}
+        </if>
+        <if test="effectiveDate!=null and effectiveDate!=''">
+            and effective_date = #{effectiveDate}
+        </if>
+        <if test="expirationDate!=null and expirationDate!=''">
+            and expiration_date = #{expirationDate}
+        </if>
+        <if test="maxConsumption!=null and maxConsumption!=''">
+            and max_consumption = #{maxConsumption}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_staff_member_card_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="memberCard!=null and memberCard!=''">
+            and member_card = #{memberCard}
+        </if>
+        <if test="cardPass!=null and cardPass!=''">
+            and card_pass = #{cardPass}
+        </if>
+        <if test="memberLevel!=null and memberLevel!=''">
+            and member_level = #{memberLevel}
+        </if>
+        <if test="memberState!=null and memberState!=''">
+            and member_state = #{memberState}
+        </if>
+        <if test="cardDeposit!=null and cardDeposit!=''">
+            and card_deposit = #{cardDeposit}
+        </if>
+        <if test="memberAmount!=null and memberAmount!=''">
+            and member_amount = #{memberAmount}
+        </if>
+        <if test="memberIntegral!=null and memberIntegral!=''">
+            and member_integral = #{memberIntegral}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="refereeName!=null and refereeName!=''">
+            and referee_name = #{refereeName}
+        </if>
+        <if test="effectiveDate!=null and effectiveDate!=''">
+            and effective_date = #{effectiveDate}
+        </if>
+        <if test="expirationDate!=null and expirationDate!=''">
+            and expiration_date = #{expirationDate}
+        </if>
+        <if test="maxConsumption!=null and maxConsumption!=''">
+            and max_consumption = #{maxConsumption}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

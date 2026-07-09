@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartDeviceParamBedMapper">
+    <sql id="tableFieldNames">
+        (
+            id, tenant_id,
+            grant_id,
+            device_name,
+            device_serial,
+            hr_alarm_enable,
+            hr_alarm_max,
+            hr_alarm_min,
+            rr_alarm_enable,
+            rr_stop_enable,
+            rr_alarm_max,
+            rr_alarm_min,
+            off_bed_enable,
+            leave_dura,
+            sleep_day_dura_start,
+            sleep_day_dura_stop,
+            sleep_all_day_enable,
+            sleep_night_dura_start,
+            sleep_night_dura_stop,
+            noon_sleep_day_enable,
+            night_sleeps_day_enable,
+            remark,
+            create_user,
+            create_dept,
+            create_time,
+            update_user,
+            update_time,
+            is_deleted,
+            heartRate,
+            breathRate,
+            bodyShake,
+            onBed,
+            status)
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+        (
+            #{item.id}, #{item.tenantId},
+            #{item.grantId},
+            #{item.deviceName},
+            #{item.deviceSerial},
+            #{item.hrAlarmEnable},
+            #{item.hrAlarmMax},
+            #{item.hrAlarmMin},
+            #{item.rrAlarmEnable},
+            #{item.rrStopEnable},
+            #{item.rrAlarmMax},
+            #{item.rrAlarmMin},
+            #{item.offBedEnable},
+            #{item.leaveDura},
+            #{item.sleepDayDuraStart},
+            #{item.sleepDayDuraStop},
+            #{item.sleepAllDayEnable},
+            #{item.sleepNightDuraStart},
+            #{item.sleepNightDuraStop},
+            #{item.noonSleepDayEnable},
+            #{item.nightSleepsDayEnable},
+            #{item.remark},
+            #{item.createUser},
+            #{item.createDept},
+            #{item.createTime},
+            #{item.updateUser},
+            #{item.updateTime},
+            #{item.isDeleted},
+            #{item.heartRate},
+            #{item.breathRate},
+            #{item.bodyShake},
+            #{item.onBed},
+            #{item.status})
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_device_param_bed
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+    <update id="updateSmartDeviceParamBed" parameterType="cn.pluss.platform.model.entity.SmartDeviceParamBed">
+        UPDATE tb_jiangyukeji_smart_device_param_bed
+        <set>
+            <if test="heartRate != null">heart_rate = #{heartRate},</if>
+            <if test="breathRate != null">breath_rate = #{breathRate},</if>
+            <if test="bodyShake != null">body_shake = #{bodyShake},</if>
+            <if test="onBed != null">on_bed = #{onBed},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        WHERE device_name = #{deviceName}
+    </update>
+
+    <select id="queryPage" parameterType="java.util.Map"
+            resultType="cn.pluss.platform.model.entity.SmartDeviceParamBed">
+        SELECT * from tb_jiangyukeji_smart_device_param_bed
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="tenantId!=null and tenantId!=''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="grantId!=null and grantId!=''">
+                and grant_id = #{grantId}
+            </if>
+            <if test="deviceName!=null and deviceName!=''">
+                and device_name = #{deviceName}
+            </if>
+            <if test="deviceSerial!=null and deviceSerial!=''">
+                and device_serial = #{deviceSerial}
+            </if>
+            <if test="hrAlarmEnable!=null and hrAlarmEnable!=''">
+                and hr_alarm_enable = #{hrAlarmEnable}
+            </if>
+            <if test="hrAlarmMax!=null and hrAlarmMax!=''">
+                and hr_alarm_max = #{hrAlarmMax}
+            </if>
+            <if test="hrAlarmMin!=null and hrAlarmMin!=''">
+                and hr_alarm_min = #{hrAlarmMin}
+            </if>
+            <if test="rrAlarmEnable!=null and rrAlarmEnable!=''">
+                and rr_alarm_enable = #{rrAlarmEnable}
+            </if>
+            <if test="rrStopEnable!=null and rrStopEnable!=''">
+                and rr_stop_enable = #{rrStopEnable}
+            </if>
+            <if test="rrAlarmMax!=null and rrAlarmMax!=''">
+                and rr_alarm_max = #{rrAlarmMax}
+            </if>
+            <if test="rrAlarmMin!=null and rrAlarmMin!=''">
+                and rr_alarm_min = #{rrAlarmMin}
+            </if>
+            <if test="offBedEnable!=null and offBedEnable!=''">
+                and off_bed_enable = #{offBedEnable}
+            </if>
+            <if test="leaveDura!=null and leaveDura!=''">
+                and leave_dura = #{leaveDura}
+            </if>
+            <if test="sleepDayDuraStart!=null and sleepDayDuraStart!=''">
+                and sleep_day_dura_start = #{sleepDayDuraStart}
+            </if>
+            <if test="sleepDayDuraStop!=null and sleepDayDuraStop!=''">
+                and sleep_day_dura_stop = #{sleepDayDuraStop}
+            </if>
+            <if test="sleepAllDayEnable!=null and sleepAllDayEnable!=''">
+                and sleep_all_day_enable = #{sleepAllDayEnable}
+            </if>
+            <if test="sleepNightDuraStart!=null and sleepNightDuraStart!=''">
+                and sleep_night_dura_start = #{sleepNightDuraStart}
+            </if>
+            <if test="sleepNightDuraStop!=null and sleepNightDuraStop!=''">
+                and sleep_night_dura_stop = #{sleepNightDuraStop}
+            </if>
+            <if test="noonSleepDayEnable!=null and noonSleepDayEnable!=''">
+                and noon_sleep_day_enable = #{noonSleepDayEnable}
+            </if>
+            <if test="nightSleepsDayEnable!=null and nightSleepsDayEnable!=''">
+                and night_sleeps_day_enable = #{nightSleepsDayEnable}
+            </if>
+            <if test="remark!=null and remark!=''">
+                and remark = #{remark}
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDept!=null and createDept!=''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted!=null and isDeleted!=''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_device_param_bed
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="tenantId!=null and tenantId!=''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="grantId!=null and grantId!=''">
+                and grant_id = #{grantId}
+            </if>
+            <if test="deviceName!=null and deviceName!=''">
+                and device_name = #{deviceName}
+            </if>
+            <if test="deviceSerial!=null and deviceSerial!=''">
+                and device_serial = #{deviceSerial}
+            </if>
+            <if test="hrAlarmEnable!=null and hrAlarmEnable!=''">
+                and hr_alarm_enable = #{hrAlarmEnable}
+            </if>
+            <if test="hrAlarmMax!=null and hrAlarmMax!=''">
+                and hr_alarm_max = #{hrAlarmMax}
+            </if>
+            <if test="hrAlarmMin!=null and hrAlarmMin!=''">
+                and hr_alarm_min = #{hrAlarmMin}
+            </if>
+            <if test="rrAlarmEnable!=null and rrAlarmEnable!=''">
+                and rr_alarm_enable = #{rrAlarmEnable}
+            </if>
+            <if test="rrStopEnable!=null and rrStopEnable!=''">
+                and rr_stop_enable = #{rrStopEnable}
+            </if>
+            <if test="rrAlarmMax!=null and rrAlarmMax!=''">
+                and rr_alarm_max = #{rrAlarmMax}
+            </if>
+            <if test="rrAlarmMin!=null and rrAlarmMin!=''">
+                and rr_alarm_min = #{rrAlarmMin}
+            </if>
+            <if test="offBedEnable!=null and offBedEnable!=''">
+                and off_bed_enable = #{offBedEnable}
+            </if>
+            <if test="leaveDura!=null and leaveDura!=''">
+                and leave_dura = #{leaveDura}
+            </if>
+            <if test="sleepDayDuraStart!=null and sleepDayDuraStart!=''">
+                and sleep_day_dura_start = #{sleepDayDuraStart}
+            </if>
+            <if test="sleepDayDuraStop!=null and sleepDayDuraStop!=''">
+                and sleep_day_dura_stop = #{sleepDayDuraStop}
+            </if>
+            <if test="sleepAllDayEnable!=null and sleepAllDayEnable!=''">
+                and sleep_all_day_enable = #{sleepAllDayEnable}
+            </if>
+            <if test="sleepNightDuraStart!=null and sleepNightDuraStart!=''">
+                and sleep_night_dura_start = #{sleepNightDuraStart}
+            </if>
+            <if test="sleepNightDuraStop!=null and sleepNightDuraStop!=''">
+                and sleep_night_dura_stop = #{sleepNightDuraStop}
+            </if>
+            <if test="noonSleepDayEnable!=null and noonSleepDayEnable!=''">
+                and noon_sleep_day_enable = #{noonSleepDayEnable}
+            </if>
+            <if test="nightSleepsDayEnable!=null and nightSleepsDayEnable!=''">
+                and night_sleeps_day_enable = #{nightSleepsDayEnable}
+            </if>
+            <if test="remark!=null and remark!=''">
+                and remark = #{remark}
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDept!=null and createDept!=''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted!=null and isDeleted!=''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+
+</mapper>
+

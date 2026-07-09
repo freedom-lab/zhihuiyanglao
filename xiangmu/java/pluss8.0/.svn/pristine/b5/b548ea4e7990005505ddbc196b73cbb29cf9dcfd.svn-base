@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/pluss-api-page/pluss-api-page.iml" filepath="$PROJECT_DIR$/pluss-api-page/pluss-api-page.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss-common-bundle/pluss-common-bundle.iml" filepath="$PROJECT_DIR$/pluss-common-bundle/pluss-common-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss-dao-bundle/pluss-dao-bundle.iml" filepath="$PROJECT_DIR$/pluss-dao-bundle/pluss-dao-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss-model-bundle/pluss-model-bundle.iml" filepath="$PROJECT_DIR$/pluss-model-bundle/pluss-model-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss-parent.iml" filepath="$PROJECT_DIR$/pluss-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss-service-bundle/pluss-service-bundle.iml" filepath="$PROJECT_DIR$/pluss-service-bundle/pluss-service-bundle.iml" />
+    </modules>
+  </component>
+</project>

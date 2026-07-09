@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.coding.TableMapper">
+
+    <insert id="saveTable" parameterType="cn.pluss.platform.model.coding.Table">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_yunlankeji_table(id,tableName,tableComment,tableType,keyPolicy,isPage,isTree,beanNameRule,beanNameReduce,createDt,status,versionCode,tableCode,seq,keyColumn,autoIncrement)VALUES(#{id},#{tableName},#{tableComment},#{tableType},#{keyPolicy},#{isPage},#{isTree},#{beanNameRule},#{beanNameReduce},#{createDt},#{status},#{versionCode},#{tableCode},#{seq},#{keyColumn},#{autoIncrement})
+    </insert>
+
+    <insert id="saveTableBatch">
+        insert into tb_yunlankeji_table(id,tableName,tableComment,tableType,keyPolicy,isPage,isTree,beanNameRule,beanNameReduce,createDt,status,versionCode,tableCode,seq,keyColumn,autoIncrement)VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.tableName},#{item.tableComment},#{item.tableType},#{item.keyPolicy},#{item.isPage},#{item.isTree},#{item.beanNameRule},#{item.beanNameReduce},#{item.createDt},#{item.status},#{item.versionCode},#{item.tableCode},#{item.seq},,#{item.keyColumn},#{item.autoIncrement})
+        </foreach>
+    </insert>
+
+
+    <select id="queryTable" parameterType="cn.pluss.platform.model.coding.Table" resultType="cn.pluss.platform.model.coding.Table">
+        SELECT * from  tb_yunlankeji_table
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="tableComment!= null and tableComment!='' ">
+                    and  tableComment = #{ tableComment}
+                </if>
+                <if test="tableType!= null and tableType!='' ">
+                    and  tableType = #{ tableType}
+                </if>
+                <if test="keyPolicy!= null and keyPolicy!='' ">
+                    and  keyPolicy = #{ keyPolicy}
+                </if>
+                <if test="isPage!= null and isPage!='' ">
+                    and  isPage = #{ isPage}
+                </if>
+                <if test="isTree!= null and isTree!='' ">
+                    and  isTree = #{ isTree}
+                </if>
+                <if test="beanNameRule!= null and beanNameRule!='' ">
+                    and  beanNameRule = #{ beanNameRule}
+                </if>
+                <if test="beanNameReduce!= null and beanNameReduce!='' ">
+                    and  beanNameReduce = #{ beanNameReduce}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+                <if test="versionCode!= null and versionCode!='' ">
+                    and  versionCode = #{ versionCode}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+            <if test="keyColumn!= null and keyColumn!='' ">
+                and  keyColumn = #{keyColumn}
+            </if>
+            <if test="autoIncrement!= null and autoIncrement!='' ">
+                and  autoIncrement = #{autoIncrement}
+            </if>
+        </where>
+		limit 1
+    </select>
+
+    <select id="queryTableList" parameterType="cn.pluss.platform.model.coding.Table" resultType="cn.pluss.platform.model.coding.Table">
+        SELECT * from  tb_yunlankeji_table
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="tableComment!= null and tableComment!='' ">
+                    and  tableComment = #{ tableComment}
+                </if>
+                <if test="tableType!= null and tableType!='' ">
+                    and  tableType = #{ tableType}
+                </if>
+                <if test="keyPolicy!= null and keyPolicy!='' ">
+                    and  keyPolicy = #{ keyPolicy}
+                </if>
+                <if test="isPage!= null and isPage!='' ">
+                    and  isPage = #{ isPage}
+                </if>
+                <if test="isTree!= null and isTree!='' ">
+                    and  isTree = #{ isTree}
+                </if>
+                <if test="beanNameRule!= null and beanNameRule!='' ">
+                    and  beanNameRule = #{ beanNameRule}
+                </if>
+                <if test="beanNameReduce!= null and beanNameReduce!='' ">
+                    and  beanNameReduce = #{ beanNameReduce}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+                <if test="versionCode!= null and versionCode!='' ">
+                    and  versionCode = #{ versionCode}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+            <if test="keyColumn!= null and keyColumn!='' ">
+                and  keyColumn = #{keyColumn}
+            </if>
+            <if test="autoIncrement!= null and autoIncrement!='' ">
+                and  autoIncrement = #{autoIncrement}
+            </if>
+        </where>
+		order by seq desc
+    </select>
+
+    <update id="updateTable" parameterType="cn.pluss.platform.model.coding.Table" >
+        update tb_yunlankeji_table
+        <set>
+				 <if test="id!= null  and id!='' ">
+				 id= #{id},
+				 </if>
+				 <if test="tableName!= null  and tableName!='' ">
+				 tableName= #{tableName},
+				 </if>
+				 <if test="tableComment!= null  and tableComment!='' ">
+				 tableComment= #{tableComment},
+				 </if>
+				 <if test="tableType!= null  and tableType!='' ">
+				 tableType= #{tableType},
+				 </if>
+				 <if test="keyPolicy!= null  and keyPolicy!='' ">
+				 keyPolicy= #{keyPolicy},
+				 </if>
+				 <if test="isPage!= null  and isPage!='' ">
+				 isPage= #{isPage},
+				 </if>
+				 <if test="isTree!= null  and isTree!='' ">
+				 isTree= #{isTree},
+				 </if>
+				 <if test="beanNameRule!= null  and beanNameRule!='' ">
+				 beanNameRule= #{beanNameRule},
+				 </if>
+				 <if test="beanNameReduce!= null  and beanNameReduce!='' ">
+				 beanNameReduce= #{beanNameReduce},
+				 </if>
+                <if test="createDt!= null">
+                createDt= #{createDt},
+                </if>
+				 <if test="status!= null  and status!='' ">
+				 status= #{status},
+				 </if>
+				 <if test="versionCode!= null  and versionCode!='' ">
+				 versionCode= #{versionCode},
+				 </if>
+				 <if test="tableCode!= null  and tableCode!='' ">
+				 tableCode= #{tableCode},
+				 </if>
+				 <if test="seq!= null  and seq!='' ">
+				 seq= #{seq},
+				 </if>
+                <if test="keyColumn!= null and keyColumn!='' ">
+                      keyColumn = #{keyColumn},
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                      autoIncrement = #{autoIncrement}
+                </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteTable" parameterType="cn.pluss.platform.model.coding.Table" >
+        DELETE FROM tb_yunlankeji_table where id=#{id}
+    </delete>
+
+    <delete id="deleteTableBatch" parameterType="java.util.List" >
+        DELETE FROM tb_yunlankeji_table where  1>2 or id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="queryTablePage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.coding.Table">
+        SELECT * from  tb_yunlankeji_table
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="tableComment!= null and tableComment!='' ">
+                    and  tableComment = #{ tableComment}
+                </if>
+                <if test="tableType!= null and tableType!='' ">
+                    and  tableType = #{ tableType}
+                </if>
+                <if test="keyPolicy!= null and keyPolicy!='' ">
+                    and  keyPolicy = #{ keyPolicy}
+                </if>
+                <if test="isPage!= null and isPage!='' ">
+                    and  isPage = #{ isPage}
+                </if>
+                <if test="isTree!= null and isTree!='' ">
+                    and  isTree = #{ isTree}
+                </if>
+                <if test="beanNameRule!= null and beanNameRule!='' ">
+                    and  beanNameRule = #{ beanNameRule}
+                </if>
+                <if test="beanNameReduce!= null and beanNameReduce!='' ">
+                    and  beanNameReduce = #{ beanNameReduce}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+                <if test="versionCode!= null and versionCode!='' ">
+                    and  versionCode = #{ versionCode}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+                <if test="keyColumn!= null and keyColumn!='' ">
+                    and  keyColumn = #{keyColumn}
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                    and  autoIncrement = #{autoIncrement}
+                </if>
+        </where>
+        order by id desc  limit #{pageSize}  offset  #{offset}
+    </select>
+
+    <select id="queryTablePageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_yunlankeji_table
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="tableComment!= null and tableComment!='' ">
+                    and  tableComment = #{ tableComment}
+                </if>
+                <if test="tableType!= null and tableType!='' ">
+                    and  tableType = #{ tableType}
+                </if>
+                <if test="keyPolicy!= null and keyPolicy!='' ">
+                    and  keyPolicy = #{ keyPolicy}
+                </if>
+                <if test="isPage!= null and isPage!='' ">
+                    and  isPage = #{ isPage}
+                </if>
+                <if test="isTree!= null and isTree!='' ">
+                    and  isTree = #{ isTree}
+                </if>
+                <if test="beanNameRule!= null and beanNameRule!='' ">
+                    and  beanNameRule = #{ beanNameRule}
+                </if>
+                <if test="beanNameReduce!= null and beanNameReduce!='' ">
+                    and  beanNameReduce = #{ beanNameReduce}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="status!= null and status!='' ">
+                    and  status = #{ status}
+                </if>
+                <if test="versionCode!= null and versionCode!='' ">
+                    and  versionCode = #{ versionCode}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+                <if test="keyColumn!= null and keyColumn!='' ">
+                    and  keyColumn = #{keyColumn}
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                    and  autoIncrement = #{autoIncrement}
+                </if>
+        </where>
+    </select>
+
+
+    <select id="queryMaxSeq"  resultType="java.lang.Integer">
+        select max(seq) seq from tb_yunlankeji_table
+    </select>
+
+</mapper>
+

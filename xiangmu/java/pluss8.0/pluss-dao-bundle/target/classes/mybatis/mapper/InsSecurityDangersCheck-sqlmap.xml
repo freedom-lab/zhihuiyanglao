@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsSecurityDangersCheckMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    institution_address,
+    dangers_type,
+    check_date,
+    pic_name,
+    manager_name,
+    building_num,
+    staff_num,
+    area_num,
+    stay_num,
+    pic_name_sign,
+    area_code,
+    area_name,
+    submit_state,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    task_id,
+    task_title,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.institutionAddress},
+    #{item.dangersType},
+    #{item.checkDate},
+    #{item.picName},
+    #{item.managerName},
+    #{item.buildingNum},
+    #{item.staffNum},
+    #{item.areaNum},
+    #{item.stayNum},
+    #{item.picNameSign},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.submitState},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.taskId},
+    #{item.taskTitle},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_security_dangers_check
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsSecurityDangersCheck">
+        SELECT * from  tb_jiangyukeji_ins_security_dangers_check
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="institutionAddress!=null and institutionAddress!=''">
+            and institution_address = #{institutionAddress}
+        </if>
+        <if test="dangersType!=null and dangersType!=''">
+            and dangers_type = #{dangersType}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="picName!=null and picName!=''">
+            and pic_name = #{picName}
+        </if>
+        <if test="managerName!=null and managerName!=''">
+            and manager_name = #{managerName}
+        </if>
+        <if test="buildingNum!=null and buildingNum!=''">
+            and building_num = #{buildingNum}
+        </if>
+        <if test="staffNum!=null and staffNum!=''">
+            and staff_num = #{staffNum}
+        </if>
+        <if test="areaNum!=null and areaNum!=''">
+            and area_num = #{areaNum}
+        </if>
+        <if test="stayNum!=null and stayNum!=''">
+            and stay_num = #{stayNum}
+        </if>
+        <if test="picNameSign!=null and picNameSign!=''">
+            and pic_name_sign = #{picNameSign}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="submitState!=null and submitState!=''">
+            and submit_state = #{submitState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="taskId!=null and taskId!=''">
+            and task_id = #{taskId}
+        </if>
+        <if test="taskTitle!=null and taskTitle!=''">
+            and task_title = #{taskTitle}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_security_dangers_check
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="institutionAddress!=null and institutionAddress!=''">
+            and institution_address = #{institutionAddress}
+        </if>
+        <if test="dangersType!=null and dangersType!=''">
+            and dangers_type = #{dangersType}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="picName!=null and picName!=''">
+            and pic_name = #{picName}
+        </if>
+        <if test="managerName!=null and managerName!=''">
+            and manager_name = #{managerName}
+        </if>
+        <if test="buildingNum!=null and buildingNum!=''">
+            and building_num = #{buildingNum}
+        </if>
+        <if test="staffNum!=null and staffNum!=''">
+            and staff_num = #{staffNum}
+        </if>
+        <if test="areaNum!=null and areaNum!=''">
+            and area_num = #{areaNum}
+        </if>
+        <if test="stayNum!=null and stayNum!=''">
+            and stay_num = #{stayNum}
+        </if>
+        <if test="picNameSign!=null and picNameSign!=''">
+            and pic_name_sign = #{picNameSign}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="submitState!=null and submitState!=''">
+            and submit_state = #{submitState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="taskId!=null and taskId!=''">
+            and task_id = #{taskId}
+        </if>
+        <if test="taskTitle!=null and taskTitle!=''">
+            and task_title = #{taskTitle}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

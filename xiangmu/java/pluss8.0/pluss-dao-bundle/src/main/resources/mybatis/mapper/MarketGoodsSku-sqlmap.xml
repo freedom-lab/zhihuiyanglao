@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketGoodsSkuMapper">
+    <sql id="tableFieldNames">
+    (
+    tenant_id,
+    id,
+    goods_id,
+    properties,
+    original_price,
+    price,
+    start_sales_volume,
+    stock,
+    actual_stock,
+    alarm_stock,
+    bar_code,
+    pic,
+    sku_name,
+    goods_name,
+    weight,
+    volume,
+    server_hour,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    corp_id,
+    institution_id,
+    institution_name
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.tenantId},
+    #{item.id},
+    #{item.goodsId},
+    #{item.properties},
+    #{item.originalPrice},
+    #{item.price},
+    #{item.startSalesVolume},
+    #{item.stock},
+    #{item.actualStock},
+    #{item.alarmStock},
+    #{item.barCode},
+    #{item.pic},
+    #{item.skuName},
+    #{item.goodsName},
+    #{item.weight},
+    #{item.volume},
+    #{item.serverHour},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_goods_sku
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketGoodsSku">
+        SELECT * from  tb_jiangyukeji_market_goods_sku
+        <where>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="properties!=null and properties!=''">
+            and properties = #{properties}
+        </if>
+        <if test="originalPrice!=null and originalPrice!=''">
+            and original_price = #{originalPrice}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="startSalesVolume!=null and startSalesVolume!=''">
+            and start_sales_volume = #{startSalesVolume}
+        </if>
+        <if test="stock!=null and stock!=''">
+            and stock = #{stock}
+        </if>
+        <if test="actualStock!=null and actualStock!=''">
+            and actual_stock = #{actualStock}
+        </if>
+        <if test="alarmStock!=null and alarmStock!=''">
+            and alarm_stock = #{alarmStock}
+        </if>
+        <if test="barCode!=null and barCode!=''">
+            and bar_code = #{barCode}
+        </if>
+        <if test="pic!=null and pic!=''">
+            and pic = #{pic}
+        </if>
+        <if test="skuName!=null and skuName!=''">
+            and sku_name = #{skuName}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="volume!=null and volume!=''">
+            and volume = #{volume}
+        </if>
+        <if test="serverHour!=null and serverHour!=''">
+            and server_hour = #{serverHour}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_goods_sku
+        <where>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="properties!=null and properties!=''">
+            and properties = #{properties}
+        </if>
+        <if test="originalPrice!=null and originalPrice!=''">
+            and original_price = #{originalPrice}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="startSalesVolume!=null and startSalesVolume!=''">
+            and start_sales_volume = #{startSalesVolume}
+        </if>
+        <if test="stock!=null and stock!=''">
+            and stock = #{stock}
+        </if>
+        <if test="actualStock!=null and actualStock!=''">
+            and actual_stock = #{actualStock}
+        </if>
+        <if test="alarmStock!=null and alarmStock!=''">
+            and alarm_stock = #{alarmStock}
+        </if>
+        <if test="barCode!=null and barCode!=''">
+            and bar_code = #{barCode}
+        </if>
+        <if test="pic!=null and pic!=''">
+            and pic = #{pic}
+        </if>
+        <if test="skuName!=null and skuName!=''">
+            and sku_name = #{skuName}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="volume!=null and volume!=''">
+            and volume = #{volume}
+        </if>
+        <if test="serverHour!=null and serverHour!=''">
+            and server_hour = #{serverHour}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

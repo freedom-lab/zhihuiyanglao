@@ -1,0 +1,229 @@
+<div class="page">
+          <!-- 左侧区域 -->
+          <div class="page-left">
+            <!-- 今日服务监管统计 -->
+            <div class="oldBox">
+              <div class="tit">
+                <img src="ddimg">
+                <h4>
+                  <span>今日服务监管统计</span>
+                </h4>
+              </div>
+              <div class="oneCon">
+                <div class="task-stats-container">
+                  <div class="total-section">
+                    <div class="icon-wrapper">
+                      <img src="ddimg" alt="护理任务总数" class="icon-pic">
+                    </div>
+                    <div class="total-info">
+                      <div class="total-num">6</div>
+                      <div class="total-label">护理任务总数</div>
+                    </div>
+                  </div>
+                  <div class="status-grid">
+                    <div class="status-sub-card sub-card-green">
+                      <div class="sub-num num-green">0</div>
+                      <div class="sub-label">已完成</div>
+                    </div>
+                    <div class="status-sub-card sub-card-orange">
+                      <div class="sub-num num-orange">6</div>
+                      <div class="sub-label">未完成</div>
+                    </div>
+                    <div class="status-sub-card sub-card-blue">
+                      <div class="sub-num num-blue">0%</div>
+                      <div class="sub-label">完成率</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 护理人员排行榜 -->
+            <div class="oldBox">
+              <div class="tit">
+                <img src="ddimg">
+                <h4>
+                  <span>护理人员排行榜</span>
+                </h4>
+                <div role="radiogroup" class="el-radio-group radioA">
+                  <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                    <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="1">
+                    <span class="el-radio-button__inner">从高到低</span>
+                  </label>
+                  <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                    <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="2">
+                    <span class="el-radio-button__inner">从低到高</span>
+                  </label>
+                </div>
+              </div>
+              <div class="twoCon">
+                <div class="warning">
+                  <div style="width: 100%; height: 100%;">
+                    <!-- el-table 仅保留外层容器，清空内部子级 -->
+                    <el-table class="tableView" style="width: 100%; height: 100%;">
+                    </el-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 中间区域 -->
+          <div class="page-center">
+            <div class="topNum">
+              <div class="li">
+                <img src="ddimg">
+                <div class="con">
+                  <h4>
+                    <span class="count m-t-10">4</span>
+                  </h4>
+                  <p>在住老人数</p>
+                </div>
+              </div>
+              <div class="li">
+                <img src="ddimg">
+                <div class="con">
+                  <h4>
+                    <span class="count m-t-10">81</span>
+                  </h4>
+                  <p>护理人员数</p>
+                </div>
+              </div>
+              <div class="li">
+                <img src="ddimg">
+                <div class="con">
+                  <h4> 1:2025 </h4>
+                  <p>服务配比</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="map">
+              <div class="nomap">
+                <img src="ddimg">
+              </div>
+            </div>
+
+            <div style="display: flex;">
+              <!-- 自选服务实时工单 -->
+              <div class="oldBox">
+                <div class="tit">
+                  <img src="ddimg">
+                  <h4>
+                    <span>自选服务实时工单</span>
+                  </h4>
+                </div>
+                <div class="fourCon">
+                  <div class="warning">
+                    <div style="width: 100%; height: 100%;">
+                      <!-- el-table 仅保留外层容器，清空内部子级 -->
+                      <el-table class="tableView" style="width: 100%; height: 100%;">
+                      </el-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧区域 -->
+          <div class="page-right">
+            <!-- 自选服务概况统计 -->
+            <div class="oldBox">
+              <div class="tit">
+                <img src="ddimg">
+                <h4>
+                  <span>自选服务概况统计</span>
+                </h4>
+                <div role="radiogroup" class="el-radio-group radioA">
+                  <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                    <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="0">
+                    <span class="el-radio-button__inner">全部</span>
+                  </label>
+                  <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                    <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="1">
+                    <span class="el-radio-button__inner">今日</span>
+                  </label>
+                  <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                    <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="2">
+                    <span class="el-radio-button__inner">本周</span>
+                  </label>
+                  <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                    <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="3">
+                    <span class="el-radio-button__inner">本月</span>
+                  </label>
+                </div>
+              </div>
+              <div class="fireCon">
+                <div class="service-card-container">
+                  <div class="left-icon-box">
+                    <span class="icon-title">自选服务</span>
+                  </div>
+                  <div class="right-data-box">
+                    <div class="data-item count-item">
+                      <div class="text-content">
+                        <span class="label">服务单量</span>
+                        <span class="value">6</span>
+                      </div>
+                    </div>
+                    <div class="data-item amount-item">
+                      <div class="text-content">
+                        <span class="label">服务金额</span>
+                        <span class="value">48.00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 自选服务工单统计 图表容器 -->
+            <div class="oldBox">
+              <div class="tit">
+                <img src="ddimg">
+                <h4>
+                  <span>自选服务工单统计</span>
+                </h4>
+              </div>
+              <div class="serveCon">
+                <div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 自选服务类别统计 图表容器 -->
+            <div class="oldBox">
+              <div class="tit">
+                <img src="ddimg">
+                <h4>
+                  <span>自选服务类别统计</span>
+                </h4>
+              </div>
+              <div class="sexCon">
+                <div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 自选服务项目排行榜 -->
+            <div class="oldBox">
+              <div class="tit">
+                <img src="ddimg">
+                <h4>
+                  <span>自选服务项目排行榜</span>
+                </h4>
+              </div>
+              <div class="fireCon">
+                <div class="warning">
+                  <div style="width: 100%; height: 100%;">
+                    <!-- el-table 仅保留外层容器，清空内部子级 -->
+                    <div class="el-table tableView el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%; height: 100%;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

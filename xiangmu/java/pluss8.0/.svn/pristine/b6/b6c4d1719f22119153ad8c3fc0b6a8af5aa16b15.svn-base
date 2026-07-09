@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthBaseInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    age,
+    sex,
+    link_tel,
+    marry_state,
+    degree_education,
+    disability_type,
+    major_diseases,
+    major_diseases_name,
+    medical_category,
+    is_children,
+    work_unit,
+    career,
+    file_code,
+    file_date,
+    put_file_name,
+    height,
+    weight,
+    waist,
+    exposure_history,
+    drinking_habits,
+    smoking_habits,
+    allergic_history,
+    dietary_habit,
+    sleep_quality,
+    relieve_bowels,
+    operation_name_one,
+    operation_time_one,
+    operation_name_two,
+    operation_time_two,
+    trauma_name_one,
+    trauma_time_one,
+    trauma_name_two,
+    trauma_time_two,
+    blood_name_one,
+    blood_time_one,
+    blood_name_two,
+    blood_time_two,
+    father_disease_ids,
+    mother_disease_ids,
+    children_disease_ids,
+    brother_disease_ids,
+    genetic_disease,
+    health_guidance,
+    intubation_type,
+    memo,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    major_diseases_other,
+    pid,
+    pvid,
+    blood_type
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.age},
+    #{item.sex},
+    #{item.linkTel},
+    #{item.marryState},
+    #{item.degreeEducation},
+    #{item.disabilityType},
+    #{item.majorDiseases},
+    #{item.majorDiseasesName},
+    #{item.medicalCategory},
+    #{item.isChildren},
+    #{item.workUnit},
+    #{item.career},
+    #{item.fileCode},
+    #{item.fileDate},
+    #{item.putFileName},
+    #{item.height},
+    #{item.weight},
+    #{item.waist},
+    #{item.exposureHistory},
+    #{item.drinkingHabits},
+    #{item.smokingHabits},
+    #{item.allergicHistory},
+    #{item.dietaryHabit},
+    #{item.sleepQuality},
+    #{item.relieveBowels},
+    #{item.operationNameOne},
+    #{item.operationTimeOne},
+    #{item.operationNameTwo},
+    #{item.operationTimeTwo},
+    #{item.traumaNameOne},
+    #{item.traumaTimeOne},
+    #{item.traumaNameTwo},
+    #{item.traumaTimeTwo},
+    #{item.bloodNameOne},
+    #{item.bloodTimeOne},
+    #{item.bloodNameTwo},
+    #{item.bloodTimeTwo},
+    #{item.fatherDiseaseIds},
+    #{item.motherDiseaseIds},
+    #{item.childrenDiseaseIds},
+    #{item.brotherDiseaseIds},
+    #{item.geneticDisease},
+    #{item.healthGuidance},
+    #{item.intubationType},
+    #{item.memo},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.majorDiseasesOther},
+    #{item.pid},
+    #{item.pvid},
+    #{item.bloodType}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_base_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthBaseInfo">
+        SELECT * from  tb_jiangyukeji_health_base_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="marryState!=null and marryState!=''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="disabilityType!=null and disabilityType!=''">
+            and disability_type = #{disabilityType}
+        </if>
+        <if test="majorDiseases!=null and majorDiseases!=''">
+            and major_diseases = #{majorDiseases}
+        </if>
+        <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+            and major_diseases_name = #{majorDiseasesName}
+        </if>
+        <if test="medicalCategory!=null and medicalCategory!=''">
+            and medical_category = #{medicalCategory}
+        </if>
+        <if test="isChildren!=null and isChildren!=''">
+            and is_children = #{isChildren}
+        </if>
+        <if test="workUnit!=null and workUnit!=''">
+            and work_unit = #{workUnit}
+        </if>
+        <if test="career!=null and career!=''">
+            and career = #{career}
+        </if>
+        <if test="fileCode!=null and fileCode!=''">
+            and file_code = #{fileCode}
+        </if>
+        <if test="fileDate!=null and fileDate!=''">
+            and file_date = #{fileDate}
+        </if>
+        <if test="putFileName!=null and putFileName!=''">
+            and put_file_name = #{putFileName}
+        </if>
+        <if test="height!=null and height!=''">
+            and height = #{height}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="waist!=null and waist!=''">
+            and waist = #{waist}
+        </if>
+        <if test="exposureHistory!=null and exposureHistory!=''">
+            and exposure_history = #{exposureHistory}
+        </if>
+        <if test="drinkingHabits!=null and drinkingHabits!=''">
+            and drinking_habits = #{drinkingHabits}
+        </if>
+        <if test="smokingHabits!=null and smokingHabits!=''">
+            and smoking_habits = #{smokingHabits}
+        </if>
+        <if test="allergicHistory!=null and allergicHistory!=''">
+            and allergic_history = #{allergicHistory}
+        </if>
+        <if test="dietaryHabit!=null and dietaryHabit!=''">
+            and dietary_habit = #{dietaryHabit}
+        </if>
+        <if test="sleepQuality!=null and sleepQuality!=''">
+            and sleep_quality = #{sleepQuality}
+        </if>
+        <if test="relieveBowels!=null and relieveBowels!=''">
+            and relieve_bowels = #{relieveBowels}
+        </if>
+        <if test="operationNameOne!=null and operationNameOne!=''">
+            and operation_name_one = #{operationNameOne}
+        </if>
+        <if test="operationTimeOne!=null and operationTimeOne!=''">
+            and operation_time_one = #{operationTimeOne}
+        </if>
+        <if test="operationNameTwo!=null and operationNameTwo!=''">
+            and operation_name_two = #{operationNameTwo}
+        </if>
+        <if test="operationTimeTwo!=null and operationTimeTwo!=''">
+            and operation_time_two = #{operationTimeTwo}
+        </if>
+        <if test="traumaNameOne!=null and traumaNameOne!=''">
+            and trauma_name_one = #{traumaNameOne}
+        </if>
+        <if test="traumaTimeOne!=null and traumaTimeOne!=''">
+            and trauma_time_one = #{traumaTimeOne}
+        </if>
+        <if test="traumaNameTwo!=null and traumaNameTwo!=''">
+            and trauma_name_two = #{traumaNameTwo}
+        </if>
+        <if test="traumaTimeTwo!=null and traumaTimeTwo!=''">
+            and trauma_time_two = #{traumaTimeTwo}
+        </if>
+        <if test="bloodNameOne!=null and bloodNameOne!=''">
+            and blood_name_one = #{bloodNameOne}
+        </if>
+        <if test="bloodTimeOne!=null and bloodTimeOne!=''">
+            and blood_time_one = #{bloodTimeOne}
+        </if>
+        <if test="bloodNameTwo!=null and bloodNameTwo!=''">
+            and blood_name_two = #{bloodNameTwo}
+        </if>
+        <if test="bloodTimeTwo!=null and bloodTimeTwo!=''">
+            and blood_time_two = #{bloodTimeTwo}
+        </if>
+        <if test="fatherDiseaseIds!=null and fatherDiseaseIds!=''">
+            and father_disease_ids = #{fatherDiseaseIds}
+        </if>
+        <if test="motherDiseaseIds!=null and motherDiseaseIds!=''">
+            and mother_disease_ids = #{motherDiseaseIds}
+        </if>
+        <if test="childrenDiseaseIds!=null and childrenDiseaseIds!=''">
+            and children_disease_ids = #{childrenDiseaseIds}
+        </if>
+        <if test="brotherDiseaseIds!=null and brotherDiseaseIds!=''">
+            and brother_disease_ids = #{brotherDiseaseIds}
+        </if>
+        <if test="geneticDisease!=null and geneticDisease!=''">
+            and genetic_disease = #{geneticDisease}
+        </if>
+        <if test="healthGuidance!=null and healthGuidance!=''">
+            and health_guidance = #{healthGuidance}
+        </if>
+        <if test="intubationType!=null and intubationType!=''">
+            and intubation_type = #{intubationType}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+            and major_diseases_other = #{majorDiseasesOther}
+        </if>
+        <if test="pid!=null and pid!=''">
+            and pid = #{pid}
+        </if>
+        <if test="pvid!=null and pvid!=''">
+            and pvid = #{pvid}
+        </if>
+        <if test="bloodType!=null and bloodType!=''">
+            and blood_type = #{bloodType}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_base_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="marryState!=null and marryState!=''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="disabilityType!=null and disabilityType!=''">
+            and disability_type = #{disabilityType}
+        </if>
+        <if test="majorDiseases!=null and majorDiseases!=''">
+            and major_diseases = #{majorDiseases}
+        </if>
+        <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+            and major_diseases_name = #{majorDiseasesName}
+        </if>
+        <if test="medicalCategory!=null and medicalCategory!=''">
+            and medical_category = #{medicalCategory}
+        </if>
+        <if test="isChildren!=null and isChildren!=''">
+            and is_children = #{isChildren}
+        </if>
+        <if test="workUnit!=null and workUnit!=''">
+            and work_unit = #{workUnit}
+        </if>
+        <if test="career!=null and career!=''">
+            and career = #{career}
+        </if>
+        <if test="fileCode!=null and fileCode!=''">
+            and file_code = #{fileCode}
+        </if>
+        <if test="fileDate!=null and fileDate!=''">
+            and file_date = #{fileDate}
+        </if>
+        <if test="putFileName!=null and putFileName!=''">
+            and put_file_name = #{putFileName}
+        </if>
+        <if test="height!=null and height!=''">
+            and height = #{height}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="waist!=null and waist!=''">
+            and waist = #{waist}
+        </if>
+        <if test="exposureHistory!=null and exposureHistory!=''">
+            and exposure_history = #{exposureHistory}
+        </if>
+        <if test="drinkingHabits!=null and drinkingHabits!=''">
+            and drinking_habits = #{drinkingHabits}
+        </if>
+        <if test="smokingHabits!=null and smokingHabits!=''">
+            and smoking_habits = #{smokingHabits}
+        </if>
+        <if test="allergicHistory!=null and allergicHistory!=''">
+            and allergic_history = #{allergicHistory}
+        </if>
+        <if test="dietaryHabit!=null and dietaryHabit!=''">
+            and dietary_habit = #{dietaryHabit}
+        </if>
+        <if test="sleepQuality!=null and sleepQuality!=''">
+            and sleep_quality = #{sleepQuality}
+        </if>
+        <if test="relieveBowels!=null and relieveBowels!=''">
+            and relieve_bowels = #{relieveBowels}
+        </if>
+        <if test="operationNameOne!=null and operationNameOne!=''">
+            and operation_name_one = #{operationNameOne}
+        </if>
+        <if test="operationTimeOne!=null and operationTimeOne!=''">
+            and operation_time_one = #{operationTimeOne}
+        </if>
+        <if test="operationNameTwo!=null and operationNameTwo!=''">
+            and operation_name_two = #{operationNameTwo}
+        </if>
+        <if test="operationTimeTwo!=null and operationTimeTwo!=''">
+            and operation_time_two = #{operationTimeTwo}
+        </if>
+        <if test="traumaNameOne!=null and traumaNameOne!=''">
+            and trauma_name_one = #{traumaNameOne}
+        </if>
+        <if test="traumaTimeOne!=null and traumaTimeOne!=''">
+            and trauma_time_one = #{traumaTimeOne}
+        </if>
+        <if test="traumaNameTwo!=null and traumaNameTwo!=''">
+            and trauma_name_two = #{traumaNameTwo}
+        </if>
+        <if test="traumaTimeTwo!=null and traumaTimeTwo!=''">
+            and trauma_time_two = #{traumaTimeTwo}
+        </if>
+        <if test="bloodNameOne!=null and bloodNameOne!=''">
+            and blood_name_one = #{bloodNameOne}
+        </if>
+        <if test="bloodTimeOne!=null and bloodTimeOne!=''">
+            and blood_time_one = #{bloodTimeOne}
+        </if>
+        <if test="bloodNameTwo!=null and bloodNameTwo!=''">
+            and blood_name_two = #{bloodNameTwo}
+        </if>
+        <if test="bloodTimeTwo!=null and bloodTimeTwo!=''">
+            and blood_time_two = #{bloodTimeTwo}
+        </if>
+        <if test="fatherDiseaseIds!=null and fatherDiseaseIds!=''">
+            and father_disease_ids = #{fatherDiseaseIds}
+        </if>
+        <if test="motherDiseaseIds!=null and motherDiseaseIds!=''">
+            and mother_disease_ids = #{motherDiseaseIds}
+        </if>
+        <if test="childrenDiseaseIds!=null and childrenDiseaseIds!=''">
+            and children_disease_ids = #{childrenDiseaseIds}
+        </if>
+        <if test="brotherDiseaseIds!=null and brotherDiseaseIds!=''">
+            and brother_disease_ids = #{brotherDiseaseIds}
+        </if>
+        <if test="geneticDisease!=null and geneticDisease!=''">
+            and genetic_disease = #{geneticDisease}
+        </if>
+        <if test="healthGuidance!=null and healthGuidance!=''">
+            and health_guidance = #{healthGuidance}
+        </if>
+        <if test="intubationType!=null and intubationType!=''">
+            and intubation_type = #{intubationType}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+            and major_diseases_other = #{majorDiseasesOther}
+        </if>
+        <if test="pid!=null and pid!=''">
+            and pid = #{pid}
+        </if>
+        <if test="pvid!=null and pvid!=''">
+            and pvid = #{pvid}
+        </if>
+        <if test="bloodType!=null and bloodType!=''">
+            and blood_type = #{bloodType}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

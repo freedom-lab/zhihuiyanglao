@@ -1,0 +1,694 @@
+<template>
+  <div style="padding:16px">
+
+    <!-- 头部部分 -->
+    <div ref="search_d">
+      <el-row type="flex" class="row-bg" justify="space-around">
+        <el-col :span="18">
+          <el-button type="primary" @click="newBtn">新建</el-button>
+        </el-col>
+        <el-col :span="6">
+          <el-input placeholder="请输入内容" v-model="queryInfo.condition.queryKey" class="input-with-select" clearable>
+            <el-button slot="append" icon="el-icon-search" @click="getList"></el-button>
+          </el-input>
+        </el-col>
+      </el-row>
+    </div>
+
+    <!-- 表格部分 -->
+    <div class="table-box">
+      <el-table border ref="table" v-loading="loading" :data="tableData" tooltip-effect="dark" style="width: 100%"
+        :header-cell-style="{
+          backgroundColor: '#fafafa',
+          color: '#333',
+          fontWeight: 'bold',
+          fontSize: '14px',
+        }" :height="height">
+        <el-table-column label="#" type="index" width="50" align="center"></el-table-column>
+
+        <!-- 基础老人信息 -->
+        <el-table-column label="服务机构名称" align="center" min-width="130">
+          <template slot-scope="scope">{{ scope.row.institutionName }}</template>
+        </el-table-column>
+        <el-table-column label="老人姓名" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.elderName }}</template>
+        </el-table-column>
+        <el-table-column label="身份证号" align="center" min-width="180">
+          <template slot-scope="scope">{{ scope.row.idCard }}</template>
+        </el-table-column>
+        <el-table-column label="年龄" align="center" min-width="70">
+          <template slot-scope="scope">{{ scope.row.age }}</template>
+        </el-table-column>
+        <el-table-column label="性别" align="center" min-width="70">
+          <template slot-scope="scope">{{ scope.row.sex === 1 ? '男' : '女' }}</template>
+        </el-table-column>
+        <el-table-column label="联系电话" align="center" min-width="130">
+          <template slot-scope="scope">{{ scope.row.linkTel }}</template>
+        </el-table-column>
+        <el-table-column label="婚姻状况" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.marryState }}</template>
+        </el-table-column>
+        <el-table-column label="文化程度" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.degreeEducation }}</template>
+        </el-table-column>
+        <el-table-column label="残疾情况类型" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.disabilityType }}</template>
+        </el-table-column>
+
+        <!-- 慢病医保 -->
+        <el-table-column label="主要慢性病名称" align="center" min-width="140">
+          <template slot-scope="scope">{{ scope.row.majorDiseasesName }}</template>
+        </el-table-column>
+        <el-table-column label="其他疾病名称" align="center" min-width="120">
+          <template slot-scope="scope">{{ scope.row.majorDiseasesOther }}</template>
+        </el-table-column>
+        <el-table-column label="医保类别代码" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.medicalCategory }}</template>
+        </el-table-column>
+        <el-table-column label="有无子女" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.isChildren === 0 ? '无' : '有' }}</template>
+        </el-table-column>
+
+        <!-- 个人基础档案 -->
+        <el-table-column label="工作单位" align="center" min-width="120">
+          <template slot-scope="scope">{{ scope.row.workUnit }}</template>
+        </el-table-column>
+        <el-table-column label="职业" align="center" min-width="80">
+          <template slot-scope="scope">{{ scope.row.career }}</template>
+        </el-table-column>
+        <el-table-column label="档案编号" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.fileCode }}</template>
+        </el-table-column>
+        <el-table-column label="建档日期" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.fileDate ? scope.row.fileDate.slice(0, 10) : '' }}</template>
+        </el-table-column>
+        <el-table-column label="建档人" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.putFileName }}</template>
+        </el-table-column>
+
+        <!-- 身体基础指标 -->
+        <el-table-column label="身高(cm)" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.height }}</template>
+        </el-table-column>
+        <el-table-column label="体重(kg)" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.weight }}</template>
+        </el-table-column>
+        <el-table-column label="腰围(cm)" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.waist }}</template>
+        </el-table-column>
+
+        <!-- 个人生活史 -->
+        <el-table-column label="暴露史" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.exposureHistory }}</template>
+        </el-table-column>
+        <el-table-column label="饮酒史" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.drinkingHabits }}</template>
+        </el-table-column>
+        <el-table-column label="吸烟史" align="center" min-width="140">
+          <template slot-scope="scope">{{ scope.row.smokingHabits }}</template>
+        </el-table-column>
+        <el-table-column label="过敏史" align="center" min-width="130">
+          <template slot-scope="scope">{{ scope.row.allergicHistory }}</template>
+        </el-table-column>
+        <el-table-column label="饮食习惯" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.dietaryHabit }}</template>
+        </el-table-column>
+        <el-table-column label="睡眠情况" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.sleepQuality }}</template>
+        </el-table-column>
+        <el-table-column label="二便情况" align="center" min-width="90">
+          <template slot-scope="scope">{{ scope.row.relieveBowels }}</template>
+        </el-table-column>
+
+        <!-- 手术/外伤/输血史 -->
+        <el-table-column label="手术1名称" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.operationNameOne }}</template>
+        </el-table-column>
+        <el-table-column label="手术1时间" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.operationTimeOne ? scope.row.operationTimeOne.slice(0, 10) : ''
+          }}</template>
+        </el-table-column>
+        <el-table-column label="手术2名称" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.operationNameTwo }}</template>
+        </el-table-column>
+        <el-table-column label="手术2时间" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.operationTimeTwo ? scope.row.operationTimeTwo.slice(0, 10) : ''
+          }}</template>
+        </el-table-column>
+        <el-table-column label="外伤1名称" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.traumaNameOne }}</template>
+        </el-table-column>
+        <el-table-column label="外伤1时间" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.traumaTimeOne ? scope.row.traumaTimeOne.slice(0, 10) : '' }}</template>
+        </el-table-column>
+        <el-table-column label="外伤2名称" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.traumaNameTwo }}</template>
+        </el-table-column>
+        <el-table-column label="外伤2时间" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.traumaTimeTwo ? scope.row.traumaTimeTwo.slice(0, 10) : '' }}</template>
+        </el-table-column>
+        <el-table-column label="输血1原因" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.bloodNameOne }}</template>
+        </el-table-column>
+        <el-table-column label="输血1日期" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.bloodTimeOne ? scope.row.bloodTimeOne.slice(0, 10) : '' }}</template>
+        </el-table-column>
+        <el-table-column label="输血2原因" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.bloodNameTwo }}</template>
+        </el-table-column>
+        <el-table-column label="输血2日期" align="center" min-width="110">
+          <template slot-scope="scope">{{ scope.row.bloodTimeTwo ? scope.row.bloodTimeTwo.slice(0, 10) : '' }}</template>
+        </el-table-column>
+
+        <!-- 家族遗传病史 -->
+        <el-table-column label="父亲病史" align="center" min-width="100">
+          <template slot-scope="scope">{{ scope.row.fatherDiseaseIds }}</template>
+        </el-table-column>
+        <el-table-column label="母亲病史" align="center" min-width="100">
+          <template slot-scope="scope">{{ scope.row.motherDiseaseIds }}</template>
+        </el-table-column>
+        <el-table-column label="子女病史" align="center" min-width="100">
+          <template slot-scope="scope">{{ scope.row.childrenDiseaseIds }}</template>
+        </el-table-column>
+        <el-table-column label="兄弟姐妹病史" align="center" min-width="120">
+          <template slot-scope="scope">{{ scope.row.brotherDiseaseIds }}</template>
+        </el-table-column>
+        <el-table-column label="遗传病史" align="center" min-width="100">
+          <template slot-scope="scope">{{ scope.row.geneticDisease }}</template>
+        </el-table-column>
+
+        <!-- 其他信息 -->
+        <el-table-column label="健康指导" align="center" min-width="120">
+          <template slot-scope="scope">{{ scope.row.healthGuidance }}</template>
+        </el-table-column>
+        <el-table-column label="插管种类" align="center" min-width="100">
+          <template slot-scope="scope">{{ scope.row.intubationType }}</template>
+        </el-table-column>
+        <el-table-column label="行政区划" align="center" min-width="130">
+          <template slot-scope="scope">{{ scope.row.areaName }}</template>
+        </el-table-column>
+        <el-table-column label="备注" align="center" min-width="120">
+          <template slot-scope="scope">{{ scope.row.memo }}</template>
+        </el-table-column>
+        <el-table-column label="状态" align="center" min-width="80">
+          <template slot-scope="scope">{{ scope.row.status === 1 ? '启用' : '禁用' }}</template>
+        </el-table-column>
+
+        <el-table-column label="操作" width="110" align="center" fixed="right">
+          <template slot-scope="scope">
+            <el-button type="text" @click="edit(scope.row)" size="small" style="padding: 0;">编辑</el-button>
+            <el-popconfirm title="确定删除吗？" @confirm="handleDelte(scope.row.id)">
+              <el-button slot="reference" type="text" style="padding: 0;margin-left: 15px;color: red;">删除</el-button>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- 分页 -->
+      <div class="block">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+          :current-page="queryInfo.currPage" :page-sizes="[100, 200, 300, 400]" :page-size="queryInfo.pageSize"
+          layout="total, sizes, prev, pager, next, jumper" :total="total">
+        </el-pagination>
+      </div>
+    </div>
+
+    <el-drawer :visible.sync="showDialog" direction="rtl" size="70%" :with-header="false" :destroy-on-close="true">
+      <el-container class="dialogBox">
+        <el-header class="dialogHeader">
+          <div>{{ labelType == 'add' ? '新增' : '编辑' }}</div>
+          <div>
+            <el-button size="small" @click="showDialog = false">取消</el-button>
+            <el-button size="small" type="primary" @click="handleSave">确定</el-button>
+          </div>
+        </el-header>
+
+        <el-main class="dialogMain">
+          <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+            <el-row :gutter="12">
+              <!-- 基础信息 -->
+              <el-col :span="12">
+                <el-form-item label="服务机构名称" prop="institutionName">
+                  <el-input v-model="form.institutionName" placeholder="请输入服务机构名称"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="老人姓名" prop="elderName">
+                  <el-input v-model="form.elderName" placeholder="请输入老人姓名"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="身份证号" prop="idCard">
+                  <el-input v-model="form.idCard" placeholder="请输入身份证号"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="年龄" prop="age">
+                  <el-input v-model="form.age" placeholder="请输入年龄"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="性别（1男/2女）" prop="sex">
+                  <el-input v-model="form.sex" placeholder="1=男，2=女"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="联系电话" prop="linkTel">
+                  <el-input v-model="form.linkTel" placeholder="请输入联系电话"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="婚姻状况" prop="marryState">
+                  <el-input v-model="form.marryState" placeholder="请填写婚姻状况"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="文化程度" prop="degreeEducation">
+                  <el-input v-model="form.degreeEducation" placeholder="请填写文化程度"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="残疾情况类型" prop="disabilityType">
+                  <el-input v-model="form.disabilityType" placeholder="请填写残疾类型"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="医保类别代码" prop="medicalCategory">
+                  <el-input v-model="form.medicalCategory" placeholder="医保编码"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="有无子女(0否/1是)" prop="isChildren">
+                  <el-input v-model="form.isChildren" placeholder="0=无，1=有"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="工作单位" prop="workUnit">
+                  <el-input v-model="form.workUnit" placeholder="填写工作单位"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="职业" prop="career">
+                  <el-input v-model="form.career" placeholder="填写职业"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="档案编号" prop="fileCode">
+                  <el-input v-model="form.fileCode" placeholder="档案编号"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="建档日期" prop="fileDate">
+                  <el-date-picker v-model="form.fileDate" type="date" placeholder="选择建档日期"></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="建档人" prop="putFileName">
+                  <el-input v-model="form.putFileName" placeholder="建档人员"></el-input>
+                </el-form-item>
+              </el-col>
+
+              <!-- 身体指标 -->
+              <el-col :span="12">
+                <el-form-item label="身高(厘米)" prop="height">
+                  <el-input v-model="form.height" placeholder="数字"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="体重(千克)" prop="weight">
+                  <el-input v-model="form.weight" placeholder="数字"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="腰围(厘米)" prop="waist">
+                  <el-input v-model="form.waist" placeholder="数字"></el-input>
+                </el-form-item>
+              </el-col>
+
+              <!-- 个人生活史 -->
+              <el-col :span="12">
+                <el-form-item label="暴露史" prop="exposureHistory">
+                  <el-input v-model="form.exposureHistory" placeholder="填写暴露史"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="饮酒史" prop="drinkingHabits">
+                  <el-input v-model="form.drinkingHabits" placeholder="1无 2已戒 3偶尔 4经常 5每天"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="吸烟史" prop="smokingHabits">
+                  <el-input v-model="form.smokingHabits" placeholder="1无 2已戒 3少量 4一包 5两包以上"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="过敏史" prop="allergicHistory">
+                  <el-input v-model="form.allergicHistory" placeholder="1无 2青霉素 3磺胺 4链霉素 5其他"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="饮食习惯" prop="dietaryHabit">
+                  <el-input v-model="form.dietaryHabit" placeholder="填写饮食情况"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="睡眠情况" prop="sleepQuality">
+                  <el-input v-model="form.sleepQuality" placeholder="1 3-5h 2 5-7h 3 7-9h 4 9-12h"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="二便情况" prop="relieveBowels">
+                  <el-input v-model="form.relieveBowels" placeholder="填写二便状态"></el-input>
+                </el-form-item>
+              </el-col>
+
+              <!-- 手术史1 -->
+              <el-col :span="12">
+                <el-form-item label="手术名称1" prop="operationNameOne">
+                  <el-input v-model="form.operationNameOne" placeholder="第一次手术名称"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="手术时间1" prop="operationTimeOne">
+                  <el-date-picker v-model="form.operationTimeOne" type="date" placeholder="选择时间"></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <!-- 手术史2 -->
+              <el-col :span="12">
+                <el-form-item label="手术名称2" prop="operationNameTwo">
+                  <el-input v-model="form.operationNameTwo" placeholder="第二次手术名称"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="手术时间2" prop="operationTimeTwo">
+                  <el-date-picker v-model="form.operationTimeTwo" type="date" placeholder="选择时间"></el-date-picker>
+                </el-form-item>
+              </el-col>
+
+              <!-- 外伤史1 -->
+              <el-col :span="12">
+                <el-form-item label="外伤名称1" prop="traumaNameOne">
+                  <el-input v-model="form.traumaNameOne" placeholder="第一次外伤"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="外伤时间1" prop="traumaTimeOne">
+                  <el-date-picker v-model="form.traumaTimeOne" type="date" placeholder="选择时间"></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <!-- 外伤史2 -->
+              <el-col :span="12">
+                <el-form-item label="外伤名称2" prop="traumaNameTwo">
+                  <el-input v-model="form.traumaNameTwo" placeholder="第二次外伤"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="外伤时间2" prop="traumaTimeTwo">
+                  <el-date-picker v-model="form.traumaTimeTwo" type="date" placeholder="选择时间"></el-date-picker>
+                </el-form-item>
+              </el-col>
+
+              <!-- 输血史1 -->
+              <el-col :span="12">
+                <el-form-item label="输血原因1" prop="bloodNameOne">
+                  <el-input v-model="form.bloodNameOne" placeholder="第一次输血原因"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="输血日期1" prop="bloodTimeOne">
+                  <el-date-picker v-model="form.bloodTimeOne" type="date" placeholder="选择日期"></el-date-picker>
+                </el-form-item>
+              </el-col>
+              <!-- 输血史2 -->
+              <el-col :span="12">
+                <el-form-item label="输血原因2" prop="bloodNameTwo">
+                  <el-input v-model="form.bloodNameTwo" placeholder="第二次输血原因"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="输血日期2" prop="bloodTimeTwo">
+                  <el-date-picker v-model="form.bloodTimeTwo" type="date" placeholder="选择日期"></el-date-picker>
+                </el-form-item>
+              </el-col>
+
+              <!-- 家族病史 -->
+              <el-col :span="12">
+                <el-form-item label="父亲病史" prop="fatherDiseaseIds">
+                  <el-input v-model="form.fatherDiseaseIds" placeholder="填写父亲病史"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="母亲病史" prop="motherDiseaseIds">
+                  <el-input v-model="form.motherDiseaseIds" placeholder="填写母亲病史"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="子女病史" prop="childrenDiseaseIds">
+                  <el-input v-model="form.childrenDiseaseIds" placeholder="填写子女病史"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="兄弟姐妹病史" prop="brotherDiseaseIds">
+                  <el-input v-model="form.brotherDiseaseIds" placeholder="填写兄弟姐妹病史"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="遗传病史" prop="geneticDisease">
+                  <el-input v-model="form.geneticDisease" placeholder="有无遗传病史"></el-input>
+                </el-form-item>
+              </el-col>
+
+              <!-- 慢病与其他 -->
+              <el-col :span="12">
+                <el-form-item label="主要慢性病名称" prop="majorDiseasesName">
+                  <el-input v-model="form.majorDiseasesName" placeholder="主要慢病"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="其他疾病名称" prop="majorDiseasesOther">
+                  <el-input v-model="form.majorDiseasesOther" placeholder="其他慢病"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="插管种类" prop="intubationType">
+                  <el-input v-model="form.intubationType" placeholder="插管类型"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="行政区划名称" prop="areaName">
+                  <el-input v-model="form.areaName" placeholder="地区名称"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="24">
+                <el-form-item label="健康指导" prop="healthGuidance">
+                  <el-input v-model="form.healthGuidance" type="textarea" rows="2" placeholder="健康指导建议"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="状态(1启用/0禁用)" prop="status">
+                  <el-input v-model="form.status" placeholder="1启用 0禁用"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="备注" prop="memo">
+                  <el-input v-model="form.memo" placeholder="补充备注"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-form>
+        </el-main>
+
+      </el-container>
+    </el-drawer>
+
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      labelType: 'add',
+      rules: {},
+      total: 0,
+      queryInfo: {
+        pageSize: 100,
+        pageCount: 1,
+        currPage: 1,
+        condition: {}
+      },
+      form: {},
+      showDialog: false,
+      tableData: [],
+      height: window.innerHeight - 256, //表格高度
+      headerHeight: 0,
+      loading: false
+    };
+  },
+
+  created() {
+    this.getList()
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      // 获取定义ref属性 和 元素高度
+      this.headerHeight = this.$refs.search_d.offsetHeight;
+      window.addEventListener('resize', this.getHeight())
+    })
+  },
+
+  methods: {
+    // 监听表格高度
+    getHeight() {
+      this.height = window.innerHeight - this.headerHeight - 256;
+    },
+
+    //获取数据
+    getList() {
+      var that = this;
+      that.loading = true
+      that.$http.post("/healthBaseInfo/list", that.queryInfo).then(function (response) {
+        console.log(response.data.data);
+        if (response.data.code == 200) {
+          that.loading = false
+          that.total = response.data.data.count;
+          that.queryInfo.currPage = response.data.data.currPage
+          that.tableData = response.data.data.data;
+        }
+      });
+    },
+
+    // 保存
+    handleSave() {
+      var that = this;
+      that.$http.post("/healthBaseInfo/save", that.form).then(function (response) {
+        if (response.data.code == 200) {
+          that.$notify.success({
+            title: "提示",
+            message: "保存成功",
+            showClose: true,
+          });
+          that.showDialog = false
+          that.getList()
+        } else {
+          that.$notify.info({
+            title: "提示",
+            message: response.data.message,
+            showClose: true,
+          });
+        }
+      }).catch(function (error) {
+
+
+      })
+
+
+    },
+
+    //修改
+    edit(row) {
+      this.showDialog = true;
+      this.labelType = 'edit'
+      this.form = JSON.parse(JSON.stringify(row))
+    },
+
+    // 删除当前行
+    //    handleDelte (id) {
+    //      del({ id: id }).then(res => {
+    //        if (res.code == 200) {
+    //         this.$message.success('删除成功')
+    //         this.getList()
+    //       }
+    //      })
+    //    },
+
+    // 删除用户
+    async handleDelte(id) {
+      const confirmResult = await this.$confirm("确定删除吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).catch((err) => err);
+      if (confirmResult === "confirm") {
+        var that = this;
+        that.$http.post("/healthBaseInfo/delete", { "id": id }).then(function (response) {
+          if (response.data.code == 200) {
+            that.$notify.success({
+              title: "提示",
+              message: "删除成功",
+              showClose: true,
+            });
+            that.getList();
+          } else {
+            that.$notify.info({
+              title: "提示",
+              message: response.data.message,
+              showClose: true,
+            });
+          }
+
+        });
+      }
+    },
+
+    //新增按钮
+    newBtn() {
+      this.labelType = 'add'
+      this.showDialog = true;
+      this.form = {}
+    },
+
+    // 修改页数大小
+    handleSizeChange(val) {
+      this.queryInfo.pageSize = val;
+      this.getList()
+    },
+
+    // 获取当前页面
+    handleCurrentChange(val) {
+      this.queryInfo.currPage = val;
+      this.getList()
+    },
+
+  },
+};
+</script>
+
+
+<style lang="less" scoped>
+.table-box {
+  background-color: white;
+  padding: 0 0 10px 0;
+}
+
+.dialogBox {
+  height: 100%;
+  overflow-y: hidden;
+
+  .dialogHeader {
+    display: flex;
+    padding: 0 15px;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .dialogMain {
+    padding: 15px;
+
+    .dialog-title {
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+
+      .line {
+        color: rgb(0, 121, 254);
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+</style>
+

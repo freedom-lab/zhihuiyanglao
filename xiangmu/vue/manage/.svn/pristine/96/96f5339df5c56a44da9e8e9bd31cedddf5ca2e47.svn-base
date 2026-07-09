@@ -1,0 +1,198 @@
+<template>
+    <div style="padding:16px">
+
+        <!-- 头部部分 -->
+        <!-- <div ref="search_d">
+            <el-row type="flex" class="row-bg" justify="space-around">
+                <el-col :span="6">
+                    <el-input placeholder="请输入内容" v-model="queryInfo.queryKey" class="input-with-select" clearable>
+                        <el-button slot="append" icon="el-icon-search" @click="getList"></el-button>
+                    </el-input>
+                </el-col>
+            </el-row>
+        </div> -->
+
+        <div class="table-box">
+            <!-- 卡片外层循环，根层级v-for="(item, index) in tableData" -->
+            <div v-for="(item, index) in tableData" :key="index" class="cost-card"
+                :style="{ '--card-header-bg': headerColorList[index % headerColorList.length] }">
+                <!-- 卡片头部，自定义背景色 -->
+                <div class="card-header">{{ item.costName }}</div>
+                <!-- 明细内容区域 -->
+                <div class="card-body">
+                    <div v-for="(detail, detailIndex) in item.costItemList" :key="detailIndex" class="card-item">
+                        <div class="item-name">{{ detail.itemName }}</div>
+                        <div class="price-row">
+                            <span class="label">日价格：</span>
+                            <span class="price">{{ detail.itemDayPrice }}</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="label">月价格：</span>
+                            <span class="price">{{ detail.itemMonthPrice }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            labelType: 'add',
+            rules: {},
+            total: 0,
+            queryInfo: {
+                queryKey: ''
+            },
+            form: {},
+            showDialog: false,
+            tableData: [],
+            height: window.innerHeight - 256, //表格高度
+            headerHeight: 0,
+            loading: false,
+            // 头部背景色数组，循环取色，多张卡片自动轮换不同颜色
+            headerColorList: [
+                '#409EFF',
+                '#67C23A',
+                '#E6A23C',
+                '#F56C6C',
+                '#909399',
+                '#8036E9',
+                '#18C6C6'
+            ],
+        };
+    },
+
+    created() {
+        this.getList()
+    },
+
+    mounted() {
+        this.$nextTick(() => {
+            // 获取定义ref属性 和 元素高度
+            this.headerHeight = this.$refs.search_d.offsetHeight;
+            window.addEventListener('resize', this.getHeight())
+        })
+    },
+
+    methods: {
+        // 监听表格高度
+        getHeight() {
+            this.height = window.innerHeight - this.headerHeight - 256;
+        },
+
+        //获取数据
+        getList() {
+            var that = this;
+            that.loading = true
+            that.$http.post("/insBaseCostInfo/queryCostInfo", that.queryInfo).then(function (response) {
+                console.log(response.data.data);
+                if (response.data.code == 200) {
+                    that.loading = false
+                    that.tableData = response.data.data;
+                }
+            });
+        },
+
+        detail(row) {
+            this.showDialog = true;
+            this.labelType = 'edit'
+            this.form = JSON.parse(JSON.stringify(row))
+        },
+
+        // 修改页数大小
+        handleSizeChange(val) {
+            this.queryInfo.pageSize = val;
+            this.getList()
+        },
+
+        // 获取当前页面
+        handleCurrentChange(val) {
+            this.queryInfo.currPage = val;
+            this.getList()
+        },
+
+    },
+};
+</script>
+
+<style lang="less" scoped>
+.table-box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    /* 卡片间距 */
+}
+
+/* 一行固定2张卡片，宽度均分 */
+.cost-card {
+    --card-header-bg: #409EFF;
+    flex: 1;
+    max-width: calc((100% - 24px) / 2);
+    min-width: 300px;
+    border: 1px solid #e4e7ed;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow: hidden;
+    /* 悬浮过渡动画 */
+    transition: all 0.3s ease;
+}
+
+/* 鼠标悬浮卡片效果 */
+.cost-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+/* 卡片头部，动态背景色 */
+.card-header {
+    padding: 14px 18px;
+    background: var(--card-header-bg);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 卡片内容区域 */
+.card-body {
+    padding: 18px;
+}
+
+/* 单条明细项 */
+.card-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed #f2f3f5;
+}
+
+.card-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-size: 14px;
+    color: #303133;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 4px 0;
+}
+
+.label {
+    color: #909399;
+}
+
+.price {
+    color: #606266;
+    font-weight: 500;
+}</style>
+

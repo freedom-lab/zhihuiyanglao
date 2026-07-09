@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.CareNursingPlanSettingMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    nursing_level_id,
+    nursing_level_name,
+    type_id,
+    type_name,
+    item_id,
+    item_name,
+    item_frequency,
+    operation_type,
+    start_time,
+    end_time,
+    week_num,
+    day_num,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.nursingLevelId},
+    #{item.nursingLevelName},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.itemId},
+    #{item.itemName},
+    #{item.itemFrequency},
+    #{item.operationType},
+    #{item.startTime},
+    #{item.endTime},
+    #{item.weekNum},
+    #{item.dayNum},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_care_nursing_plan_setting
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.CareNursingPlanSetting">
+        SELECT * from  tb_jiangyukeji_care_nursing_plan_setting
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemFrequency!=null and itemFrequency!=''">
+            and item_frequency = #{itemFrequency}
+        </if>
+        <if test="operationType!=null and operationType!=''">
+            and operation_type = #{operationType}
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            and start_time = #{startTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and end_time = #{endTime}
+        </if>
+        <if test="weekNum!=null and weekNum!=''">
+            and week_num = #{weekNum}
+        </if>
+        <if test="dayNum!=null and dayNum!=''">
+            and day_num = #{dayNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_care_nursing_plan_setting
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemFrequency!=null and itemFrequency!=''">
+            and item_frequency = #{itemFrequency}
+        </if>
+        <if test="operationType!=null and operationType!=''">
+            and operation_type = #{operationType}
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            and start_time = #{startTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and end_time = #{endTime}
+        </if>
+        <if test="weekNum!=null and weekNum!=''">
+            and week_num = #{weekNum}
+        </if>
+        <if test="dayNum!=null and dayNum!=''">
+            and day_num = #{dayNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

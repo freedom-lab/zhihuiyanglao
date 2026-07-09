@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartAlarmRemindSetMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    alarm_level,
+    is_user_app,
+    is_server_app,
+    is_sms,
+    is_phone,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.alarmLevel},
+    #{item.isUserApp},
+    #{item.isServerApp},
+    #{item.isSms},
+    #{item.isPhone},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_alarm_remind_set
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.SmartAlarmRemindSet">
+        SELECT * from  tb_jiangyukeji_smart_alarm_remind_set
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="alarmLevel!=null and alarmLevel!=''">
+            and alarm_level = #{alarmLevel}
+        </if>
+        <if test="isUserApp!=null and isUserApp!=''">
+            and is_user_app = #{isUserApp}
+        </if>
+        <if test="isServerApp!=null and isServerApp!=''">
+            and is_server_app = #{isServerApp}
+        </if>
+        <if test="isSms!=null and isSms!=''">
+            and is_sms = #{isSms}
+        </if>
+        <if test="isPhone!=null and isPhone!=''">
+            and is_phone = #{isPhone}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_alarm_remind_set
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="alarmLevel!=null and alarmLevel!=''">
+            and alarm_level = #{alarmLevel}
+        </if>
+        <if test="isUserApp!=null and isUserApp!=''">
+            and is_user_app = #{isUserApp}
+        </if>
+        <if test="isServerApp!=null and isServerApp!=''">
+            and is_server_app = #{isServerApp}
+        </if>
+        <if test="isSms!=null and isSms!=''">
+            and is_sms = #{isSms}
+        </if>
+        <if test="isPhone!=null and isPhone!=''">
+            and is_phone = #{isPhone}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

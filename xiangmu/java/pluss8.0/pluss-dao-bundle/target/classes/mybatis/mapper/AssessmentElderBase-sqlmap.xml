@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.AssessmentElderBaseMapper">
+    <sql id="tableFieldNames">
+        (
+            id, tenant_id,
+            appoint_id,
+            elder_id,
+            elder_name,
+            id_card,
+            birthday,
+            sex,
+            height,
+            weight,
+            nation,
+            religion_type,
+            degree_education,
+            live_state,
+            marry_state,
+            medical_type,
+            economic_sources,
+            accident_one,
+            accident_two,
+            accident_three,
+            accident_four,
+            accident_five,
+            provide_name,
+            provide_relation,
+            provide_man,
+            provide_tel,
+            remark,
+            create_user,
+            create_dept,
+            create_time,
+            update_user,
+            update_time,
+            is_deleted,
+            status,
+            area_code,
+            area_name,
+            major_diseases,
+            major_diseases_name,
+            health_one,
+            health_two,
+            health_two_memo,
+            health_three,
+            health_four,
+            health_five,
+            health_six,
+            health_six_three,
+            health_six_four,
+            health_seven,
+            health_eight,
+            health_nine,
+            health_ten,
+            health_eleven,
+            health_other,
+            major_diseases_other)
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+        (
+            #{item.id}, #{item.tenantId},
+            #{item.appointId},
+            #{item.elderId},
+            #{item.elderName},
+            #{item.idCard},
+            #{item.birthday},
+            #{item.sex},
+            #{item.height},
+            #{item.weight},
+            #{item.nation},
+            #{item.religionType},
+            #{item.degreeEducation},
+            #{item.liveState},
+            #{item.marryState},
+            #{item.medicalType},
+            #{item.economicSources},
+            #{item.accidentOne},
+            #{item.accidentTwo},
+            #{item.accidentThree},
+            #{item.accidentFour},
+            #{item.accidentFive},
+            #{item.provideName},
+            #{item.provideRelation},
+            #{item.provideMan},
+            #{item.provideTel},
+            #{item.remark},
+            #{item.createUser},
+            #{item.createDept},
+            #{item.createTime},
+            #{item.updateUser},
+            #{item.updateTime},
+            #{item.isDeleted},
+            #{item.status},
+            #{item.areaCode},
+            #{item.areaName},
+            #{item.majorDiseases},
+            #{item.majorDiseasesName},
+            #{item.healthOne},
+            #{item.healthTwo},
+            #{item.healthTwoMemo},
+            #{item.healthThree},
+            #{item.healthFour},
+            #{item.healthFive},
+            #{item.healthSix},
+            #{item.healthSixThree},
+            #{item.healthSixFour},
+            #{item.healthSeven},
+            #{item.healthEight},
+            #{item.healthNine},
+            #{item.healthTen},
+            #{item.healthEleven},
+            #{item.healthOther},
+            #{item.majorDiseasesOther})
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_assessment_elder_base
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map"
+            resultType="cn.pluss.platform.model.entity.AssessmentElderBase">
+        SELECT * from tb_jiangyukeji_assessment_elder_base
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="tenantId!=null and tenantId!=''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="appointId!=null and appointId!=''">
+                and appoint_id = #{appointId}
+            </if>
+            <if test="elderId!=null and elderId!=''">
+                and elder_id = #{elderId}
+            </if>
+            <if test="elderName!=null and elderName!=''">
+                and elder_name = #{elderName}
+            </if>
+            <if test="idCard!=null and idCard!=''">
+                and id_card = #{idCard}
+            </if>
+            <if test="birthday!=null and birthday!=''">
+                and birthday = #{birthday}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex = #{sex}
+            </if>
+            <if test="height!=null and height!=''">
+                and height = #{height}
+            </if>
+            <if test="weight!=null and weight!=''">
+                and weight = #{weight}
+            </if>
+            <if test="nation!=null and nation!=''">
+                and nation = #{nation}
+            </if>
+            <if test="religionType!=null and religionType!=''">
+                and religion_type = #{religionType}
+            </if>
+            <if test="degreeEducation!=null and degreeEducation!=''">
+                and degree_education = #{degreeEducation}
+            </if>
+            <if test="liveState!=null and liveState!=''">
+                and live_state = #{liveState}
+            </if>
+            <if test="marryState!=null and marryState!=''">
+                and marry_state = #{marryState}
+            </if>
+            <if test="medicalType!=null and medicalType!=''">
+                and medical_type = #{medicalType}
+            </if>
+            <if test="economicSources!=null and economicSources!=''">
+                and economic_sources = #{economicSources}
+            </if>
+            <if test="accidentOne!=null and accidentOne!=''">
+                and accident_one = #{accidentOne}
+            </if>
+            <if test="accidentTwo!=null and accidentTwo!=''">
+                and accident_two = #{accidentTwo}
+            </if>
+            <if test="accidentThree!=null and accidentThree!=''">
+                and accident_three = #{accidentThree}
+            </if>
+            <if test="accidentFour!=null and accidentFour!=''">
+                and accident_four = #{accidentFour}
+            </if>
+            <if test="accidentFive!=null and accidentFive!=''">
+                and accident_five = #{accidentFive}
+            </if>
+            <if test="provideName!=null and provideName!=''">
+                and provide_name = #{provideName}
+            </if>
+            <if test="provideRelation!=null and provideRelation!=''">
+                and provide_relation = #{provideRelation}
+            </if>
+            <if test="provideMan!=null and provideMan!=''">
+                and provide_man = #{provideMan}
+            </if>
+            <if test="provideTel!=null and provideTel!=''">
+                and provide_tel = #{provideTel}
+            </if>
+            <if test="remark!=null and remark!=''">
+                and remark = #{remark}
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDept!=null and createDept!=''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted!=null and isDeleted!=''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+            <if test="areaCode!=null and areaCode!=''">
+                and area_code = #{areaCode}
+            </if>
+            <if test="areaName!=null and areaName!=''">
+                and area_name = #{areaName}
+            </if>
+            <if test="majorDiseases!=null and majorDiseases!=''">
+                and major_diseases = #{majorDiseases}
+            </if>
+            <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+                and major_diseases_name = #{majorDiseasesName}
+            </if>
+            <if test="healthOne!=null and healthOne!=''">
+                and health_one = #{healthOne}
+            </if>
+            <if test="healthTwo!=null and healthTwo!=''">
+                and health_two = #{healthTwo}
+            </if>
+            <if test="healthTwoMemo!=null and healthTwoMemo!=''">
+                and health_two_memo = #{healthTwoMemo}
+            </if>
+            <if test="healthThree!=null and healthThree!=''">
+                and health_three = #{healthThree}
+            </if>
+            <if test="healthFour!=null and healthFour!=''">
+                and health_four = #{healthFour}
+            </if>
+            <if test="healthFive!=null and healthFive!=''">
+                and health_five = #{healthFive}
+            </if>
+            <if test="healthSix!=null and healthSix!=''">
+                and health_six = #{healthSix}
+            </if>
+            <if test="healthSixThree!=null and healthSixThree!=''">
+                and health_six_three = #{healthSixThree}
+            </if>
+            <if test="healthSixFour!=null and healthSixFour!=''">
+                and health_six_four = #{healthSixFour}
+            </if>
+            <if test="healthSeven!=null and healthSeven!=''">
+                and health_seven = #{healthSeven}
+            </if>
+            <if test="healthEight!=null and healthEight!=''">
+                and health_eight = #{healthEight}
+            </if>
+            <if test="healthNine!=null and healthNine!=''">
+                and health_nine = #{healthNine}
+            </if>
+            <if test="healthTen!=null and healthTen!=''">
+                and health_ten = #{healthTen}
+            </if>
+            <if test="healthEleven!=null and healthEleven!=''">
+                and health_eleven = #{healthEleven}
+            </if>
+            <if test="healthOther!=null and healthOther!=''">
+                and health_other = #{healthOther}
+            </if>
+            <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+                and major_diseases_other = #{majorDiseasesOther}
+            </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_assessment_elder_base
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="tenantId!=null and tenantId!=''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="appointId!=null and appointId!=''">
+                and appoint_id = #{appointId}
+            </if>
+            <if test="elderId!=null and elderId!=''">
+                and elder_id = #{elderId}
+            </if>
+            <if test="elderName!=null and elderName!=''">
+                and elder_name = #{elderName}
+            </if>
+            <if test="idCard!=null and idCard!=''">
+                and id_card = #{idCard}
+            </if>
+            <if test="birthday!=null and birthday!=''">
+                and birthday = #{birthday}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex = #{sex}
+            </if>
+            <if test="height!=null and height!=''">
+                and height = #{height}
+            </if>
+            <if test="weight!=null and weight!=''">
+                and weight = #{weight}
+            </if>
+            <if test="nation!=null and nation!=''">
+                and nation = #{nation}
+            </if>
+            <if test="religionType!=null and religionType!=''">
+                and religion_type = #{religionType}
+            </if>
+            <if test="degreeEducation!=null and degreeEducation!=''">
+                and degree_education = #{degreeEducation}
+            </if>
+            <if test="liveState!=null and liveState!=''">
+                and live_state = #{liveState}
+            </if>
+            <if test="marryState!=null and marryState!=''">
+                and marry_state = #{marryState}
+            </if>
+            <if test="medicalType!=null and medicalType!=''">
+                and medical_type = #{medicalType}
+            </if>
+            <if test="economicSources!=null and economicSources!=''">
+                and economic_sources = #{economicSources}
+            </if>
+            <if test="accidentOne!=null and accidentOne!=''">
+                and accident_one = #{accidentOne}
+            </if>
+            <if test="accidentTwo!=null and accidentTwo!=''">
+                and accident_two = #{accidentTwo}
+            </if>
+            <if test="accidentThree!=null and accidentThree!=''">
+                and accident_three = #{accidentThree}
+            </if>
+            <if test="accidentFour!=null and accidentFour!=''">
+                and accident_four = #{accidentFour}
+            </if>
+            <if test="accidentFive!=null and accidentFive!=''">
+                and accident_five = #{accidentFive}
+            </if>
+            <if test="provideName!=null and provideName!=''">
+                and provide_name = #{provideName}
+            </if>
+            <if test="provideRelation!=null and provideRelation!=''">
+                and provide_relation = #{provideRelation}
+            </if>
+            <if test="provideMan!=null and provideMan!=''">
+                and provide_man = #{provideMan}
+            </if>
+            <if test="provideTel!=null and provideTel!=''">
+                and provide_tel = #{provideTel}
+            </if>
+            <if test="remark!=null and remark!=''">
+                and remark = #{remark}
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDept!=null and createDept!=''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted!=null and isDeleted!=''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+            <if test="areaCode!=null and areaCode!=''">
+                and area_code = #{areaCode}
+            </if>
+            <if test="areaName!=null and areaName!=''">
+                and area_name = #{areaName}
+            </if>
+            <if test="majorDiseases!=null and majorDiseases!=''">
+                and major_diseases = #{majorDiseases}
+            </if>
+            <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+                and major_diseases_name = #{majorDiseasesName}
+            </if>
+            <if test="healthOne!=null and healthOne!=''">
+                and health_one = #{healthOne}
+            </if>
+            <if test="healthTwo!=null and healthTwo!=''">
+                and health_two = #{healthTwo}
+            </if>
+            <if test="healthTwoMemo!=null and healthTwoMemo!=''">
+                and health_two_memo = #{healthTwoMemo}
+            </if>
+            <if test="healthThree!=null and healthThree!=''">
+                and health_three = #{healthThree}
+            </if>
+            <if test="healthFour!=null and healthFour!=''">
+                and health_four = #{healthFour}
+            </if>
+            <if test="healthFive!=null and healthFive!=''">
+                and health_five = #{healthFive}
+            </if>
+            <if test="healthSix!=null and healthSix!=''">
+                and health_six = #{healthSix}
+            </if>
+            <if test="healthSixThree!=null and healthSixThree!=''">
+                and health_six_three = #{healthSixThree}
+            </if>
+            <if test="healthSixFour!=null and healthSixFour!=''">
+                and health_six_four = #{healthSixFour}
+            </if>
+            <if test="healthSeven!=null and healthSeven!=''">
+                and health_seven = #{healthSeven}
+            </if>
+            <if test="healthEight!=null and healthEight!=''">
+                and health_eight = #{healthEight}
+            </if>
+            <if test="healthNine!=null and healthNine!=''">
+                and health_nine = #{healthNine}
+            </if>
+            <if test="healthTen!=null and healthTen!=''">
+                and health_ten = #{healthTen}
+            </if>
+            <if test="healthEleven!=null and healthEleven!=''">
+                and health_eleven = #{healthEleven}
+            </if>
+            <if test="healthOther!=null and healthOther!=''">
+                and health_other = #{healthOther}
+            </if>
+            <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+                and major_diseases_other = #{majorDiseasesOther}
+            </if>
+        </where>
+    </select>
+
+</mapper>
+

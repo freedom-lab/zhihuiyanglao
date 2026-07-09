@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsElderChangeBedRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    check_id,
+    check_date,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    change_state,
+    apply_time,
+    execute_date,
+    is_room,
+    old_building_id,
+    old_building_name,
+    old_floor_id,
+    old_floor_name,
+    old_room_id,
+    old_room_name,
+    old_bed_id,
+    old_bed_name,
+    old_bed_price,
+    old_bed_info,
+    new_building_id,
+    new_building_name,
+    new_floor_id,
+    new_floor_name,
+    new_room_id,
+    new_room_name,
+    new_bed_id,
+    new_bed_name,
+    new_bed_price,
+    new_bed_info,
+    standard_id,
+    calculate_state,
+    settlement_state,
+    bill_id,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.checkId},
+    #{item.checkDate},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.changeState},
+    #{item.applyTime},
+    #{item.executeDate},
+    #{item.isRoom},
+    #{item.oldBuildingId},
+    #{item.oldBuildingName},
+    #{item.oldFloorId},
+    #{item.oldFloorName},
+    #{item.oldRoomId},
+    #{item.oldRoomName},
+    #{item.oldBedId},
+    #{item.oldBedName},
+    #{item.oldBedPrice},
+    #{item.oldBedInfo},
+    #{item.newBuildingId},
+    #{item.newBuildingName},
+    #{item.newFloorId},
+    #{item.newFloorName},
+    #{item.newRoomId},
+    #{item.newRoomName},
+    #{item.newBedId},
+    #{item.newBedName},
+    #{item.newBedPrice},
+    #{item.newBedInfo},
+    #{item.standardId},
+    #{item.calculateState},
+    #{item.settlementState},
+    #{item.billId},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_elder_change_bed_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsElderChangeBedRecord">
+        SELECT * from  tb_jiangyukeji_ins_elder_change_bed_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="changeState!=null and changeState!=''">
+            and change_state = #{changeState}
+        </if>
+        <if test="applyTime!=null and applyTime!=''">
+            and apply_time = #{applyTime}
+        </if>
+        <if test="executeDate!=null and executeDate!=''">
+            and execute_date = #{executeDate}
+        </if>
+        <if test="isRoom!=null and isRoom!=''">
+            and is_room = #{isRoom}
+        </if>
+        <if test="oldBuildingId!=null and oldBuildingId!=''">
+            and old_building_id = #{oldBuildingId}
+        </if>
+        <if test="oldBuildingName!=null and oldBuildingName!=''">
+            and old_building_name = #{oldBuildingName}
+        </if>
+        <if test="oldFloorId!=null and oldFloorId!=''">
+            and old_floor_id = #{oldFloorId}
+        </if>
+        <if test="oldFloorName!=null and oldFloorName!=''">
+            and old_floor_name = #{oldFloorName}
+        </if>
+        <if test="oldRoomId!=null and oldRoomId!=''">
+            and old_room_id = #{oldRoomId}
+        </if>
+        <if test="oldRoomName!=null and oldRoomName!=''">
+            and old_room_name = #{oldRoomName}
+        </if>
+        <if test="oldBedId!=null and oldBedId!=''">
+            and old_bed_id = #{oldBedId}
+        </if>
+        <if test="oldBedName!=null and oldBedName!=''">
+            and old_bed_name = #{oldBedName}
+        </if>
+        <if test="oldBedPrice!=null and oldBedPrice!=''">
+            and old_bed_price = #{oldBedPrice}
+        </if>
+        <if test="oldBedInfo!=null and oldBedInfo!=''">
+            and old_bed_info = #{oldBedInfo}
+        </if>
+        <if test="newBuildingId!=null and newBuildingId!=''">
+            and new_building_id = #{newBuildingId}
+        </if>
+        <if test="newBuildingName!=null and newBuildingName!=''">
+            and new_building_name = #{newBuildingName}
+        </if>
+        <if test="newFloorId!=null and newFloorId!=''">
+            and new_floor_id = #{newFloorId}
+        </if>
+        <if test="newFloorName!=null and newFloorName!=''">
+            and new_floor_name = #{newFloorName}
+        </if>
+        <if test="newRoomId!=null and newRoomId!=''">
+            and new_room_id = #{newRoomId}
+        </if>
+        <if test="newRoomName!=null and newRoomName!=''">
+            and new_room_name = #{newRoomName}
+        </if>
+        <if test="newBedId!=null and newBedId!=''">
+            and new_bed_id = #{newBedId}
+        </if>
+        <if test="newBedName!=null and newBedName!=''">
+            and new_bed_name = #{newBedName}
+        </if>
+        <if test="newBedPrice!=null and newBedPrice!=''">
+            and new_bed_price = #{newBedPrice}
+        </if>
+        <if test="newBedInfo!=null and newBedInfo!=''">
+            and new_bed_info = #{newBedInfo}
+        </if>
+        <if test="standardId!=null and standardId!=''">
+            and standard_id = #{standardId}
+        </if>
+        <if test="calculateState!=null and calculateState!=''">
+            and calculate_state = #{calculateState}
+        </if>
+        <if test="settlementState!=null and settlementState!=''">
+            and settlement_state = #{settlementState}
+        </if>
+        <if test="billId!=null and billId!=''">
+            and bill_id = #{billId}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_elder_change_bed_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="changeState!=null and changeState!=''">
+            and change_state = #{changeState}
+        </if>
+        <if test="applyTime!=null and applyTime!=''">
+            and apply_time = #{applyTime}
+        </if>
+        <if test="executeDate!=null and executeDate!=''">
+            and execute_date = #{executeDate}
+        </if>
+        <if test="isRoom!=null and isRoom!=''">
+            and is_room = #{isRoom}
+        </if>
+        <if test="oldBuildingId!=null and oldBuildingId!=''">
+            and old_building_id = #{oldBuildingId}
+        </if>
+        <if test="oldBuildingName!=null and oldBuildingName!=''">
+            and old_building_name = #{oldBuildingName}
+        </if>
+        <if test="oldFloorId!=null and oldFloorId!=''">
+            and old_floor_id = #{oldFloorId}
+        </if>
+        <if test="oldFloorName!=null and oldFloorName!=''">
+            and old_floor_name = #{oldFloorName}
+        </if>
+        <if test="oldRoomId!=null and oldRoomId!=''">
+            and old_room_id = #{oldRoomId}
+        </if>
+        <if test="oldRoomName!=null and oldRoomName!=''">
+            and old_room_name = #{oldRoomName}
+        </if>
+        <if test="oldBedId!=null and oldBedId!=''">
+            and old_bed_id = #{oldBedId}
+        </if>
+        <if test="oldBedName!=null and oldBedName!=''">
+            and old_bed_name = #{oldBedName}
+        </if>
+        <if test="oldBedPrice!=null and oldBedPrice!=''">
+            and old_bed_price = #{oldBedPrice}
+        </if>
+        <if test="oldBedInfo!=null and oldBedInfo!=''">
+            and old_bed_info = #{oldBedInfo}
+        </if>
+        <if test="newBuildingId!=null and newBuildingId!=''">
+            and new_building_id = #{newBuildingId}
+        </if>
+        <if test="newBuildingName!=null and newBuildingName!=''">
+            and new_building_name = #{newBuildingName}
+        </if>
+        <if test="newFloorId!=null and newFloorId!=''">
+            and new_floor_id = #{newFloorId}
+        </if>
+        <if test="newFloorName!=null and newFloorName!=''">
+            and new_floor_name = #{newFloorName}
+        </if>
+        <if test="newRoomId!=null and newRoomId!=''">
+            and new_room_id = #{newRoomId}
+        </if>
+        <if test="newRoomName!=null and newRoomName!=''">
+            and new_room_name = #{newRoomName}
+        </if>
+        <if test="newBedId!=null and newBedId!=''">
+            and new_bed_id = #{newBedId}
+        </if>
+        <if test="newBedName!=null and newBedName!=''">
+            and new_bed_name = #{newBedName}
+        </if>
+        <if test="newBedPrice!=null and newBedPrice!=''">
+            and new_bed_price = #{newBedPrice}
+        </if>
+        <if test="newBedInfo!=null and newBedInfo!=''">
+            and new_bed_info = #{newBedInfo}
+        </if>
+        <if test="standardId!=null and standardId!=''">
+            and standard_id = #{standardId}
+        </if>
+        <if test="calculateState!=null and calculateState!=''">
+            and calculate_state = #{calculateState}
+        </if>
+        <if test="settlementState!=null and settlementState!=''">
+            and settlement_state = #{settlementState}
+        </if>
+        <if test="billId!=null and billId!=''">
+            and bill_id = #{billId}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthChronicDiseaseArchiveMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    doctor_id,
+    doctor_name,
+    archive_no,
+    establish_date,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    birth_date,
+    medical_category,
+    medical_card_number,
+    disease_ids,
+    disease_names,
+    smoking_status,
+    drinking_status,
+    diet_habits,
+    exercise_habits,
+    sleep_condition,
+    drug_allergy_history,
+    major_disease_history,
+    family_medical_history,
+    past_referral_records,
+    risk_level,
+    control_status,
+    follow_up_cycle,
+    sign_state,
+    sign_date,
+    sign_doctor_id,
+    sign_doctor_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.doctorId},
+    #{item.doctorName},
+    #{item.archiveNo},
+    #{item.establishDate},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.birthDate},
+    #{item.medicalCategory},
+    #{item.medicalCardNumber},
+    #{item.diseaseIds},
+    #{item.diseaseNames},
+    #{item.smokingStatus},
+    #{item.drinkingStatus},
+    #{item.dietHabits},
+    #{item.exerciseHabits},
+    #{item.sleepCondition},
+    #{item.drugAllergyHistory},
+    #{item.majorDiseaseHistory},
+    #{item.familyMedicalHistory},
+    #{item.pastReferralRecords},
+    #{item.riskLevel},
+    #{item.controlStatus},
+    #{item.followUpCycle},
+    #{item.signState},
+    #{item.signDate},
+    #{item.signDoctorId},
+    #{item.signDoctorName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_chronic_disease_archive
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthChronicDiseaseArchive">
+        SELECT * from  tb_jiangyukeji_health_chronic_disease_archive
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="archiveNo!=null and archiveNo!=''">
+            and archive_no = #{archiveNo}
+        </if>
+        <if test="establishDate!=null and establishDate!=''">
+            and establish_date = #{establishDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="birthDate!=null and birthDate!=''">
+            and birth_date = #{birthDate}
+        </if>
+        <if test="medicalCategory!=null and medicalCategory!=''">
+            and medical_category = #{medicalCategory}
+        </if>
+        <if test="medicalCardNumber!=null and medicalCardNumber!=''">
+            and medical_card_number = #{medicalCardNumber}
+        </if>
+        <if test="diseaseIds!=null and diseaseIds!=''">
+            and disease_ids = #{diseaseIds}
+        </if>
+        <if test="diseaseNames!=null and diseaseNames!=''">
+            and disease_names = #{diseaseNames}
+        </if>
+        <if test="smokingStatus!=null and smokingStatus!=''">
+            and smoking_status = #{smokingStatus}
+        </if>
+        <if test="drinkingStatus!=null and drinkingStatus!=''">
+            and drinking_status = #{drinkingStatus}
+        </if>
+        <if test="dietHabits!=null and dietHabits!=''">
+            and diet_habits = #{dietHabits}
+        </if>
+        <if test="exerciseHabits!=null and exerciseHabits!=''">
+            and exercise_habits = #{exerciseHabits}
+        </if>
+        <if test="sleepCondition!=null and sleepCondition!=''">
+            and sleep_condition = #{sleepCondition}
+        </if>
+        <if test="drugAllergyHistory!=null and drugAllergyHistory!=''">
+            and drug_allergy_history = #{drugAllergyHistory}
+        </if>
+        <if test="majorDiseaseHistory!=null and majorDiseaseHistory!=''">
+            and major_disease_history = #{majorDiseaseHistory}
+        </if>
+        <if test="familyMedicalHistory!=null and familyMedicalHistory!=''">
+            and family_medical_history = #{familyMedicalHistory}
+        </if>
+        <if test="pastReferralRecords!=null and pastReferralRecords!=''">
+            and past_referral_records = #{pastReferralRecords}
+        </if>
+        <if test="riskLevel!=null and riskLevel!=''">
+            and risk_level = #{riskLevel}
+        </if>
+        <if test="controlStatus!=null and controlStatus!=''">
+            and control_status = #{controlStatus}
+        </if>
+        <if test="followUpCycle!=null and followUpCycle!=''">
+            and follow_up_cycle = #{followUpCycle}
+        </if>
+        <if test="signState!=null and signState!=''">
+            and sign_state = #{signState}
+        </if>
+        <if test="signDate!=null and signDate!=''">
+            and sign_date = #{signDate}
+        </if>
+        <if test="signDoctorId!=null and signDoctorId!=''">
+            and sign_doctor_id = #{signDoctorId}
+        </if>
+        <if test="signDoctorName!=null and signDoctorName!=''">
+            and sign_doctor_name = #{signDoctorName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_chronic_disease_archive
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="archiveNo!=null and archiveNo!=''">
+            and archive_no = #{archiveNo}
+        </if>
+        <if test="establishDate!=null and establishDate!=''">
+            and establish_date = #{establishDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="birthDate!=null and birthDate!=''">
+            and birth_date = #{birthDate}
+        </if>
+        <if test="medicalCategory!=null and medicalCategory!=''">
+            and medical_category = #{medicalCategory}
+        </if>
+        <if test="medicalCardNumber!=null and medicalCardNumber!=''">
+            and medical_card_number = #{medicalCardNumber}
+        </if>
+        <if test="diseaseIds!=null and diseaseIds!=''">
+            and disease_ids = #{diseaseIds}
+        </if>
+        <if test="diseaseNames!=null and diseaseNames!=''">
+            and disease_names = #{diseaseNames}
+        </if>
+        <if test="smokingStatus!=null and smokingStatus!=''">
+            and smoking_status = #{smokingStatus}
+        </if>
+        <if test="drinkingStatus!=null and drinkingStatus!=''">
+            and drinking_status = #{drinkingStatus}
+        </if>
+        <if test="dietHabits!=null and dietHabits!=''">
+            and diet_habits = #{dietHabits}
+        </if>
+        <if test="exerciseHabits!=null and exerciseHabits!=''">
+            and exercise_habits = #{exerciseHabits}
+        </if>
+        <if test="sleepCondition!=null and sleepCondition!=''">
+            and sleep_condition = #{sleepCondition}
+        </if>
+        <if test="drugAllergyHistory!=null and drugAllergyHistory!=''">
+            and drug_allergy_history = #{drugAllergyHistory}
+        </if>
+        <if test="majorDiseaseHistory!=null and majorDiseaseHistory!=''">
+            and major_disease_history = #{majorDiseaseHistory}
+        </if>
+        <if test="familyMedicalHistory!=null and familyMedicalHistory!=''">
+            and family_medical_history = #{familyMedicalHistory}
+        </if>
+        <if test="pastReferralRecords!=null and pastReferralRecords!=''">
+            and past_referral_records = #{pastReferralRecords}
+        </if>
+        <if test="riskLevel!=null and riskLevel!=''">
+            and risk_level = #{riskLevel}
+        </if>
+        <if test="controlStatus!=null and controlStatus!=''">
+            and control_status = #{controlStatus}
+        </if>
+        <if test="followUpCycle!=null and followUpCycle!=''">
+            and follow_up_cycle = #{followUpCycle}
+        </if>
+        <if test="signState!=null and signState!=''">
+            and sign_state = #{signState}
+        </if>
+        <if test="signDate!=null and signDate!=''">
+            and sign_date = #{signDate}
+        </if>
+        <if test="signDoctorId!=null and signDoctorId!=''">
+            and sign_doctor_id = #{signDoctorId}
+        </if>
+        <if test="signDoctorName!=null and signDoctorName!=''">
+            and sign_doctor_name = #{signDoctorName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

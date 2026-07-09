@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.AssessmentPersonInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    institution_id,
+    institution_name,
+    person_code,
+    person_name,
+    sex,
+    age,
+    link_tel,
+    password,
+    skill_level,
+    document_type,
+    id_card,
+    special_ability,
+    id_card_patha,
+    id_card_pathb,
+    nation,
+    degree_education,
+    duty_type,
+    entry_date,
+    dimission_date,
+    photo,
+    address,
+    certificate_img,
+    memo,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    server_state,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.personCode},
+    #{item.personName},
+    #{item.sex},
+    #{item.age},
+    #{item.linkTel},
+    #{item.password},
+    #{item.skillLevel},
+    #{item.documentType},
+    #{item.idCard},
+    #{item.specialAbility},
+    #{item.idCardPatha},
+    #{item.idCardPathb},
+    #{item.nation},
+    #{item.degreeEducation},
+    #{item.dutyType},
+    #{item.entryDate},
+    #{item.dimissionDate},
+    #{item.photo},
+    #{item.address},
+    #{item.certificateImg},
+    #{item.memo},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.serverState},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_assessment_person_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.AssessmentPersonInfo">
+        SELECT * from  tb_jiangyukeji_assessment_person_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="personCode!=null and personCode!=''">
+            and person_code = #{personCode}
+        </if>
+        <if test="personName!=null and personName!=''">
+            and person_name = #{personName}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="password!=null and password!=''">
+            and password = #{password}
+        </if>
+        <if test="skillLevel!=null and skillLevel!=''">
+            and skill_level = #{skillLevel}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="specialAbility!=null and specialAbility!=''">
+            and special_ability = #{specialAbility}
+        </if>
+        <if test="idCardPatha!=null and idCardPatha!=''">
+            and id_card_patha = #{idCardPatha}
+        </if>
+        <if test="idCardPathb!=null and idCardPathb!=''">
+            and id_card_pathb = #{idCardPathb}
+        </if>
+        <if test="nation!=null and nation!=''">
+            and nation = #{nation}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="dutyType!=null and dutyType!=''">
+            and duty_type = #{dutyType}
+        </if>
+        <if test="entryDate!=null and entryDate!=''">
+            and entry_date = #{entryDate}
+        </if>
+        <if test="dimissionDate!=null and dimissionDate!=''">
+            and dimission_date = #{dimissionDate}
+        </if>
+        <if test="photo!=null and photo!=''">
+            and photo = #{photo}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="certificateImg!=null and certificateImg!=''">
+            and certificate_img = #{certificateImg}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="serverState!=null and serverState!=''">
+            and server_state = #{serverState}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_assessment_person_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="personCode!=null and personCode!=''">
+            and person_code = #{personCode}
+        </if>
+        <if test="personName!=null and personName!=''">
+            and person_name = #{personName}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="password!=null and password!=''">
+            and password = #{password}
+        </if>
+        <if test="skillLevel!=null and skillLevel!=''">
+            and skill_level = #{skillLevel}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="specialAbility!=null and specialAbility!=''">
+            and special_ability = #{specialAbility}
+        </if>
+        <if test="idCardPatha!=null and idCardPatha!=''">
+            and id_card_patha = #{idCardPatha}
+        </if>
+        <if test="idCardPathb!=null and idCardPathb!=''">
+            and id_card_pathb = #{idCardPathb}
+        </if>
+        <if test="nation!=null and nation!=''">
+            and nation = #{nation}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="dutyType!=null and dutyType!=''">
+            and duty_type = #{dutyType}
+        </if>
+        <if test="entryDate!=null and entryDate!=''">
+            and entry_date = #{entryDate}
+        </if>
+        <if test="dimissionDate!=null and dimissionDate!=''">
+            and dimission_date = #{dimissionDate}
+        </if>
+        <if test="photo!=null and photo!=''">
+            and photo = #{photo}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="certificateImg!=null and certificateImg!=''">
+            and certificate_img = #{certificateImg}
+        </if>
+        <if test="memo!=null and memo!=''">
+            and memo = #{memo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="serverState!=null and serverState!=''">
+            and server_state = #{serverState}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

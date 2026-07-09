@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pluss-common-bundle" />
+        <module name="pluss-dao-bundle" />
+        <module name="pluss-iot-page" />
+        <module name="pluss-api-page" />
+        <module name="pluss-model-bundle" />
+        <module name="pluss-service-bundle" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pluss-api-page" options="-parameters" />
+      <module name="pluss-common-bundle" options="-parameters" />
+      <module name="pluss-dao-bundle" options="-parameters" />
+      <module name="pluss-iot-page" options="-parameters" />
+      <module name="pluss-model-bundle" options="-parameters" />
+      <module name="pluss-parent" options="-parameters" />
+      <module name="pluss-service-bundle" options="-parameters" />
+    </option>
+  </component>
+</project>

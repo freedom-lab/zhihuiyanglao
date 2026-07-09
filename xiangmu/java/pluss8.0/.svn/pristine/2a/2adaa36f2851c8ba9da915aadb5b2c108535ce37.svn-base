@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketOrderRefundMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    order_id,
+    order_code,
+    order_amount,
+    order_item_id,
+    refund_code,
+    out_trade_no,
+    out_refund_no,
+    pay_type,
+    person_type,
+    person_id,
+    person_name,
+    id_card,
+    goods_num,
+    refund_amount,
+    apply_type,
+    audit_state,
+    audit_name,
+    audit_memo,
+    return_state,
+    apply_time,
+    handle_time,
+    refund_time,
+    pics,
+    apply_reason,
+    seller_memo,
+    express_id,
+    express_name,
+    express_no,
+    send_time,
+    receive_time,
+    receive_memo,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    area_code,
+    area_name
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.orderId},
+    #{item.orderCode},
+    #{item.orderAmount},
+    #{item.orderItemId},
+    #{item.refundCode},
+    #{item.outTradeNo},
+    #{item.outRefundNo},
+    #{item.payType},
+    #{item.personType},
+    #{item.personId},
+    #{item.personName},
+    #{item.idCard},
+    #{item.goodsNum},
+    #{item.refundAmount},
+    #{item.applyType},
+    #{item.auditState},
+    #{item.auditName},
+    #{item.auditMemo},
+    #{item.returnState},
+    #{item.applyTime},
+    #{item.handleTime},
+    #{item.refundTime},
+    #{item.pics},
+    #{item.applyReason},
+    #{item.sellerMemo},
+    #{item.expressId},
+    #{item.expressName},
+    #{item.expressNo},
+    #{item.sendTime},
+    #{item.receiveTime},
+    #{item.receiveMemo},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.areaCode},
+    #{item.areaName}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_order_refund
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketOrderRefund">
+        SELECT * from  tb_jiangyukeji_market_order_refund
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="orderId!=null and orderId!=''">
+            and order_id = #{orderId}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="orderAmount!=null and orderAmount!=''">
+            and order_amount = #{orderAmount}
+        </if>
+        <if test="orderItemId!=null and orderItemId!=''">
+            and order_item_id = #{orderItemId}
+        </if>
+        <if test="refundCode!=null and refundCode!=''">
+            and refund_code = #{refundCode}
+        </if>
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and out_trade_no = #{outTradeNo}
+        </if>
+        <if test="outRefundNo!=null and outRefundNo!=''">
+            and out_refund_no = #{outRefundNo}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="personType!=null and personType!=''">
+            and person_type = #{personType}
+        </if>
+        <if test="personId!=null and personId!=''">
+            and person_id = #{personId}
+        </if>
+        <if test="personName!=null and personName!=''">
+            and person_name = #{personName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="goodsNum!=null and goodsNum!=''">
+            and goods_num = #{goodsNum}
+        </if>
+        <if test="refundAmount!=null and refundAmount!=''">
+            and refund_amount = #{refundAmount}
+        </if>
+        <if test="applyType!=null and applyType!=''">
+            and apply_type = #{applyType}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="returnState!=null and returnState!=''">
+            and return_state = #{returnState}
+        </if>
+        <if test="applyTime!=null and applyTime!=''">
+            and apply_time = #{applyTime}
+        </if>
+        <if test="handleTime!=null and handleTime!=''">
+            and handle_time = #{handleTime}
+        </if>
+        <if test="refundTime!=null and refundTime!=''">
+            and refund_time = #{refundTime}
+        </if>
+        <if test="pics!=null and pics!=''">
+            and pics = #{pics}
+        </if>
+        <if test="applyReason!=null and applyReason!=''">
+            and apply_reason = #{applyReason}
+        </if>
+        <if test="sellerMemo!=null and sellerMemo!=''">
+            and seller_memo = #{sellerMemo}
+        </if>
+        <if test="expressId!=null and expressId!=''">
+            and express_id = #{expressId}
+        </if>
+        <if test="expressName!=null and expressName!=''">
+            and express_name = #{expressName}
+        </if>
+        <if test="expressNo!=null and expressNo!=''">
+            and express_no = #{expressNo}
+        </if>
+        <if test="sendTime!=null and sendTime!=''">
+            and send_time = #{sendTime}
+        </if>
+        <if test="receiveTime!=null and receiveTime!=''">
+            and receive_time = #{receiveTime}
+        </if>
+        <if test="receiveMemo!=null and receiveMemo!=''">
+            and receive_memo = #{receiveMemo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_order_refund
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="orderId!=null and orderId!=''">
+            and order_id = #{orderId}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="orderAmount!=null and orderAmount!=''">
+            and order_amount = #{orderAmount}
+        </if>
+        <if test="orderItemId!=null and orderItemId!=''">
+            and order_item_id = #{orderItemId}
+        </if>
+        <if test="refundCode!=null and refundCode!=''">
+            and refund_code = #{refundCode}
+        </if>
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and out_trade_no = #{outTradeNo}
+        </if>
+        <if test="outRefundNo!=null and outRefundNo!=''">
+            and out_refund_no = #{outRefundNo}
+        </if>
+        <if test="payType!=null and payType!=''">
+            and pay_type = #{payType}
+        </if>
+        <if test="personType!=null and personType!=''">
+            and person_type = #{personType}
+        </if>
+        <if test="personId!=null and personId!=''">
+            and person_id = #{personId}
+        </if>
+        <if test="personName!=null and personName!=''">
+            and person_name = #{personName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="goodsNum!=null and goodsNum!=''">
+            and goods_num = #{goodsNum}
+        </if>
+        <if test="refundAmount!=null and refundAmount!=''">
+            and refund_amount = #{refundAmount}
+        </if>
+        <if test="applyType!=null and applyType!=''">
+            and apply_type = #{applyType}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="returnState!=null and returnState!=''">
+            and return_state = #{returnState}
+        </if>
+        <if test="applyTime!=null and applyTime!=''">
+            and apply_time = #{applyTime}
+        </if>
+        <if test="handleTime!=null and handleTime!=''">
+            and handle_time = #{handleTime}
+        </if>
+        <if test="refundTime!=null and refundTime!=''">
+            and refund_time = #{refundTime}
+        </if>
+        <if test="pics!=null and pics!=''">
+            and pics = #{pics}
+        </if>
+        <if test="applyReason!=null and applyReason!=''">
+            and apply_reason = #{applyReason}
+        </if>
+        <if test="sellerMemo!=null and sellerMemo!=''">
+            and seller_memo = #{sellerMemo}
+        </if>
+        <if test="expressId!=null and expressId!=''">
+            and express_id = #{expressId}
+        </if>
+        <if test="expressName!=null and expressName!=''">
+            and express_name = #{expressName}
+        </if>
+        <if test="expressNo!=null and expressNo!=''">
+            and express_no = #{expressNo}
+        </if>
+        <if test="sendTime!=null and sendTime!=''">
+            and send_time = #{sendTime}
+        </if>
+        <if test="receiveTime!=null and receiveTime!=''">
+            and receive_time = #{receiveTime}
+        </if>
+        <if test="receiveMemo!=null and receiveMemo!=''">
+            and receive_memo = #{receiveMemo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthBloodSugarMapper">
+    <sql id="tableFieldNames">
+        (
+            id, tenant_id,
+            corp_id,
+            institution_id,
+            institution_name,
+            elder_id,
+            elder_name,
+            id_card,
+            sex,
+            age,
+            gauge_time,
+            gauge_type,
+            conditions,
+            blood_glucose,
+            analysis_result,
+            opinion,
+            warn_flag,
+            area_code,
+            area_name,
+            create_user,
+            create_dept,
+            create_time,
+            update_user,
+            update_time,
+            is_deleted,
+            status,
+            data_source)
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+        (
+            #{item.id}, #{item.tenantId},
+            #{item.corpId},
+            #{item.institutionId},
+            #{item.institutionName},
+            #{item.elderId},
+            #{item.elderName},
+            #{item.idCard},
+            #{item.sex},
+            #{item.age},
+            #{item.gaugeTime},
+            #{item.gaugeType},
+            #{item.conditions},
+            #{item.bloodGlucose},
+            #{item.analysisResult},
+            #{item.opinion},
+            #{item.warnFlag},
+            #{item.areaCode},
+            #{item.areaName},
+            #{item.createUser},
+            #{item.createDept},
+            #{item.createTime},
+            #{item.updateUser},
+            #{item.updateTime},
+            #{item.isDeleted},
+            #{item.status},
+            #{item.dataSource})
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_blood_sugar
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthBloodSugar">
+        SELECT * from tb_jiangyukeji_health_blood_sugar
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="tenantId!=null and tenantId!=''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="corpId!=null and corpId!=''">
+                and corp_id = #{corpId}
+            </if>
+            <if test="institutionId!=null and institutionId!=''">
+                and institution_id = #{institutionId}
+            </if>
+            <if test="institutionName!=null and institutionName!=''">
+                and institution_name = #{institutionName}
+            </if>
+            <if test="elderId!=null and elderId!=''">
+                and elder_id = #{elderId}
+            </if>
+            <if test="elderName!=null and elderName!=''">
+                and elder_name = #{elderName}
+            </if>
+            <if test="idCard!=null and idCard!=''">
+                and id_card = #{idCard}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex = #{sex}
+            </if>
+            <if test="age!=null and age!=''">
+                and age = #{age}
+            </if>
+            <if test="gaugeTime!=null and gaugeTime!=''">
+                and gauge_time = #{gaugeTime}
+            </if>
+            <if test="gaugeType!=null and gaugeType!=''">
+                and gauge_type = #{gaugeType}
+            </if>
+            <if test="conditions!=null and conditions!=''">
+                and conditions = #{conditions}
+            </if>
+            <if test="bloodGlucose!=null and bloodGlucose!=''">
+                and blood_glucose = #{bloodGlucose}
+            </if>
+            <if test="analysisResult!=null and analysisResult!=''">
+                and analysis_result = #{analysisResult}
+            </if>
+            <if test="opinion!=null and opinion!=''">
+                and opinion = #{opinion}
+            </if>
+            <if test="warnFlag!=null and warnFlag!=''">
+                and warn_flag = #{warnFlag}
+            </if>
+            <if test="areaCode!=null and areaCode!=''">
+                and area_code = #{areaCode}
+            </if>
+            <if test="areaName!=null and areaName!=''">
+                and area_name = #{areaName}
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDept!=null and createDept!=''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted!=null and isDeleted!=''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+            <if test="dataSource!=null and dataSource!=''">
+                and data_source = #{dataSource}
+            </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_blood_sugar
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+            <if test="tenantId!=null and tenantId!=''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="corpId!=null and corpId!=''">
+                and corp_id = #{corpId}
+            </if>
+            <if test="institutionId!=null and institutionId!=''">
+                and institution_id = #{institutionId}
+            </if>
+            <if test="institutionName!=null and institutionName!=''">
+                and institution_name = #{institutionName}
+            </if>
+            <if test="elderId!=null and elderId!=''">
+                and elder_id = #{elderId}
+            </if>
+            <if test="elderName!=null and elderName!=''">
+                and elder_name = #{elderName}
+            </if>
+            <if test="idCard!=null and idCard!=''">
+                and id_card = #{idCard}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex = #{sex}
+            </if>
+            <if test="age!=null and age!=''">
+                and age = #{age}
+            </if>
+            <if test="gaugeTime!=null and gaugeTime!=''">
+                and gauge_time = #{gaugeTime}
+            </if>
+            <if test="gaugeType!=null and gaugeType!=''">
+                and gauge_type = #{gaugeType}
+            </if>
+            <if test="conditions!=null and conditions!=''">
+                and conditions = #{conditions}
+            </if>
+            <if test="bloodGlucose!=null and bloodGlucose!=''">
+                and blood_glucose = #{bloodGlucose}
+            </if>
+            <if test="analysisResult!=null and analysisResult!=''">
+                and analysis_result = #{analysisResult}
+            </if>
+            <if test="opinion!=null and opinion!=''">
+                and opinion = #{opinion}
+            </if>
+            <if test="warnFlag!=null and warnFlag!=''">
+                and warn_flag = #{warnFlag}
+            </if>
+            <if test="areaCode!=null and areaCode!=''">
+                and area_code = #{areaCode}
+            </if>
+            <if test="areaName!=null and areaName!=''">
+                and area_name = #{areaName}
+            </if>
+            <if test="createUser!=null and createUser!=''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDept!=null and createDept!=''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateUser!=null and updateUser!=''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted!=null and isDeleted!=''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+            <if test="dataSource!=null and dataSource!=''">
+                and data_source = #{dataSource}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryBloodSugarDetectionStatistics"
+            resultType="cn.pluss.platform.model.vo.SugarDetectionVo">
+        SELECT COUNT(*)                                                                   AS bloodSugarCount,
+               SUM(IF(analysis_result = 0, 1, 0))                                         AS normalBloodSugar,
+               SUM(IF(analysis_result = 1, 1, 0))                                         AS highBloodSugar,
+               SUM(IF(analysis_result = 2, 1, 0))                                         AS lowBloodSugar,
+               CONCAT(ROUND(SUM(IF(analysis_result = 0, 1, 0)) / COUNT(*) * 100, 2), '%') AS normalBloodSugarProportion,
+               CONCAT(ROUND(SUM(IF(analysis_result = 1, 1, 0)) / COUNT(*) * 100, 2), '%') AS highBloodSugarProportion,
+               CONCAT(ROUND(SUM(IF(analysis_result = 2, 1, 0)) / COUNT(*) * 100, 2), '%') AS lowBloodSugarProportion
+        FROM tb_jiangyukeji_health_blood_sugar
+    </select>
+
+    <select id="queryWeeklyBloodSugarStats"
+            resultType="cn.pluss.platform.model.vo.BloodWeeklyStatVo">
+        SELECT DATE_FORMAT(gauge_time, '%Y-%m-%d') AS gaugeDate,
+               SUM(IF(analysis_result = 0, 1, 0))  AS normalCount,
+               SUM(IF(analysis_result != 0, 1, 0)) AS abnormalCount
+        FROM tb_jiangyukeji_health_blood_sugar
+        WHERE gauge_time >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+        GROUP BY DATE_FORMAT(gauge_time, '%Y-%m-%d')
+        ORDER BY gaugeDate ASC
+    </select>
+
+</mapper>
+

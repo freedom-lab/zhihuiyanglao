@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsLogisticsMaterialOutMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    out_code,
+    out_type,
+    material_id,
+    material_name,
+    out_time,
+    out_num,
+    staff_id,
+    staff_name,
+    neck_department,
+    remark,
+    state,
+    return_time,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.outCode},
+    #{item.outType},
+    #{item.materialId},
+    #{item.materialName},
+    #{item.outTime},
+    #{item.outNum},
+    #{item.staffId},
+    #{item.staffName},
+    #{item.neckDepartment},
+    #{item.remark},
+    #{item.state},
+    #{item.returnTime},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_logistics_material_out
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsLogisticsMaterialOut">
+        SELECT * from  tb_jiangyukeji_ins_logistics_material_out
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="outCode!=null and outCode!=''">
+            and out_code = #{outCode}
+        </if>
+        <if test="outType!=null and outType!=''">
+            and out_type = #{outType}
+        </if>
+        <if test="materialId!=null and materialId!=''">
+            and material_id = #{materialId}
+        </if>
+        <if test="materialName!=null and materialName!=''">
+            and material_name = #{materialName}
+        </if>
+        <if test="outTime!=null and outTime!=''">
+            and out_time = #{outTime}
+        </if>
+        <if test="outNum!=null and outNum!=''">
+            and out_num = #{outNum}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="neckDepartment!=null and neckDepartment!=''">
+            and neck_department = #{neckDepartment}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="state!=null and state!=''">
+            and state = #{state}
+        </if>
+        <if test="returnTime!=null and returnTime!=''">
+            and return_time = #{returnTime}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_logistics_material_out
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="outCode!=null and outCode!=''">
+            and out_code = #{outCode}
+        </if>
+        <if test="outType!=null and outType!=''">
+            and out_type = #{outType}
+        </if>
+        <if test="materialId!=null and materialId!=''">
+            and material_id = #{materialId}
+        </if>
+        <if test="materialName!=null and materialName!=''">
+            and material_name = #{materialName}
+        </if>
+        <if test="outTime!=null and outTime!=''">
+            and out_time = #{outTime}
+        </if>
+        <if test="outNum!=null and outNum!=''">
+            and out_num = #{outNum}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="neckDepartment!=null and neckDepartment!=''">
+            and neck_department = #{neckDepartment}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="state!=null and state!=''">
+            and state = #{state}
+        </if>
+        <if test="returnTime!=null and returnTime!=''">
+            and return_time = #{returnTime}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+
