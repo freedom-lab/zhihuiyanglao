@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.OrganMapper">
+
+	   	<insert id="saveOrgan" parameterType="cn.pluss.platform.model.auth.Organ">
+        	insert into tb_yunlankeji_organ(organCode,organName,organAlias,organType,seq,description,createTime,creator,updator,updateTime,parentCode,userCode,userName,executeUserName,organLevel,organGroup,status,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{organCode},#{organName},#{organAlias},#{organType},#{seq},#{description},#{createTime},#{creator},#{updator},#{updateTime},#{parentCode},#{userCode},#{userName},#{executeUserName},#{organLevel},#{organGroup},#{status},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    	</insert>
+
+	   	<insert id="saveOrganBatch">
+        	insert into tb_yunlankeji_organ(organCode,organName,organAlias,organType,seq,description,createTime,creator,updator,updateTime,parentCode,userCode,userName,executeUserName,organLevel,organGroup,status,tenant_id,corp_id,corp_name,institution_id,institution_name) VALUES
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{organCode},#{organName},#{organAlias},#{organType},#{seq},#{description},#{createTime},#{creator},#{updator},#{updateTime},#{parentCode},#{userCode},#{userName},#{executeUserName},#{organLevel},#{organGroup},#{status},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+				</foreach>
+    	</insert>
+
+		<select id="queryOrgan" parameterType="cn.pluss.platform.model.auth.Organ" resultType="cn.pluss.platform.model.auth.Organ">
+			SELECT * from tb_yunlankeji_organ 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="organCode!= null and organCode!='' "> 
+					 	and organCode = #{organCode}
+					 </if> 
+					<if test="organName!= null and organName!='' "> 
+					 	and organName = #{organName}
+					 </if> 
+					<if test="organAlias!= null and organAlias!='' "> 
+					 	and organAlias = #{organAlias}
+					 </if> 
+					<if test="organType!= null and organType!='' "> 
+					 	and organType = #{organType}
+					 </if> 
+					<if test="seq!= null and seq!='' "> 
+					 	and seq = #{seq}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 	and description = #{description}
+					 </if> 
+					<if test="createTime!= null and createTime!='' "> 
+					 	and createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 	and creator = #{creator}
+					 </if> 
+					<if test="updator!= null and updator!='' "> 
+					 	and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null and updateTime!='' "> 
+					 	and updateTime = #{updateTime}
+					 </if> 
+					<if test="parentCode!= null and parentCode!='' "> 
+					 	and parentCode = #{parentCode}
+					 </if> 
+					<if test="userCode!= null and userCode!='' "> 
+					 	and userCode = #{userCode}
+					 </if> 
+					<if test="userName!= null and userName!='' "> 
+					 	and userName = #{userName}
+					 </if> 
+					<if test="executeUserName!= null and executeUserName!='' "> 
+					 	and executeUserName = #{executeUserName}
+					 </if> 
+					<if test="organLevel!= null and organLevel!='' "> 
+					 	and organLevel = #{organLevel}
+					 </if> 
+					<if test="organGroup!= null and organGroup!='' "> 
+					 	and organGroup = #{organGroup}
+					 </if> 
+					<if test="status!= null and status!='' "> 
+					 	and status = #{status}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+
+				 </where> 
+		</select>
+
+		<select id="queryOrganList" parameterType="cn.pluss.platform.model.auth.Organ" resultType="cn.pluss.platform.model.auth.Organ">
+			SELECT * from tb_yunlankeji_organ 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="organCode!= null and organCode!='' "> 
+					 and 	organCode = #{organCode}
+					 </if> 
+					<if test="organName!= null and organName!='' "> 
+					 and 	organName = #{organName}
+					 </if> 
+					<if test="organAlias!= null and organAlias!='' "> 
+					 and 	organAlias = #{organAlias}
+					 </if> 
+					<if test="organType!= null and organType!='' "> 
+					 and 	organType = #{organType}
+					 </if> 
+					<if test="seq!= null and seq!='' "> 
+					 and 	seq = #{seq}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 and 	description = #{description}
+					 </if> 
+					<if test="createTime!= null and createTime!='' "> 
+					 and 	createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 and 	creator = #{creator}
+					 </if> 
+					<if test="updator!= null and updator!='' "> 
+					 and 	updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null and updateTime!='' "> 
+					 and 	updateTime = #{updateTime}
+					 </if> 
+					<if test="parentCode!= null and parentCode!='' "> 
+					 and 	parentCode = #{parentCode}
+					 </if> 
+					<if test="userCode!= null and userCode!='' "> 
+					 and 	userCode = #{userCode}
+					 </if> 
+					<if test="userName!= null and userName!='' "> 
+					 and 	userName = #{userName}
+					 </if> 
+					<if test="executeUserName!= null and executeUserName!='' "> 
+					 and 	executeUserName = #{executeUserName}
+					 </if> 
+					<if test="organLevel!= null and organLevel!='' "> 
+					 and 	organLevel = #{organLevel}
+					 </if> 
+					<if test="organGroup!= null and organGroup!='' "> 
+					 and 	organGroup = #{organGroup}
+					 </if> 
+					<if test="status!= null and status!='' "> 
+					 and 	status = #{status}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 and 	tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 and 	corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 and 	corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 and 	institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 and 	institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<update id="updateOrgan" parameterType="cn.pluss.platform.model.auth.Organ" >
+			update tb_yunlankeji_organ 
+				  <set> 
+					<if test="organCode!= null  and organCode!='' "> 
+					 	organCode = #{organCode},
+					 </if> 
+					<if test="organName!= null  and organName!='' "> 
+					 	organName = #{organName},
+					 </if> 
+					<if test="organAlias!= null  and organAlias!='' "> 
+					 	organAlias = #{organAlias},
+					 </if> 
+					<if test="organType!= null  and organType!='' "> 
+					 	organType = #{organType},
+					 </if> 
+					<if test="seq!= null  and seq!='' "> 
+					 	seq = #{seq},
+					 </if> 
+					<if test="description!= null  and description!='' "> 
+					 	description = #{description},
+					 </if> 
+					<if test="createTime!= null  "> 
+					 	createTime = #{createTime},
+					 </if> 
+					<if test="creator!= null  and creator!='' "> 
+					 	creator = #{creator},
+					 </if> 
+					<if test="updator!= null  and updator!='' "> 
+					 	updator = #{updator},
+					 </if> 
+					<if test="updateTime!= null  "> 
+					 	updateTime = #{updateTime},
+					 </if> 
+					<if test="parentCode!= null  and parentCode!='' "> 
+					 	parentCode = #{parentCode},
+					 </if> 
+					<if test="userCode!= null  and userCode!='' "> 
+					 	userCode = #{userCode},
+					 </if> 
+					<if test="userName!= null  and userName!='' "> 
+					 	userName = #{userName},
+					 </if> 
+					<if test="executeUserName!= null  and executeUserName!='' "> 
+					 	executeUserName = #{executeUserName},
+					 </if> 
+					<if test="organLevel!= null  and organLevel!='' "> 
+					 	organLevel = #{organLevel},
+					 </if> 
+					<if test="organGroup!= null  and organGroup!='' "> 
+					 	organGroup = #{organGroup},
+					 </if> 
+					<if test="status!= null  and status!='' "> 
+					 	status = #{status}
+					 </if>
+					<if test="tenantId!= null  and tenantId!='' ">
+					 	tenant_id = #{tenantId},
+					 </if>
+					<if test="corpId!= null  and corpId!='' ">
+					 	corp_id = #{corpId},
+					 </if>
+					<if test="corpName!= null  and corpName!='' ">
+					 	corp_name = #{corpName},
+					 </if>
+					<if test="institutionId!= null  and institutionId!='' ">
+					 	institution_id = #{institutionId},
+					 </if>
+					<if test="institutionName!= null  and institutionName!='' ">
+					 	institution_name = #{institutionName},
+					 </if>
+
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deleteOrgan" parameterType="cn.pluss.platform.model.auth.Organ" >
+			DELETE FROM tb_yunlankeji_organ where id=#{id}
+		</delete>
+
+		<delete id="deleteOrganBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_organ where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryOrganPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.Organ">
+			SELECT * from tb_yunlankeji_organ 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="organCode!= null  and organCode!=''   "> 
+					and organCode = #{organCode}
+					 </if> 
+					<if test="organName!= null  and organName!=''   "> 
+					and organName = #{organName}
+					 </if> 
+					<if test="organAlias!= null  and organAlias!=''   "> 
+					and organAlias = #{organAlias}
+					 </if> 
+					<if test="organType!= null  and organType!=''   "> 
+					and organType = #{organType}
+					 </if> 
+					<if test="seq!= null  and seq!=''   "> 
+					and seq = #{seq}
+					 </if> 
+					<if test="description!= null  and description!=''   "> 
+					and description = #{description}
+					 </if> 
+					<if test="createTime!= null  and createTime!=''   "> 
+					and createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null  and creator!=''   "> 
+					and creator = #{creator}
+					 </if> 
+					<if test="updator!= null  and updator!=''   "> 
+					and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null  and updateTime!=''   "> 
+					and updateTime = #{updateTime}
+					 </if> 
+					<if test="parentCode!= null  and parentCode!=''   "> 
+					and parentCode = #{parentCode}
+					 </if> 
+					<if test="userCode!= null  and userCode!=''   "> 
+					and userCode = #{userCode}
+					 </if> 
+					<if test="userName!= null  and userName!=''   "> 
+					and userName = #{userName}
+					 </if> 
+					<if test="executeUserName!= null  and executeUserName!=''   "> 
+					and executeUserName = #{executeUserName}
+					 </if> 
+					<if test="organLevel!= null  and organLevel!=''   "> 
+					and organLevel = #{organLevel}
+					 </if> 
+					<if test="organGroup!= null  and organGroup!=''   "> 
+					and organGroup = #{organGroup}
+					 </if> 
+					<if test="status!= null  and status!=''   "> 
+					and status = #{status}
+					 </if>
+					<if test="tenantId!= null  and tenantId!=''   ">
+					and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!=''   ">
+					and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!=''   ">
+					and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!=''   ">
+					and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!=''   ">
+					and institution_name = #{institutionName}
+					 </if>
+				 </where> 
+			order by id desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryOrganPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_organ 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="organCode!= null  and organCode!=''  "> 
+					 and organCode = #{organCode}
+					 </if> 
+					<if test="organName!= null  and organName!=''  "> 
+					 and organName = #{organName}
+					 </if> 
+					<if test="organAlias!= null  and organAlias!=''  "> 
+					 and organAlias = #{organAlias}
+					 </if> 
+					<if test="organType!= null  and organType!=''  "> 
+					 and organType = #{organType}
+					 </if> 
+					<if test="seq!= null  and seq!=''  "> 
+					 and seq = #{seq}
+					 </if> 
+					<if test="description!= null  and description!=''  "> 
+					 and description = #{description}
+					 </if> 
+					<if test="createTime!= null  and createTime!=''  "> 
+					 and createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null  and creator!=''  "> 
+					 and creator = #{creator}
+					 </if> 
+					<if test="updator!= null  and updator!=''  "> 
+					 and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null  and updateTime!=''  "> 
+					 and updateTime = #{updateTime}
+					 </if> 
+					<if test="parentCode!= null  and parentCode!=''  "> 
+					 and parentCode = #{parentCode}
+					 </if> 
+					<if test="userCode!= null  and userCode!=''  "> 
+					 and userCode = #{userCode}
+					 </if> 
+					<if test="userName!= null  and userName!=''  "> 
+					 and userName = #{userName}
+					 </if> 
+					<if test="executeUserName!= null  and executeUserName!=''  "> 
+					 and executeUserName = #{executeUserName}
+					 </if> 
+					<if test="organLevel!= null  and organLevel!=''  "> 
+					 and organLevel = #{organLevel}
+					 </if> 
+					<if test="organGroup!= null  and organGroup!=''  "> 
+					 and organGroup = #{organGroup}
+					 </if> 
+					<if test="status!= null  and status!=''  "> 
+					 and status = #{status}
+					 </if>
+					<if test="tenantId!= null  and tenantId!=''  ">
+					 and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!=''  ">
+					 and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!=''  ">
+					 and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!=''  ">
+					 and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!=''  ">
+					 and institution_name = #{institutionName}
+					 </if>
+				</where>
+		</select>
+
+</mapper>

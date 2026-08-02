@@ -1,0 +1,987 @@
+<template>
+  <div class="three-table-layout">
+
+    <!-- 左侧：楼栋楼层面板 -->
+    <div class="panel left-panel">
+      <div class="panel-header">
+        <h3>楼栋 - 楼层</h3>
+        <div class="header-btn-group">
+          <el-button class="btn-add_blue" circle icon="el-icon-plus" size="mini" type="text"
+            @click="openAddDialog"></el-button>
+          <el-button class="btn-del-red" circle icon="el-icon-delete" size="mini" type="danger"
+            @click="deleteBuild"></el-button>
+        </div>
+      </div>
+      <el-table :data="buildingList" border width="100%" empty-text="暂无楼栋数据" height="calc(100% - 40px)"
+        :default-sort="{ prop: 'buildingName', order: 'ascending' }">
+        <el-table-column type="selection" width="40" />
+        <el-table-column label="楼栋" prop="buildingName" min-width="110">
+          <template slot-scope="scope">
+            <div v-if="scope.row.isBuilding" class="building-row"><i></i>
+              <span>{{ scope.row.buildingName }}</span>
+            </div>
+            <div v-else class="floor-row">
+              <span>{{ scope.row.floorName }}</span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="110" align="center">
+          <template slot-scope="scope">
+            <el-button v-if="false" class="btn-no-border" icon="el-icon-setting" size="mini" circle
+              title="配置"></el-button>
+            <el-button class="btn-no-border" icon="el-icon-plus" size="mini" circle title="添加楼层"></el-button>
+            <el-button class="btn-no-border" icon="el-icon-edit" size="mini" circle title="编辑"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+    <!-- 中间：房间面板 -->
+    <div class="panel center-panel">
+      <div class="panel-header">
+        <h3>房间</h3>
+        <div class="header-btn-group">
+          <el-button class="btn-add_blue" circle icon="el-icon-plus" size="mini" type="text"
+            @click="openRoomDialog"></el-button>
+          <el-button class="btn-edit-yellow" circle icon="el-icon-edit" size="mini" type="warning"
+            @click="editRoomDialog"></el-button>
+          <el-button class="btn-del-red" circle icon="el-icon-delete" size="mini" type="danger"
+            @click="deleteRoom"></el-button>
+        </div>
+      </div>
+      <el-table :data="roomList" border width="100%" empty-text="暂无数据" height="calc(100% - 40px)"
+        :default-sort="{ prop: 'roomName', order: 'ascending' }">
+        <el-table-column type="selection" width="40" fixed="left" />
+        <el-table-column label="序号" type="index" :index="indexMethod" width="60" fixed="left" />
+        <el-table-column label="房间名称" prop="roomName" min-width="120" sortable align="center" fixed="left">
+          <template slot-scope="scope">
+            <span>{{ scope.row.roomName }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="房间面积 (m²)" prop="area" min-width="130" sortable align="center" />
+        <el-table-column label="房间类型" prop="roomType" min-width="100" align="center">
+          <template slot-scope="scope">
+            <el-tag :type="getRoomTypeTag(scope.row.roomType)" size="mini">
+              {{ scope.row.roomType }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="房间朝向" prop="roomType" min-width="100" align="center">
+        </el-table-column>
+        <el-table-column label="排序" prop="roomType" min-width="100" align="center">
+        </el-table-column>
+        <el-table-column label="操作" width="100" fixed="right" align="center">
+          <template slot-scope="scope">
+            <el-button class="btn-no-border" icon="el-icon-plus" size="mini" circle title="添加床位"></el-button>
+            <el-button class="btn-no-border" icon="el-icon-edit" size="mini" circle title="编辑"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+
+    <!-- 右侧：床位面板 -->
+    <div class="panel right-panel">
+      <div class="panel-header">
+        <h3>床位</h3>
+        <el-button class="btn-add_blue" circle icon="el-icon-plus" size="mini" type="text"
+          @click="openBedDialog"></el-button>
+      </div>
+
+      <div class="bed-card-wrap">
+        <div class="bed-card" v-for="(item, index) in bedList" :key="index">
+          <!-- 顶部整行容器 -->
+          <div class="card-top-wrap">
+            <div class="room-tag">{{ item.roomNo }}</div>
+            <div class="center-text">入住</div>
+            <img class="qrcode" src="@/assets/images/qr_code.png" />
+          </div>
+
+          <!-- 床位图标+价格区域 -->
+          <div class="bed-info">
+            <img class="bed-icon" src="@/assets/images/login_left_bg.jpg" />
+            <div class="price-text">
+              <div class="bed-num">{{ item.bedNum }}</div>
+              <div class="price-day">{{ item.dayPrice }}元/日</div>
+              <div class="price-month">{{ item.monthPrice }}元/月</div>
+            </div>
+          </div>
+
+          <!-- 分割线 -->
+          <div class="divider-line"></div>
+
+          <!-- 底部操作按钮 -->
+          <div class="btn-group">
+            <div class="btn-item edit-btn" @click="handleEdit(item)">修改</div>
+            <div class="divider-vertical"></div>
+            <div class="btn-item del-btn" @click="handleDelete(item)">删除</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- 楼栋 新增、编辑 弹窗 -->
+    <el-dialog title="新增" :visible.sync="buildAddDialogVisible" width="60%" :close-on-click-modal="false"
+      append-to-body>
+      <el-form :ref="buildAddFormRef" :model="buildAddForm" label-width="140px">
+        <!-- 第一行：左右分栏（左3个输入框竖排 + 右图片） -->
+        <el-row :gutter="24" align="flex-start">
+          <el-col :span="12">
+            <el-form-item label="楼栋:" required>
+              <el-input v-model="buildAddForm.buildingName" placeholder="请输入 楼栋" />
+            </el-form-item>
+            <el-form-item label="楼层总数:" required>
+              <el-input v-model="buildAddForm.floorTotal" placeholder="请输入 楼层总数" />
+            </el-form-item>
+            <el-form-item label="定位数据楼栋id:">
+              <el-input v-model="buildAddForm.locationDataId" placeholder="请输入 定位数据楼栋id" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="楼栋照片:">
+              <el-upload list-type="picture-card" :show-file-list="false">
+                <i class="el-icon-plus"></i>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24">
+          <el-col :span="12">
+            <el-form-item label="定位地图楼栋id:">
+              <el-input v-model="buildAddForm.mapBuildingId" placeholder="请输入 定位地图楼栋id" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24">
+          <el-col :span="12">
+            <el-form-item label="室内吸顶信标数量:">
+              <el-input v-model="buildAddForm.indoorBeaconNum" placeholder="请输入 室内吸顶信标数量" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="室外地面信标数量:">
+              <el-input v-model="buildAddForm.outdoorBeaconNum" placeholder="请输入 室外地面信标数量" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24">
+          <el-col :span="12">
+            <el-form-item label="排序:">
+              <el-input v-model="buildAddForm.sort" placeholder="请输入 排序" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-form-item label="备注:">
+          <el-input v-model="buildAddForm.remark" type="textarea" rows="3" placeholder="请输入 备注" maxlength="100"
+            show-word-limit />
+        </el-form-item>
+      </el-form>
+      <div class="dialog-footer" style="text-align: right;">
+        <el-button type="primary" @click="submitAdd">
+          <i class="el-icon-circle-plus-outline"></i> 保存
+        </el-button>
+        <el-button @click="buildAddDialogVisible = false" clear>
+          <i class="el-icon-circle-close"></i> 取消
+        </el-button>
+      </div>
+    </el-dialog>
+
+
+    <!-- 房间 新增、编辑弹窗 -->
+    <el-dialog title="新增" :visible.sync="roomAddDialogVisible" width="60%" :close-on-click-modal="false" append-to-body>
+      <el-form :ref="roomAddFormRef" :model="roomAddForm" label-width="140px">
+        <el-row :gutter="24" align="flex-start">
+          <el-col :span="12">
+            <el-form-item label="房间名称:" required>
+              <el-input v-model="roomAddForm.roomName" placeholder="请输入 房间名称" style="width:100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房间面积(m²):" required>
+              <el-input v-model="roomAddForm.roomArea" placeholder="请输入 房间面积(m²)" style="width:100%">
+                <template #append>
+                  <span
+                    style="background:#f5f7fa; padding:0; height:100%; display:flex; align-items:center; color:#606266;">m²</span>
+                </template>
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24" align="flex-start">
+          <el-col :span="12">
+            <el-form-item label="房间类型:" required>
+              <el-select v-model="roomAddForm.roomType" placeholder="请选择 房间类型" clearable collapse-tags
+                style="width:100%">
+                <el-option label="单人间" value="1" />
+                <el-option label="两人间" value="2" />
+                <el-option label="三人间" value="3" />
+                <el-option label="四人间" value="4" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="房间朝向:">
+              <el-select v-model="roomAddForm.roomDirection" placeholder="请选择 房间朝向" clearable collapse-tags
+                style="width:100%">
+                <el-option label="东" value="1" />
+                <el-option label="西" value="2" />
+                <el-option label="南" value="3" />
+                <el-option label="北" value="4" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24" align="flex-start">
+          <el-col :span="12">
+            <el-form-item label="采光情况:">
+              <el-select v-model="roomAddForm.roomLight" placeholder="请选择 采光情况" clearable collapse-tags
+                style="width:100%">
+                <el-option label="较好" value="1" />
+                <el-option label="一般" value="2" />
+                <el-option label="较差" value="3" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="通风情况:">
+              <el-select v-model="roomAddForm.roomVentilate" placeholder="请选择 通风情况" clearable collapse-tags
+                style="width:100%">
+                <el-option label="较好" value="1" />
+                <el-option label="一般" value="2" />
+                <el-option label="较差" value="3" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24">
+          <el-col :span="12">
+            <el-form-item label="排序" required>
+              <el-input v-model="roomAddForm.sort" placeholder="请输入 排序" style="width:100%" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-form-item label="备注">
+          <el-input v-model="roomAddForm.remark" type="textarea" rows="3" placeholder="请输入 备注" maxlength="100"
+            show-word-limit />
+        </el-form-item>
+      </el-form>
+      <div class="dialog-footer" style="text-align: right;">
+        <el-button type="primary" @click="submitAdd">
+          <i class="el-icon-circle-plus-outline"></i> 保存
+        </el-button>
+        <el-button @click="roomAddDialogVisible = false" clear>
+          <i class="el-icon-circle-close"></i> 取消
+        </el-button>
+      </div>
+    </el-dialog>
+
+
+    <!-- 床位 新增、编辑弹窗 -->
+    <el-dialog title="新增" :visible.sync="bedAddDialogVisible" width="60%" :close-on-click-modal="false" append-to-body>
+      <el-form :ref="bedAddFormRef" :model="bedAddForm" label-width="140px">
+        <el-row :gutter="24" align="flex-start">
+          <el-col :span="12">
+            <el-form-item label="床位名称:" required>
+              <el-input v-model="bedAddForm.bedName" placeholder="请输入 房间名称" style="width:100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="床位类型:" required>
+              <el-select v-model="bedAddForm.bedType" placeholder="请选择 床位类型" clearable collapse-tags style="width:100%">
+                <el-option label="普通床位" value="1" />
+                <el-option label="护理床位" value="2" />
+                <el-option label="医疗床位" value="3" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24" align="flex-start">
+          <el-col :span="12">
+            <el-form-item label="床位日价格:" required>
+              <el-input v-model="bedAddForm.dayPrice" placeholder="请输入 床位日价格" style="width:100%">
+                <template #append>
+                  <span
+                    style="background:#f5f7fa; padding:0; height:100%; display:flex; align-items:center; color:#606266;">元/日</span>
+                </template>
+              </el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="床位月价格:" required>
+              <el-input v-model="bedAddForm.monthPrice" placeholder="请输入 床位月价格" style="width:100%">
+                <template #append>
+                  <span
+                    style="background:#f5f7fa; padding:0; height:100%; display:flex; align-items:center; color:#606266;">元/月</span>
+                </template>
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="24">
+          <el-col :span="12">
+            <el-form-item label="排序" required>
+              <el-input v-model="bedAddForm.sort" placeholder="请输入 排序" style="width:100%" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-form-item label="备注">
+          <el-input v-model="bedAddForm.remark" type="textarea" rows="3" placeholder="请输入 备注" maxlength="100"
+            show-word-limit />
+        </el-form-item>
+      </el-form>
+      <div class="dialog-footer" style="text-align: right;">
+        <el-button type="primary" @click="submitAdd"><i class="el-icon-check"></i> 保存</el-button>
+        <el-button clear><i class="el-icon-delete"></i> 清空</el-button>
+      </div>
+    </el-dialog>
+
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'BuildingFloors',
+  data() {
+    return {
+      buildingList: [
+        { buildingName: '1 号楼', isBuilding: true, id: 1 },
+        { floorName: '1F', isBuilding: false, parentId: 1 },
+        { floorName: '2F', isBuilding: false, parentId: 1 },
+        { floorName: '3F', isBuilding: false, parentId: 1 },
+        { floorName: '4F', isBuilding: false, parentId: 1 },
+        { floorName: '5F', isBuilding: false, parentId: 1 },
+        { floorName: '6F', isBuilding: false, parentId: 1 },
+        { buildingName: '2 号楼', isBuilding: true, id: 2 }
+      ],
+      roomList: [
+        // { roomName: '101', area: 25.5, roomType: '单人间', id: 1 },
+        // { roomName: '102', area: 30.0, roomType: '双人间', id: 2 },
+        // { roomName: '103', area: 45.0, roomType: '三人间', id: 3 }
+      ],
+      bedList: [
+        // { bedNo: '101-A', bedStatus: '空闲', id: 1 },
+        // { bedNo: '101-B', bedStatus: '已入住', id: 2 },
+        // { bedNo: '102-A', bedStatus: '空闲', id: 3 },
+        // { bedNo: '102-B', bedStatus: '预定', id: 4 }
+      ],
+      // 床位数据源
+      bedList: [
+        {
+          roomNo: "101",
+          bedNum: 1,
+          dayPrice: "0.00",
+          monthPrice: "600.00",
+          bedImg: "bed-empty-1.png", // 空床图片
+          qrcodeImg: "@/assets/images/common/bed-qrcode.png",
+          id: 1
+        },
+        {
+          roomNo: "101",
+          bedNum: 2,
+          dayPrice: "0.00",
+          monthPrice: "600.00",
+          bedImg: "bed-empty-1.png",
+          qrcodeImg: "@/assets/images/common/bed-qrcode.png",
+          id: 2
+        },
+        {
+          roomNo: "101",
+          bedNum: 2,
+          dayPrice: "0.00",
+          monthPrice: "600.00",
+          bedImg: "bed-empty-1.png",
+          qrcodeImg: "@/assets/images/common/bed-qrcode.png",
+          id: 2
+        }
+      ],
+      // 楼栋弹窗显示控制
+      buildAddDialogVisible: false,
+      // 楼栋新增表单数据
+      buildAddForm: {
+        buildingName: "",
+        floorTotal: "",
+        locationDataId: "",
+        mapBuildingId: "",
+        indoorBeaconNum: "",
+        outdoorBeaconNum: "",
+        sort: "",
+        remark: ""
+      },
+      buildAddFormRef: null,
+      // 房间弹窗显示控制
+      roomAddDialogVisible: false,
+      // 房间新增表单数据
+      roomAddForm: {
+        roomName: "",
+        roomArea: "",
+        roomType: "",
+        roomDirection: "",
+        roomLight: "",
+        roomVentilate: "",
+        sort: "",
+        remark: ""
+      },
+      roomAddFormRef: null,
+      // 床位弹窗显示控制
+      bedAddDialogVisible: false,
+      // 房间新增表单数据
+      bedAddForm: {
+        bedName: "",
+        bedType: "",
+        dayPrice: "",
+        monthPrice: "",
+        roomLight: "",
+        roomVentilate: "",
+        sort: "",
+        remark: ""
+      },
+      bedAddFormRef: null,
+    }
+  },
+  mounted() {
+    // 初始化数据加载
+    console.log('页面已加载')
+  },
+  methods: {
+    // 序号方法
+    indexMethod(index) {
+      return index + 1
+    },
+    // 获取房间类型标签颜色
+    getRoomTypeTag(type) {
+      const typeMap = {
+        '单人间': '',
+        '双人间': 'success',
+        '三人间': 'warning',
+        'VIP 间': 'danger'
+      }
+      return typeMap[type] || ''
+    },
+    // 获取床位状态标签颜色
+    getBedStatusTag(status) {
+      const statusMap = {
+        '空闲': 'success',
+        '已入住': 'danger',
+        '预定': 'warning',
+        '维修中': 'info'
+      }
+      return statusMap[status] || ''
+    },
+    // 打开新增弹窗，重置表单
+    openAddDialog() {
+      console.log('新增楼栋')
+      this.buildAddDialogVisible = true;
+      console.log("赋值后buildAddDialogVisible=", this.buildAddDialogVisible);
+      // 清空表单校验
+      this.$nextTick(() => {
+        this.$refs.buildAddFormRef?.clearValidate();
+        this.buildAddForm = {
+          buildingName: "",
+          floorTotal: "",
+          locationDataId: "",
+          mapBuildingId: "",
+          indoorBeaconNum: "",
+          outdoorBeaconNum: "",
+          sort: "",
+          remark: ""
+        };
+      });
+    },
+    // 提交保存
+    submitAdd() {
+      this.$refs.buildAddFormRef.validate(async valid => {
+        if (!valid) return;
+        // 此处写新增接口请求逻辑
+        console.log("提交新增数据", this.buildAddForm);
+        // 成功后关闭弹窗、刷新列表
+        // await api.addBuilding(this.addForm)
+        // this.addDialogVisible = false
+        // this.getTableList()
+      });
+    },
+    //删除楼栋
+    deleteBuild() {
+      this.$confirm('确定将选择数据删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning', // 黄色感叹号警告图标，和截图匹配
+        closeOnClickModal: false,
+      }).then(async () => {
+        // 点击确定，执行删除接口
+        // await api.delBuilding(id)
+        this.$message.success('删除成功');
+        // 刷新表格列表
+        this.getTableList();
+      }).catch(() => {
+        // 点击取消，无操作
+      })
+    },
+    //打开 新增房间弹窗
+    openRoomDialog() {
+      this.roomAddDialogVisible = true
+    },
+    //打开 编辑房间弹窗
+    editRoomDialog() {
+
+    },
+    //删除房间数据
+    deleteRoom() {
+
+    },
+    // 修改床位
+    handleEdit(row) {
+      console.log("编辑床位", row)
+      // 弹窗/路由跳转逻辑
+    },
+    // 删除床位
+    handleDelete(row) {
+      this.$confirm(`确认删除${row.roomNo}房${row.bedNum}号床位？`, "提示", {
+        type: "warning"
+      }).then(() => {
+        console.log("执行删除", row.id)
+      }).catch(() => { })
+    },
+    //打开 床位弹窗
+    openBedDialog() {
+      this.bedAddDialogVisible = true
+    }
+  },
+}
+</script>
+
+<style scoped>
+/* 三栏弹性布局核心 */
+.three-table-layout {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  height: calc(100vh - 120px);
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #F1F2F5;
+}
+
+/* 统一面板样式 */
+.panel {
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panel-header h3::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 15px;
+  background: #4B66F1;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+
+.header-btn-group {
+  display: flex;
+  gap: 2px;
+}
+
+.header-btn-group .el-button {
+  margin-left: 3px;
+}
+
+/* 左面板：固定最小宽度，不拉伸 */
+.left-panel {
+  width: 22%;
+  flex: 0 0 auto;
+}
+
+/* 中间面板：弹性自适应剩余宽度，核心区域 */
+.center-panel {
+  flex: 1;
+}
+
+/* 右面板：固定最小宽度，不拉伸 */
+.right-panel {
+  width: 35%;
+  flex: 0 0 auto;
+}
+
+/* 表格高度适配父容器 */
+.el-table {
+  flex: 1;
+}
+
+/* 楼栋和楼层行样式 */
+.building-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.floor-row {
+  padding-left: 24px;
+  color: #606266;
+}
+
+/* 表格行选中样式 */
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+  background-color: #f5f7fa;
+}
+
+/* 全局mini圆形统一尺寸 */
+:deep(.el-button--mini.is-circle) {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  border-radius: 15px;
+}
+
+/* ========== 蓝色新增 btn-add_blue ========== */
+:deep(.btn-add_blue.el-button--text.el-button--mini.is-circle) {
+  border: 1px solid #409EFF !important;
+  background: #ecf5ff !important;
+}
+
+:deep(.btn-add_blue.el-button--text.el-button--mini.is-circle i) {
+  color: #409EFF !important;
+}
+
+:deep(.btn-add_blue.el-button--text.el-button--mini.is-circle:hover) {
+  background: #409EFF !important;
+  border-color: #409EFF !important;
+}
+
+:deep(.btn-add_blue.el-button--text.el-button--mini.is-circle:hover i) {
+  color: #fff !important;
+}
+
+/* ========== 黄色编辑 btn-edit-yellow ========== */
+:deep(.btn-edit-yellow.el-button--mini.is-circle) {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  border-radius: 15px;
+  border: 1px solid #e6b86c !important;
+  background-color: #fff9e8 !important;
+}
+
+:deep(.btn-edit-yellow.el-button--mini.is-circle i) {
+  color: #e6b86c !important;
+}
+
+:deep(.btn-edit-yellow.el-button--mini.is-circle:hover) {
+  background-color: #e6b86c !important;
+  border-color: #e6b86c !important;
+}
+
+:deep(.btn-edit-yellow.el-button--mini.is-circle:hover i) {
+  color: #ffffff !important;
+}
+
+/* ========== 红色删除 btn-del-red ========== */
+:deep(.btn-del-red.el-button--mini.is-circle) {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  border-radius: 15px;
+  border: 1px solid #e88686 !important;
+  background-color: #fff2f2 !important;
+}
+
+:deep(.btn-del-red.el-button--mini.is-circle i) {
+  color: #e88686 !important;
+}
+
+:deep(.btn-del-red.el-button--mini.is-circle:hover) {
+  background-color: #e88686 !important;
+  border-color: #e88686 !important;
+}
+
+:deep(.btn-del-red.el-button--mini.is-circle:hover i) {
+  color: #ffffff !important;
+}
+
+
+
+/* 无边框按钮：配置/新增/编辑 */
+:deep(.btn-no-border.el-button--mini.is-circle) {
+  border: none;
+  background: transparent;
+}
+
+:deep(.btn-no-border.el-button--mini.is-circle i) {
+  color: #409EFF;
+}
+
+:deep(.btn-no-border.el-button--mini.is-circle:hover) {
+  background: #e6f2ff;
+}
+
+/* 删除黄色按钮 */
+:deep(.btn-del-yellow.el-button--danger.el-button--mini.is-circle) {
+  background: #fff7e6;
+  border: 1px solid #ffc53d;
+}
+
+:deep(.btn-del-yellow.el-button--danger.el-button--mini.is-circle i) {
+  color: #ffc53d;
+}
+
+:deep(.btn-del-yellow.el-button--danger.el-button--mini.is-circle:hover) {
+  background: #ffc53d;
+}
+
+:deep(.btn-del-yellow.el-button--danger.el-button--mini.is-circle:hover i) {
+  color: #fff;
+}
+
+/* 保留页面原有warning按钮样式，不受干扰 */
+:deep(.el-button--warning.el-button--mini.is-circle) {
+  background: #faecd8;
+  border-color: #faecd8;
+}
+
+/* 统一mini圆形尺寸复用，只写一次 */
+:deep(.el-button--mini.is-circle.btn-no-border) {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  border-radius: 10px;
+}
+
+/* 按钮圆形样式 */
+/* .el-button--circle {
+  padding: 8px;
+} */
+
+/* 空状态样式 */
+.el-table__empty-text {
+  color: #909399;
+  font-size: 14px;
+}
+
+/* 滚动条样式优化 */
+.el-table__body-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background: #c0c4cc;
+  border-radius: 3px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-track {
+  background: #f5f7fa;
+}
+
+/* 响应式适配 */
+@media screen and (max-width: 1400px) {
+  .left-panel {
+    min-width: 260px;
+  }
+
+  .center-panel {
+    min-width: 400px;
+  }
+
+  .right-panel {
+    min-width: 240px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .three-table-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .panel {
+    min-height: 400px;
+  }
+
+
+  /* 楼栋新增弹窗 */
+  :deep(.upload-box) {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    .label {
+      line-height: 40px;
+      white-space: nowrap;
+    }
+
+    .el-upload {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
+
+
+/* 外层两列网格容器 */
+.bed-card-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  margin-top: 15px;
+}
+
+/* 单张卡片：高度完全自适应内容 */
+.bed-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  /* 无固定高度，内部内容自动撑高 */
+  height: auto;
+  min-width: 0;
+}
+
+/* 顶部整行容器 */
+.card-top-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding: 2px 2px 12px;
+}
+
+.room-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #409eff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 0 0 10px 0;
+  z-index: 2;
+}
+
+.center-text {
+  font-size: 14px;
+  color: #409eff;
+  font-weight: 500;
+}
+
+.qrcode {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 30px;
+  height: 30px;
+}
+
+/* 床位图标+价格区域 */
+.bed-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px 14px;
+}
+
+.bed-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.price-text {
+  display: flex;
+  flex-direction: column;
+  color: #666;
+}
+
+.bed-num {
+  font-size: 16px;
+  color: black;
+}
+
+.price-day {
+  font-size: 13px;
+  color: #9E9E9E;
+}
+
+.price-month {
+  font-size: 13px;
+  color: #9E9E9E;
+}
+
+/* 水平分割线 */
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background: #eee;
+}
+
+/* 底部按钮 */
+.btn-group {
+  display: flex;
+  width: 100%;
+}
+
+.btn-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  color: #67c23a;
+}
+
+.del-btn {
+  color: #f56c6c;
+}
+
+.divider-vertical {
+  width: 1px;
+  background: #eee;
+}
+</style>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsLogisticsGoodsInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    goods_name,
+    goods_code,
+    type_id,
+    type_name,
+    goods_unit,
+    goods_standards,
+    bar_code,
+    manufactor_name,
+    period_num,
+    is_sales,
+    selling_price,
+    early_stock,
+    icon_path,
+    brief_content,
+    description,
+    click_num,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.goodsName},
+    #{item.goodsCode},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.goodsUnit},
+    #{item.goodsStandards},
+    #{item.barCode},
+    #{item.manufactorName},
+    #{item.periodNum},
+    #{item.isSales},
+    #{item.sellingPrice},
+    #{item.earlyStock},
+    #{item.iconPath},
+    #{item.briefContent},
+    #{item.description},
+    #{item.clickNum},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_logistics_goods_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsLogisticsGoodsInfo">
+        SELECT * from  tb_jiangyukeji_ins_logistics_goods_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="goodsCode!=null and goodsCode!=''">
+            and goods_code = #{goodsCode}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="goodsUnit!=null and goodsUnit!=''">
+            and goods_unit = #{goodsUnit}
+        </if>
+        <if test="goodsStandards!=null and goodsStandards!=''">
+            and goods_standards = #{goodsStandards}
+        </if>
+        <if test="barCode!=null and barCode!=''">
+            and bar_code = #{barCode}
+        </if>
+        <if test="manufactorName!=null and manufactorName!=''">
+            and manufactor_name = #{manufactorName}
+        </if>
+        <if test="periodNum!=null and periodNum!=''">
+            and period_num = #{periodNum}
+        </if>
+        <if test="isSales!=null and isSales!=''">
+            and is_sales = #{isSales}
+        </if>
+        <if test="sellingPrice!=null and sellingPrice!=''">
+            and selling_price = #{sellingPrice}
+        </if>
+        <if test="earlyStock!=null and earlyStock!=''">
+            and early_stock = #{earlyStock}
+        </if>
+        <if test="iconPath!=null and iconPath!=''">
+            and icon_path = #{iconPath}
+        </if>
+        <if test="briefContent!=null and briefContent!=''">
+            and brief_content = #{briefContent}
+        </if>
+        <if test="description!=null and description!=''">
+            and description = #{description}
+        </if>
+        <if test="clickNum!=null and clickNum!=''">
+            and click_num = #{clickNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_logistics_goods_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="goodsCode!=null and goodsCode!=''">
+            and goods_code = #{goodsCode}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="goodsUnit!=null and goodsUnit!=''">
+            and goods_unit = #{goodsUnit}
+        </if>
+        <if test="goodsStandards!=null and goodsStandards!=''">
+            and goods_standards = #{goodsStandards}
+        </if>
+        <if test="barCode!=null and barCode!=''">
+            and bar_code = #{barCode}
+        </if>
+        <if test="manufactorName!=null and manufactorName!=''">
+            and manufactor_name = #{manufactorName}
+        </if>
+        <if test="periodNum!=null and periodNum!=''">
+            and period_num = #{periodNum}
+        </if>
+        <if test="isSales!=null and isSales!=''">
+            and is_sales = #{isSales}
+        </if>
+        <if test="sellingPrice!=null and sellingPrice!=''">
+            and selling_price = #{sellingPrice}
+        </if>
+        <if test="earlyStock!=null and earlyStock!=''">
+            and early_stock = #{earlyStock}
+        </if>
+        <if test="iconPath!=null and iconPath!=''">
+            and icon_path = #{iconPath}
+        </if>
+        <if test="briefContent!=null and briefContent!=''">
+            and brief_content = #{briefContent}
+        </if>
+        <if test="description!=null and description!=''">
+            and description = #{description}
+        </if>
+        <if test="clickNum!=null and clickNum!=''">
+            and click_num = #{clickNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

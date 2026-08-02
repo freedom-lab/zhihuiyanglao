@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsStaffEvaluationTasksMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    template_id,
+    task_name,
+    evaluation_type,
+    start_date,
+    end_date,
+    tasks_state,
+    initiate_time,
+    initiate_id,
+    initiate_name,
+    evaluator_id,
+    evaluator_name,
+    staff_ids,
+    staff_names,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.templateId},
+    #{item.taskName},
+    #{item.evaluationType},
+    #{item.startDate},
+    #{item.endDate},
+    #{item.tasksState},
+    #{item.initiateTime},
+    #{item.initiateId},
+    #{item.initiateName},
+    #{item.evaluatorId},
+    #{item.evaluatorName},
+    #{item.staffIds},
+    #{item.staffNames},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_staff_evaluation_tasks
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsStaffEvaluationTasks">
+        SELECT * from  tb_jiangyukeji_ins_staff_evaluation_tasks
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="taskName!=null and taskName!=''">
+            and task_name = #{taskName}
+        </if>
+        <if test="evaluationType!=null and evaluationType!=''">
+            and evaluation_type = #{evaluationType}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="tasksState!=null and tasksState!=''">
+            and tasks_state = #{tasksState}
+        </if>
+        <if test="initiateTime!=null and initiateTime!=''">
+            and initiate_time = #{initiateTime}
+        </if>
+        <if test="initiateId!=null and initiateId!=''">
+            and initiate_id = #{initiateId}
+        </if>
+        <if test="initiateName!=null and initiateName!=''">
+            and initiate_name = #{initiateName}
+        </if>
+        <if test="evaluatorId!=null and evaluatorId!=''">
+            and evaluator_id = #{evaluatorId}
+        </if>
+        <if test="evaluatorName!=null and evaluatorName!=''">
+            and evaluator_name = #{evaluatorName}
+        </if>
+        <if test="staffIds!=null and staffIds!=''">
+            and staff_ids = #{staffIds}
+        </if>
+        <if test="staffNames!=null and staffNames!=''">
+            and staff_names = #{staffNames}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_staff_evaluation_tasks
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="templateId!=null and templateId!=''">
+            and template_id = #{templateId}
+        </if>
+        <if test="taskName!=null and taskName!=''">
+            and task_name = #{taskName}
+        </if>
+        <if test="evaluationType!=null and evaluationType!=''">
+            and evaluation_type = #{evaluationType}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="tasksState!=null and tasksState!=''">
+            and tasks_state = #{tasksState}
+        </if>
+        <if test="initiateTime!=null and initiateTime!=''">
+            and initiate_time = #{initiateTime}
+        </if>
+        <if test="initiateId!=null and initiateId!=''">
+            and initiate_id = #{initiateId}
+        </if>
+        <if test="initiateName!=null and initiateName!=''">
+            and initiate_name = #{initiateName}
+        </if>
+        <if test="evaluatorId!=null and evaluatorId!=''">
+            and evaluator_id = #{evaluatorId}
+        </if>
+        <if test="evaluatorName!=null and evaluatorName!=''">
+            and evaluator_name = #{evaluatorName}
+        </if>
+        <if test="staffIds!=null and staffIds!=''">
+            and staff_ids = #{staffIds}
+        </if>
+        <if test="staffNames!=null and staffNames!=''">
+            and staff_names = #{staffNames}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

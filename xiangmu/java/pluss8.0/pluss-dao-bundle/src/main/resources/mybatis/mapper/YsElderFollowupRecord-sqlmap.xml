@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.YsElderFollowupRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    link_tel,
+    sex,
+    age,
+    home_address,
+    access_time,
+    doctor_id,
+    doctor_name,
+    access_type,
+    pulse_rate,
+    systolic_pressure,
+    diastolic_pressure,
+    pressure_result,
+    conditions,
+    blood_glucose,
+    glucose_result,
+    health_context,
+    next_access_time,
+    attach_path,
+    access_recom,
+    access_context,
+    remark,
+    data_source,
+    area_code,
+    area_name,
+    create_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.linkTel},
+    #{item.sex},
+    #{item.age},
+    #{item.homeAddress},
+    #{item.accessTime},
+    #{item.doctorId},
+    #{item.doctorName},
+    #{item.accessType},
+    #{item.pulseRate},
+    #{item.systolicPressure},
+    #{item.diastolicPressure},
+    #{item.pressureResult},
+    #{item.conditions},
+    #{item.bloodGlucose},
+    #{item.glucoseResult},
+    #{item.healthContext},
+    #{item.nextAccessTime},
+    #{item.attachPath},
+    #{item.accessRecom},
+    #{item.accessContext},
+    #{item.remark},
+    #{item.dataSource},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ys_elder_followup_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.YsElderFollowupRecord">
+        SELECT * from  tb_jiangyukeji_ys_elder_followup_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="homeAddress!=null and homeAddress!=''">
+            and home_address = #{homeAddress}
+        </if>
+        <if test="accessTime!=null and accessTime!=''">
+            and access_time = #{accessTime}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="accessType!=null and accessType!=''">
+            and access_type = #{accessType}
+        </if>
+        <if test="pulseRate!=null and pulseRate!=''">
+            and pulse_rate = #{pulseRate}
+        </if>
+        <if test="systolicPressure!=null and systolicPressure!=''">
+            and systolic_pressure = #{systolicPressure}
+        </if>
+        <if test="diastolicPressure!=null and diastolicPressure!=''">
+            and diastolic_pressure = #{diastolicPressure}
+        </if>
+        <if test="pressureResult!=null and pressureResult!=''">
+            and pressure_result = #{pressureResult}
+        </if>
+        <if test="conditions!=null and conditions!=''">
+            and conditions = #{conditions}
+        </if>
+        <if test="bloodGlucose!=null and bloodGlucose!=''">
+            and blood_glucose = #{bloodGlucose}
+        </if>
+        <if test="glucoseResult!=null and glucoseResult!=''">
+            and glucose_result = #{glucoseResult}
+        </if>
+        <if test="healthContext!=null and healthContext!=''">
+            and health_context = #{healthContext}
+        </if>
+        <if test="nextAccessTime!=null and nextAccessTime!=''">
+            and next_access_time = #{nextAccessTime}
+        </if>
+        <if test="attachPath!=null and attachPath!=''">
+            and attach_path = #{attachPath}
+        </if>
+        <if test="accessRecom!=null and accessRecom!=''">
+            and access_recom = #{accessRecom}
+        </if>
+        <if test="accessContext!=null and accessContext!=''">
+            and access_context = #{accessContext}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ys_elder_followup_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="homeAddress!=null and homeAddress!=''">
+            and home_address = #{homeAddress}
+        </if>
+        <if test="accessTime!=null and accessTime!=''">
+            and access_time = #{accessTime}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="accessType!=null and accessType!=''">
+            and access_type = #{accessType}
+        </if>
+        <if test="pulseRate!=null and pulseRate!=''">
+            and pulse_rate = #{pulseRate}
+        </if>
+        <if test="systolicPressure!=null and systolicPressure!=''">
+            and systolic_pressure = #{systolicPressure}
+        </if>
+        <if test="diastolicPressure!=null and diastolicPressure!=''">
+            and diastolic_pressure = #{diastolicPressure}
+        </if>
+        <if test="pressureResult!=null and pressureResult!=''">
+            and pressure_result = #{pressureResult}
+        </if>
+        <if test="conditions!=null and conditions!=''">
+            and conditions = #{conditions}
+        </if>
+        <if test="bloodGlucose!=null and bloodGlucose!=''">
+            and blood_glucose = #{bloodGlucose}
+        </if>
+        <if test="glucoseResult!=null and glucoseResult!=''">
+            and glucose_result = #{glucoseResult}
+        </if>
+        <if test="healthContext!=null and healthContext!=''">
+            and health_context = #{healthContext}
+        </if>
+        <if test="nextAccessTime!=null and nextAccessTime!=''">
+            and next_access_time = #{nextAccessTime}
+        </if>
+        <if test="attachPath!=null and attachPath!=''">
+            and attach_path = #{attachPath}
+        </if>
+        <if test="accessRecom!=null and accessRecom!=''">
+            and access_recom = #{accessRecom}
+        </if>
+        <if test="accessContext!=null and accessContext!=''">
+            and access_context = #{accessContext}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

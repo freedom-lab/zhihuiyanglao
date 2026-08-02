@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.OrganTypeMapper">
+
+	   	<insert id="saveOrganType" parameterType="cn.pluss.platform.model.auth.OrganType">
+        	insert into tb_yunlankeji_organ_type(organTypeCode,organTypeName,createDt,description,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{organTypeCode},#{organTypeName},#{createDt},#{description},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    	</insert>
+
+	   	<insert id="saveOrganTypeBatch">
+        	insert into tb_yunlankeji_organ_type(organTypeCode,organTypeName,createDt,description,tenant_id,corp_id,corp_name,institution_id,institution_name) VALUES
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{organTypeCode},#{organTypeName},#{createDt},#{description},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName}		)
+				</foreach>
+    	</insert>
+
+		<select id="queryOrganType" parameterType="cn.pluss.platform.model.auth.OrganType" resultType="cn.pluss.platform.model.auth.OrganType">
+			SELECT * from tb_yunlankeji_organ_type 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="organTypeCode!= null and organTypeCode!='' "> 
+					 	and organTypeCode = #{organTypeCode}
+					 </if> 
+					<if test="organTypeName!= null and organTypeName!='' "> 
+					 	and organTypeName = #{organTypeName}
+					 </if> 
+					<if test="createDt!= null and createDt!='' "> 
+					 	and createDt = #{createDt}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 	and description = #{description}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<select id="queryOrganTypeList" parameterType="cn.pluss.platform.model.auth.OrganType" resultType="cn.pluss.platform.model.auth.OrganType">
+			SELECT * from tb_yunlankeji_organ_type 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="organTypeCode!= null and organTypeCode!='' "> 
+					 and 	organTypeCode = #{organTypeCode}
+					 </if> 
+					<if test="organTypeName!= null and organTypeName!='' "> 
+					  and organTypeName LIKE CONCAT('%',#{organTypeName},'%')
+					 </if> 
+					<if test="createDt!= null and createDt!='' "> 
+					 and 	createDt = #{createDt}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 and 	description = #{description}
+					 </if> 
+					<if test="tenantId!= null and tenantId!='' ">
+					 and 	tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 and 	corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 and 	corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 and 	institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 and 	institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<update id="updateOrganType" parameterType="cn.pluss.platform.model.auth.OrganType" >
+			update tb_yunlankeji_organ_type 
+				  <set> 
+					<if test="organTypeCode!= null  and organTypeCode!='' "> 
+					 	organTypeCode = #{organTypeCode},
+					 </if> 
+					<if test="organTypeName!= null  and organTypeName!='' "> 
+					 	organTypeName = #{organTypeName},
+					 </if> 
+					<if test="createDt!= null  "> 
+					 	createDt = #{createDt},
+					 </if> 
+					<if test="description!= null  and description!='' "> 
+					 	description = #{description}
+					 </if>
+					<if test="tenantId!= null  and tenantId!='' ">
+					 	tenant_id = #{tenantId},
+					 </if>
+					<if test="corpId!= null  and corpId!='' ">
+					 	corp_id = #{corpId},
+					 </if>
+					<if test="corpName!= null  and corpName!='' ">
+					 	corp_name = #{corpName},
+					 </if>
+					<if test="institutionId!= null  and institutionId!='' ">
+					 	institution_id = #{institutionId},
+					 </if>
+					<if test="institutionName!= null  and institutionName!='' ">
+					 	institution_name = #{institutionName},
+					 </if>
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deleteOrganType" parameterType="cn.pluss.platform.model.auth.OrganType" >
+			DELETE FROM tb_yunlankeji_organ_type where id=#{id}
+		</delete>
+
+		<delete id="deleteOrganTypeBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_organ_type where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryOrganTypePage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.OrganType">
+			SELECT * from tb_yunlankeji_organ_type 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="organTypeCode!= null  and organTypeCode!=''   "> 
+					and organTypeCode = #{organTypeCode}
+					 </if> 
+					<if test="organTypeName!= null  and organTypeName!=''   "> 
+					and organTypeName = #{organTypeName}
+					 </if> 
+					<if test="createDt!= null  and createDt!=''   "> 
+					and createDt = #{createDt}
+					 </if> 
+					<if test="description!= null  and description!=''   "> 
+					and description = #{description}
+					 </if>
+			         	<if test="tenantId!= null  and tenantId!=''   ">
+			         	and tenant_id = #{tenantId}
+			         	 </if>
+			         	<if test="corpId!= null  and corpId!=''   ">
+			         	and corp_id = #{corpId}
+			         	 </if>
+			         	<if test="corpName!= null  and corpName!=''   ">
+			         	and corp_name = #{corpName}
+			         	 </if>
+			         	<if test="institutionId!= null  and institutionId!=''   ">
+			         	and institution_id = #{institutionId}
+			         	 </if>
+			         	<if test="institutionName!= null  and institutionName!=''   ">
+			         	and institution_name = #{institutionName}
+			         	 </if>
+				 </where> 
+			order by id desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryOrganTypePageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_organ_type 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="organTypeCode!= null  and organTypeCode!=''  "> 
+					 and organTypeCode = #{organTypeCode}
+					 </if> 
+					<if test="organTypeName!= null  and organTypeName!=''  "> 
+					 and organTypeName = #{organTypeName}
+					 </if> 
+					<if test="createDt!= null  and createDt!=''  "> 
+					 and createDt = #{createDt}
+					 </if> 
+					<if test="description!= null  and description!=''  "> 
+					 and description = #{description}
+					 </if>
+
+			         	<if test="tenantId!= null  and tenantId!=''  ">
+			         	and tenant_id = #{tenantId}
+			         	 </if>
+			         	<if test="corpId!= null  and corpId!=''  ">
+			         	and corp_id = #{corpId}
+			         	 </if>
+			         	<if test="corpName!= null  and corpName!=''  ">
+			         	and corp_name = #{corpName}
+			         	 </if>
+			         	<if test="institutionId!= null  and institutionId!=''  ">
+			         	and institution_id = #{institutionId}
+			         	 </if>
+			         	<if test="institutionName!= null  and institutionName!=''  ">
+			         	and institution_name = #{institutionName}
+			         	 </if>
+				</where>
+		</select>
+
+</mapper>

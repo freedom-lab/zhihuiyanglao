@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsLogisticsSupplierInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    supplier_name,
+    supplier_type,
+    link_man,
+    link_tel,
+    legal_person,
+    document_type,
+    document_code,
+    tax_number,
+    account_name,
+    bank_name,
+    bank_code,
+    business_number,
+    period_validity,
+    business_scope,
+    supplier_address,
+    business_img_path,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.supplierName},
+    #{item.supplierType},
+    #{item.linkMan},
+    #{item.linkTel},
+    #{item.legalPerson},
+    #{item.documentType},
+    #{item.documentCode},
+    #{item.taxNumber},
+    #{item.accountName},
+    #{item.bankName},
+    #{item.bankCode},
+    #{item.businessNumber},
+    #{item.periodValidity},
+    #{item.businessScope},
+    #{item.supplierAddress},
+    #{item.businessImgPath},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_logistics_supplier_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsLogisticsSupplierInfo">
+        SELECT * from  tb_jiangyukeji_ins_logistics_supplier_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="supplierName!=null and supplierName!=''">
+            and supplier_name = #{supplierName}
+        </if>
+        <if test="supplierType!=null and supplierType!=''">
+            and supplier_type = #{supplierType}
+        </if>
+        <if test="linkMan!=null and linkMan!=''">
+            and link_man = #{linkMan}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="legalPerson!=null and legalPerson!=''">
+            and legal_person = #{legalPerson}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="documentCode!=null and documentCode!=''">
+            and document_code = #{documentCode}
+        </if>
+        <if test="taxNumber!=null and taxNumber!=''">
+            and tax_number = #{taxNumber}
+        </if>
+        <if test="accountName!=null and accountName!=''">
+            and account_name = #{accountName}
+        </if>
+        <if test="bankName!=null and bankName!=''">
+            and bank_name = #{bankName}
+        </if>
+        <if test="bankCode!=null and bankCode!=''">
+            and bank_code = #{bankCode}
+        </if>
+        <if test="businessNumber!=null and businessNumber!=''">
+            and business_number = #{businessNumber}
+        </if>
+        <if test="periodValidity!=null and periodValidity!=''">
+            and period_validity = #{periodValidity}
+        </if>
+        <if test="businessScope!=null and businessScope!=''">
+            and business_scope = #{businessScope}
+        </if>
+        <if test="supplierAddress!=null and supplierAddress!=''">
+            and supplier_address = #{supplierAddress}
+        </if>
+        <if test="businessImgPath!=null and businessImgPath!=''">
+            and business_img_path = #{businessImgPath}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_logistics_supplier_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="supplierName!=null and supplierName!=''">
+            and supplier_name = #{supplierName}
+        </if>
+        <if test="supplierType!=null and supplierType!=''">
+            and supplier_type = #{supplierType}
+        </if>
+        <if test="linkMan!=null and linkMan!=''">
+            and link_man = #{linkMan}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="legalPerson!=null and legalPerson!=''">
+            and legal_person = #{legalPerson}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="documentCode!=null and documentCode!=''">
+            and document_code = #{documentCode}
+        </if>
+        <if test="taxNumber!=null and taxNumber!=''">
+            and tax_number = #{taxNumber}
+        </if>
+        <if test="accountName!=null and accountName!=''">
+            and account_name = #{accountName}
+        </if>
+        <if test="bankName!=null and bankName!=''">
+            and bank_name = #{bankName}
+        </if>
+        <if test="bankCode!=null and bankCode!=''">
+            and bank_code = #{bankCode}
+        </if>
+        <if test="businessNumber!=null and businessNumber!=''">
+            and business_number = #{businessNumber}
+        </if>
+        <if test="periodValidity!=null and periodValidity!=''">
+            and period_validity = #{periodValidity}
+        </if>
+        <if test="businessScope!=null and businessScope!=''">
+            and business_scope = #{businessScope}
+        </if>
+        <if test="supplierAddress!=null and supplierAddress!=''">
+            and supplier_address = #{supplierAddress}
+        </if>
+        <if test="businessImgPath!=null and businessImgPath!=''">
+            and business_img_path = #{businessImgPath}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

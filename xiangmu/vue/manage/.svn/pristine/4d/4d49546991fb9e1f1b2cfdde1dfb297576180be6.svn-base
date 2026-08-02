@@ -1,0 +1,211 @@
+<template>
+  <div class="login-box">
+    <!-- 右侧海报 -->
+    <div class="login-left">
+      <img class="login-left-bg" src="../assets/images/login_left_bg.jpg" alt=""/>
+    </div>
+
+    <!-- 左侧登录 -->
+    <div class="login-right">
+      <div class="login-logo">
+        <img src="../assets/images/login_app_logo.png" alt="">
+      </div>
+      <div class="login-title">
+        城投康养家管理平台
+      </div>
+      <div class="login-form">
+        <label class='login-icon'><i class="el-icon-user"></i></label>
+        <input class="login-input" type="text" placeholder="请输入账号" v-model="username" />
+      </div>
+      <div class="login-form">
+        <label class='login-icon'><i class="el-icon-lock"></i></label>
+        <input class="login-input" type="password" placeholder="请输入密码" v-model="password" @keyup.enter="enterSubmit" />
+      </div>
+      <button class="login_btn" type="button" @click="submit">登 录</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      code: "",
+    };
+  },
+  methods: {
+    // 登录
+    submit() {
+      var that = this;
+
+      if (!that.username) {
+        that.$message({
+          message: "请输入用户名",
+          type: "warning",
+        });
+        return;
+      }
+      if (!that.password) {
+        that.$message({
+          message: "请输入密码",
+          type: "warning",
+        });
+        return;
+      }
+      console.log(that.username);
+      console.log(that.$md5(that.password));
+
+      //登陆到首页
+      that.$http
+        .post("/userInfo/login", {
+          loginName: that.username,
+          password: that.$md5(that.password),
+        })
+        .then(function (response) {
+          if(response.data.code==200){
+            that.setLocalStorage(
+              "token",
+              response.data.code,
+              30 * 60 * 1000
+            );
+            localStorage.setItem("loginName", that.username, 30 * 60 * 1000);
+            localStorage.setItem("userInfo", JSON.stringify(response.data.data));
+            localStorage.setItem("authToken", response.data.data.token);
+            that.username = "";
+            that.password = "";
+            that.$router.push({ path: "/index" });
+          }else{
+             that.$message({
+                message: response.data.message,
+                type: "warning",
+              });
+          }
+        });
+    },
+    // 回车事件
+    enterSubmit() {
+      this.submit();
+    },
+
+    setLocalStorage(key, value, expires) {
+      // 保持到LocalStorage,expires单位是毫秒
+      // expires = expires * 1000;
+      let params = { key, value, expires };
+      if (expires) {
+        // 记录何时将值存入缓存，毫秒级
+        var data = Object.assign(params, { startTime: new Date().getTime() });
+        localStorage.setItem(key, JSON.stringify(data));
+      } else {
+        if (Object.prototype.toString.call(value) == "[object Object]") {
+          value = JSON.stringify(value);
+        }
+        if (Object.prototype.toString.call(value) == "[object Array]") {
+          value = JSON.stringify(value);
+        }
+        localStorage.setItem(key, value);
+      }
+    },
+  },
+  created() {},
+};
+</script>
+
+<style lang="less" scoped>
+.login-box {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  .login-left {
+    width: calc(100% - 520px);
+    height: 100vh;
+    overflow: hidden;
+
+    .login-left-bg {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+  .login-right {
+    min-width: 400px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 60px 0 60px;
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 70px;
+
+      img {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    .login-title {
+      font-size: 27px;
+      color: #333;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 20px;
+      padding-bottom: 60px;
+    }
+
+    .login-form {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 45px;
+
+      .login-icon {
+        margin-left: 10px;
+        color: #333;
+        font-size: 20px;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .login-input {
+        flex: 1;
+        height: 32px;
+        border: none;
+        outline: 0;
+        font-size: 15px;
+        box-sizing: border-box;
+        outline: none;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .login-input ::placeholder {
+        color: #333 !important;
+      }
+    }
+
+    .login_btn {
+        height: 45px;
+        background: #409eff;
+        border-radius: 5px;
+        background-color: #409eff;
+        margin-top: 30px;
+        border: none;
+        color: white;
+        font-size: 16px;
+    }
+  }
+}
+
+</style>
+

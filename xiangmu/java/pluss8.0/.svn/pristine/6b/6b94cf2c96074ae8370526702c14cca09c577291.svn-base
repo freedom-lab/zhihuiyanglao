@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthFollowUpMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    follow_up_no,
+    archive_id,
+    elder_id,
+    elder_name,
+    doctor_id,
+    doctor_name,
+    follow_up_date,
+    follow_up_type,
+    symptoms_signs,
+    blood_pressure_sys,
+    blood_pressure_dia,
+    blood_sugar_fasting,
+    blood_sugar_postprandial,
+    heart_rate,
+    weight,
+    medication_adherence,
+    plan_execution,
+    existing_problems,
+    treatment_advice,
+    control_status,
+    risk_level,
+    next_follow_up_date,
+    file_path,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.followUpNo},
+    #{item.archiveId},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.doctorId},
+    #{item.doctorName},
+    #{item.followUpDate},
+    #{item.followUpType},
+    #{item.symptomsSigns},
+    #{item.bloodPressureSys},
+    #{item.bloodPressureDia},
+    #{item.bloodSugarFasting},
+    #{item.bloodSugarPostprandial},
+    #{item.heartRate},
+    #{item.weight},
+    #{item.medicationAdherence},
+    #{item.planExecution},
+    #{item.existingProblems},
+    #{item.treatmentAdvice},
+    #{item.controlStatus},
+    #{item.riskLevel},
+    #{item.nextFollowUpDate},
+    #{item.filePath},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_follow_up
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthFollowUp">
+        SELECT * from  tb_jiangyukeji_health_follow_up
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="followUpNo!=null and followUpNo!=''">
+            and follow_up_no = #{followUpNo}
+        </if>
+        <if test="archiveId!=null and archiveId!=''">
+            and archive_id = #{archiveId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="followUpDate!=null and followUpDate!=''">
+            and follow_up_date = #{followUpDate}
+        </if>
+        <if test="followUpType!=null and followUpType!=''">
+            and follow_up_type = #{followUpType}
+        </if>
+        <if test="symptomsSigns!=null and symptomsSigns!=''">
+            and symptoms_signs = #{symptomsSigns}
+        </if>
+        <if test="bloodPressureSys!=null and bloodPressureSys!=''">
+            and blood_pressure_sys = #{bloodPressureSys}
+        </if>
+        <if test="bloodPressureDia!=null and bloodPressureDia!=''">
+            and blood_pressure_dia = #{bloodPressureDia}
+        </if>
+        <if test="bloodSugarFasting!=null and bloodSugarFasting!=''">
+            and blood_sugar_fasting = #{bloodSugarFasting}
+        </if>
+        <if test="bloodSugarPostprandial!=null and bloodSugarPostprandial!=''">
+            and blood_sugar_postprandial = #{bloodSugarPostprandial}
+        </if>
+        <if test="heartRate!=null and heartRate!=''">
+            and heart_rate = #{heartRate}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="medicationAdherence!=null and medicationAdherence!=''">
+            and medication_adherence = #{medicationAdherence}
+        </if>
+        <if test="planExecution!=null and planExecution!=''">
+            and plan_execution = #{planExecution}
+        </if>
+        <if test="existingProblems!=null and existingProblems!=''">
+            and existing_problems = #{existingProblems}
+        </if>
+        <if test="treatmentAdvice!=null and treatmentAdvice!=''">
+            and treatment_advice = #{treatmentAdvice}
+        </if>
+        <if test="controlStatus!=null and controlStatus!=''">
+            and control_status = #{controlStatus}
+        </if>
+        <if test="riskLevel!=null and riskLevel!=''">
+            and risk_level = #{riskLevel}
+        </if>
+        <if test="nextFollowUpDate!=null and nextFollowUpDate!=''">
+            and next_follow_up_date = #{nextFollowUpDate}
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            and file_path = #{filePath}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_follow_up
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="followUpNo!=null and followUpNo!=''">
+            and follow_up_no = #{followUpNo}
+        </if>
+        <if test="archiveId!=null and archiveId!=''">
+            and archive_id = #{archiveId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="followUpDate!=null and followUpDate!=''">
+            and follow_up_date = #{followUpDate}
+        </if>
+        <if test="followUpType!=null and followUpType!=''">
+            and follow_up_type = #{followUpType}
+        </if>
+        <if test="symptomsSigns!=null and symptomsSigns!=''">
+            and symptoms_signs = #{symptomsSigns}
+        </if>
+        <if test="bloodPressureSys!=null and bloodPressureSys!=''">
+            and blood_pressure_sys = #{bloodPressureSys}
+        </if>
+        <if test="bloodPressureDia!=null and bloodPressureDia!=''">
+            and blood_pressure_dia = #{bloodPressureDia}
+        </if>
+        <if test="bloodSugarFasting!=null and bloodSugarFasting!=''">
+            and blood_sugar_fasting = #{bloodSugarFasting}
+        </if>
+        <if test="bloodSugarPostprandial!=null and bloodSugarPostprandial!=''">
+            and blood_sugar_postprandial = #{bloodSugarPostprandial}
+        </if>
+        <if test="heartRate!=null and heartRate!=''">
+            and heart_rate = #{heartRate}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="medicationAdherence!=null and medicationAdherence!=''">
+            and medication_adherence = #{medicationAdherence}
+        </if>
+        <if test="planExecution!=null and planExecution!=''">
+            and plan_execution = #{planExecution}
+        </if>
+        <if test="existingProblems!=null and existingProblems!=''">
+            and existing_problems = #{existingProblems}
+        </if>
+        <if test="treatmentAdvice!=null and treatmentAdvice!=''">
+            and treatment_advice = #{treatmentAdvice}
+        </if>
+        <if test="controlStatus!=null and controlStatus!=''">
+            and control_status = #{controlStatus}
+        </if>
+        <if test="riskLevel!=null and riskLevel!=''">
+            and risk_level = #{riskLevel}
+        </if>
+        <if test="nextFollowUpDate!=null and nextFollowUpDate!=''">
+            and next_follow_up_date = #{nextFollowUpDate}
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            and file_path = #{filePath}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

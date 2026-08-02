@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartDeviceParamFallMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    grant_id,
+    device_name,
+    device_serial,
+    fall_type,
+    install_height,
+    someone_exist,
+    motion_status,
+    movement_sign,
+    param,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.grantId},
+    #{item.deviceName},
+    #{item.deviceSerial},
+    #{item.fallType},
+    #{item.installHeight},
+    #{item.someoneExist},
+    #{item.motionStatus},
+    #{item.movementSign},
+    #{item.param},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_device_param_fall
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.SmartDeviceParamFall">
+        SELECT * from  tb_jiangyukeji_smart_device_param_fall
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="fallType!=null and fallType!=''">
+            and fall_type = #{fallType}
+        </if>
+        <if test="installHeight!=null and installHeight!=''">
+            and install_height = #{installHeight}
+        </if>
+        <if test="someoneExist!=null and someoneExist!=''">
+            and someone_exist = #{someoneExist}
+        </if>
+        <if test="motionStatus!=null and motionStatus!=''">
+            and motion_status = #{motionStatus}
+        </if>
+        <if test="movementSign!=null and movementSign!=''">
+            and movement_sign = #{movementSign}
+        </if>
+        <if test="param!=null and param!=''">
+            and param = #{param}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_device_param_fall
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="fallType!=null and fallType!=''">
+            and fall_type = #{fallType}
+        </if>
+        <if test="installHeight!=null and installHeight!=''">
+            and install_height = #{installHeight}
+        </if>
+        <if test="someoneExist!=null and someoneExist!=''">
+            and someone_exist = #{someoneExist}
+        </if>
+        <if test="motionStatus!=null and motionStatus!=''">
+            and motion_status = #{motionStatus}
+        </if>
+        <if test="movementSign!=null and movementSign!=''">
+            and movement_sign = #{movementSign}
+        </if>
+        <if test="param!=null and param!=''">
+            and param = #{param}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

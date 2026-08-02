@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsBaseBuildingInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    parent_id,
+    parent_name,
+    building_name,
+    img_path,
+    floor_num,
+    building_type,
+    house_img,
+    structure_img,
+    indoor_positioning_id,
+    indoor_map_id,
+    indoor_ceiling_num,
+    indoor_ground_num,
+    sort_num,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    bed_num,
+    occupancy_num
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.parentId},
+    #{item.parentName},
+    #{item.buildingName},
+    #{item.imgPath},
+    #{item.floorNum},
+    #{item.buildingType},
+    #{item.houseImg},
+    #{item.structureImg},
+    #{item.indoorPositioningId},
+    #{item.indoorMapId},
+    #{item.indoorCeilingNum},
+    #{item.indoorGroundNum},
+    #{item.sortNum},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.bedNum},
+    #{item.occupancyNum}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_base_building_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsBaseBuildingInfo">
+        SELECT * from  tb_jiangyukeji_ins_base_building_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="parentId!=null and parentId!=''">
+            and parent_id = #{parentId}
+        </if>
+        <if test="parentName!=null and parentName!=''">
+            and parent_name = #{parentName}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="floorNum!=null and floorNum!=''">
+            and floor_num = #{floorNum}
+        </if>
+        <if test="buildingType!=null and buildingType!=''">
+            and building_type = #{buildingType}
+        </if>
+        <if test="houseImg!=null and houseImg!=''">
+            and house_img = #{houseImg}
+        </if>
+        <if test="structureImg!=null and structureImg!=''">
+            and structure_img = #{structureImg}
+        </if>
+        <if test="indoorPositioningId!=null and indoorPositioningId!=''">
+            and indoor_positioning_id = #{indoorPositioningId}
+        </if>
+        <if test="indoorMapId!=null and indoorMapId!=''">
+            and indoor_map_id = #{indoorMapId}
+        </if>
+        <if test="indoorCeilingNum!=null and indoorCeilingNum!=''">
+            and indoor_ceiling_num = #{indoorCeilingNum}
+        </if>
+        <if test="indoorGroundNum!=null and indoorGroundNum!=''">
+            and indoor_ground_num = #{indoorGroundNum}
+        </if>
+        <if test="sortNum!=null and sortNum!=''">
+            and sort_num = #{sortNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="bedNum!=null">
+            and bed_num = #{bedNum}
+        </if>
+        <if test="occupancyNum!=null">
+            and occupancy_num = #{occupancyNum}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_base_building_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="parentId!=null and parentId!=''">
+            and parent_id = #{parentId}
+        </if>
+        <if test="parentName!=null and parentName!=''">
+            and parent_name = #{parentName}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="floorNum!=null and floorNum!=''">
+            and floor_num = #{floorNum}
+        </if>
+        <if test="buildingType!=null and buildingType!=''">
+            and building_type = #{buildingType}
+        </if>
+        <if test="houseImg!=null and houseImg!=''">
+            and house_img = #{houseImg}
+        </if>
+        <if test="structureImg!=null and structureImg!=''">
+            and structure_img = #{structureImg}
+        </if>
+        <if test="indoorPositioningId!=null and indoorPositioningId!=''">
+            and indoor_positioning_id = #{indoorPositioningId}
+        </if>
+        <if test="indoorMapId!=null and indoorMapId!=''">
+            and indoor_map_id = #{indoorMapId}
+        </if>
+        <if test="indoorCeilingNum!=null and indoorCeilingNum!=''">
+            and indoor_ceiling_num = #{indoorCeilingNum}
+        </if>
+        <if test="indoorGroundNum!=null and indoorGroundNum!=''">
+            and indoor_ground_num = #{indoorGroundNum}
+        </if>
+        <if test="sortNum!=null and sortNum!=''">
+            and sort_num = #{sortNum}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="bedNum!=null">
+            and bed_num = #{bedNum}
+        </if>
+        <if test="occupancyNum!=null">
+            and occupancy_num = #{occupancyNum}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.MenuInfoMapper">
+
+	   	<insert id="saveMenuInfo" parameterType="cn.pluss.platform.model.auth.MenuInfo">
+        	insert into tb_yunlankeji_menu_info(name,menuType,link,menuOrder,iconUrl,visible,creator,description,seq,menuCode,parentCode,activeIconUrl,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{name},#{menuType},#{link},#{menuOrder},#{iconUrl},#{visible},#{creator},#{description},#{seq},#{menuCode},#{parentCode},#{activeIconUrl},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    	</insert>
+
+	   	<insert id="saveMenuInfoBatch">
+        	insert into tb_yunlankeji_menu_info(name,menuType,link,menuOrder,iconUrl,visible,creator,description,seq,menuCode,parentCode,activeIconUrl,tenant_id,corp_id,corp_name,institution_id,institution_name) VALUES
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{name},#{menuType},#{link},#{menuOrder},#{iconUrl},#{visible},#{creator},#{description},#{seq},#{menuCode},#{parentCode},#{activeIconUrl},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+				</foreach>
+    	</insert>
+
+		<select id="queryMenuInfo" parameterType="cn.pluss.platform.model.auth.MenuInfo" resultType="cn.pluss.platform.model.auth.MenuInfo">
+			SELECT * from tb_yunlankeji_menu_info 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="name!= null and name!='' "> 
+					 	and name = #{name}
+					 </if> 
+					<if test="menuType!= null and menuType!='' "> 
+					 	and menuType = #{menuType}
+					 </if> 
+					<if test="link!= null and link!='' "> 
+					 	and link = #{link}
+					 </if> 
+					<if test="menuOrder!= null and menuOrder!='' "> 
+					 	and menuOrder = #{menuOrder}
+					 </if> 
+					<if test="iconUrl!= null and iconUrl!='' "> 
+					 	and iconUrl = #{iconUrl}
+					 </if> 
+					<if test="visible!= null and visible!='' "> 
+					 	and visible = #{visible}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 	and creator = #{creator}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 	and description = #{description}
+					 </if> 
+					<if test="seq!= null and seq!='' "> 
+					 	and seq = #{seq}
+					 </if> 
+					<if test="menuCode!= null and menuCode!='' "> 
+					 	and menuCode = #{menuCode}
+					 </if> 
+					<if test="parentCode!= null and parentCode!='' "> 
+					 	and parentCode = #{parentCode}
+					 </if>
+                    <if test="activeIconUrl!= null and activeIconUrl!='' ">
+                        and activeIconUrl = #{activeIconUrl}
+                    </if>
+			         <if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					 <if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					 <if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					 <if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					 <if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+                </where>
+				 ORDER BY menuOrder desc
+		</select>
+
+		<select id="queryMenuInfoList" parameterType="cn.pluss.platform.model.auth.MenuInfo" resultType="cn.pluss.platform.model.auth.MenuInfo">
+			SELECT * from tb_yunlankeji_menu_info 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="name!= null and name!='' "> 
+					 and 	name = #{name}
+					 </if> 
+					<if test="menuType!= null and menuType!='' "> 
+					 and 	menuType = #{menuType}
+					 </if> 
+					<if test="link!= null and link!='' "> 
+					 and 	link = #{link}
+					 </if> 
+					<if test="menuOrder!= null and menuOrder!='' "> 
+					 and 	menuOrder = #{menuOrder}
+					 </if> 
+					<if test="iconUrl!= null and iconUrl!='' "> 
+					 and 	iconUrl = #{iconUrl}
+					 </if> 
+					<if test="visible!= null and visible!='' "> 
+					 and 	visible = #{visible}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 and 	creator = #{creator}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 and 	description = #{description}
+					 </if> 
+					<if test="seq!= null and seq!='' "> 
+					 and 	seq = #{seq}
+					 </if> 
+					<if test="menuCode!= null and menuCode!='' "> 
+					 and 	menuCode = #{menuCode}
+					 </if> 
+					<if test="parentCode!= null and parentCode!='' "> 
+					 and 	parentCode = #{parentCode}
+					 </if>
+                    <if test="activeIconUrl!= null and activeIconUrl!='' ">
+                        and activeIconUrl = #{activeIconUrl}
+                    </if>
+			         <if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					 <if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					 <if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					 <if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					 <if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where> 
+				 ORDER BY menuOrder desc
+		</select>
+
+		<update id="updateMenuInfo" parameterType="cn.pluss.platform.model.auth.MenuInfo" >
+			update tb_yunlankeji_menu_info 
+				  <set> 
+					<if test="name!= null  and name!='' "> 
+					 	name = #{name},
+					 </if> 
+					<if test="menuType!= null  and menuType!='' "> 
+					 	menuType = #{menuType},
+					 </if> 
+					<if test="link!= null  and link!='' "> 
+					 	link = #{link},
+					 </if> 
+					<if test="menuOrder!= null  and menuOrder!='' "> 
+					 	menuOrder = #{menuOrder},
+					 </if> 
+					<if test="iconUrl!= null  and iconUrl!='' "> 
+					 	iconUrl = #{iconUrl},
+					 </if> 
+					<if test="visible!= null  and visible!='' "> 
+					 	visible = #{visible},
+					 </if> 
+					<if test="creator!= null  and creator!='' "> 
+					 	creator = #{creator},
+					 </if> 
+					<if test="description!= null  and description!='' "> 
+					 	description = #{description},
+					 </if> 
+					<if test="seq!= null  and seq!='' "> 
+					 	seq = #{seq},
+					 </if> 
+					<if test="menuCode!= null  and menuCode!='' "> 
+					 	menuCode = #{menuCode},
+					 </if> 
+					<if test="parentCode!= null  and parentCode!='' "> 
+					 	parentCode = #{parentCode}
+					 </if>
+                      <if test="activeIconUrl!= null and activeIconUrl!='' ">
+                        activeIconUrl = #{activeIconUrl}
+                      </if>
+			         <if test="tenantId!= null and tenantId!='' ">
+					 	tenant_id = #{tenantId},
+					 </if>
+					 <if test="corpId!= null and corpId!='' ">
+					 	corp_id = #{corpId},
+					 </if>
+					 <if test="corpName!= null and corpName!='' ">
+					 	corp_name = #{corpName},
+					 </if>
+					 <if test="institutionId!= null and institutionId!='' ">
+					 	institution_id = #{institutionId},
+					 </if>
+					 <if test="institutionName!= null and institutionName!='' ">
+					 	institution_name = #{institutionName},
+					 </if>
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deleteMenuInfo" parameterType="cn.pluss.platform.model.auth.MenuInfo" >
+			DELETE FROM tb_yunlankeji_menu_info where id=#{id}
+		</delete>
+
+		<delete id="deleteMenuInfoBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_menu_info where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryMenuInfoPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.MenuInfo">
+			SELECT * from tb_yunlankeji_menu_info 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="name!= null  and name!=''   "> 
+					and name = #{name}
+					 </if> 
+					<if test="menuType!= null  and menuType!=''   "> 
+					and menuType = #{menuType}
+					 </if> 
+					<if test="link!= null  and link!=''   "> 
+					and link = #{link}
+					 </if> 
+					<if test="menuOrder!= null  and menuOrder!=''   "> 
+					and menuOrder = #{menuOrder}
+					 </if> 
+					<if test="iconUrl!= null  and iconUrl!=''   "> 
+					and iconUrl = #{iconUrl}
+					 </if> 
+					<if test="visible!= null  and visible!=''   "> 
+					and visible = #{visible}
+					 </if> 
+					<if test="creator!= null  and creator!=''   "> 
+					and creator = #{creator}
+					 </if> 
+					<if test="description!= null  and description!=''   "> 
+					and description = #{description}
+					 </if> 
+					<if test="seq!= null  and seq!=''   "> 
+					and seq = #{seq}
+					 </if> 
+					<if test="menuCode!= null  and menuCode!=''   "> 
+					and menuCode = #{menuCode}
+					 </if> 
+					<if test="parentCode!= null  and parentCode!=''   "> 
+					and parentCode = #{parentCode}
+					 </if>
+                    <if test="activeIconUrl!= null and activeIconUrl!='' ">
+                        and activeIconUrl = #{activeIconUrl}
+                    </if>
+			         <if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					 <if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					 <if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					 <if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					 <if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where> 
+			ORDER BY menuOrder desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryMenuInfoPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_menu_info 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="name!= null  and name!=''  "> 
+					 and name = #{name}
+					 </if> 
+					<if test="menuType!= null  and menuType!=''  "> 
+					 and menuType = #{menuType}
+					 </if> 
+					<if test="link!= null  and link!=''  "> 
+					 and link = #{link}
+					 </if> 
+					<if test="menuOrder!= null  and menuOrder!=''  "> 
+					 and menuOrder = #{menuOrder}
+					 </if> 
+					<if test="iconUrl!= null  and iconUrl!=''  "> 
+					 and iconUrl = #{iconUrl}
+					 </if> 
+					<if test="visible!= null  and visible!=''  "> 
+					 and visible = #{visible}
+					 </if> 
+					<if test="creator!= null  and creator!=''  "> 
+					 and creator = #{creator}
+					 </if> 
+					<if test="description!= null  and description!=''  "> 
+					 and description = #{description}
+					 </if> 
+					<if test="seq!= null  and seq!=''  "> 
+					 and seq = #{seq}
+					 </if> 
+					<if test="menuCode!= null  and menuCode!=''  "> 
+					 and menuCode = #{menuCode}
+					 </if> 
+					<if test="parentCode!= null  and parentCode!=''  "> 
+					 and parentCode = #{parentCode}
+					 </if>
+                        <if test="activeIconUrl!= null and activeIconUrl!='' ">
+                            and activeIconUrl = #{activeIconUrl}
+                        </if>
+			         <if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					 <if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					 <if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					 <if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					 <if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				</where>
+		</select>
+
+
+
+	<select id="queryMenuInfoByRole" parameterType="java.util.List" resultType="cn.pluss.platform.model.auth.MenuInfo">
+		select * from tb_yunlankeji_menu_info   where menuCode IN(
+		    select menuCode from tb_yunlankeji_role_menu_info
+		    where  roleCode in(
+				<foreach collection="list" item="item" separator=",">
+					#{item}
+				</foreach>
+		        )
+		    )  ORDER BY menuOrder desc
+	</select>
+</mapper>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.PortalConfigMapper">
+
+	   	<insert id="savePortalConfig" parameterType="cn.pluss.platform.model.auth.PortalConfig">
+        	insert into tb_yunlankeji_portal_config(draft,content,createDt,releaseDt,updateDt,updateor,conserve)VALUES(#{draft},#{content},#{createDt},#{releaseDt},#{updateDt},#{updateor},#{conserve})
+    	</insert>
+
+	   	<insert id="savePortalConfigBatch">
+        	insert into tb_yunlankeji_portal_config(draft,content,createDt,releaseDt,updateDt,updateor) VALUES 
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{draft},#{content},#{createDt},#{releaseDt},#{updateDt},#{updateor}		)
+				</foreach>
+    	</insert>
+
+		<select id="queryPortalConfig" parameterType="cn.pluss.platform.model.auth.PortalConfig" resultType="cn.pluss.platform.model.auth.PortalConfig">
+			SELECT * from tb_yunlankeji_portal_config 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="draft!= null and draft!='' "> 
+					 	and draft = #{draft}
+					 </if> 
+					<if test="content!= null and content!='' "> 
+					 	and content = #{content}
+					 </if> 
+					<if test="createDt!= null and createDt!='' "> 
+					 	and createDt = #{createDt}
+					 </if> 
+					<if test="releaseDt!= null and releaseDt!='' "> 
+					 	and releaseDt = #{releaseDt}
+					 </if> 
+					<if test="updateDt!= null and updateDt!='' "> 
+					 	and updateDt = #{updateDt}
+					 </if> 
+					<if test="updateor!= null and updateor!='' "> 
+					 	and updateor = #{updateor}
+					 </if> 
+				 </where> 
+		</select>
+
+		<select id="queryPortalConfigList" parameterType="cn.pluss.platform.model.auth.PortalConfig" resultType="cn.pluss.platform.model.auth.PortalConfig">
+			SELECT * from tb_yunlankeji_portal_config 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="draft!= null and draft!='' "> 
+					 and 	draft = #{draft}
+					 </if> 
+					<if test="content!= null and content!='' "> 
+					 and 	content = #{content}
+					 </if> 
+					<if test="createDt!= null and createDt!='' "> 
+					 and 	createDt = #{createDt}
+					 </if> 
+					<if test="releaseDt!= null and releaseDt!='' "> 
+					 and 	releaseDt = #{releaseDt}
+					 </if> 
+					<if test="updateDt!= null and updateDt!='' "> 
+					 and 	updateDt = #{updateDt}
+					 </if> 
+					<if test="updateor!= null and updateor!='' "> 
+					 and 	updateor = #{updateor}
+					 </if> 
+				 </where> 
+		</select>
+
+		<update id="updatePortalConfig" parameterType="cn.pluss.platform.model.auth.PortalConfig" >
+			update tb_yunlankeji_portal_config 
+				  <set> 
+					<if test="draft!= null  and draft!='' "> 
+					 	draft = #{draft},
+					 </if> 
+					<if test="content!= null  and content!='' "> 
+					 	content = #{content},
+					 </if> 
+					<if test="createDt!= null  "> 
+					 	createDt = #{createDt},
+					 </if> 
+					<if test="releaseDt!= null  "> 
+					 	releaseDt = #{releaseDt},
+					 </if> 
+					<if test="updateDt!= null  "> 
+					 	updateDt = #{updateDt},
+					 </if> 
+					<if test="updateor!= null  and updateor!='' "> 
+					 	updateor = #{updateor}
+					 </if>
+					 <if test="conserve!= null  and conserve!='' "> 
+					 	conserve = #{conserve}
+					 </if> 
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deletePortalConfig" parameterType="cn.pluss.platform.model.auth.PortalConfig" >
+			DELETE FROM tb_yunlankeji_portal_config where id=#{id}
+		</delete>
+
+		<delete id="deletePortalConfigBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_portal_config where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryPortalConfigPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.PortalConfig">
+			SELECT * from tb_yunlankeji_portal_config 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="draft!= null  and draft!=''   "> 
+					and draft = #{draft}
+					 </if> 
+					<if test="content!= null  and content!=''   "> 
+					and content = #{content}
+					 </if> 
+					<if test="createDt!= null  and createDt!=''   "> 
+					and createDt = #{createDt}
+					 </if> 
+					<if test="releaseDt!= null  and releaseDt!=''   "> 
+					and releaseDt = #{releaseDt}
+					 </if> 
+					<if test="updateDt!= null  and updateDt!=''   "> 
+					and updateDt = #{updateDt}
+					 </if> 
+					<if test="updateor!= null  and updateor!=''   "> 
+					and updateor = #{updateor}
+					 </if> 
+				 </where> 
+			order by id desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryPortalConfigPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_portal_config 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="draft!= null  and draft!=''  "> 
+					 and draft = #{draft}
+					 </if> 
+					<if test="content!= null  and content!=''  "> 
+					 and content = #{content}
+					 </if> 
+					<if test="createDt!= null  and createDt!=''  "> 
+					 and createDt = #{createDt}
+					 </if> 
+					<if test="releaseDt!= null  and releaseDt!=''  "> 
+					 and releaseDt = #{releaseDt}
+					 </if> 
+					<if test="updateDt!= null  and updateDt!=''  "> 
+					 and updateDt = #{updateDt}
+					 </if> 
+					<if test="updateor!= null  and updateor!=''  "> 
+					 and updateor = #{updateor}
+					 </if> 
+				</where>
+		</select>
+
+</mapper>

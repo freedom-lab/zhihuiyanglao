@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsElderCheckInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    link_tel,
+    sex,
+    age,
+    apply_date,
+    check_step,
+    plan_date,
+    check_date,
+    trying_end_date,
+    check_state,
+    check_code,
+    building_id,
+    building_name,
+    floor_id,
+    floor_name,
+    room_id,
+    room_name,
+    bed_id,
+    bed_name,
+    bed_code,
+    bed_info,
+    is_room,
+    nursing_level_id,
+    nursing_level_name,
+    nursing_group_id,
+    nursing_group_name,
+    nursing_staff_id,
+    nursing_staff_name,
+    check_type,
+    is_household,
+    household_id,
+    turn_over_state,
+    elder_category,
+    elder_category_time,
+    retreat_time,
+    area_code,
+    area_name,
+    total_audit_state,
+    media_channels,
+    sign_way,
+    sign_is_video,
+    relatives_id,
+    relatives_name,
+    pass_word,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    video_id,
+    benefits_id,
+    benefits_name,
+    admission_method,
+    household_check_state,
+    household_relationship,
+    blood_type
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.linkTel},
+    #{item.sex},
+    #{item.age},
+    #{item.applyDate},
+    #{item.checkStep},
+    #{item.planDate},
+    #{item.checkDate},
+    #{item.tryingEndDate},
+    #{item.checkState},
+    #{item.checkCode},
+    #{item.buildingId},
+    #{item.buildingName},
+    #{item.floorId},
+    #{item.floorName},
+    #{item.roomId},
+    #{item.roomName},
+    #{item.bedId},
+    #{item.bedName},
+    #{item.bedCode},
+    #{item.bedInfo},
+    #{item.isRoom},
+    #{item.nursingLevelId},
+    #{item.nursingLevelName},
+    #{item.nursingGroupId},
+    #{item.nursingGroupName},
+    #{item.nursingStaffId},
+    #{item.nursingStaffName},
+    #{item.checkType},
+    #{item.isHousehold},
+    #{item.householdId},
+    #{item.turnOverState},
+    #{item.elderCategory},
+    #{item.elderCategoryTime},
+    #{item.retreatTime},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.totalAuditState},
+    #{item.mediaChannels},
+    #{item.signWay},
+    #{item.signIsVideo},
+    #{item.relativesId},
+    #{item.relativesName},
+    #{item.passWord},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.videoId},
+    #{item.benefitsId},
+    #{item.benefitsName},
+    #{item.admissionMethod},
+    #{item.householdCheckState},
+    #{item.householdRelationship},
+    #{item.bloodType}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_elder_check_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsElderCheckInfo">
+        SELECT * from  tb_jiangyukeji_ins_elder_check_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="applyDate!=null and applyDate!=''">
+            and apply_date = #{applyDate}
+        </if>
+        <if test="checkStep!=null and checkStep!=''">
+            and check_step = #{checkStep}
+        </if>
+        <if test="planDate!=null and planDate!=''">
+            and plan_date = #{planDate}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="tryingEndDate!=null and tryingEndDate!=''">
+            and trying_end_date = #{tryingEndDate}
+        </if>
+        <if test="checkState!=null and checkState!=''">
+            and check_state = #{checkState}
+        </if>
+        <if test="checkCode!=null and checkCode!=''">
+            and check_code = #{checkCode}
+        </if>
+        <if test="buildingId!=null and buildingId!=''">
+            and building_id = #{buildingId}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="floorId!=null and floorId!=''">
+            and floor_id = #{floorId}
+        </if>
+        <if test="floorName!=null and floorName!=''">
+            and floor_name = #{floorName}
+        </if>
+        <if test="roomId!=null and roomId!=''">
+            and room_id = #{roomId}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="bedId!=null and bedId!=''">
+            and bed_id = #{bedId}
+        </if>
+        <if test="bedName!=null and bedName!=''">
+            and bed_name = #{bedName}
+        </if>
+        <if test="bedCode!=null and bedCode!=''">
+            and bed_code = #{bedCode}
+        </if>
+        <if test="bedInfo!=null and bedInfo!=''">
+            and bed_info = #{bedInfo}
+        </if>
+        <if test="isRoom!=null and isRoom!=''">
+            and is_room = #{isRoom}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="nursingGroupId!=null and nursingGroupId!=''">
+            and nursing_group_id = #{nursingGroupId}
+        </if>
+        <if test="nursingGroupName!=null and nursingGroupName!=''">
+            and nursing_group_name = #{nursingGroupName}
+        </if>
+        <if test="nursingStaffId!=null and nursingStaffId!=''">
+            and nursing_staff_id = #{nursingStaffId}
+        </if>
+        <if test="nursingStaffName!=null and nursingStaffName!=''">
+            and nursing_staff_name = #{nursingStaffName}
+        </if>
+        <if test="checkType!=null and checkType!=''">
+            and check_type = #{checkType}
+        </if>
+        <if test="isHousehold!=null and isHousehold!=''">
+            and is_household = #{isHousehold}
+        </if>
+        <if test="householdId!=null and householdId!=''">
+            and household_id = #{householdId}
+        </if>
+        <if test="turnOverState!=null and turnOverState!=''">
+            and turn_over_state = #{turnOverState}
+        </if>
+        <if test="elderCategory!=null and elderCategory!=''">
+            and elder_category = #{elderCategory}
+        </if>
+        <if test="elderCategoryTime!=null and elderCategoryTime!=''">
+            and elder_category_time = #{elderCategoryTime}
+        </if>
+        <if test="retreatTime!=null and retreatTime!=''">
+            and retreat_time = #{retreatTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="totalAuditState!=null and totalAuditState!=''">
+            and total_audit_state = #{totalAuditState}
+        </if>
+        <if test="mediaChannels!=null and mediaChannels!=''">
+            and media_channels = #{mediaChannels}
+        </if>
+        <if test="signWay!=null and signWay!=''">
+            and sign_way = #{signWay}
+        </if>
+        <if test="signIsVideo!=null and signIsVideo!=''">
+            and sign_is_video = #{signIsVideo}
+        </if>
+        <if test="relativesId!=null and relativesId!=''">
+            and relatives_id = #{relativesId}
+        </if>
+        <if test="relativesName!=null and relativesName!=''">
+            and relatives_name = #{relativesName}
+        </if>
+        <if test="passWord!=null and passWord!=''">
+            and pass_word = #{passWord}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="videoId!=null and videoId!=''">
+            and video_id = #{videoId}
+        </if>
+        <if test="benefitsId!=null and benefitsId!=''">
+            and benefits_id = #{benefitsId}
+        </if>
+        <if test="benefitsName!=null and benefitsName!=''">
+            and benefits_name = #{benefitsName}
+        </if>
+        <if test="admissionMethod!=null and admissionMethod!=''">
+            and admission_method = #{admissionMethod}
+        </if>
+        <if test="householdCheckState!=null and householdCheckState!=''">
+            and household_check_state = #{householdCheckState}
+        </if>
+        <if test="householdRelationship!=null and householdRelationship!=''">
+            and household_relationship = #{householdRelationship}
+        </if>
+        <if test="bloodType!=null and bloodType!=''">
+            and blood_type = #{bloodType}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_elder_check_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="applyDate!=null and applyDate!=''">
+            and apply_date = #{applyDate}
+        </if>
+        <if test="checkStep!=null and checkStep!=''">
+            and check_step = #{checkStep}
+        </if>
+        <if test="planDate!=null and planDate!=''">
+            and plan_date = #{planDate}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="tryingEndDate!=null and tryingEndDate!=''">
+            and trying_end_date = #{tryingEndDate}
+        </if>
+        <if test="checkState!=null and checkState!=''">
+            and check_state = #{checkState}
+        </if>
+        <if test="checkCode!=null and checkCode!=''">
+            and check_code = #{checkCode}
+        </if>
+        <if test="buildingId!=null and buildingId!=''">
+            and building_id = #{buildingId}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="floorId!=null and floorId!=''">
+            and floor_id = #{floorId}
+        </if>
+        <if test="floorName!=null and floorName!=''">
+            and floor_name = #{floorName}
+        </if>
+        <if test="roomId!=null and roomId!=''">
+            and room_id = #{roomId}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="bedId!=null and bedId!=''">
+            and bed_id = #{bedId}
+        </if>
+        <if test="bedName!=null and bedName!=''">
+            and bed_name = #{bedName}
+        </if>
+        <if test="bedCode!=null and bedCode!=''">
+            and bed_code = #{bedCode}
+        </if>
+        <if test="bedInfo!=null and bedInfo!=''">
+            and bed_info = #{bedInfo}
+        </if>
+        <if test="isRoom!=null and isRoom!=''">
+            and is_room = #{isRoom}
+        </if>
+        <if test="nursingLevelId!=null and nursingLevelId!=''">
+            and nursing_level_id = #{nursingLevelId}
+        </if>
+        <if test="nursingLevelName!=null and nursingLevelName!=''">
+            and nursing_level_name = #{nursingLevelName}
+        </if>
+        <if test="nursingGroupId!=null and nursingGroupId!=''">
+            and nursing_group_id = #{nursingGroupId}
+        </if>
+        <if test="nursingGroupName!=null and nursingGroupName!=''">
+            and nursing_group_name = #{nursingGroupName}
+        </if>
+        <if test="nursingStaffId!=null and nursingStaffId!=''">
+            and nursing_staff_id = #{nursingStaffId}
+        </if>
+        <if test="nursingStaffName!=null and nursingStaffName!=''">
+            and nursing_staff_name = #{nursingStaffName}
+        </if>
+        <if test="checkType!=null and checkType!=''">
+            and check_type = #{checkType}
+        </if>
+        <if test="isHousehold!=null and isHousehold!=''">
+            and is_household = #{isHousehold}
+        </if>
+        <if test="householdId!=null and householdId!=''">
+            and household_id = #{householdId}
+        </if>
+        <if test="turnOverState!=null and turnOverState!=''">
+            and turn_over_state = #{turnOverState}
+        </if>
+        <if test="elderCategory!=null and elderCategory!=''">
+            and elder_category = #{elderCategory}
+        </if>
+        <if test="elderCategoryTime!=null and elderCategoryTime!=''">
+            and elder_category_time = #{elderCategoryTime}
+        </if>
+        <if test="retreatTime!=null and retreatTime!=''">
+            and retreat_time = #{retreatTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="totalAuditState!=null and totalAuditState!=''">
+            and total_audit_state = #{totalAuditState}
+        </if>
+        <if test="mediaChannels!=null and mediaChannels!=''">
+            and media_channels = #{mediaChannels}
+        </if>
+        <if test="signWay!=null and signWay!=''">
+            and sign_way = #{signWay}
+        </if>
+        <if test="signIsVideo!=null and signIsVideo!=''">
+            and sign_is_video = #{signIsVideo}
+        </if>
+        <if test="relativesId!=null and relativesId!=''">
+            and relatives_id = #{relativesId}
+        </if>
+        <if test="relativesName!=null and relativesName!=''">
+            and relatives_name = #{relativesName}
+        </if>
+        <if test="passWord!=null and passWord!=''">
+            and pass_word = #{passWord}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="videoId!=null and videoId!=''">
+            and video_id = #{videoId}
+        </if>
+        <if test="benefitsId!=null and benefitsId!=''">
+            and benefits_id = #{benefitsId}
+        </if>
+        <if test="benefitsName!=null and benefitsName!=''">
+            and benefits_name = #{benefitsName}
+        </if>
+        <if test="admissionMethod!=null and admissionMethod!=''">
+            and admission_method = #{admissionMethod}
+        </if>
+        <if test="householdCheckState!=null and householdCheckState!=''">
+            and household_check_state = #{householdCheckState}
+        </if>
+        <if test="householdRelationship!=null and householdRelationship!=''">
+            and household_relationship = #{householdRelationship}
+        </if>
+        <if test="bloodType!=null and bloodType!=''">
+            and blood_type = #{bloodType}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

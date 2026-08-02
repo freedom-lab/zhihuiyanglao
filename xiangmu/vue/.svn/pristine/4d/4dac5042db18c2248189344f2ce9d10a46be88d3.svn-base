@@ -1,0 +1,298 @@
+<template>
+  <div class="managingPeople hp100 bbox" v-loading="loading">
+    <!-- 面包屑导航区 -->
+    <el-breadcrumb>
+      <!-- <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item> -->
+      <el-breadcrumb-item>子系统管理 /</el-breadcrumb-item>
+    </el-breadcrumb>
+    <!-- 卡片视图 -->
+    <el-card>
+      <!-- 搜索-->
+      <el-row :gutter="20" type="flex" justify="space-between">
+        <el-col>
+          <el-button type="primary" size="small">导入</el-button>
+          <el-button type="primary" size="small">导出</el-button>
+        </el-col>
+        <el-col>
+          <div class="flex align-center justify-end header-search-box">
+            <el-input
+              placeholder="姓名/AD/员工账号/邮箱"
+              clearable
+              v-model="searchInput"
+              class="header-search-input ml10"
+            >
+              <el-button
+                slot="append"
+                icon="el-icon-search"
+                class="textblue searchBtn"
+              ></el-button>
+            </el-input>
+          </div>
+        </el-col>
+      </el-row>
+      <!-- 用户列表区域 -->
+      <el-table
+        :data="tableData"
+        border
+        fit
+        :height="height"
+        highlight-current-row
+        style="width: 100%"
+      >
+        <el-table-column label="序号" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.id }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="子系统" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.ad }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="特征码" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.loginName }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.email }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="操作"
+          align="center"
+          class-name="small-padding fixed-width"
+        >
+          <template slot-scope="scope">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="编辑"
+              placement="bottom"
+            >
+              <i
+                class="el-icon-edit textblue f16"
+                @click="open('2', scope.row)"
+              ></i>
+            </el-tooltip>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="删除"
+              placement="bottom"
+            >
+              <i
+                class="el-icon-delete textblue f16 ml20"
+                @click="del(scope.row.id)"
+              ></i>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="footerBox">
+        <!-- 新增按钮 -->
+        <div class="handle-btn wp100" @click="open('1', '')">
+          <el-button plain class="add-column-btn bbox"
+            ><i class="el-icon-plus fw900 f16"></i> 新增</el-button
+          >
+        </div>
+        <!-- 分页区域 -->
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="queryInfo.page"
+          :page-sizes="[10, 20, 30, 50]"
+          :page-size="queryInfo.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        ></el-pagination>
+      </div>
+    </el-card>
+
+    <!-- 新增弹窗 -->
+    <el-dialog title="新建权限组" :visible.sync="addDialogVisible" ref="dialog">
+      <el-form
+        :model="addForm"
+        :rules="addRules"
+        ref="addForm"
+        label-width="100px"
+        class="dia-gap"
+        size="mini"
+      >
+        <el-form-item label="子系统" prop="SSname">
+          <el-input v-model="addForm.SSname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="特征码" prop="featureCode">
+          <el-input v-model="addForm.featureCode" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm()">确 认</el-button>
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+      </div>
+    </el-dialog>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      height: window.innerHeight - 256, //表格高度
+      value: "",
+      searchInput: "",
+      tableData: [],
+      loading: true,
+      // 获取用户列表查询参数对象
+      queryInfo: {
+        // 当前页数
+        page: 1,
+        // 每页显示多少数据
+        size: 20,
+      },
+      total: 0,
+      // 添加对话框
+      addDialogVisible: false,
+      // 添加
+      addForm: {
+        SSname: "", //子系统账户
+        featureCode: "", //特征码
+      },
+      addRules: {
+        SSname: [
+          { required: true, message: "【子系统】不能为空", trigger: "blur" },
+        ],
+        featureCode: [
+          { required: true, message: "【特征】不能为空", trigger: "blur" },
+        ],
+      },
+    };
+  },
+  created() {
+    this.getUserData();
+    window.addEventListener("resize", this.getHeight);
+  },
+  mounted() {
+    this.loading = false;
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.getHeight);
+  },
+  methods: {
+    // 监听 pagesize改变的事件
+    handleSizeChange(newSize) {
+      // console.log(newSize)
+      this.queryInfo.size = newSize;
+      this.getUserData();
+    },
+    // 监听 页码值 改变事件
+    handleCurrentChange(newSize) {
+      // console.log(newSize)
+      this.queryInfo.page = newSize;
+      this.getUserData();
+    },
+
+    //跳转到详情
+    open(i, item) {
+      //    新增
+      if (i == 1) {
+         this.addDialogVisible = true;
+         $(".el-dialog__title").html("新增");
+
+      }
+      // 编辑
+      if (i == 2) {
+          this.addDialogVisible = true;
+          $(".el-dialog__title").html("编辑");
+        //   this.addForm.SSname = item.name;
+        //   this.addForm.featureCode = item.id;
+
+      }
+    },
+
+    // 删除用户
+    async del(id) {
+      const confirmResult = await this.$confirm("确定删除吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      }).catch((err) => err);
+      // 点击确定 返回值为：confirm
+      // 点击取消 返回值为： cancel
+      if (confirmResult !== "confirm") {
+        // return this.$message.info("已取消删除");
+        return this.$notify.info({
+          title: "提示",
+          message: "已取消删除",
+          showClose: false,
+        });
+      } else {
+        var that = this;
+        that.$http.delete("/userInfo/" + id).then(function (response) {
+          that.$notify.success({
+            title: "提示",
+            message: "删除成功",
+            showClose: true,
+          });
+          that.getUserData();
+        });
+      }
+    },
+
+    // 获取人员列表
+    getUserData() {
+      var that = this;
+      that.$http.get("/userInfo", that.queryInfo).then(function (response) {
+        console.log(response.data.data);
+        // console.log(response.data.data.data);
+        if (response.data.code == 200) {
+          that.total = response.data.data.count;
+          that.tableData = response.data.data.data;
+        }
+      });
+    },
+    // 监听表格高度
+    getHeight() {
+      this.height = window.innerHeight - 256;
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.textblue {
+  color: #008eff;
+}
+.managingPeople {
+  .el-card {
+    height: calc(100vh - 114px);
+    position: relative;
+    .el-select > .el-input {
+      width: 200px;
+    }
+    .header-search-box .header-search-input {
+      width: 325px;
+    }
+    input::placeholder {
+      font-size: 12px;
+    }
+    .handle-btn .el-button.add-column-btn {
+      width: 100%;
+      font-size: 13px;
+      background-color: transparent;
+      color: #008eff;
+      z-index: 102;
+    }
+    .footerBox {
+      position: absolute;
+      width: 100%;
+      height: 78px;
+      left: 20px;
+      right: 20px;
+      bottom: 0;
+    }
+  }
+}
+</style>

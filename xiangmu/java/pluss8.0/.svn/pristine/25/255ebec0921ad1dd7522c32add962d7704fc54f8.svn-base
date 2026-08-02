@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthInterventionPlanMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    plan_no,
+    archive_id,
+    elder_id,
+    elder_name,
+    doctor_id,
+    doctor_name,
+    develop_time,
+    start_date,
+    end_date,
+    intervention_target,
+    disease_id,
+    disease_name,
+    disease_level_id,
+    disease_level_name,
+    medication_plan,
+    diet_plan,
+    monitoring_plan,
+    plan_state,
+    execution_rate,
+    effect_evaluation,
+    adjustment_count,
+    last_adjust_time,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.planNo},
+    #{item.archiveId},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.doctorId},
+    #{item.doctorName},
+    #{item.developTime},
+    #{item.startDate},
+    #{item.endDate},
+    #{item.interventionTarget},
+    #{item.diseaseId},
+    #{item.diseaseName},
+    #{item.diseaseLevelId},
+    #{item.diseaseLevelName},
+    #{item.medicationPlan},
+    #{item.dietPlan},
+    #{item.monitoringPlan},
+    #{item.planState},
+    #{item.executionRate},
+    #{item.effectEvaluation},
+    #{item.adjustmentCount},
+    #{item.lastAdjustTime},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_intervention_plan
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthInterventionPlan">
+        SELECT * from  tb_jiangyukeji_health_intervention_plan
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="planNo!=null and planNo!=''">
+            and plan_no = #{planNo}
+        </if>
+        <if test="archiveId!=null and archiveId!=''">
+            and archive_id = #{archiveId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="developTime!=null and developTime!=''">
+            and develop_time = #{developTime}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="interventionTarget!=null and interventionTarget!=''">
+            and intervention_target = #{interventionTarget}
+        </if>
+        <if test="diseaseId!=null and diseaseId!=''">
+            and disease_id = #{diseaseId}
+        </if>
+        <if test="diseaseName!=null and diseaseName!=''">
+            and disease_name = #{diseaseName}
+        </if>
+        <if test="diseaseLevelId!=null and diseaseLevelId!=''">
+            and disease_level_id = #{diseaseLevelId}
+        </if>
+        <if test="diseaseLevelName!=null and diseaseLevelName!=''">
+            and disease_level_name = #{diseaseLevelName}
+        </if>
+        <if test="medicationPlan!=null and medicationPlan!=''">
+            and medication_plan = #{medicationPlan}
+        </if>
+        <if test="dietPlan!=null and dietPlan!=''">
+            and diet_plan = #{dietPlan}
+        </if>
+        <if test="monitoringPlan!=null and monitoringPlan!=''">
+            and monitoring_plan = #{monitoringPlan}
+        </if>
+        <if test="planState!=null and planState!=''">
+            and plan_state = #{planState}
+        </if>
+        <if test="executionRate!=null and executionRate!=''">
+            and execution_rate = #{executionRate}
+        </if>
+        <if test="effectEvaluation!=null and effectEvaluation!=''">
+            and effect_evaluation = #{effectEvaluation}
+        </if>
+        <if test="adjustmentCount!=null and adjustmentCount!=''">
+            and adjustment_count = #{adjustmentCount}
+        </if>
+        <if test="lastAdjustTime!=null and lastAdjustTime!=''">
+            and last_adjust_time = #{lastAdjustTime}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_intervention_plan
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="planNo!=null and planNo!=''">
+            and plan_no = #{planNo}
+        </if>
+        <if test="archiveId!=null and archiveId!=''">
+            and archive_id = #{archiveId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="doctorId!=null and doctorId!=''">
+            and doctor_id = #{doctorId}
+        </if>
+        <if test="doctorName!=null and doctorName!=''">
+            and doctor_name = #{doctorName}
+        </if>
+        <if test="developTime!=null and developTime!=''">
+            and develop_time = #{developTime}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="interventionTarget!=null and interventionTarget!=''">
+            and intervention_target = #{interventionTarget}
+        </if>
+        <if test="diseaseId!=null and diseaseId!=''">
+            and disease_id = #{diseaseId}
+        </if>
+        <if test="diseaseName!=null and diseaseName!=''">
+            and disease_name = #{diseaseName}
+        </if>
+        <if test="diseaseLevelId!=null and diseaseLevelId!=''">
+            and disease_level_id = #{diseaseLevelId}
+        </if>
+        <if test="diseaseLevelName!=null and diseaseLevelName!=''">
+            and disease_level_name = #{diseaseLevelName}
+        </if>
+        <if test="medicationPlan!=null and medicationPlan!=''">
+            and medication_plan = #{medicationPlan}
+        </if>
+        <if test="dietPlan!=null and dietPlan!=''">
+            and diet_plan = #{dietPlan}
+        </if>
+        <if test="monitoringPlan!=null and monitoringPlan!=''">
+            and monitoring_plan = #{monitoringPlan}
+        </if>
+        <if test="planState!=null and planState!=''">
+            and plan_state = #{planState}
+        </if>
+        <if test="executionRate!=null and executionRate!=''">
+            and execution_rate = #{executionRate}
+        </if>
+        <if test="effectEvaluation!=null and effectEvaluation!=''">
+            and effect_evaluation = #{effectEvaluation}
+        </if>
+        <if test="adjustmentCount!=null and adjustmentCount!=''">
+            and adjustment_count = #{adjustmentCount}
+        </if>
+        <if test="lastAdjustTime!=null and lastAdjustTime!=''">
+            and last_adjust_time = #{lastAdjustTime}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

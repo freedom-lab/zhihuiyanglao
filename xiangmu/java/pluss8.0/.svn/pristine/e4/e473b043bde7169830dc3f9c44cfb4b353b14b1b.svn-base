@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.AssessmentInstitutionInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    institution_code,
+    institution_img,
+    license_img,
+    institution_name,
+    credit_code,
+    legal_man,
+    legal_link_tel,
+    id_card,
+    manager,
+    link_tel,
+    establish_date,
+    registrar,
+    business_area,
+    address,
+    username,
+    password,
+    institution_brief,
+    institution_status,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    institution_type,
+    manage_level
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.institutionCode},
+    #{item.institutionImg},
+    #{item.licenseImg},
+    #{item.institutionName},
+    #{item.creditCode},
+    #{item.legalMan},
+    #{item.legalLinkTel},
+    #{item.idCard},
+    #{item.manager},
+    #{item.linkTel},
+    #{item.establishDate},
+    #{item.registrar},
+    #{item.businessArea},
+    #{item.address},
+    #{item.username},
+    #{item.password},
+    #{item.institutionBrief},
+    #{item.institutionStatus},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.institutionType},
+    #{item.manageLevel}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_assessment_institution_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.AssessmentInstitutionInfo">
+        SELECT * from  tb_jiangyukeji_assessment_institution_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="institutionCode!=null and institutionCode!=''">
+            and institution_code = #{institutionCode}
+        </if>
+        <if test="institutionImg!=null and institutionImg!=''">
+            and institution_img = #{institutionImg}
+        </if>
+        <if test="licenseImg!=null and licenseImg!=''">
+            and license_img = #{licenseImg}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="creditCode!=null and creditCode!=''">
+            and credit_code = #{creditCode}
+        </if>
+        <if test="legalMan!=null and legalMan!=''">
+            and legal_man = #{legalMan}
+        </if>
+        <if test="legalLinkTel!=null and legalLinkTel!=''">
+            and legal_link_tel = #{legalLinkTel}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="manager!=null and manager!=''">
+            and manager = #{manager}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="establishDate!=null and establishDate!=''">
+            and establish_date = #{establishDate}
+        </if>
+        <if test="registrar!=null and registrar!=''">
+            and registrar = #{registrar}
+        </if>
+        <if test="businessArea!=null and businessArea!=''">
+            and business_area = #{businessArea}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="username!=null and username!=''">
+            and username = #{username}
+        </if>
+        <if test="password!=null and password!=''">
+            and password = #{password}
+        </if>
+        <if test="institutionBrief!=null and institutionBrief!=''">
+            and institution_brief = #{institutionBrief}
+        </if>
+        <if test="institutionStatus!=null and institutionStatus!=''">
+            and institution_status = #{institutionStatus}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="institutionType!=null and institutionType!=''">
+            and institution_type = #{institutionType}
+        </if>
+        <if test="manageLevel!=null and manageLevel!=''">
+            and manage_level = #{manageLevel}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_assessment_institution_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="institutionCode!=null and institutionCode!=''">
+            and institution_code = #{institutionCode}
+        </if>
+        <if test="institutionImg!=null and institutionImg!=''">
+            and institution_img = #{institutionImg}
+        </if>
+        <if test="licenseImg!=null and licenseImg!=''">
+            and license_img = #{licenseImg}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="creditCode!=null and creditCode!=''">
+            and credit_code = #{creditCode}
+        </if>
+        <if test="legalMan!=null and legalMan!=''">
+            and legal_man = #{legalMan}
+        </if>
+        <if test="legalLinkTel!=null and legalLinkTel!=''">
+            and legal_link_tel = #{legalLinkTel}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="manager!=null and manager!=''">
+            and manager = #{manager}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="establishDate!=null and establishDate!=''">
+            and establish_date = #{establishDate}
+        </if>
+        <if test="registrar!=null and registrar!=''">
+            and registrar = #{registrar}
+        </if>
+        <if test="businessArea!=null and businessArea!=''">
+            and business_area = #{businessArea}
+        </if>
+        <if test="address!=null and address!=''">
+            and address = #{address}
+        </if>
+        <if test="username!=null and username!=''">
+            and username = #{username}
+        </if>
+        <if test="password!=null and password!=''">
+            and password = #{password}
+        </if>
+        <if test="institutionBrief!=null and institutionBrief!=''">
+            and institution_brief = #{institutionBrief}
+        </if>
+        <if test="institutionStatus!=null and institutionStatus!=''">
+            and institution_status = #{institutionStatus}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="institutionType!=null and institutionType!=''">
+            and institution_type = #{institutionType}
+        </if>
+        <if test="manageLevel!=null and manageLevel!=''">
+            and manage_level = #{manageLevel}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

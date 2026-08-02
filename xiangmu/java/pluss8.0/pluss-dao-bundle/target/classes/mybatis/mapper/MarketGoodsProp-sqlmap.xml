@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketGoodsPropMapper">
+    <sql id="tableFieldNames">
+    (
+    tenant_id,
+    id,
+    goods_id,
+    prop_name,
+    prop_value,
+    rule,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    prop_category_id,
+    select_type,
+    input_type,
+    input_list,
+    filter_type,
+    search_type,
+    related_status,
+    hand_add_status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.tenantId},
+    #{item.id},
+    #{item.goodsId},
+    #{item.propName},
+    #{item.propValue},
+    #{item.rule},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.propCategoryId},
+    #{item.selectType},
+    #{item.inputType},
+    #{item.inputList},
+    #{item.filterType},
+    #{item.searchType},
+    #{item.relatedStatus},
+    #{item.handAddStatus}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_goods_prop
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketGoodsProp">
+        SELECT * from  tb_jiangyukeji_market_goods_prop
+        <where>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="propName!=null and propName!=''">
+            and prop_name = #{propName}
+        </if>
+        <if test="propValue!=null and propValue!=''">
+            and prop_value = #{propValue}
+        </if>
+        <if test="rule!=null and rule!=''">
+            and rule = #{rule}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="propCategoryId!=null and propCategoryId!=''">
+            and prop_category_id = #{propCategoryId}
+        </if>
+        <if test="selectType!=null and selectType!=''">
+            and select_type = #{selectType}
+        </if>
+        <if test="inputType!=null and inputType!=''">
+            and input_type = #{inputType}
+        </if>
+        <if test="inputList!=null and inputList!=''">
+            and input_list = #{inputList}
+        </if>
+        <if test="filterType!=null and filterType!=''">
+            and filter_type = #{filterType}
+        </if>
+        <if test="searchType!=null and searchType!=''">
+            and search_type = #{searchType}
+        </if>
+        <if test="relatedStatus!=null and relatedStatus!=''">
+            and related_status = #{relatedStatus}
+        </if>
+        <if test="handAddStatus!=null and handAddStatus!=''">
+            and hand_add_status = #{handAddStatus}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_goods_prop
+        <where>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="propName!=null and propName!=''">
+            and prop_name = #{propName}
+        </if>
+        <if test="propValue!=null and propValue!=''">
+            and prop_value = #{propValue}
+        </if>
+        <if test="rule!=null and rule!=''">
+            and rule = #{rule}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="propCategoryId!=null and propCategoryId!=''">
+            and prop_category_id = #{propCategoryId}
+        </if>
+        <if test="selectType!=null and selectType!=''">
+            and select_type = #{selectType}
+        </if>
+        <if test="inputType!=null and inputType!=''">
+            and input_type = #{inputType}
+        </if>
+        <if test="inputList!=null and inputList!=''">
+            and input_list = #{inputList}
+        </if>
+        <if test="filterType!=null and filterType!=''">
+            and filter_type = #{filterType}
+        </if>
+        <if test="searchType!=null and searchType!=''">
+            and search_type = #{searchType}
+        </if>
+        <if test="relatedStatus!=null and relatedStatus!=''">
+            and related_status = #{relatedStatus}
+        </if>
+        <if test="handAddStatus!=null and handAddStatus!=''">
+            and hand_add_status = #{handAddStatus}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

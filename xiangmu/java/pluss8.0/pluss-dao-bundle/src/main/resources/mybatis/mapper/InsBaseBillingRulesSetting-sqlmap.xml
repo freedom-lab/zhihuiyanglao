@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsBaseBillingRulesSettingMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    check_flow_path,
+    check_day_charges,
+    billing_rules,
+    bill_title,
+    fee_reminder_number,
+    leave_refund_number,
+    retreat_day_charges,
+    cost_reserve_number,
+    water_price,
+    electric_price,
+    contract_number,
+    assess_number,
+    nursing_number,
+    party_name,
+    party_tel,
+    party_address,
+    code_img_path,
+    breakfast_time,
+    lunch_time,
+    dinner_time,
+    check_distance,
+    check_position,
+    rest_days,
+    company_seal,
+    hot_water_price,
+    heating_price,
+    medical_expert,
+    filing_rate,
+    year_follow,
+    drug_warning,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.checkFlowPath},
+    #{item.checkDayCharges},
+    #{item.billingRules},
+    #{item.billTitle},
+    #{item.feeReminderNumber},
+    #{item.leaveRefundNumber},
+    #{item.retreatDayCharges},
+    #{item.costReserveNumber},
+    #{item.waterPrice},
+    #{item.electricPrice},
+    #{item.contractNumber},
+    #{item.assessNumber},
+    #{item.nursingNumber},
+    #{item.partyName},
+    #{item.partyTel},
+    #{item.partyAddress},
+    #{item.codeImgPath},
+    #{item.breakfastTime},
+    #{item.lunchTime},
+    #{item.dinnerTime},
+    #{item.checkDistance},
+    #{item.checkPosition},
+    #{item.restDays},
+    #{item.companySeal},
+    #{item.hotWaterPrice},
+    #{item.heatingPrice},
+    #{item.medicalExpert},
+    #{item.filingRate},
+    #{item.yearFollow},
+    #{item.drugWarning},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_base_billing_rules_setting
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsBaseBillingRulesSetting">
+        SELECT * from  tb_jiangyukeji_ins_base_billing_rules_setting
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkFlowPath!=null and checkFlowPath!=''">
+            and check_flow_path = #{checkFlowPath}
+        </if>
+        <if test="checkDayCharges!=null and checkDayCharges!=''">
+            and check_day_charges = #{checkDayCharges}
+        </if>
+        <if test="billingRules!=null and billingRules!=''">
+            and billing_rules = #{billingRules}
+        </if>
+        <if test="billTitle!=null and billTitle!=''">
+            and bill_title = #{billTitle}
+        </if>
+        <if test="feeReminderNumber!=null and feeReminderNumber!=''">
+            and fee_reminder_number = #{feeReminderNumber}
+        </if>
+        <if test="leaveRefundNumber!=null and leaveRefundNumber!=''">
+            and leave_refund_number = #{leaveRefundNumber}
+        </if>
+        <if test="retreatDayCharges!=null and retreatDayCharges!=''">
+            and retreat_day_charges = #{retreatDayCharges}
+        </if>
+        <if test="costReserveNumber!=null and costReserveNumber!=''">
+            and cost_reserve_number = #{costReserveNumber}
+        </if>
+        <if test="waterPrice!=null and waterPrice!=''">
+            and water_price = #{waterPrice}
+        </if>
+        <if test="electricPrice!=null and electricPrice!=''">
+            and electric_price = #{electricPrice}
+        </if>
+        <if test="contractNumber!=null and contractNumber!=''">
+            and contract_number = #{contractNumber}
+        </if>
+        <if test="assessNumber!=null and assessNumber!=''">
+            and assess_number = #{assessNumber}
+        </if>
+        <if test="nursingNumber!=null and nursingNumber!=''">
+            and nursing_number = #{nursingNumber}
+        </if>
+        <if test="partyName!=null and partyName!=''">
+            and party_name = #{partyName}
+        </if>
+        <if test="partyTel!=null and partyTel!=''">
+            and party_tel = #{partyTel}
+        </if>
+        <if test="partyAddress!=null and partyAddress!=''">
+            and party_address = #{partyAddress}
+        </if>
+        <if test="codeImgPath!=null and codeImgPath!=''">
+            and code_img_path = #{codeImgPath}
+        </if>
+        <if test="breakfastTime!=null and breakfastTime!=''">
+            and breakfast_time = #{breakfastTime}
+        </if>
+        <if test="lunchTime!=null and lunchTime!=''">
+            and lunch_time = #{lunchTime}
+        </if>
+        <if test="dinnerTime!=null and dinnerTime!=''">
+            and dinner_time = #{dinnerTime}
+        </if>
+        <if test="checkDistance!=null and checkDistance!=''">
+            and check_distance = #{checkDistance}
+        </if>
+        <if test="checkPosition!=null and checkPosition!=''">
+            and check_position = #{checkPosition}
+        </if>
+        <if test="restDays!=null and restDays!=''">
+            and rest_days = #{restDays}
+        </if>
+        <if test="companySeal!=null and companySeal!=''">
+            and company_seal = #{companySeal}
+        </if>
+        <if test="hotWaterPrice!=null and hotWaterPrice!=''">
+            and hot_water_price = #{hotWaterPrice}
+        </if>
+        <if test="heatingPrice!=null and heatingPrice!=''">
+            and heating_price = #{heatingPrice}
+        </if>
+        <if test="medicalExpert!=null and medicalExpert!=''">
+            and medical_expert = #{medicalExpert}
+        </if>
+        <if test="filingRate!=null and filingRate!=''">
+            and filing_rate = #{filingRate}
+        </if>
+        <if test="yearFollow!=null and yearFollow!=''">
+            and year_follow = #{yearFollow}
+        </if>
+        <if test="drugWarning!=null and drugWarning!=''">
+            and drug_warning = #{drugWarning}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_base_billing_rules_setting
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkFlowPath!=null and checkFlowPath!=''">
+            and check_flow_path = #{checkFlowPath}
+        </if>
+        <if test="checkDayCharges!=null and checkDayCharges!=''">
+            and check_day_charges = #{checkDayCharges}
+        </if>
+        <if test="billingRules!=null and billingRules!=''">
+            and billing_rules = #{billingRules}
+        </if>
+        <if test="billTitle!=null and billTitle!=''">
+            and bill_title = #{billTitle}
+        </if>
+        <if test="feeReminderNumber!=null and feeReminderNumber!=''">
+            and fee_reminder_number = #{feeReminderNumber}
+        </if>
+        <if test="leaveRefundNumber!=null and leaveRefundNumber!=''">
+            and leave_refund_number = #{leaveRefundNumber}
+        </if>
+        <if test="retreatDayCharges!=null and retreatDayCharges!=''">
+            and retreat_day_charges = #{retreatDayCharges}
+        </if>
+        <if test="costReserveNumber!=null and costReserveNumber!=''">
+            and cost_reserve_number = #{costReserveNumber}
+        </if>
+        <if test="waterPrice!=null and waterPrice!=''">
+            and water_price = #{waterPrice}
+        </if>
+        <if test="electricPrice!=null and electricPrice!=''">
+            and electric_price = #{electricPrice}
+        </if>
+        <if test="contractNumber!=null and contractNumber!=''">
+            and contract_number = #{contractNumber}
+        </if>
+        <if test="assessNumber!=null and assessNumber!=''">
+            and assess_number = #{assessNumber}
+        </if>
+        <if test="nursingNumber!=null and nursingNumber!=''">
+            and nursing_number = #{nursingNumber}
+        </if>
+        <if test="partyName!=null and partyName!=''">
+            and party_name = #{partyName}
+        </if>
+        <if test="partyTel!=null and partyTel!=''">
+            and party_tel = #{partyTel}
+        </if>
+        <if test="partyAddress!=null and partyAddress!=''">
+            and party_address = #{partyAddress}
+        </if>
+        <if test="codeImgPath!=null and codeImgPath!=''">
+            and code_img_path = #{codeImgPath}
+        </if>
+        <if test="breakfastTime!=null and breakfastTime!=''">
+            and breakfast_time = #{breakfastTime}
+        </if>
+        <if test="lunchTime!=null and lunchTime!=''">
+            and lunch_time = #{lunchTime}
+        </if>
+        <if test="dinnerTime!=null and dinnerTime!=''">
+            and dinner_time = #{dinnerTime}
+        </if>
+        <if test="checkDistance!=null and checkDistance!=''">
+            and check_distance = #{checkDistance}
+        </if>
+        <if test="checkPosition!=null and checkPosition!=''">
+            and check_position = #{checkPosition}
+        </if>
+        <if test="restDays!=null and restDays!=''">
+            and rest_days = #{restDays}
+        </if>
+        <if test="companySeal!=null and companySeal!=''">
+            and company_seal = #{companySeal}
+        </if>
+        <if test="hotWaterPrice!=null and hotWaterPrice!=''">
+            and hot_water_price = #{hotWaterPrice}
+        </if>
+        <if test="heatingPrice!=null and heatingPrice!=''">
+            and heating_price = #{heatingPrice}
+        </if>
+        <if test="medicalExpert!=null and medicalExpert!=''">
+            and medical_expert = #{medicalExpert}
+        </if>
+        <if test="filingRate!=null and filingRate!=''">
+            and filing_rate = #{filingRate}
+        </if>
+        <if test="yearFollow!=null and yearFollow!=''">
+            and year_follow = #{yearFollow}
+        </if>
+        <if test="drugWarning!=null and drugWarning!=''">
+            and drug_warning = #{drugWarning}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

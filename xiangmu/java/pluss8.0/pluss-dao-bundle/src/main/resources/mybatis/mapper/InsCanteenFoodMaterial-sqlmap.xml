@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsCanteenFoodMaterialMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    material_name,
+    pinyin_code,
+    cate_id,
+    unit,
+    reference_amount,
+    calorie,
+    protein,
+    fat,
+    carbohydrate,
+    dietary_fiber,
+    sodium,
+    potassium,
+    calcium,
+    phosphorus,
+    magnesium,
+    iron,
+    purine,
+    gi_value,
+    is_high_purine,
+    is_high_sugar,
+    edible_part_rate,
+    description,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    update_user,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.materialName},
+    #{item.pinyinCode},
+    #{item.cateId},
+    #{item.unit},
+    #{item.referenceAmount},
+    #{item.calorie},
+    #{item.protein},
+    #{item.fat},
+    #{item.carbohydrate},
+    #{item.dietaryFiber},
+    #{item.sodium},
+    #{item.potassium},
+    #{item.calcium},
+    #{item.phosphorus},
+    #{item.magnesium},
+    #{item.iron},
+    #{item.purine},
+    #{item.giValue},
+    #{item.isHighPurine},
+    #{item.isHighSugar},
+    #{item.ediblePartRate},
+    #{item.description},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.updateUser},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_canteen_food_material
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsCanteenFoodMaterial">
+        SELECT * from  tb_jiangyukeji_ins_canteen_food_material
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="materialName!=null and materialName!=''">
+            and material_name = #{materialName}
+        </if>
+        <if test="pinyinCode!=null and pinyinCode!=''">
+            and pinyin_code = #{pinyinCode}
+        </if>
+        <if test="cateId!=null and cateId!=''">
+            and cate_id = #{cateId}
+        </if>
+        <if test="unit!=null and unit!=''">
+            and unit = #{unit}
+        </if>
+        <if test="referenceAmount!=null and referenceAmount!=''">
+            and reference_amount = #{referenceAmount}
+        </if>
+        <if test="calorie!=null and calorie!=''">
+            and calorie = #{calorie}
+        </if>
+        <if test="protein!=null and protein!=''">
+            and protein = #{protein}
+        </if>
+        <if test="fat!=null and fat!=''">
+            and fat = #{fat}
+        </if>
+        <if test="carbohydrate!=null and carbohydrate!=''">
+            and carbohydrate = #{carbohydrate}
+        </if>
+        <if test="dietaryFiber!=null and dietaryFiber!=''">
+            and dietary_fiber = #{dietaryFiber}
+        </if>
+        <if test="sodium!=null and sodium!=''">
+            and sodium = #{sodium}
+        </if>
+        <if test="potassium!=null and potassium!=''">
+            and potassium = #{potassium}
+        </if>
+        <if test="calcium!=null and calcium!=''">
+            and calcium = #{calcium}
+        </if>
+        <if test="phosphorus!=null and phosphorus!=''">
+            and phosphorus = #{phosphorus}
+        </if>
+        <if test="magnesium!=null and magnesium!=''">
+            and magnesium = #{magnesium}
+        </if>
+        <if test="iron!=null and iron!=''">
+            and iron = #{iron}
+        </if>
+        <if test="purine!=null and purine!=''">
+            and purine = #{purine}
+        </if>
+        <if test="giValue!=null and giValue!=''">
+            and gi_value = #{giValue}
+        </if>
+        <if test="isHighPurine!=null and isHighPurine!=''">
+            and is_high_purine = #{isHighPurine}
+        </if>
+        <if test="isHighSugar!=null and isHighSugar!=''">
+            and is_high_sugar = #{isHighSugar}
+        </if>
+        <if test="ediblePartRate!=null and ediblePartRate!=''">
+            and edible_part_rate = #{ediblePartRate}
+        </if>
+        <if test="description!=null and description!=''">
+            and description = #{description}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_canteen_food_material
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="materialName!=null and materialName!=''">
+            and material_name = #{materialName}
+        </if>
+        <if test="pinyinCode!=null and pinyinCode!=''">
+            and pinyin_code = #{pinyinCode}
+        </if>
+        <if test="cateId!=null and cateId!=''">
+            and cate_id = #{cateId}
+        </if>
+        <if test="unit!=null and unit!=''">
+            and unit = #{unit}
+        </if>
+        <if test="referenceAmount!=null and referenceAmount!=''">
+            and reference_amount = #{referenceAmount}
+        </if>
+        <if test="calorie!=null and calorie!=''">
+            and calorie = #{calorie}
+        </if>
+        <if test="protein!=null and protein!=''">
+            and protein = #{protein}
+        </if>
+        <if test="fat!=null and fat!=''">
+            and fat = #{fat}
+        </if>
+        <if test="carbohydrate!=null and carbohydrate!=''">
+            and carbohydrate = #{carbohydrate}
+        </if>
+        <if test="dietaryFiber!=null and dietaryFiber!=''">
+            and dietary_fiber = #{dietaryFiber}
+        </if>
+        <if test="sodium!=null and sodium!=''">
+            and sodium = #{sodium}
+        </if>
+        <if test="potassium!=null and potassium!=''">
+            and potassium = #{potassium}
+        </if>
+        <if test="calcium!=null and calcium!=''">
+            and calcium = #{calcium}
+        </if>
+        <if test="phosphorus!=null and phosphorus!=''">
+            and phosphorus = #{phosphorus}
+        </if>
+        <if test="magnesium!=null and magnesium!=''">
+            and magnesium = #{magnesium}
+        </if>
+        <if test="iron!=null and iron!=''">
+            and iron = #{iron}
+        </if>
+        <if test="purine!=null and purine!=''">
+            and purine = #{purine}
+        </if>
+        <if test="giValue!=null and giValue!=''">
+            and gi_value = #{giValue}
+        </if>
+        <if test="isHighPurine!=null and isHighPurine!=''">
+            and is_high_purine = #{isHighPurine}
+        </if>
+        <if test="isHighSugar!=null and isHighSugar!=''">
+            and is_high_sugar = #{isHighSugar}
+        </if>
+        <if test="ediblePartRate!=null and ediblePartRate!=''">
+            and edible_part_rate = #{ediblePartRate}
+        </if>
+        <if test="description!=null and description!=''">
+            and description = #{description}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

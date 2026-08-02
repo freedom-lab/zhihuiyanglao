@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.AssessmentResultMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    appoint_id,
+    option_ids,
+    question_ids,
+    step_id,
+    result_mark,
+    assess_time,
+    assess_result,
+    question_types,
+    text_memo,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.appointId},
+    #{item.optionIds},
+    #{item.questionIds},
+    #{item.stepId},
+    #{item.resultMark},
+    #{item.assessTime},
+    #{item.assessResult},
+    #{item.questionTypes},
+    #{item.textMemo},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_assessment_result
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.AssessmentResult">
+        SELECT * from  tb_jiangyukeji_assessment_result
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="appointId!=null and appointId!=''">
+            and appoint_id = #{appointId}
+        </if>
+        <if test="optionIds!=null and optionIds!=''">
+            and option_ids = #{optionIds}
+        </if>
+        <if test="questionIds!=null and questionIds!=''">
+            and question_ids = #{questionIds}
+        </if>
+        <if test="stepId!=null and stepId!=''">
+            and step_id = #{stepId}
+        </if>
+        <if test="resultMark!=null and resultMark!=''">
+            and result_mark = #{resultMark}
+        </if>
+        <if test="assessTime!=null and assessTime!=''">
+            and assess_time = #{assessTime}
+        </if>
+        <if test="assessResult!=null and assessResult!=''">
+            and assess_result = #{assessResult}
+        </if>
+        <if test="questionTypes!=null and questionTypes!=''">
+            and question_types = #{questionTypes}
+        </if>
+        <if test="textMemo!=null and textMemo!=''">
+            and text_memo = #{textMemo}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_assessment_result
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="appointId!=null and appointId!=''">
+            and appoint_id = #{appointId}
+        </if>
+        <if test="optionIds!=null and optionIds!=''">
+            and option_ids = #{optionIds}
+        </if>
+        <if test="questionIds!=null and questionIds!=''">
+            and question_ids = #{questionIds}
+        </if>
+        <if test="stepId!=null and stepId!=''">
+            and step_id = #{stepId}
+        </if>
+        <if test="resultMark!=null and resultMark!=''">
+            and result_mark = #{resultMark}
+        </if>
+        <if test="assessTime!=null and assessTime!=''">
+            and assess_time = #{assessTime}
+        </if>
+        <if test="assessResult!=null and assessResult!=''">
+            and assess_result = #{assessResult}
+        </if>
+        <if test="questionTypes!=null and questionTypes!=''">
+            and question_types = #{questionTypes}
+        </if>
+        <if test="textMemo!=null and textMemo!=''">
+            and text_memo = #{textMemo}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

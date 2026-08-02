@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.CarePaymentDetailMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    payment_id,
+    serial_code,
+    item_id,
+    item_name,
+    item_price,
+    fee_type,
+    cost_type,
+    is_refund,
+    is_preferential,
+    amount,
+    preferential_amount,
+    cost_amount,
+    start_date,
+    end_date,
+    change_id,
+    order_ids,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.paymentId},
+    #{item.serialCode},
+    #{item.itemId},
+    #{item.itemName},
+    #{item.itemPrice},
+    #{item.feeType},
+    #{item.costType},
+    #{item.isRefund},
+    #{item.isPreferential},
+    #{item.amount},
+    #{item.preferentialAmount},
+    #{item.costAmount},
+    #{item.startDate},
+    #{item.endDate},
+    #{item.changeId},
+    #{item.orderIds},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_care_payment_detail
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.CarePaymentDetail">
+        SELECT * from  tb_jiangyukeji_care_payment_detail
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="paymentId!=null and paymentId!=''">
+            and payment_id = #{paymentId}
+        </if>
+        <if test="serialCode!=null and serialCode!=''">
+            and serial_code = #{serialCode}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemPrice!=null and itemPrice!=''">
+            and item_price = #{itemPrice}
+        </if>
+        <if test="feeType!=null and feeType!=''">
+            and fee_type = #{feeType}
+        </if>
+        <if test="costType!=null and costType!=''">
+            and cost_type = #{costType}
+        </if>
+        <if test="isRefund!=null and isRefund!=''">
+            and is_refund = #{isRefund}
+        </if>
+        <if test="isPreferential!=null and isPreferential!=''">
+            and is_preferential = #{isPreferential}
+        </if>
+        <if test="amount!=null and amount!=''">
+            and amount = #{amount}
+        </if>
+        <if test="preferentialAmount!=null and preferentialAmount!=''">
+            and preferential_amount = #{preferentialAmount}
+        </if>
+        <if test="costAmount!=null and costAmount!=''">
+            and cost_amount = #{costAmount}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="changeId!=null and changeId!=''">
+            and change_id = #{changeId}
+        </if>
+        <if test="orderIds!=null and orderIds!=''">
+            and order_ids = #{orderIds}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_care_payment_detail
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="paymentId!=null and paymentId!=''">
+            and payment_id = #{paymentId}
+        </if>
+        <if test="serialCode!=null and serialCode!=''">
+            and serial_code = #{serialCode}
+        </if>
+        <if test="itemId!=null and itemId!=''">
+            and item_id = #{itemId}
+        </if>
+        <if test="itemName!=null and itemName!=''">
+            and item_name = #{itemName}
+        </if>
+        <if test="itemPrice!=null and itemPrice!=''">
+            and item_price = #{itemPrice}
+        </if>
+        <if test="feeType!=null and feeType!=''">
+            and fee_type = #{feeType}
+        </if>
+        <if test="costType!=null and costType!=''">
+            and cost_type = #{costType}
+        </if>
+        <if test="isRefund!=null and isRefund!=''">
+            and is_refund = #{isRefund}
+        </if>
+        <if test="isPreferential!=null and isPreferential!=''">
+            and is_preferential = #{isPreferential}
+        </if>
+        <if test="amount!=null and amount!=''">
+            and amount = #{amount}
+        </if>
+        <if test="preferentialAmount!=null and preferentialAmount!=''">
+            and preferential_amount = #{preferentialAmount}
+        </if>
+        <if test="costAmount!=null and costAmount!=''">
+            and cost_amount = #{costAmount}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="changeId!=null and changeId!=''">
+            and change_id = #{changeId}
+        </if>
+        <if test="orderIds!=null and orderIds!=''">
+            and order_ids = #{orderIds}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

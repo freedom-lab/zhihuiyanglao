@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.auth.PostMapper">
+
+	   	<insert id="savePost" parameterType="cn.pluss.platform.model.auth.Post">
+        	insert into tb_yunlankeji_post(postCode,postName,description,seq,postTypeCode,createTime,creator,updator,updateTime,postTypeName,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{postCode},#{postName},#{description},#{seq},#{postTypeCode},#{createTime},#{creator},#{updator},#{updateTime},#{postTypeName},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    	</insert>
+
+	   	<insert id="savePostBatch">
+        	insert into tb_yunlankeji_post(postCode,postName,description,seq,postTypeCode,createTime,creator,updator,updateTime,postTypeName,tenant_id,corp_id,corp_name,institution_id,institution_name) VALUES
+    			<foreach collection="list" item="item" index="index" separator=",">
+			(#{postCode},#{postName},#{description},#{seq},#{postTypeCode},#{createTime},#{creator},#{updator},#{updateTime},#{postTypeName},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+				</foreach>
+    	</insert>
+
+		<select id="queryPost" parameterType="cn.pluss.platform.model.auth.Post" resultType="cn.pluss.platform.model.auth.Post">
+			SELECT * from tb_yunlankeji_post 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 	and id = #{id}
+					 </if> 
+					<if test="postCode!= null and postCode!='' "> 
+					 	and postCode = #{postCode}
+					 </if> 
+					<if test="postName!= null and postName!='' "> 
+					 	and postName = #{postName}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 	and description = #{description}
+					 </if> 
+					<if test="seq!= null and seq!='' "> 
+					 	and seq = #{seq}
+					 </if> 
+					<if test="postTypeCode!= null and postTypeCode!='' "> 
+					 	and postTypeCode = #{postTypeCode}
+					 </if> 
+					<if test="createTime!= null and createTime!='' "> 
+					 	and createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 	and creator = #{creator}
+					 </if> 
+					<if test="updator!= null and updator!='' "> 
+					 	and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null and updateTime!='' "> 
+					 	and updateTime = #{updateTime}
+					 </if> 
+					 <if test="postTypeName!= null and postTypeName!='' "> 
+					 	and postTypeName = #{postTypeName}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+
+				 </where> 
+		</select>
+
+		<select id="queryPostList" parameterType="cn.pluss.platform.model.auth.Post" resultType="cn.pluss.platform.model.auth.Post">
+			SELECT * from tb_yunlankeji_post 
+				<where> 
+					<if test="id!= null and id!='' "> 
+					 and 	id = #{id}
+					 </if> 
+					<if test="postCode!= null and postCode!='' "> 
+					 and 	postCode = #{postCode}
+					 </if> 
+					<if test="postName!= null and postName!='' "> 
+					 and 	postName = #{postName}
+					 </if> 
+					<if test="description!= null and description!='' "> 
+					 and 	description = #{description}
+					 </if> 
+					<if test="seq!= null and seq!='' "> 
+					 and 	seq = #{seq}
+					 </if> 
+					<if test="postTypeCode!= null and postTypeCode!='' "> 
+					 and 	postTypeCode = #{postTypeCode}
+					 </if> 
+					<if test="createTime!= null and createTime!='' "> 
+					 and 	createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null and creator!='' "> 
+					 and 	creator = #{creator}
+					 </if> 
+					<if test="updator!= null and updator!='' "> 
+					 and 	updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null and updateTime!='' "> 
+					 and 	updateTime = #{updateTime}
+					 </if> 
+					 <if test="postTypeName!= null and postTypeName!='' "> 
+					 	and postTypeName = #{postTypeName}
+					 </if> 
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where>
+		</select>
+
+		<update id="updatePost" parameterType="cn.pluss.platform.model.auth.Post" >
+			update tb_yunlankeji_post 
+				  <set> 
+					<if test="postCode!= null  and postCode!='' "> 
+					 	postCode = #{postCode},
+					 </if> 
+					<if test="postName!= null  and postName!='' "> 
+					 	postName = #{postName},
+					 </if> 
+					<if test="description!= null  and description!='' "> 
+					 	description = #{description},
+					 </if> 
+					<if test="seq!= null  and seq!='' "> 
+					 	seq = #{seq},
+					 </if> 
+					<if test="postTypeCode!= null  and postTypeCode!='' "> 
+					 	postTypeCode = #{postTypeCode},
+					 </if> 
+					<if test="createTime!= null  "> 
+					 	createTime = #{createTime},
+					 </if> 
+					<if test="creator!= null  and creator!='' "> 
+					 	creator = #{creator},
+					 </if> 
+					<if test="updator!= null  and updator!='' "> 
+					 	updator = #{updator},
+					 </if> 
+					<if test="updateTime!= null  "> 
+					 	updateTime = #{updateTime}
+					 </if> 
+					 <if test="postTypeName!= null and postTypeName!='' "> 
+					 	and postTypeName = #{postTypeName}
+					 </if> 
+					<if test="tenantId!= null  and tenantId!='' ">
+					 	tenant_id = #{tenantId},
+					 </if>
+					<if test="corpId!= null  and corpId!='' ">
+					 	corp_id = #{corpId},
+					 </if>
+					<if test="corpName!= null  and corpName!='' ">
+					 	corp_name = #{corpName},
+					 </if>
+					<if test="institutionId!= null  and institutionId!='' ">
+					 	institution_id = #{institutionId},
+					 </if>
+					<if test="institutionName!= null  and institutionName!='' ">
+					 	institution_name = #{institutionName},
+					 </if>
+				</set>
+			where id=#{id} 
+		</update>
+
+		<delete id="deletePost" parameterType="cn.pluss.platform.model.auth.Post" >
+			DELETE FROM tb_yunlankeji_post where id=#{id}
+		</delete>
+
+		<delete id="deletePostBatch" parameterType="java.util.List" >
+			DELETE FROM tb_yunlankeji_post where  1>2 or id in
+			<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			 #{item}
+			</foreach>
+		</delete>
+
+		<select id="queryPostPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.Post">
+			SELECT * from tb_yunlankeji_post 
+				<where> 
+					<if test="id!= null  and id!=''   "> 
+					and id = #{id}
+					 </if> 
+					<if test="postCode!= null  and postCode!=''   "> 
+					and postCode = #{postCode}
+					 </if> 
+					<if test="postName!= null  and postName!=''   "> 
+					and postName = #{postName}
+					 </if> 
+					<if test="description!= null  and description!=''   "> 
+					and description = #{description}
+					 </if> 
+					<if test="seq!= null  and seq!=''   "> 
+					and seq = #{seq}
+					 </if> 
+					<if test="postTypeCode!= null  and postTypeCode!=''   "> 
+					and postTypeCode = #{postTypeCode}
+					 </if> 
+					<if test="createTime!= null  and createTime!=''   "> 
+					and createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null  and creator!=''   "> 
+					and creator = #{creator}
+					 </if> 
+					<if test="updator!= null  and updator!=''   "> 
+					and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null  and updateTime!=''   "> 
+					and updateTime = #{updateTime}
+					 </if> 
+					 <if test="postTypeName!= null and postTypeName!='' "> 
+					 	and postTypeName = #{postTypeName}
+					 </if>
+					<if test="tenantId!= null and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				 </where> 
+			order by id desc  limit #{pageSize}  offset  #{offset}  
+		</select>
+
+		<select id="queryPostPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+			SELECT count(*) from tb_yunlankeji_post 
+					<where> 
+					<if test="id!= null  and id!=''  "> 
+					 and id = #{id}
+					 </if> 
+					<if test="postCode!= null  and postCode!=''  "> 
+					 and postCode = #{postCode}
+					 </if> 
+					<if test="postName!= null  and postName!=''  "> 
+					 and postName = #{postName}
+					 </if> 
+					<if test="description!= null  and description!=''  "> 
+					 and description = #{description}
+					 </if> 
+					<if test="seq!= null  and seq!=''  "> 
+					 and seq = #{seq}
+					 </if> 
+					<if test="postTypeCode!= null  and postTypeCode!=''  "> 
+					 and postTypeCode = #{postTypeCode}
+					 </if> 
+					<if test="createTime!= null  and createTime!=''  "> 
+					 and createTime = #{createTime}
+					 </if> 
+					<if test="creator!= null  and creator!=''  "> 
+					 and creator = #{creator}
+					 </if> 
+					<if test="updator!= null  and updator!=''  "> 
+					 and updator = #{updator}
+					 </if> 
+					<if test="updateTime!= null  and updateTime!=''  "> 
+					 and updateTime = #{updateTime}
+					 </if> 
+					 <if test="postTypeName!= null and postTypeName!='' "> 
+					 	and postTypeName = #{postTypeName}
+					 </if> 
+					<if test="tenantId!= null  and tenantId!='' ">
+					 	and tenant_id = #{tenantId}
+					 </if>
+					<if test="corpId!= null  and corpId!='' ">
+					 	and corp_id = #{corpId}
+					 </if>
+					<if test="corpName!= null  and corpName!='' ">
+					 	and corp_name = #{corpName}
+					 </if>
+					<if test="institutionId!= null  and institutionId!='' ">
+					 	and institution_id = #{institutionId}
+					 </if>
+					<if test="institutionName!= null  and institutionName!='' ">
+					 	and institution_name = #{institutionName}
+					 </if>
+				</where>
+		</select>
+
+</mapper>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.MarketOrderItemMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    order_code,
+    order_id,
+    goods_id,
+    big_type_id,
+    big_type_name,
+    sku_id,
+    goods_count,
+    goods_name,
+    sku_name,
+    pic,
+    price,
+    elder_id,
+    total_amount,
+    buy_time,
+    evaluate_state,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted,
+    corp_id,
+    institution_id,
+    institution_name
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.orderCode},
+    #{item.orderId},
+    #{item.goodsId},
+    #{item.bigTypeId},
+    #{item.bigTypeName},
+    #{item.skuId},
+    #{item.goodsCount},
+    #{item.goodsName},
+    #{item.skuName},
+    #{item.pic},
+    #{item.price},
+    #{item.elderId},
+    #{item.totalAmount},
+    #{item.buyTime},
+    #{item.evaluateState},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_market_order_item
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.MarketOrderItem">
+        SELECT * from  tb_jiangyukeji_market_order_item
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="orderId!=null and orderId!=''">
+            and order_id = #{orderId}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="bigTypeId!=null and bigTypeId!=''">
+            and big_type_id = #{bigTypeId}
+        </if>
+        <if test="bigTypeName!=null and bigTypeName!=''">
+            and big_type_name = #{bigTypeName}
+        </if>
+        <if test="skuId!=null and skuId!=''">
+            and sku_id = #{skuId}
+        </if>
+        <if test="goodsCount!=null and goodsCount!=''">
+            and goods_count = #{goodsCount}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="skuName!=null and skuName!=''">
+            and sku_name = #{skuName}
+        </if>
+        <if test="pic!=null and pic!=''">
+            and pic = #{pic}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="totalAmount!=null and totalAmount!=''">
+            and total_amount = #{totalAmount}
+        </if>
+        <if test="buyTime!=null and buyTime!=''">
+            and buy_time = #{buyTime}
+        </if>
+        <if test="evaluateState!=null and evaluateState!=''">
+            and evaluate_state = #{evaluateState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_market_order_item
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="orderCode!=null and orderCode!=''">
+            and order_code = #{orderCode}
+        </if>
+        <if test="orderId!=null and orderId!=''">
+            and order_id = #{orderId}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="bigTypeId!=null and bigTypeId!=''">
+            and big_type_id = #{bigTypeId}
+        </if>
+        <if test="bigTypeName!=null and bigTypeName!=''">
+            and big_type_name = #{bigTypeName}
+        </if>
+        <if test="skuId!=null and skuId!=''">
+            and sku_id = #{skuId}
+        </if>
+        <if test="goodsCount!=null and goodsCount!=''">
+            and goods_count = #{goodsCount}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="skuName!=null and skuName!=''">
+            and sku_name = #{skuName}
+        </if>
+        <if test="pic!=null and pic!=''">
+            and pic = #{pic}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="totalAmount!=null and totalAmount!=''">
+            and total_amount = #{totalAmount}
+        </if>
+        <if test="buyTime!=null and buyTime!=''">
+            and buy_time = #{buyTime}
+        </if>
+        <if test="evaluateState!=null and evaluateState!=''">
+            and evaluate_state = #{evaluateState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

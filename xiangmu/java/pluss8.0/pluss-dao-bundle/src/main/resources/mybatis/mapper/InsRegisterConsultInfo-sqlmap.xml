@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsRegisterConsultInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    consult_type,
+    consult_time,
+    consult_name,
+    link_tel,
+    condition_type,
+    consult_mode,
+    consult_intention,
+    consult_num,
+    media_channels,
+    elder_name,
+    id_card,
+    sex,
+    age,
+    home_address,
+    ability_level,
+    check_method,
+    ideal_price,
+    assume_cost,
+    concerns,
+    satisfied,
+    dissatisfied,
+    visitors_number,
+    building_id,
+    building_name,
+    floor_id,
+    floor_name,
+    room_id,
+    room_name,
+    bed_id,
+    bed_name,
+    bed_info,
+    is_room,
+    reserve_start_time,
+    reserve_end_time,
+    appointment_fee,
+    referee_name,
+    reception_id,
+    reception_person,
+    consult_state,
+    data_source,
+    children_id,
+    area_code,
+    area_name,
+    appointment_state,
+    birthday,
+    social_card_no,
+    marry_state,
+    degree_education,
+    economic_sources,
+    hobby,
+    hobby_name,
+    major_diseases,
+    major_diseases_name,
+    major_diseases_other,
+    failure_reason,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.consultType},
+    #{item.consultTime},
+    #{item.consultName},
+    #{item.linkTel},
+    #{item.conditionType},
+    #{item.consultMode},
+    #{item.consultIntention},
+    #{item.consultNum},
+    #{item.mediaChannels},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.age},
+    #{item.homeAddress},
+    #{item.abilityLevel},
+    #{item.checkMethod},
+    #{item.idealPrice},
+    #{item.assumeCost},
+    #{item.concerns},
+    #{item.satisfied},
+    #{item.dissatisfied},
+    #{item.visitorsNumber},
+    #{item.buildingId},
+    #{item.buildingName},
+    #{item.floorId},
+    #{item.floorName},
+    #{item.roomId},
+    #{item.roomName},
+    #{item.bedId},
+    #{item.bedName},
+    #{item.bedInfo},
+    #{item.isRoom},
+    #{item.reserveStartTime},
+    #{item.reserveEndTime},
+    #{item.appointmentFee},
+    #{item.refereeName},
+    #{item.receptionId},
+    #{item.receptionPerson},
+    #{item.consultState},
+    #{item.dataSource},
+    #{item.childrenId},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.appointmentState},
+    #{item.birthday},
+    #{item.socialCardNo},
+    #{item.marryState},
+    #{item.degreeEducation},
+    #{item.economicSources},
+    #{item.hobby},
+    #{item.hobbyName},
+    #{item.majorDiseases},
+    #{item.majorDiseasesName},
+    #{item.majorDiseasesOther},
+    #{item.failureReason},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_register_consult_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsRegisterConsultInfo">
+        SELECT * from  tb_jiangyukeji_ins_register_consult_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="consultType!=null and consultType!=''">
+            and consult_type = #{consultType}
+        </if>
+        <if test="consultTime!=null and consultTime!=''">
+            and consult_time = #{consultTime}
+        </if>
+        <if test="consultName!=null and consultName!=''">
+            and consult_name = #{consultName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="conditionType!=null and conditionType!=''">
+            and condition_type = #{conditionType}
+        </if>
+        <if test="consultMode!=null and consultMode!=''">
+            and consult_mode = #{consultMode}
+        </if>
+        <if test="consultIntention!=null and consultIntention!=''">
+            and consult_intention = #{consultIntention}
+        </if>
+        <if test="consultNum!=null and consultNum!=''">
+            and consult_num = #{consultNum}
+        </if>
+        <if test="mediaChannels!=null and mediaChannels!=''">
+            and media_channels = #{mediaChannels}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="homeAddress!=null and homeAddress!=''">
+            and home_address = #{homeAddress}
+        </if>
+        <if test="abilityLevel!=null and abilityLevel!=''">
+            and ability_level = #{abilityLevel}
+        </if>
+        <if test="checkMethod!=null and checkMethod!=''">
+            and check_method = #{checkMethod}
+        </if>
+        <if test="idealPrice!=null and idealPrice!=''">
+            and ideal_price = #{idealPrice}
+        </if>
+        <if test="assumeCost!=null and assumeCost!=''">
+            and assume_cost = #{assumeCost}
+        </if>
+        <if test="concerns!=null and concerns!=''">
+            and concerns = #{concerns}
+        </if>
+        <if test="satisfied!=null and satisfied!=''">
+            and satisfied = #{satisfied}
+        </if>
+        <if test="dissatisfied!=null and dissatisfied!=''">
+            and dissatisfied = #{dissatisfied}
+        </if>
+        <if test="visitorsNumber!=null and visitorsNumber!=''">
+            and visitors_number = #{visitorsNumber}
+        </if>
+        <if test="buildingId!=null and buildingId!=''">
+            and building_id = #{buildingId}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="floorId!=null and floorId!=''">
+            and floor_id = #{floorId}
+        </if>
+        <if test="floorName!=null and floorName!=''">
+            and floor_name = #{floorName}
+        </if>
+        <if test="roomId!=null and roomId!=''">
+            and room_id = #{roomId}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="bedId!=null and bedId!=''">
+            and bed_id = #{bedId}
+        </if>
+        <if test="bedName!=null and bedName!=''">
+            and bed_name = #{bedName}
+        </if>
+        <if test="bedInfo!=null and bedInfo!=''">
+            and bed_info = #{bedInfo}
+        </if>
+        <if test="isRoom!=null and isRoom!=''">
+            and is_room = #{isRoom}
+        </if>
+        <if test="reserveStartTime!=null and reserveStartTime!=''">
+            and reserve_start_time = #{reserveStartTime}
+        </if>
+        <if test="reserveEndTime!=null and reserveEndTime!=''">
+            and reserve_end_time = #{reserveEndTime}
+        </if>
+        <if test="appointmentFee!=null and appointmentFee!=''">
+            and appointment_fee = #{appointmentFee}
+        </if>
+        <if test="refereeName!=null and refereeName!=''">
+            and referee_name = #{refereeName}
+        </if>
+        <if test="receptionId!=null and receptionId!=''">
+            and reception_id = #{receptionId}
+        </if>
+        <if test="receptionPerson!=null and receptionPerson!=''">
+            and reception_person = #{receptionPerson}
+        </if>
+        <if test="consultState!=null and consultState!=''">
+            and consult_state = #{consultState}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="childrenId!=null and childrenId!=''">
+            and children_id = #{childrenId}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="appointmentState!=null and appointmentState!=''">
+            and appointment_state = #{appointmentState}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="socialCardNo!=null and socialCardNo!=''">
+            and social_card_no = #{socialCardNo}
+        </if>
+        <if test="marryState!=null and marryState!=''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="economicSources!=null and economicSources!=''">
+            and economic_sources = #{economicSources}
+        </if>
+        <if test="hobby!=null and hobby!=''">
+            and hobby = #{hobby}
+        </if>
+        <if test="hobbyName!=null and hobbyName!=''">
+            and hobby_name = #{hobbyName}
+        </if>
+        <if test="majorDiseases!=null and majorDiseases!=''">
+            and major_diseases = #{majorDiseases}
+        </if>
+        <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+            and major_diseases_name = #{majorDiseasesName}
+        </if>
+        <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+            and major_diseases_other = #{majorDiseasesOther}
+        </if>
+        <if test="failureReason!=null and failureReason!=''">
+            and failure_reason = #{failureReason}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_register_consult_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="consultType!=null and consultType!=''">
+            and consult_type = #{consultType}
+        </if>
+        <if test="consultTime!=null and consultTime!=''">
+            and consult_time = #{consultTime}
+        </if>
+        <if test="consultName!=null and consultName!=''">
+            and consult_name = #{consultName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="conditionType!=null and conditionType!=''">
+            and condition_type = #{conditionType}
+        </if>
+        <if test="consultMode!=null and consultMode!=''">
+            and consult_mode = #{consultMode}
+        </if>
+        <if test="consultIntention!=null and consultIntention!=''">
+            and consult_intention = #{consultIntention}
+        </if>
+        <if test="consultNum!=null and consultNum!=''">
+            and consult_num = #{consultNum}
+        </if>
+        <if test="mediaChannels!=null and mediaChannels!=''">
+            and media_channels = #{mediaChannels}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="homeAddress!=null and homeAddress!=''">
+            and home_address = #{homeAddress}
+        </if>
+        <if test="abilityLevel!=null and abilityLevel!=''">
+            and ability_level = #{abilityLevel}
+        </if>
+        <if test="checkMethod!=null and checkMethod!=''">
+            and check_method = #{checkMethod}
+        </if>
+        <if test="idealPrice!=null and idealPrice!=''">
+            and ideal_price = #{idealPrice}
+        </if>
+        <if test="assumeCost!=null and assumeCost!=''">
+            and assume_cost = #{assumeCost}
+        </if>
+        <if test="concerns!=null and concerns!=''">
+            and concerns = #{concerns}
+        </if>
+        <if test="satisfied!=null and satisfied!=''">
+            and satisfied = #{satisfied}
+        </if>
+        <if test="dissatisfied!=null and dissatisfied!=''">
+            and dissatisfied = #{dissatisfied}
+        </if>
+        <if test="visitorsNumber!=null and visitorsNumber!=''">
+            and visitors_number = #{visitorsNumber}
+        </if>
+        <if test="buildingId!=null and buildingId!=''">
+            and building_id = #{buildingId}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="floorId!=null and floorId!=''">
+            and floor_id = #{floorId}
+        </if>
+        <if test="floorName!=null and floorName!=''">
+            and floor_name = #{floorName}
+        </if>
+        <if test="roomId!=null and roomId!=''">
+            and room_id = #{roomId}
+        </if>
+        <if test="roomName!=null and roomName!=''">
+            and room_name = #{roomName}
+        </if>
+        <if test="bedId!=null and bedId!=''">
+            and bed_id = #{bedId}
+        </if>
+        <if test="bedName!=null and bedName!=''">
+            and bed_name = #{bedName}
+        </if>
+        <if test="bedInfo!=null and bedInfo!=''">
+            and bed_info = #{bedInfo}
+        </if>
+        <if test="isRoom!=null and isRoom!=''">
+            and is_room = #{isRoom}
+        </if>
+        <if test="reserveStartTime!=null and reserveStartTime!=''">
+            and reserve_start_time = #{reserveStartTime}
+        </if>
+        <if test="reserveEndTime!=null and reserveEndTime!=''">
+            and reserve_end_time = #{reserveEndTime}
+        </if>
+        <if test="appointmentFee!=null and appointmentFee!=''">
+            and appointment_fee = #{appointmentFee}
+        </if>
+        <if test="refereeName!=null and refereeName!=''">
+            and referee_name = #{refereeName}
+        </if>
+        <if test="receptionId!=null and receptionId!=''">
+            and reception_id = #{receptionId}
+        </if>
+        <if test="receptionPerson!=null and receptionPerson!=''">
+            and reception_person = #{receptionPerson}
+        </if>
+        <if test="consultState!=null and consultState!=''">
+            and consult_state = #{consultState}
+        </if>
+        <if test="dataSource!=null and dataSource!=''">
+            and data_source = #{dataSource}
+        </if>
+        <if test="childrenId!=null and childrenId!=''">
+            and children_id = #{childrenId}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="appointmentState!=null and appointmentState!=''">
+            and appointment_state = #{appointmentState}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="socialCardNo!=null and socialCardNo!=''">
+            and social_card_no = #{socialCardNo}
+        </if>
+        <if test="marryState!=null and marryState!=''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="economicSources!=null and economicSources!=''">
+            and economic_sources = #{economicSources}
+        </if>
+        <if test="hobby!=null and hobby!=''">
+            and hobby = #{hobby}
+        </if>
+        <if test="hobbyName!=null and hobbyName!=''">
+            and hobby_name = #{hobbyName}
+        </if>
+        <if test="majorDiseases!=null and majorDiseases!=''">
+            and major_diseases = #{majorDiseases}
+        </if>
+        <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+            and major_diseases_name = #{majorDiseasesName}
+        </if>
+        <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+            and major_diseases_other = #{majorDiseasesOther}
+        </if>
+        <if test="failureReason!=null and failureReason!=''">
+            and failure_reason = #{failureReason}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+
+    </select>
+
+</mapper>
+

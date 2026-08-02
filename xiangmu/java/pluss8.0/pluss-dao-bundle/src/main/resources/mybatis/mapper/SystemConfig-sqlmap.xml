@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SystemConfigMapper">
+
+    <insert id="saveSystemConfig" parameterType="cn.pluss.platform.model.auth.SystemConfig">
+        insert into tb_yunlankeji_system_config(id,propertyKey,propertyValue,propertyDesc,propertyIndex,systemId,adress,createDt,wechat,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES(#{id},#{propertyKey},#{propertyValue},#{propertyDesc},#{propertyIndex},#{systemId},#{adress},#{createDt},#{wechat},#{tenantId},#{corpId},#{corpName},#{institutionId},#{institutionName})
+    </insert>
+
+    <insert id="saveSystemConfigBatch">
+        insert into tb_yunlankeji_system_config(id,propertyKey,propertyValue,propertyDesc,propertyIndex,systemId,adress,createDt,wechat,tenant_id,corp_id,corp_name,institution_id,institution_name)VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.propertyKey},#{item.propertyValue},#{item.propertyDesc},#{item.propertyIndex},#{item.systemId},#{item.adress},#{item.createDt},#{item.wechat},#{item.tenantId},#{item.corpId},#{item.corpName},#{item.institutionId},#{item.institutionName})
+        </foreach>
+    </insert>
+
+
+    <select id="querySystemConfig" parameterType="cn.pluss.platform.model.auth.SystemConfig" resultType="cn.pluss.platform.model.auth.SystemConfig">
+        SELECT * from  tb_yunlankeji_system_config
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="propertyKey!= null and propertyKey!='' ">
+                    and  propertyKey = #{ propertyKey}
+                </if>
+                <if test="propertyValue!= null and propertyValue!='' ">
+                    and  propertyValue = #{ propertyValue}
+                </if>
+                <if test="propertyDesc!= null and propertyDesc!='' ">
+                    and  propertyDesc = #{ propertyDesc}
+                </if>
+                <if test="propertyIndex!= null and propertyIndex!='' ">
+                    and  propertyIndex = #{ propertyIndex}
+                </if>
+                <if test="systemId!= null and systemId!='' ">
+                    and  systemId = #{ systemId}
+                </if>
+                <if test="adress!= null and adress!='' ">
+                    and  adress = #{ adress}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="wechat!= null and wechat!='' ">
+                    and  wechat = #{ wechat}
+                </if>
+                <if test="tenantId!= null and tenantId!='' ">
+                    and tenant_id = #{tenantId}
+                </if>
+                <if test="corpId!= null and corpId!='' ">
+                    and corp_id = #{corpId}
+                </if>
+                <if test="corpName!= null and corpName!='' ">
+                    and corp_name = #{corpName}
+                </if>
+                <if test="institutionId!= null and institutionId!='' ">
+                    and institution_id = #{institutionId}
+                </if>
+                <if test="institutionName!= null and institutionName!='' ">
+                    and institution_name = #{institutionName}
+                </if>
+
+        </where>
+    </select>
+
+    <select id="querySystemConfigList" parameterType="cn.pluss.platform.model.auth.SystemConfig" resultType="cn.pluss.platform.model.auth.SystemConfig">
+        SELECT * from  tb_yunlankeji_system_config
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="propertyKey!= null and propertyKey!='' ">
+                    and  propertyKey = #{ propertyKey}
+                </if>
+                <if test="propertyValue!= null and propertyValue!='' ">
+                    and  propertyValue = #{ propertyValue}
+                </if>
+                <if test="propertyDesc!= null and propertyDesc!='' ">
+                    and  propertyDesc = #{ propertyDesc}
+                </if>
+                <if test="propertyIndex!= null and propertyIndex!='' ">
+                    and  propertyIndex = #{ propertyIndex}
+                </if>
+                <if test="systemId!= null and systemId!='' ">
+                    and  systemId = #{ systemId}
+                </if>
+                <if test="adress!= null and adress!='' ">
+                    and  adress = #{ adress}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="wechat!= null and wechat!='' ">
+                    and  wechat = #{ wechat}
+                </if>
+                <if test="tenantId!= null and tenantId!='' ">
+                    and tenant_id = #{tenantId}
+                </if>
+                <if test="corpId!= null and corpId!='' ">
+                    and corp_id = #{corpId}
+                </if>
+                <if test="corpName!= null and corpName!='' ">
+                    and corp_name = #{corpName}
+                </if>
+                <if test="institutionId!= null and institutionId!='' ">
+                    and institution_id = #{institutionId}
+                </if>
+                <if test="institutionName!= null and institutionName!='' ">
+                    and institution_name = #{institutionName}
+                </if>
+        </where>
+    </select>
+
+    <update id="updateSystemConfig" parameterType="cn.pluss.platform.model.auth.SystemConfig" >
+        update tb_yunlankeji_system_config
+        <set>
+                <if test="id!= null  and id!='' ">
+                id= #{id},
+                </if>
+                <if test="propertyKey!= null  and propertyKey!='' ">
+                propertyKey= #{propertyKey},
+                </if>
+                <if test="propertyValue!= null  and propertyValue!='' ">
+                propertyValue= #{propertyValue},
+                </if>
+                <if test="propertyDesc!= null  and propertyDesc!='' ">
+                propertyDesc= #{propertyDesc},
+                </if>
+                <if test="propertyIndex!= null  and propertyIndex!='' ">
+                propertyIndex= #{propertyIndex},
+                </if>
+                <if test="systemId!= null  and systemId!='' ">
+                systemId= #{systemId},
+                </if>
+                <if test="adress!= null  and adress!='' ">
+                adress= #{adress},
+                </if>
+                <if test="createDt!= null  and createDt!='' ">
+                createDt= #{createDt},
+                </if>
+                <if test="wechat!= null  and wechat!='' ">
+                wechat= #{wechat}
+                </if>
+                <if test="tenantId!= null  and tenantId!='' ">
+                tenant_id = #{tenantId},
+                </if>
+                <if test="corpId!= null  and corpId!='' ">
+                corp_id = #{corpId},
+                </if>
+                <if test="corpName!= null  and corpName!='' ">
+                corp_name = #{corpName},
+                </if>
+                <if test="institutionId!= null  and institutionId!='' ">
+                institution_id = #{institutionId},
+                </if>
+                <if test="institutionName!= null  and institutionName!='' ">
+                institution_name = #{institutionName},
+                </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteSystemConfig" parameterType="cn.pluss.platform.model.auth.SystemConfig" >
+        DELETE FROM tb_yunlankeji_system_config where id=#{id}
+    </delete>
+
+    <delete id="deleteSystemConfigBatch" parameterType="java.util.List" >
+        DELETE FROM tb_yunlankeji_system_config where  1>2 or id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="querySystemConfigPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.auth.SystemConfig">
+        SELECT * from  tb_yunlankeji_system_config
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="propertyKey!= null and propertyKey!='' ">
+                    and  propertyKey = #{ propertyKey}
+                </if>
+                <if test="propertyValue!= null and propertyValue!='' ">
+                    and  propertyValue = #{ propertyValue}
+                </if>
+                <if test="propertyDesc!= null and propertyDesc!='' ">
+                    and  propertyDesc = #{ propertyDesc}
+                </if>
+                <if test="propertyIndex!= null and propertyIndex!='' ">
+                    and  propertyIndex = #{ propertyIndex}
+                </if>
+                <if test="systemId!= null and systemId!='' ">
+                    and  systemId = #{ systemId}
+                </if>
+                <if test="adress!= null and adress!='' ">
+                    and  adress = #{ adress}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="wechat!= null and wechat!='' ">
+                    and  wechat = #{ wechat}
+                </if>
+                <if test="tenantId!= null and tenantId!='' ">
+                    and tenant_id = #{tenantId}
+                </if>
+                <if test="corpId!= null and corpId!='' ">
+                    and corp_id = #{corpId}
+                </if>
+                <if test="corpName!= null and corpName!='' ">
+                    and corp_name = #{corpName}
+                </if>
+                <if test="institutionId!= null and institutionId!='' ">
+                    and institution_id = #{institutionId}
+                </if>
+                <if test="institutionName!= null and institutionName!='' ">
+                    and institution_name = #{institutionName}
+                </if>
+        </where>
+        order by id desc  limit #{pageSize}  offset  #{offset}
+    </select>
+
+    <select id="querySystemConfigPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_yunlankeji_system_config
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="propertyKey!= null and propertyKey!='' ">
+                    and  propertyKey = #{ propertyKey}
+                </if>
+                <if test="propertyValue!= null and propertyValue!='' ">
+                    and  propertyValue = #{ propertyValue}
+                </if>
+                <if test="propertyDesc!= null and propertyDesc!='' ">
+                    and  propertyDesc = #{ propertyDesc}
+                </if>
+                <if test="propertyIndex!= null and propertyIndex!='' ">
+                    and  propertyIndex = #{ propertyIndex}
+                </if>
+                <if test="systemId!= null and systemId!='' ">
+                    and  systemId = #{ systemId}
+                </if>
+                <if test="adress!= null and adress!='' ">
+                    and  adress = #{ adress}
+                </if>
+                <if test="createDt!= null and createDt!='' ">
+                    and  createDt = #{ createDt}
+                </if>
+                <if test="wechat!= null and wechat!='' ">
+                    and  wechat = #{ wechat}
+                </if>
+                <if test="tenantId!= null and tenantId!='' ">
+                    and tenant_id = #{tenantId}
+                </if>
+                <if test="corpId!= null and corpId!='' ">
+                    and corp_id = #{corpId}
+                </if>
+                <if test="corpName!= null and corpName!='' ">
+                    and corp_name = #{corpName}
+                </if>
+                <if test="institutionId!= null and institutionId!='' ">
+                    and institution_id = #{institutionId}
+                </if>
+                <if test="institutionName!= null and institutionName!='' ">
+                    and institution_name = #{institutionName}
+                </if>
+        </where>
+    </select>
+
+
+</mapper>
+

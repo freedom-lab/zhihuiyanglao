@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthPhysicalCheckMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    elder_id,
+    elder_name,
+    id_card,
+    age,
+    sex,
+    birthday,
+    recent_symptom,
+    sleep_time,
+    temperature,
+    pulse,
+    breathe,
+    high_pressure,
+    low_pressure,
+    height,
+    weight,
+    waistline,
+    self_assessment,
+    self_desp,
+    skin_status,
+    skin_desp,
+    lymph_status,
+    lymph_desp,
+    lips_status,
+    tooth_status,
+    throat_status,
+    left_eyesight,
+    right_eyesight,
+    listening_status,
+    ear_nose_status,
+    eye_status,
+    chest_shape,
+    chest_percussion,
+    chest_sounds,
+    heart_status,
+    heart_rate,
+    heart_rhythm,
+    heart_sounds,
+    abdomen_status,
+    abdomen_desp,
+    arms_skin,
+    arms_skin_desp,
+    can_touch,
+    no_touch,
+    anus_status,
+    woman_check,
+    check_file,
+    check_result,
+    physical_state,
+    hospital_name,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    status,
+    is_deleted
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.age},
+    #{item.sex},
+    #{item.birthday},
+    #{item.recentSymptom},
+    #{item.sleepTime},
+    #{item.temperature},
+    #{item.pulse},
+    #{item.breathe},
+    #{item.highPressure},
+    #{item.lowPressure},
+    #{item.height},
+    #{item.weight},
+    #{item.waistline},
+    #{item.selfAssessment},
+    #{item.selfDesp},
+    #{item.skinStatus},
+    #{item.skinDesp},
+    #{item.lymphStatus},
+    #{item.lymphDesp},
+    #{item.lipsStatus},
+    #{item.toothStatus},
+    #{item.throatStatus},
+    #{item.leftEyesight},
+    #{item.rightEyesight},
+    #{item.listeningStatus},
+    #{item.earNoseStatus},
+    #{item.eyeStatus},
+    #{item.chestShape},
+    #{item.chestPercussion},
+    #{item.chestSounds},
+    #{item.heartStatus},
+    #{item.heartRate},
+    #{item.heartRhythm},
+    #{item.heartSounds},
+    #{item.abdomenStatus},
+    #{item.abdomenDesp},
+    #{item.armsSkin},
+    #{item.armsSkinDesp},
+    #{item.canTouch},
+    #{item.noTouch},
+    #{item.anusStatus},
+    #{item.womanCheck},
+    #{item.checkFile},
+    #{item.checkResult},
+    #{item.physicalState},
+    #{item.hospitalName},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.status},
+    #{item.isDeleted}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_physical_check
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthPhysicalCheck">
+        SELECT * from  tb_jiangyukeji_health_physical_check
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="recentSymptom!=null and recentSymptom!=''">
+            and recent_symptom = #{recentSymptom}
+        </if>
+        <if test="sleepTime!=null and sleepTime!=''">
+            and sleep_time = #{sleepTime}
+        </if>
+        <if test="temperature!=null and temperature!=''">
+            and temperature = #{temperature}
+        </if>
+        <if test="pulse!=null and pulse!=''">
+            and pulse = #{pulse}
+        </if>
+        <if test="breathe!=null and breathe!=''">
+            and breathe = #{breathe}
+        </if>
+        <if test="highPressure!=null and highPressure!=''">
+            and high_pressure = #{highPressure}
+        </if>
+        <if test="lowPressure!=null and lowPressure!=''">
+            and low_pressure = #{lowPressure}
+        </if>
+        <if test="height!=null and height!=''">
+            and height = #{height}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="waistline!=null and waistline!=''">
+            and waistline = #{waistline}
+        </if>
+        <if test="selfAssessment!=null and selfAssessment!=''">
+            and self_assessment = #{selfAssessment}
+        </if>
+        <if test="selfDesp!=null and selfDesp!=''">
+            and self_desp = #{selfDesp}
+        </if>
+        <if test="skinStatus!=null and skinStatus!=''">
+            and skin_status = #{skinStatus}
+        </if>
+        <if test="skinDesp!=null and skinDesp!=''">
+            and skin_desp = #{skinDesp}
+        </if>
+        <if test="lymphStatus!=null and lymphStatus!=''">
+            and lymph_status = #{lymphStatus}
+        </if>
+        <if test="lymphDesp!=null and lymphDesp!=''">
+            and lymph_desp = #{lymphDesp}
+        </if>
+        <if test="lipsStatus!=null and lipsStatus!=''">
+            and lips_status = #{lipsStatus}
+        </if>
+        <if test="toothStatus!=null and toothStatus!=''">
+            and tooth_status = #{toothStatus}
+        </if>
+        <if test="throatStatus!=null and throatStatus!=''">
+            and throat_status = #{throatStatus}
+        </if>
+        <if test="leftEyesight!=null and leftEyesight!=''">
+            and left_eyesight = #{leftEyesight}
+        </if>
+        <if test="rightEyesight!=null and rightEyesight!=''">
+            and right_eyesight = #{rightEyesight}
+        </if>
+        <if test="listeningStatus!=null and listeningStatus!=''">
+            and listening_status = #{listeningStatus}
+        </if>
+        <if test="earNoseStatus!=null and earNoseStatus!=''">
+            and ear_nose_status = #{earNoseStatus}
+        </if>
+        <if test="eyeStatus!=null and eyeStatus!=''">
+            and eye_status = #{eyeStatus}
+        </if>
+        <if test="chestShape!=null and chestShape!=''">
+            and chest_shape = #{chestShape}
+        </if>
+        <if test="chestPercussion!=null and chestPercussion!=''">
+            and chest_percussion = #{chestPercussion}
+        </if>
+        <if test="chestSounds!=null and chestSounds!=''">
+            and chest_sounds = #{chestSounds}
+        </if>
+        <if test="heartStatus!=null and heartStatus!=''">
+            and heart_status = #{heartStatus}
+        </if>
+        <if test="heartRate!=null and heartRate!=''">
+            and heart_rate = #{heartRate}
+        </if>
+        <if test="heartRhythm!=null and heartRhythm!=''">
+            and heart_rhythm = #{heartRhythm}
+        </if>
+        <if test="heartSounds!=null and heartSounds!=''">
+            and heart_sounds = #{heartSounds}
+        </if>
+        <if test="abdomenStatus!=null and abdomenStatus!=''">
+            and abdomen_status = #{abdomenStatus}
+        </if>
+        <if test="abdomenDesp!=null and abdomenDesp!=''">
+            and abdomen_desp = #{abdomenDesp}
+        </if>
+        <if test="armsSkin!=null and armsSkin!=''">
+            and arms_skin = #{armsSkin}
+        </if>
+        <if test="armsSkinDesp!=null and armsSkinDesp!=''">
+            and arms_skin_desp = #{armsSkinDesp}
+        </if>
+        <if test="canTouch!=null and canTouch!=''">
+            and can_touch = #{canTouch}
+        </if>
+        <if test="noTouch!=null and noTouch!=''">
+            and no_touch = #{noTouch}
+        </if>
+        <if test="anusStatus!=null and anusStatus!=''">
+            and anus_status = #{anusStatus}
+        </if>
+        <if test="womanCheck!=null and womanCheck!=''">
+            and woman_check = #{womanCheck}
+        </if>
+        <if test="checkFile!=null and checkFile!=''">
+            and check_file = #{checkFile}
+        </if>
+        <if test="checkResult!=null and checkResult!=''">
+            and check_result = #{checkResult}
+        </if>
+        <if test="physicalState!=null and physicalState!=''">
+            and physical_state = #{physicalState}
+        </if>
+        <if test="hospitalName!=null and hospitalName!=''">
+            and hospital_name = #{hospitalName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_physical_check
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="recentSymptom!=null and recentSymptom!=''">
+            and recent_symptom = #{recentSymptom}
+        </if>
+        <if test="sleepTime!=null and sleepTime!=''">
+            and sleep_time = #{sleepTime}
+        </if>
+        <if test="temperature!=null and temperature!=''">
+            and temperature = #{temperature}
+        </if>
+        <if test="pulse!=null and pulse!=''">
+            and pulse = #{pulse}
+        </if>
+        <if test="breathe!=null and breathe!=''">
+            and breathe = #{breathe}
+        </if>
+        <if test="highPressure!=null and highPressure!=''">
+            and high_pressure = #{highPressure}
+        </if>
+        <if test="lowPressure!=null and lowPressure!=''">
+            and low_pressure = #{lowPressure}
+        </if>
+        <if test="height!=null and height!=''">
+            and height = #{height}
+        </if>
+        <if test="weight!=null and weight!=''">
+            and weight = #{weight}
+        </if>
+        <if test="waistline!=null and waistline!=''">
+            and waistline = #{waistline}
+        </if>
+        <if test="selfAssessment!=null and selfAssessment!=''">
+            and self_assessment = #{selfAssessment}
+        </if>
+        <if test="selfDesp!=null and selfDesp!=''">
+            and self_desp = #{selfDesp}
+        </if>
+        <if test="skinStatus!=null and skinStatus!=''">
+            and skin_status = #{skinStatus}
+        </if>
+        <if test="skinDesp!=null and skinDesp!=''">
+            and skin_desp = #{skinDesp}
+        </if>
+        <if test="lymphStatus!=null and lymphStatus!=''">
+            and lymph_status = #{lymphStatus}
+        </if>
+        <if test="lymphDesp!=null and lymphDesp!=''">
+            and lymph_desp = #{lymphDesp}
+        </if>
+        <if test="lipsStatus!=null and lipsStatus!=''">
+            and lips_status = #{lipsStatus}
+        </if>
+        <if test="toothStatus!=null and toothStatus!=''">
+            and tooth_status = #{toothStatus}
+        </if>
+        <if test="throatStatus!=null and throatStatus!=''">
+            and throat_status = #{throatStatus}
+        </if>
+        <if test="leftEyesight!=null and leftEyesight!=''">
+            and left_eyesight = #{leftEyesight}
+        </if>
+        <if test="rightEyesight!=null and rightEyesight!=''">
+            and right_eyesight = #{rightEyesight}
+        </if>
+        <if test="listeningStatus!=null and listeningStatus!=''">
+            and listening_status = #{listeningStatus}
+        </if>
+        <if test="earNoseStatus!=null and earNoseStatus!=''">
+            and ear_nose_status = #{earNoseStatus}
+        </if>
+        <if test="eyeStatus!=null and eyeStatus!=''">
+            and eye_status = #{eyeStatus}
+        </if>
+        <if test="chestShape!=null and chestShape!=''">
+            and chest_shape = #{chestShape}
+        </if>
+        <if test="chestPercussion!=null and chestPercussion!=''">
+            and chest_percussion = #{chestPercussion}
+        </if>
+        <if test="chestSounds!=null and chestSounds!=''">
+            and chest_sounds = #{chestSounds}
+        </if>
+        <if test="heartStatus!=null and heartStatus!=''">
+            and heart_status = #{heartStatus}
+        </if>
+        <if test="heartRate!=null and heartRate!=''">
+            and heart_rate = #{heartRate}
+        </if>
+        <if test="heartRhythm!=null and heartRhythm!=''">
+            and heart_rhythm = #{heartRhythm}
+        </if>
+        <if test="heartSounds!=null and heartSounds!=''">
+            and heart_sounds = #{heartSounds}
+        </if>
+        <if test="abdomenStatus!=null and abdomenStatus!=''">
+            and abdomen_status = #{abdomenStatus}
+        </if>
+        <if test="abdomenDesp!=null and abdomenDesp!=''">
+            and abdomen_desp = #{abdomenDesp}
+        </if>
+        <if test="armsSkin!=null and armsSkin!=''">
+            and arms_skin = #{armsSkin}
+        </if>
+        <if test="armsSkinDesp!=null and armsSkinDesp!=''">
+            and arms_skin_desp = #{armsSkinDesp}
+        </if>
+        <if test="canTouch!=null and canTouch!=''">
+            and can_touch = #{canTouch}
+        </if>
+        <if test="noTouch!=null and noTouch!=''">
+            and no_touch = #{noTouch}
+        </if>
+        <if test="anusStatus!=null and anusStatus!=''">
+            and anus_status = #{anusStatus}
+        </if>
+        <if test="womanCheck!=null and womanCheck!=''">
+            and woman_check = #{womanCheck}
+        </if>
+        <if test="checkFile!=null and checkFile!=''">
+            and check_file = #{checkFile}
+        </if>
+        <if test="checkResult!=null and checkResult!=''">
+            and check_result = #{checkResult}
+        </if>
+        <if test="physicalState!=null and physicalState!=''">
+            and physical_state = #{physicalState}
+        </if>
+        <if test="hospitalName!=null and hospitalName!=''">
+            and hospital_name = #{hospitalName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,960 @@
+<template>
+  <div class="page-outer">
+    <div class="page-container">
+      <el-card class="pure-card page-card">
+        <div class="card-content">
+          <!-- 顶部楼栋栏 -->
+          <div class="content-top flex">
+            <img :src="buildimg" alt="" class="m-l-10" />
+            <div class="m-l-10 m-r-10">楼栋名称</div>
+            <div class="topcon">
+              <div class="list m-l-20 light">
+                <span>1号楼</span>
+              </div>
+            </div>
+            <div>
+              <el-switch
+                v-model="switchVal"
+                active-text="展示全部"
+                inactive-text="空闲床位查询"
+                active-color="#EEEEEE"
+                inactive-color="#13ce66"
+              ></el-switch>
+            </div>
+          </div>
+
+          <div class="container-content flex">
+            <!-- 左侧楼层栏 -->
+            <el-card class="pure-card cc-left">
+              <div class="header-floor flex flex-direction-column align-items-center">
+                <img :src="headerfloorimg" alt="" style="height: 25px; object-fit: cover;" />
+                <span>所在楼层</span>
+              </div>
+              <div class="floor-ul">
+                <div class="floor-li" v-for="item,index in floorList" :key="index" @click="handlefloorClick(item)">
+                  {{item.floorName}}
+                </div>
+              </div>
+            </el-card>
+
+            <!-- 右侧床位主区域 -->
+            <div class="cc-right">
+              <!-- 顶部统计行 -->
+              <div class="flex stats-top">
+                <div class="stats-item stats-first">
+                  <img :src="topstaticimg" alt="" style="height: 25px; object-fit: cover;" />
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #409eff;">6</div>
+                  <div class="si-label">房间总数</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #21aa06;">12</div>
+                  <div class="si-label">床位总数</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #ef8d19;">7</div>
+                  <div class="si-label">当前空闲</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #21aa06;">5</div>
+                  <div class="si-label">入住数</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #21aa06;">0</div>
+                  <div class="si-label">试住数</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #5476c3;">0</div>
+                  <div class="si-label">预订数</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #ef8d19;">0</div>
+                  <div class="si-label">变更占用</div>
+                </div>
+                <div class="stats-item">
+                  <div class="si-num" style="font-family: SimHei; color: #4f84e7;">41.67%</div>
+                  <div class="si-label">入住率</div>
+                </div>
+              </div>
+
+              <!-- 房间卡片容器 -->
+              <div class="room">
+                <div class="room-ul" style="">
+                  <!-- 101房间 -->
+                  <div class="el-col el-col-12 room-li" v-for="item,index in tableData" :key="index" style="">
+                    <el-card class="boxs is-always-shadow" style="border-radius: 5px;">
+                      <div class="el-card__body" style="padding: 0;">
+                        <div class="flex room-top">
+                          <span>房间朝向({{item.direction || '-'}})</span>
+                          <span class="font-weight-600" style="font-size: 15px;">{{item.roomName}}({{item.bedCount}})</span>
+                          <span>采光情况(-)</span>
+                        </div>
+                        <div class="bed over-flow">
+                          <!-- 101-1 入住 -->
+                          <el-card class="bed-list" v-for="beditem,bindex in item.bedList" :key="bindex">
+                            <div class="" @click="edit(beditem)">
+                              <div class="bed-top w100">
+                                <span class="tip font-14" :class="tipclass(beditem.status)">{{beditem.label}}</span>
+                                <div>
+                                  <el-dropdown trigger="hover" @command="e=>handleBed(e,beditem)">
+                                    <span class="el-dropdown-link pointer">
+                                      <i class="el-icon-menu el-icon--right"></i>
+                                      {{beditem.status | bedstatusFormat}}
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                      <el-dropdown-item command="1"><i class="el-icon-view"></i>入住详情</el-dropdown-item>
+                                      <el-dropdown-item command="2" disabled><i class="el-icon-user-solid"></i>预订床位</el-dropdown-item>
+                                      <el-dropdown-item command="3" disabled><i class="el-icon-s-custom"></i>快捷入住</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                  </el-dropdown>
+                                </div>
+                              </div>
+                              <div class="bed-middle flex align-items-center justify-content-between">
+                                <div class="flex align-items-center">
+                                  <el-image style="width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; margin-right: 10px;" :src="beditem.status=='1'?bedenterimg:beditem.status=='2'?bedreserveimg:bedemptyimg"></el-image>
+                                  <div class="flex flex-direction-column">
+                                    <div>海大富 男/61</div>
+                                    <div>护理等级：轻度</div>
+                                  </div>
+                                </div>
+                                <el-image style="width: 27px; height: 27px; margin: 2px 2px 0 0; border-radius: 5px; border: 1px solid #eeeded; flex-shrink: 0;" :src="q2qbackimg" :preview-src-list="[q2qbackimg]" @click.stop></el-image>
+                              </div>
+                              <div class="flex align-items-center justify-content-between p-l-10 p-r-10">
+                                <span class="m-t-10">入住时间：2026-06-10</span>
+                                <span class="m-b-3 text-red">0.00元/日<br>600.00元/月</span>
+                              </div>
+                            </div>
+                          </el-card>
+                        </div>
+                      </div>
+                    </el-card>
+                  </div>
+                </div>
+                <!-- 分页 -->
+                <div class="block">
+                  <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                    :current-page="queryInfo.currPage" :page-sizes="[100, 200, 300, 400]" :page-size="queryInfo.pageSize"
+                    layout="total, sizes, prev, pager, next, jumper" :total="total">
+                  </el-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </el-card>
+    </div>
+    <!-- 用户详情抽屉 -->
+    <el-drawer
+      title="用户详情"
+      :visible.sync="drawer"
+      size="75%"
+      :with-header="false">
+      <div class="ljd-drawer-content" style="">
+        <!-- 顶部头部：头像+姓名+切换箭头+标签 -->
+        <div class="top-header flex align-items-center" style="">
+          <div class="user-avatar" style="width:40px;height:40px;background:#409eff;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-right:10px;">
+            <i class="el-icon-user-solid" style="color:#fff;font-size:24px;"></i>
+          </div>
+          <span class="username" style="font-size:20px;font-weight:bold;margin-right:10px;">海大富</span>
+          <div class="arrow-group flex">
+            <el-button icon="el-icon-arrow-left" size="mini" circle></el-button>
+            <el-button icon="el-icon-arrow-right" size="mini" circle></el-button>
+          </div>
+          <el-tag size="small" style="margin-left:20px;background:#e6f7ff;color:#1890ff;border:none;">轻度失能</el-tag>
+        </div>
+
+        <!-- 第一行老人基础统计栏 -->
+        <div class="info-bar flex">
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">年龄</span>
+            <div style="font-size:14px;">61</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">性别</span>
+            <div style="font-size:14px;">男</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">手机号码</span>
+            <div style="font-size:14px;">18888888888</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">入住日期</span>
+            <div style="font-size:14px;">2026-06-10</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">已住天数</span>
+            <div style="font-size:14px;">1</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">护理等级</span>
+            <div style="font-size:14px;">轻度</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">入住床位</span>
+            <div style="font-size:14px;">1号楼-1F-101-1-1</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">责任护工组</span>
+            <div style="font-size:14px;">护理一组</div>
+          </div>
+          <div class="info-item">
+            <span style="color:#666;font-size:13px;">入院方式</span>
+            <div style="font-size:14px;">-</div>
+          </div>
+        </div>
+
+        <!-- 标签页导航 -->
+        <el-tabs v-model="activeTab" type="card" tab-position="top" style="">
+          <el-tab-pane label="基本资料" name="base"></el-tab-pane>
+          <el-tab-pane label="健康档案" name="health"></el-tab-pane>
+          <el-tab-pane label="亲属信息" name="family"></el-tab-pane>
+          <el-tab-pane label="体检信息" name="check"></el-tab-pane>
+          <el-tab-pane label="签约信息" name="sign"></el-tab-pane>
+          <el-tab-pane label="资金信息" name="money"></el-tab-pane>
+          <el-tab-pane label="护理计划" name="plan"></el-tab-pane>
+          <el-tab-pane label="护理记录" name="record"></el-tab-pane>
+          <el-tab-pane label="照护记录" name="care"></el-tab-pane>
+          <el-tab-pane label="智能监控" name="monitor"></el-tab-pane>
+          <el-tab-pane label="评估记录" name="eval"></el-tab-pane>
+          <el-tab-pane label="变更记录" name="change"></el-tab-pane>
+          <el-tab-pane label="医疗记录" name="medical"></el-tab-pane>
+          <el-tab-pane label="充值记录" name="recharge"></el-tab-pane>
+          <el-tab-pane label="收费标准" name="charge"></el-tab-pane>
+          <el-tab-pane label="请假记录" name="recharge2"></el-tab-pane>
+          <el-tab-pane label="增值服务" name="recharge3"></el-tab-pane>
+        </el-tabs>
+
+        <!-- 基本资料面板 -->
+        <div class="base-panel">
+
+          <el-collapse v-model="activeCollapses" @change="handleChange">
+            <el-collapse-item name="1">
+              <template slot="title">
+                <!-- 账户余额标题栏 -->
+                <div class="collapse-title">
+                  <i v-if="activeCollapses.includes('1')" class="collapse-icon el-icon-arrow-down"></i>
+                  <i v-else class="collapse-icon el-icon-arrow-right"></i>
+                  基本信息 <span style="color:#999;font-weight:normal;">(账户余额: 0.00 充值金额: 0.00 欠费金额: 800.00)</span>
+                </div>
+              </template>
+              <!-- 表单布局 两栏 + 右侧照片二维码 -->
+              <div class="flex" style="gap:30px;">
+                <!-- 左侧表单区域 -->
+                <div style="flex:1;">
+                  <el-row :gutter="20">
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">老人姓名</span>
+                        <span>海大富</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">身份证号</span>
+                        <span>340321196504141652</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">年龄</span>
+                        <span>61</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">性别</span>
+                        <span>男</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">出生日期</span>
+                        <span>1965-04-14</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">民族</span>
+                        <span>汉族</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">老人类别</span>
+                        <span>未知</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">手机号码</span>
+                        <span>18888888888</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">固定电话</span>
+                        <span>-</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">血型</span>
+                        <span></span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">老人状态</span>
+                        <span>正常</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">婚姻状况</span>
+                        <span>已婚</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">医保类别</span>
+                        <span>其他</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">文化程度</span>
+                        <span>本科及以上</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">宗教信仰</span>
+                        <span>无</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">媒介渠道</span>
+                        <span></span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">是否视频替代打卡</span>
+                        <span>否</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">户籍类别</span>
+                        <span>农业户口</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">户籍区划</span>
+                        <span>-</span>
+                      </div>
+                    </el-col>
+                    <el-col span="11">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">户籍地址</span>
+                        <span>阿斯蒂芬</span>
+                      </div>
+                    </el-col>
+
+                    <el-col span="22">
+                      <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                        <span style="width:100px;color:#666;">家庭住址</span>
+                        <span>大幅改善的</span>
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
+
+                <!-- 右侧：照片 + 二维码 -->
+                <div class="right-img-col flex flex-direction-column align-items-center">
+                  <div class="img-title" style="color:#666;margin-bottom:8px;">照片</div>
+                  <div style="width:120px;height:120px;border:1px solid #eee;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                    <img src="/assets/oldman.png" alt="老人照片" style="max-width:100%;max-height:100%;" />
+                  </div>
+                  <div class="img-title" style="color:#666;margin-bottom:8px;">二维码</div>
+                  <div style="width:120px;height:120px;border:1px solid #eee;display:flex;align-items:center;justify-content:center;">
+                    <img src="/assets/qrcode.png" alt="床位二维码" style="max-width:100%;max-height:100%;" />
+                  </div>
+                </div>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item name="2">
+              <template slot="title">
+                <div class="collapse-title">
+                  <i v-if="activeCollapses.includes('1')" class="collapse-icon el-icon-arrow-down"></i>
+                  <i v-else class="collapse-icon el-icon-arrow-right"></i>
+                  紧急联系人信息
+                </div>
+              </template>
+              <el-row :gutter="20">
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">联系人姓名</span>
+                    <span>海翔宇</span>
+                  </div>
+                </el-col>
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">联系电话</span>
+                    <span>18888888888</span>
+                  </div>
+                </el-col>
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">与老人关系</span>
+                    <span>儿子</span>
+                  </div>
+                </el-col>
+                <el-col span="24">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">联系人地址</span>
+                    <span>阿道夫刚刚</span>
+                  </div>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+            <el-collapse-item name="3">
+              <template slot="title">
+                <div class="collapse-title">
+                  <i v-if="activeCollapses.includes('1')" class="collapse-icon el-icon-arrow-down"></i>
+                  <i v-else class="collapse-icon el-icon-arrow-right"></i>
+                  监护人信息
+                </div>
+              </template>
+              <el-row :gutter="20">
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">监护人姓名</span>
+                    <span>海翔宇</span>
+                  </div>
+                </el-col>
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">联系电话</span>
+                    <span>18888888888</span>
+                  </div>
+                </el-col>
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">与老人关系</span>
+                    <span>儿子</span>
+                  </div>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+            <el-collapse-item name="4">
+              <template slot="title">
+                <div class="collapse-title">
+                  <i v-if="activeCollapses.includes('1')" class="collapse-icon el-icon-arrow-down"></i>
+                  <i v-else class="collapse-icon el-icon-arrow-right"></i>
+                  健康状况
+                </div>
+              </template>
+              <el-row :gutter="20">
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">监护人姓名</span>
+                    <span>海翔宇</span>
+                  </div>
+                </el-col>
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">联系电话</span>
+                    <span>18888888888</span>
+                  </div>
+                </el-col>
+                <el-col span="8">
+                  <div class="form-row flex align-items-center" style="margin-bottom:12px;">
+                    <span style="width:100px;color:#666;">与老人关系</span>
+                    <span>儿子</span>
+                  </div>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+        <!-- 底部操作按钮 -->
+        <!-- <div class="btn-bottom flex" style="position:sticky;bottom:-20px;background:#fff;padding:16px 0;margin-top:30px;border-top:1px solid #eee;">
+          <el-button @click="drawer = false">返回</el-button>
+          <el-button size="small" type="primary" @click="handleSave2">保存</el-button>
+        </div> -->
+      </div>
+    </el-drawer>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "BedManage",
+  data() {
+    return {
+      // 顶部开关
+      switchVal: false,
+      // 左侧楼层数据
+      floorList: [
+        { floorName: "1F（空闲：7）" },
+        { floorName: "2F（空闲：0）" },
+        { floorName: "3F（空闲：0）" },
+        { floorName: "4F（空闲：0）" },
+        { floorName: "5F（空闲：0）" },
+        { floorName: "6F（空闲：0）" },
+      ],
+      buildimg: require("@/assets/images/instituionSystem/bed/build.png"),
+      headerfloorimg: require("@/assets/images/instituionSystem/bed/header-floor.png"),
+      topstaticimg: require("@/assets/images/instituionSystem/bed/static.png"),
+      bedemptyimg: require("@/assets/images/instituionSystem/bed/bed-empty-1.png"),
+      bedenterimg: require("@/assets/images/instituionSystem/bed/bed-enter-1.png"),
+      bedreserveimg: require("@/assets/images/instituionSystem/bed/bed-reserve-1.png"),
+      q2qbackimg: require("@/assets/images/instituionSystem/q2qback.png"),
+      drawer: false,
+      loading: false,
+      form: {
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
+        ],
+        loginName: [
+          { required: true, message: '请输入用户账号', trigger: 'blur' },
+        ],
+        passwordText: [
+          { required: true, message: '请输入用户密码', trigger: 'blur' },
+        ],
+        lifeTime: [
+          { required: true, message: '请选择用户有效期', trigger: 'change' },
+        ],
+        longProductsCode: [
+          { required: true, message: '请选择授权产品', trigger: 'change' },
+        ],
+      },
+      total: 0,
+      queryInfo: {
+        pageSize: 4,
+        pageCount: 1,
+        currPage: 1,
+        condition: {
+        }
+      },
+      tableData: [
+      ],
+      userInfo: {},
+      activeTab: 'base',
+      activeCollapses: ['1','2','3','4','5','6','7','8',],
+    };
+  },
+  
+  filters: {
+    bedstatusFormat(val){
+      switch (val) {
+        case 0:
+        case '0':
+          return '空闲';
+        case 1:
+        case '1':
+          return '入住';
+        case 2:
+        case '2':
+          return '预定';
+      
+        default:
+          return '';
+      }
+    },
+  },
+  computed: {
+  },
+  created() {
+    try{
+      this.userInfo = JSON.parse(localStorage.getItem("userInfo"))?.userInfo
+    }catch(e){}
+    this.getList()
+  },
+  methods: {
+    // 获取当前楼层
+    tipclass(status) {
+      switch (status) {
+        case 0:
+        case '0':
+          return 'bg-warning';
+        case 1:
+        case '1':
+          return 'bg-sussess';
+        case 2:
+        case '2':
+          return 'bg-blue';
+      
+        default:
+          return 'bg-info';
+      }
+    },
+    //获取数据
+    getList() {
+      var that = this;
+      that.loading = true
+      // that.queryInfo.condition.isSigning = that.activeName == '1' ? 1 : 0
+      that.$http.post("/userInfo/list", that.queryInfo).then( (response)=> {
+        console.log(response.data.data);
+        if (response.data.code == 200) {
+          that.loading = false
+          that.total = response.data.data.count;
+          that.queryInfo.currPage = response.data.data.currPage
+          that.tableData = response.data.data.data.map(item => {
+            return {
+              ...item,
+              roomName: "1层-01房", // 房间名称
+              roomType: "四人间",    // 房型：四人间/两人间
+              direction: "朝北",     // 朝向
+              bedCount: 4,           // 床位数量2/4
+              isWholeRoom: false,    // 是否包房（右上角"包"标记）
+              // 价格字段
+              shareMonthPrice: 150,
+              wholeMonthPrice: 300,
+              shareDayPrice: 5,
+              wholeDayPrice: 10,
+              // 床位列表 status: 0-空闲 1-使用中 2-预定
+              bedList: [
+              { label: '1层-01-01', status: '1', userName: '', gender: '' },
+              { label: '1层-01-02', status: '1', userName: '王琪', gender: '男' },
+              { label: '1层-01-03', status: '2', userName: '蓝天', gender: '男' },
+              { label: '1层-01-04', status: '0', userName: '', gender: '' },
+              ],
+            }
+          });
+        }
+      });
+    },
+    handlefloorClick(tab, event) {
+      // console.log(tab, event);
+      this.search()
+    },
+    handleChange(e){},
+    // 保存
+    handleSave() {
+      var that = this;
+      that.$refs.addform.validate(valid => {
+        if (!valid) return;
+        const _form = JSON.parse(JSON.stringify(that.form))
+        _form.password = that.$md5(that.form.passwordText)
+        that.$http.post("/userInfo/add", _form).then( (response)=> {
+          if (response.data.code == 200) {
+            that.$notify.success({
+              title: "提示",
+              message: "保存成功",
+              showClose: true,
+            });
+            that.showDialog = false
+            this.drawer = false
+            that.getList()
+          } else {
+            that.$notify.info({
+              title: "提示",
+              message: response.data.message,
+              showClose: true,
+            });
+          }
+        }).catch(function (error) {
+
+        })
+      });
+
+    },
+    // 编辑
+    handleSave2() {
+      var that = this;
+      that.$refs.editform.validate(valid => {
+        if (!valid) return;
+        const _form = JSON.parse(JSON.stringify(that.form))
+        _form.password = that.$md5(that.form.passwordText)
+        that.$http.post("/userInfo/update", _form).then( (response)=> {
+          if (response.data.code == 200) {
+            that.$notify.success({
+              title: "提示",
+              message: "保存成功",
+              showClose: true,
+            });
+            that.showDialog = false
+            this.drawer = false
+            that.getList()
+          } else {
+            that.$notify.info({
+              title: "提示",
+              message: response.data.message,
+              showClose: true,
+            });
+          }
+        }).catch(function (error) {
+
+        })
+      });
+
+    },
+    //修改
+    edit(row) {
+      this.drawer = true;
+      this.labelType = 'edit'
+      this.form = JSON.parse(JSON.stringify(row))
+      // this.activeTabName = '1'
+      // this.tabSearch()
+    },
+    handleBed(e,row) {
+      this.drawer = true;
+      this.labelType = 'edit'
+      this.form = JSON.parse(JSON.stringify(row))
+      // this.activeTabName = '1'
+      // this.tabSearch()
+    },
+    search() {
+      this.queryInfo.currPage = 1
+      this.getList()
+    },
+    reset() {
+      this.queryInfo.condition = {}
+      this.search()
+    },
+
+    // 修改页数大小
+    handleSizeChange(val) {
+      this.queryInfo.pageSize = val;
+      this.search()
+    },
+
+    // 获取当前页面
+    handleCurrentChange(val) {
+      this.queryInfo.currPage = val;
+      this.getList()
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.card-content{
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.page-card{
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+}
+.container-content{
+  height: 80%;
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  .cc-left{
+    width: 140px;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    position: relative;
+    .header-floor{
+      border-top: 1px solid #ebeef5;
+      border-left: 1px solid #ebeef5;
+      border-right: 1px solid #ebeef5;
+      position: sticky;
+      top: 0;
+    }
+    .floor-ul{
+      font-size: 12px;
+      border-top: 1px solid #ebeef5;
+      flex: 1;
+      overflow-y: auto;
+      .floor-li{
+        padding: 10px;
+        border-bottom: 1px solid #ebeef5;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .cc-right{
+    height: 100%;
+    flex: 1;
+    padding: 10px 0 10px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .room{
+      height: 80%;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      .room-ul{
+        height: 70%;
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+      .room-li{
+        width: calc((100% - 20px) / 2)
+      }
+      .room-top {
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        background: #f5f5f5;
+      }
+      .bed{
+        height: 270px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        white-space: nowrap;
+        padding: 20px 12px 15px;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bed-list {
+        padding-right: 10px;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+
+        min-height: 120px;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        width: calc((100% - 10px) / 2);
+        border-radius: 5px;
+        -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
+        white-space: wrap;
+        overflow: hidden;
+        font-size: .7vw;
+        cursor: pointer;
+      }
+      .bed-list:last-child {
+        border-bottom: none;
+      }
+      .bed-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        .el-icon-menu{
+          color: #2E59FB;
+        }
+      }
+      .tip {
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .block {
+        // margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid #eee;
+      }
+    }
+  }
+}
+.content-top{
+  height: 50px;
+  background: #409eff;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #fff;
+  white-space: nowrap;
+  border-radius: 3px;
+  font-size: 16px;
+  padding-right: 10px;
+  ::v-deep .el-switch__label{
+    color: #fff;
+  }
+  ::v-deep .el-switch__label.is-active{
+    color: #fffc00;
+  }
+}
+.stats-top{
+  background: #f5f5f5;
+  padding: 8px 20px;
+  font-size: 15px;
+  -webkit-box-shadow: 0 0 0 1px #e6e6e6;
+  box-shadow: 0 0 0 1px #e6e6e6;
+
+  gap: 20px;
+  .stats-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1;
+    font-size: 16px;
+    .si-num{
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  .stats-first{
+    width: 80px;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+}
+.topcon {
+  display: flex;
+  flex: 1;
+  .list{
+    border-radius: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .light{
+    background: #fff;
+    color: #000;
+  }
+}
+.list {
+  background: #fff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+}
+.countflex {
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.header-floor {
+  padding: 10px 0;
+}
+.boxs {
+  border-radius: 5px;
+}
+
+.el-col-12 {
+  width: 50%;
+}
+</style>

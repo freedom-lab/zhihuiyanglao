@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.GspInstitutionBuildingTransferMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    data_id,
+    institution_id,
+    institution_name,
+    credit_code,
+    building_name,
+    structure,
+    floor,
+    floor_num,
+    building_time,
+    building_area,
+    price,
+    original_value,
+    residue_ratio,
+    net_value,
+    total_price,
+    building_type,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.dataId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.creditCode},
+    #{item.buildingName},
+    #{item.structure},
+    #{item.floor},
+    #{item.floorNum},
+    #{item.buildingTime},
+    #{item.buildingArea},
+    #{item.price},
+    #{item.originalValue},
+    #{item.residueRatio},
+    #{item.netValue},
+    #{item.totalPrice},
+    #{item.buildingType},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_gsp_institution_building_transfer
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.GspInstitutionBuildingTransfer">
+        SELECT * from  tb_jiangyukeji_gsp_institution_building_transfer
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="dataId!=null and dataId!=''">
+            and data_id = #{dataId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="creditCode!=null and creditCode!=''">
+            and credit_code = #{creditCode}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="structure!=null and structure!=''">
+            and structure = #{structure}
+        </if>
+        <if test="floor!=null and floor!=''">
+            and floor = #{floor}
+        </if>
+        <if test="floorNum!=null and floorNum!=''">
+            and floor_num = #{floorNum}
+        </if>
+        <if test="buildingTime!=null and buildingTime!=''">
+            and building_time = #{buildingTime}
+        </if>
+        <if test="buildingArea!=null and buildingArea!=''">
+            and building_area = #{buildingArea}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="originalValue!=null and originalValue!=''">
+            and original_value = #{originalValue}
+        </if>
+        <if test="residueRatio!=null and residueRatio!=''">
+            and residue_ratio = #{residueRatio}
+        </if>
+        <if test="netValue!=null and netValue!=''">
+            and net_value = #{netValue}
+        </if>
+        <if test="totalPrice!=null and totalPrice!=''">
+            and total_price = #{totalPrice}
+        </if>
+        <if test="buildingType!=null and buildingType!=''">
+            and building_type = #{buildingType}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_gsp_institution_building_transfer
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="dataId!=null and dataId!=''">
+            and data_id = #{dataId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="creditCode!=null and creditCode!=''">
+            and credit_code = #{creditCode}
+        </if>
+        <if test="buildingName!=null and buildingName!=''">
+            and building_name = #{buildingName}
+        </if>
+        <if test="structure!=null and structure!=''">
+            and structure = #{structure}
+        </if>
+        <if test="floor!=null and floor!=''">
+            and floor = #{floor}
+        </if>
+        <if test="floorNum!=null and floorNum!=''">
+            and floor_num = #{floorNum}
+        </if>
+        <if test="buildingTime!=null and buildingTime!=''">
+            and building_time = #{buildingTime}
+        </if>
+        <if test="buildingArea!=null and buildingArea!=''">
+            and building_area = #{buildingArea}
+        </if>
+        <if test="price!=null and price!=''">
+            and price = #{price}
+        </if>
+        <if test="originalValue!=null and originalValue!=''">
+            and original_value = #{originalValue}
+        </if>
+        <if test="residueRatio!=null and residueRatio!=''">
+            and residue_ratio = #{residueRatio}
+        </if>
+        <if test="netValue!=null and netValue!=''">
+            and net_value = #{netValue}
+        </if>
+        <if test="totalPrice!=null and totalPrice!=''">
+            and total_price = #{totalPrice}
+        </if>
+        <if test="buildingType!=null and buildingType!=''">
+            and building_type = #{buildingType}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

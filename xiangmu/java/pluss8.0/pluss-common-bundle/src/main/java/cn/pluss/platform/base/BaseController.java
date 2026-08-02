@@ -1,0 +1,24 @@
+package cn.pluss.platform.base;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.web.subject.WebSubject;
+
+import cn.pluss.platform.entitiy.ShiroUser;
+
+
+public class BaseController {
+
+	
+	/**
+	 * 获取登录用户信息
+	 * @return
+	 */
+	public static ShiroUser queryCurrentShiroUser() {
+		try {
+		WebSubject ws = (WebSubject) SecurityUtils.getSubject();
+		return (ShiroUser) ws.getPrincipal();
+		} catch (Exception e) {
+		return null;
+		}
+	}
+}

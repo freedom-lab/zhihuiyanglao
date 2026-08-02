@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/java.iml" filepath="$PROJECT_DIR$/.idea/java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-api-page/pluss-api-page.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-api-page/pluss-api-page.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-common-bundle/pluss-common-bundle.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-common-bundle/pluss-common-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-dao-bundle/pluss-dao-bundle.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-dao-bundle/pluss-dao-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-iot-page/pluss-iot-page.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-iot-page/pluss-iot-page.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-model-bundle/pluss-model-bundle.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-model-bundle/pluss-model-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-parent.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluss8.0/pluss-service-bundle/pluss-service-bundle.iml" filepath="$PROJECT_DIR$/pluss8.0/pluss-service-bundle/pluss-service-bundle.iml" />
+    </modules>
+  </component>
+</project>

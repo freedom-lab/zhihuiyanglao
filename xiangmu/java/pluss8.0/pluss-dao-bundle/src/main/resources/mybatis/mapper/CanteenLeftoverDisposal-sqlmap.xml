@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.CanteenLeftoverDisposalMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    disposal_date,
+    food_type,
+    food_name,
+    food_surplus,
+    disposal_method,
+    disposal_name,
+    link_tel,
+    photo,
+    remark,
+    create_name,
+    area_code,
+    area_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    gsp_state
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.disposalDate},
+    #{item.foodType},
+    #{item.foodName},
+    #{item.foodSurplus},
+    #{item.disposalMethod},
+    #{item.disposalName},
+    #{item.linkTel},
+    #{item.photo},
+    #{item.remark},
+    #{item.createName},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.gspState}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_canteen_leftover_disposal
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.CanteenLeftoverDisposal">
+        SELECT * from  tb_jiangyukeji_canteen_leftover_disposal
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="disposalDate!=null and disposalDate!=''">
+            and disposal_date = #{disposalDate}
+        </if>
+        <if test="foodType!=null and foodType!=''">
+            and food_type = #{foodType}
+        </if>
+        <if test="foodName!=null and foodName!=''">
+            and food_name = #{foodName}
+        </if>
+        <if test="foodSurplus!=null and foodSurplus!=''">
+            and food_surplus = #{foodSurplus}
+        </if>
+        <if test="disposalMethod!=null and disposalMethod!=''">
+            and disposal_method = #{disposalMethod}
+        </if>
+        <if test="disposalName!=null and disposalName!=''">
+            and disposal_name = #{disposalName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="photo!=null and photo!=''">
+            and photo = #{photo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="gspState!=null and gspState!=''">
+            and gsp_state = #{gspState}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_canteen_leftover_disposal
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="disposalDate!=null and disposalDate!=''">
+            and disposal_date = #{disposalDate}
+        </if>
+        <if test="foodType!=null and foodType!=''">
+            and food_type = #{foodType}
+        </if>
+        <if test="foodName!=null and foodName!=''">
+            and food_name = #{foodName}
+        </if>
+        <if test="foodSurplus!=null and foodSurplus!=''">
+            and food_surplus = #{foodSurplus}
+        </if>
+        <if test="disposalMethod!=null and disposalMethod!=''">
+            and disposal_method = #{disposalMethod}
+        </if>
+        <if test="disposalName!=null and disposalName!=''">
+            and disposal_name = #{disposalName}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="photo!=null and photo!=''">
+            and photo = #{photo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="gspState!=null and gspState!=''">
+            and gsp_state = #{gspState}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

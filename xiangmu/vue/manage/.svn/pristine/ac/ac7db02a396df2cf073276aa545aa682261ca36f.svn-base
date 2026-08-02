@@ -1,0 +1,210 @@
+import Vue from "vue";
+import VueRouter from "vue-router";
+/**
+ * 重写路由的push方法
+ */
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error => error);
+};
+
+// 路由懒加载
+const Login = () => import("../views/Login.vue");
+const Index = () => import("../views/Index.vue");
+const Welcome = () => import("../views/auth/index/Welcome.vue");
+const Dashboard = () => import("../views/dataCenter/InsAdminWel/Dashboard.vue");
+const appointmentVisitStatistics = () => import("../views/dataCenter/elderlyReport/appointmentVisitStatistics.vue");
+
+const employeeManagement = () =>
+  import("../views/auth/employee/EmployeeManagement.vue");
+const employeeDetail = () =>
+  import("../views/auth/employee/EmployeeDetail.vue");
+const OrganizationManagement = () =>
+  import("../views/auth/organization/OrganizationManagement.vue");
+const Post = () => import("../views/auth/post/Post.vue");
+const Menu = () => import("../views/auth/menu/Menu.vue");
+const Authority = () => import("../views/auth/authority/Authority.vue");
+const OrganizationTypeMaintenance = () =>
+  import("../views/auth/organizationType/OrganizationType.vue");
+const myAccountView = () => import("../views/auth/my/MyAccountView.vue");
+const SystemConfig = () => import("../views/systemConfig/SystemConfig.vue");
+const SystemConfigDetails = () =>
+  import("../views/systemConfig/SystemConfigDetails.vue");
+const TableDesign = () => import("../views/coding/tableDesign/TableDesign.vue");
+const Table = () => import('../views/coding/table/Table.vue')
+const TableDetails = () => import('../views/coding/table/TableDetails.vue')
+const TableDdl = () => import('../views/coding/tableDdl/TableDdl.vue')
+const TableDdlDetails = () => import('../views/coding/tableDdl/TableDdlDetails.vue')
+// const FromDesigner = () => import('../views/fromDesigner/FromDesigner.vue')
+
+
+const LoginLog = () => import('../views/loginLog/LoginLog.vue')
+const LoginLogDetails = () => import('../views/loginLog/LoginLogDetails.vue')
+
+//design
+const FromDesigner = () => import('../components/formDesigner.vue')
+const DialogTest   = () => import('../views/fromDesigner/dialogTest.vue')
+const QueryDialogTest   = () => import('../views/fromDesigner/queryDialogTest.vue')
+const View   = () => import('../views/fromDesigner/view.vue')
+const DesignTable   = () => import('../views/fromDesigner/table.vue')
+
+const Buildingss = () => import("../views/sysmanage/buildingss.vue");
+
+const RoleMenu = () => import("../views/auth/roleMenu/RoleMenu.vue");
+//老人档案
+const PielderlyDetail = () => import("../views/pensioninstitution/pielderlydetail.vue");
+// 子页面组件
+const BaseInfo = () => import("../views/pensioninstitution/child/BaseInfo.vue");
+const HealthFile = () => import("../views/pensioninstitution/child/HealthFile.vue");
+const NurseEvaluate = () => import("../views/pensioninstitution/child/NurseEvaluate.vue");
+const DrugManage = () => import("../views/pensioninstitution/child/DrugManage.vue");
+const CostManage = () => import("../views/pensioninstitution/child/CostManage.vue");
+const InfoLog = () => import("../views/pensioninstitution/child/InfoLog.vue");
+const SignData = () => import("../views/pensioninstitution/child/SignData.vue");
+const CheckInfo = () => import("../views/pensioninstitution/child/CheckInfo.vue");
+const DoctorAdvice = () => import("../views/pensioninstitution/child/DoctorAdvice.vue");
+const MedicalRecord = () => import("../views/pensioninstitution/child/MedicalRecord.vue");
+const OutRecord = () => import("../views/pensioninstitution/child/OutRecord.vue");
+
+//-----------智慧入驻-----------
+//咨询接待
+//预约接待
+const InsRegisterConsultInfo = () => import("../views/insRegisterConsultInfo/InsRegisterConsultInfo.vue");
+//床位预定登记
+const InsRegisterConsultBedInfo = () => import("../views/insRegisterConsultBedInfo/insRegisterConsultBedInfo.vue");
+//探访信息登记
+const InsRegisterVisitInfo = () => import("../views/insRegisterVisitInfo/InsRegisterVisitInfo.vue");
+//费用标准
+const InsCostInfoSearch = () => import("../views/insCostInfoSearch/insCostInfoSearch.vue");
+//床位监测
+const InsBaseBedMonitor = () => import("../views/insBaseBedMonitor/insBaseBedMonitor.vue");
+
+//入住办理
+//入住档案登记
+const InsElderCheckInfoRegister = () => import("../views/insElderCheckInfoRegister/insElderCheckInfoRegister.vue");
+
+//在住管理
+//入住老人管理
+const InsElderCheckInfoManager = () => import("../views/insElderCheckInfoManager/insElderCheckInfoManager.vue");
+//试住老人管理
+const InsElderCheckInfoTry = () => import("../views/insElderCheckInfoTry/insElderCheckInfoTry.vue");
+//新入住7日追踪
+const InsElderTrackRecord = () => import("../views/insElderTrackRecord/InsElderTrackRecord.vue");
+//老人健康档案
+const HealthBaseInfo = () => import("../views/healthBaseInfo/HealthBaseInfo.vue");
+Vue.use(VueRouter);
+
+const BladeDict = () => import('../views/bladeDict/BladeDict.vue');
+const routes = [
+  { path: "/", redirect: "/index" },
+  { path: "/login", component: Login },
+  { path:'/visualization/insScreen', component: () => import('@/views/visualization/insScreen/insScreen.vue'), meta: { keepAlive: true } },
+  {
+    path: "/index",
+    component: Index,
+    redirect: "/Welcome",
+    children: [
+      { path: "/index", component: Welcome },
+      { path: "/employee", component: employeeManagement },
+      { path: "/employee/details", component: employeeDetail },
+      { path: "/organization", component: OrganizationManagement },
+      { path: "/post", component: Post },
+      { path: "/menu", component: Menu },
+      { path: "/authority", component: Authority },
+      { path: "/organizationType", component: OrganizationTypeMaintenance },
+      { path: "/myAccountView", component: myAccountView },
+      { path: "/roleMenu", component: RoleMenu },
+      { path: "/systemConfig", component: SystemConfig },
+      { path: "/systemConfig/details", component: SystemConfigDetails },
+      { path: "/tableDesign", component: TableDesign },
+      { path: '/coding', component: Table },
+      { path:'/table/details',component:TableDetails },
+      { path: '/tableDdl', component: TableDdl },
+      { path:'/tableDdl/details',component:TableDdlDetails },
+      { path: '/loginLog', component: LoginLog },
+      { path:'/loginLog/details',component:LoginLogDetails },
+      { path:'/fromDesigner',name: 'designer',component:FromDesigner },
+      { path:'/dialog',  name: 'dialogTest',component:DialogTest },
+      { path:'/queryDialog', name: 'queryDialogTest',component:QueryDialogTest },
+      { path:'/view', name: 'view',component:View },
+      { path:'/table',name: 'table',component:DesignTable },
+      { path:'/dashboard',name: 'table',component:Dashboard },
+       { path:'/appointmentVisitStatistics',name: 'table',component:appointmentVisitStatistics },
+      //智慧入驻
+      { path:'/insRegisterConsultInfo', component:InsRegisterConsultInfo },
+      { path:'/insRegisterConsultBedInfo', component:InsRegisterConsultBedInfo },
+      { path:'/insRegisterVisitInfo', component:InsRegisterVisitInfo },
+      { path:'/insBaseBedMonitor', component:InsBaseBedMonitor },
+      { path:'/insElderCheckInfoRegister', component:InsElderCheckInfoRegister },
+      { path:'/insElderCheckInfoManager', component:InsElderCheckInfoManager },
+      { path:'/healthBaseInfo', component:HealthBaseInfo },
+      { path:'/insCostInfoSearch', component:InsCostInfoSearch },
+      { path:'/insElderCheckInfoTry', component:InsElderCheckInfoTry },
+      { path:'/insElderTrackRecord', component:InsElderTrackRecord },
+      
+      
+
+      { path: "/buildingss", component: Buildingss },
+      {
+        path: "/pielderlydetail", 
+        component: PielderlyDetail,
+        redirect: "/pielderlydetail/base",
+        children: [
+          { path: "base", component: BaseInfo },
+          { path: "health", component: HealthFile },
+          { path: "nurse", component: NurseEvaluate },
+          { path: "drug", component: DrugManage },
+          { path: "cost", component: CostManage },
+          { path: "infoLog", component: InfoLog },
+          { path: "sign", component: SignData },
+          { path: "check", component: CheckInfo },
+          { path: "doctor", component: DoctorAdvice },
+          { path: "record", component: MedicalRecord },
+          { path: "out", component: OutRecord },
+        ],
+       },
+
+      { path:'/picheckservice/bedall', component: () => import('@/views/pensioninstitution/picheckservice/bedall.vue'), meta: { keepAlive: true } },
+      { path:'/instituionSystem/instituion/bedSearch', component: () => import('@/views/pensioninstitution/picheckservice/roomall/roomall.vue'), meta: { keepAlive: true } },
+       { path: '/bladeDict', component: BladeDict },
+    ]
+  }
+];
+
+const router = new VueRouter({
+  routes
+});
+
+// 挂载路由导航守卫,to表示将要访问的路径，from表示从哪里来，next是下一个要做的操作 next('/login')强制跳转login
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login") {
+    next();
+  } else {
+    let token = ""; //token保存在localstorage中
+
+    let item = localStorage.getItem("token");
+    // 先将拿到的试着进行json转为对象的形式
+    try {
+      item = JSON.parse(item);
+    } catch (error) {
+      // eslint-disable-next-line no-self-assign
+      item = item;
+    }
+    if (item && item.startTime) {
+      let date = new Date().getTime();
+      // 如果大于就是过期了，如果小于或等于就还没过期
+      let timel = date - item.startTime;
+      console.log("timelength:" + timel + ",expires:" + item.expires);
+      if (timel < item.expires) {
+        token = item.value;
+      }
+    }
+    if (token === null || token === "") {
+      next("/login");
+    } else {
+      next();
+    }
+  }
+});
+
+export default router;

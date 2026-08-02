@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthMedicineRecordsMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    elder_id,
+    elder_name,
+    id_card,
+    drug_name,
+    use_type,
+    drug_frequency_unit,
+    drug_frequency,
+    drug_dosage,
+    drug_unit,
+    drug_remark,
+    start_date,
+    end_date,
+    compliance,
+    effect_desp,
+    record_name,
+    record_datetime,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    area_code,
+    area_name
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.drugName},
+    #{item.useType},
+    #{item.drugFrequencyUnit},
+    #{item.drugFrequency},
+    #{item.drugDosage},
+    #{item.drugUnit},
+    #{item.drugRemark},
+    #{item.startDate},
+    #{item.endDate},
+    #{item.compliance},
+    #{item.effectDesp},
+    #{item.recordName},
+    #{item.recordDatetime},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.areaCode},
+    #{item.areaName}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_medicine_records
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthMedicineRecords">
+        SELECT * from  tb_jiangyukeji_health_medicine_records
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="drugName!=null and drugName!=''">
+            and drug_name = #{drugName}
+        </if>
+        <if test="useType!=null and useType!=''">
+            and use_type = #{useType}
+        </if>
+        <if test="drugFrequencyUnit!=null and drugFrequencyUnit!=''">
+            and drug_frequency_unit = #{drugFrequencyUnit}
+        </if>
+        <if test="drugFrequency!=null and drugFrequency!=''">
+            and drug_frequency = #{drugFrequency}
+        </if>
+        <if test="drugDosage!=null and drugDosage!=''">
+            and drug_dosage = #{drugDosage}
+        </if>
+        <if test="drugUnit!=null and drugUnit!=''">
+            and drug_unit = #{drugUnit}
+        </if>
+        <if test="drugRemark!=null and drugRemark!=''">
+            and drug_remark = #{drugRemark}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="compliance!=null and compliance!=''">
+            and compliance = #{compliance}
+        </if>
+        <if test="effectDesp!=null and effectDesp!=''">
+            and effect_desp = #{effectDesp}
+        </if>
+        <if test="recordName!=null and recordName!=''">
+            and record_name = #{recordName}
+        </if>
+        <if test="recordDatetime!=null and recordDatetime!=''">
+            and record_datetime = #{recordDatetime}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_medicine_records
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="drugName!=null and drugName!=''">
+            and drug_name = #{drugName}
+        </if>
+        <if test="useType!=null and useType!=''">
+            and use_type = #{useType}
+        </if>
+        <if test="drugFrequencyUnit!=null and drugFrequencyUnit!=''">
+            and drug_frequency_unit = #{drugFrequencyUnit}
+        </if>
+        <if test="drugFrequency!=null and drugFrequency!=''">
+            and drug_frequency = #{drugFrequency}
+        </if>
+        <if test="drugDosage!=null and drugDosage!=''">
+            and drug_dosage = #{drugDosage}
+        </if>
+        <if test="drugUnit!=null and drugUnit!=''">
+            and drug_unit = #{drugUnit}
+        </if>
+        <if test="drugRemark!=null and drugRemark!=''">
+            and drug_remark = #{drugRemark}
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            and start_date = #{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            and end_date = #{endDate}
+        </if>
+        <if test="compliance!=null and compliance!=''">
+            and compliance = #{compliance}
+        </if>
+        <if test="effectDesp!=null and effectDesp!=''">
+            and effect_desp = #{effectDesp}
+        </if>
+        <if test="recordName!=null and recordName!=''">
+            and record_name = #{recordName}
+        </if>
+        <if test="recordDatetime!=null and recordDatetime!=''">
+            and record_datetime = #{recordDatetime}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

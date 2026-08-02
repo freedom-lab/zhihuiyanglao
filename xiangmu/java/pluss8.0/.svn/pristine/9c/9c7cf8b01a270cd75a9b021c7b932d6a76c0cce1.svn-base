@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.ElderBaseInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    institution_id,
+    institution_name,
+    file_code,
+    elder_name,
+    elder_code,
+    elder_img,
+    elder_code_image,
+    elder_nursing_level,
+    sex,
+    age,
+    birthday,
+    traditional_birthday,
+    blood_type,
+    nationality,
+    nation,
+    link_tel,
+    home_tel,
+    census_type,
+    elder_type,
+    document_type,
+    id_card,
+    social_card_no,
+    elder_state,
+    pension_mode,
+    identity_status,
+    provide_type,
+    marry_state,
+    degree_education,
+    political_status,
+    religion_type,
+    economic_sources,
+    monthly_income,
+    live_state,
+    pesidence_type,
+    pesidence_area_code,
+    pesidence_area_name,
+    pesidence_address,
+    home_address,
+    residence_id,
+    residence_name,
+    is_provide,
+    is_stay_pesidence,
+    is_alone,
+    is_dementia,
+    is_stay_behind,
+    is_allowance,
+    is_poor,
+    is_lonely_old,
+    is_ltci,
+    is_disabled,
+    is_extremely_poor,
+    is_social_insurance,
+    is_entitled,
+    medical_category,
+    oldage_insurance_type,
+    ability_level,
+    is_disability,
+    disability_level,
+    disability_type,
+    disability_card,
+    major_diseases,
+    major_diseases_name,
+    guardian_contact,
+    guardian_contact_tel,
+    guardian_contact_relationship,
+    guardian_contact_address,
+    emergency_contact,
+    emergency_contact_tel,
+    emergency_contact_relationship,
+    emergency_contact_address,
+    child_num,
+    character_type,
+    hobby,
+    eating_habits,
+    taboo,
+    work_unit,
+    app_pass,
+    is_come,
+    lon,
+    lat,
+    area_code,
+    area_name,
+    audit_state,
+    audit_name,
+    audit_time,
+    audit_opinion,
+    is_older_age,
+    is_empty_nest,
+    is_reform,
+    is_bed_build,
+    is_service_subsidy,
+    is_nursing_subsidy,
+    is_self_care,
+    is_centralized_care,
+    householder_name,
+    householder_id_card,
+    householder_age,
+    basic_service_ids,
+    remark,
+    create_name,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status,
+    guid,
+    face_guid,
+    gsp_state,
+    fk_elder_id,
+    monthly_disposable_income,
+    health_condition,
+    health_id,
+    is_wish_care_bed,
+    is_install_care_bed,
+    nfc_number,
+    major_diseases_other,
+    isCheck
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.fileCode},
+    #{item.elderName},
+    #{item.elderCode},
+    #{item.elderImg},
+    #{item.elderCodeImage},
+    #{item.elderNursingLevel},
+    #{item.sex},
+    #{item.age},
+    #{item.birthday},
+    #{item.traditionalBirthday},
+    #{item.bloodType},
+    #{item.nationality},
+    #{item.nation},
+    #{item.linkTel},
+    #{item.homeTel},
+    #{item.censusType},
+    #{item.elderType},
+    #{item.documentType},
+    #{item.idCard},
+    #{item.socialCardNo},
+    #{item.elderState},
+    #{item.pensionMode},
+    #{item.identityStatus},
+    #{item.provideType},
+    #{item.marryState},
+    #{item.degreeEducation},
+    #{item.politicalStatus},
+    #{item.religionType},
+    #{item.economicSources},
+    #{item.monthlyIncome},
+    #{item.liveState},
+    #{item.pesidenceType},
+    #{item.pesidenceAreaCode},
+    #{item.pesidenceAreaName},
+    #{item.pesidenceAddress},
+    #{item.homeAddress},
+    #{item.residenceId},
+    #{item.residenceName},
+    #{item.isProvide},
+    #{item.isStayPesidence},
+    #{item.isAlone},
+    #{item.isDementia},
+    #{item.isStayBehind},
+    #{item.isAllowance},
+    #{item.isPoor},
+    #{item.isLonelyOld},
+    #{item.isLtci},
+    #{item.isDisabled},
+    #{item.isExtremelyPoor},
+    #{item.isSocialInsurance},
+    #{item.isEntitled},
+    #{item.medicalCategory},
+    #{item.oldageInsuranceType},
+    #{item.abilityLevel},
+    #{item.isDisability},
+    #{item.disabilityLevel},
+    #{item.disabilityType},
+    #{item.disabilityCard},
+    #{item.majorDiseases},
+    #{item.majorDiseasesName},
+    #{item.guardianContact},
+    #{item.guardianContactTel},
+    #{item.guardianContactRelationship},
+    #{item.guardianContactAddress},
+    #{item.emergencyContact},
+    #{item.emergencyContactTel},
+    #{item.emergencyContactRelationship},
+    #{item.emergencyContactAddress},
+    #{item.childNum},
+    #{item.characterType},
+    #{item.hobby},
+    #{item.eatingHabits},
+    #{item.taboo},
+    #{item.workUnit},
+    #{item.appPass},
+    #{item.isCome},
+    #{item.lon},
+    #{item.lat},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.auditState},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditOpinion},
+    #{item.isOlderAge},
+    #{item.isEmptyNest},
+    #{item.isReform},
+    #{item.isBedBuild},
+    #{item.isServiceSubsidy},
+    #{item.isNursingSubsidy},
+    #{item.isSelfCare},
+    #{item.isCentralizedCare},
+    #{item.householderName},
+    #{item.householderIdCard},
+    #{item.householderAge},
+    #{item.basicServiceIds},
+    #{item.remark},
+    #{item.createName},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status},
+    #{item.guid},
+    #{item.faceGuid},
+    #{item.gspState},
+    #{item.fkElderId},
+    #{item.monthlyDisposableIncome},
+    #{item.healthCondition},
+    #{item.healthId},
+    #{item.isWishCareBed},
+    #{item.isInstallCareBed},
+    #{item.nfcNumber},
+    #{item.majorDiseasesOther},
+    #{item.isCheck}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_elder_base_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.ElderBaseInfo">
+        SELECT * from  tb_jiangyukeji_elder_base_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="fileCode!=null and fileCode!=''">
+            and file_code = #{fileCode}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="elderCode!=null and elderCode!=''">
+            and elder_code = #{elderCode}
+        </if>
+        <if test="elderImg!=null and elderImg!=''">
+            and elder_img = #{elderImg}
+        </if>
+        <if test="elderCodeImage!=null and elderCodeImage!=''">
+            and elder_code_image = #{elderCodeImage}
+        </if>
+        <if test="elderNursingLevel!=null and elderNursingLevel!=''">
+            and elder_nursing_level = #{elderNursingLevel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="traditionalBirthday!=null and traditionalBirthday!=''">
+            and traditional_birthday = #{traditionalBirthday}
+        </if>
+        <if test="bloodType!=null and bloodType!=''">
+            and blood_type = #{bloodType}
+        </if>
+        <if test="nationality!=null and nationality!=''">
+            and nationality = #{nationality}
+        </if>
+        <if test="nation!=null and nation!=''">
+            and nation = #{nation}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="homeTel!=null and homeTel!=''">
+            and home_tel = #{homeTel}
+        </if>
+        <if test="censusType!=null and censusType!=''">
+            and census_type = #{censusType}
+        </if>
+        <if test="elderType!=null and elderType!=''">
+            and elder_type = #{elderType}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="socialCardNo!=null and socialCardNo!=''">
+            and social_card_no = #{socialCardNo}
+        </if>
+        <if test="elderState!=null and elderState!=''">
+            and elder_state = #{elderState}
+        </if>
+        <if test="pensionMode!=null and pensionMode!=''">
+            and pension_mode = #{pensionMode}
+        </if>
+        <if test="identityStatus!=null and identityStatus!=''">
+            and identity_status = #{identityStatus}
+        </if>
+        <if test="provideType!=null and provideType!=''">
+            and provide_type = #{provideType}
+        </if>
+        <if test="marryState!=null and marryState!=''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="politicalStatus!=null and politicalStatus!=''">
+            and political_status = #{politicalStatus}
+        </if>
+        <if test="religionType!=null and religionType!=''">
+            and religion_type = #{religionType}
+        </if>
+        <if test="economicSources!=null and economicSources!=''">
+            and economic_sources = #{economicSources}
+        </if>
+        <if test="monthlyIncome!=null and monthlyIncome!=''">
+            and monthly_income = #{monthlyIncome}
+        </if>
+        <if test="liveState!=null and liveState!=''">
+            and live_state = #{liveState}
+        </if>
+        <if test="pesidenceType!=null and pesidenceType!=''">
+            and pesidence_type = #{pesidenceType}
+        </if>
+        <if test="pesidenceAreaCode!=null and pesidenceAreaCode!=''">
+            and pesidence_area_code = #{pesidenceAreaCode}
+        </if>
+        <if test="pesidenceAreaName!=null and pesidenceAreaName!=''">
+            and pesidence_area_name = #{pesidenceAreaName}
+        </if>
+        <if test="pesidenceAddress!=null and pesidenceAddress!=''">
+            and pesidence_address = #{pesidenceAddress}
+        </if>
+        <if test="homeAddress!=null and homeAddress!=''">
+            and home_address = #{homeAddress}
+        </if>
+        <if test="residenceId!=null and residenceId!=''">
+            and residence_id = #{residenceId}
+        </if>
+        <if test="residenceName!=null and residenceName!=''">
+            and residence_name = #{residenceName}
+        </if>
+        <if test="isProvide!=null and isProvide!=''">
+            and is_provide = #{isProvide}
+        </if>
+        <if test="isStayPesidence!=null and isStayPesidence!=''">
+            and is_stay_pesidence = #{isStayPesidence}
+        </if>
+        <if test="isAlone!=null and isAlone!=''">
+            and is_alone = #{isAlone}
+        </if>
+        <if test="isDementia!=null and isDementia!=''">
+            and is_dementia = #{isDementia}
+        </if>
+        <if test="isStayBehind!=null and isStayBehind!=''">
+            and is_stay_behind = #{isStayBehind}
+        </if>
+        <if test="isAllowance!=null and isAllowance!=''">
+            and is_allowance = #{isAllowance}
+        </if>
+        <if test="isPoor!=null and isPoor!=''">
+            and is_poor = #{isPoor}
+        </if>
+        <if test="isLonelyOld!=null and isLonelyOld!=''">
+            and is_lonely_old = #{isLonelyOld}
+        </if>
+        <if test="isLtci!=null and isLtci!=''">
+            and is_ltci = #{isLtci}
+        </if>
+        <if test="isDisabled!=null and isDisabled!=''">
+            and is_disabled = #{isDisabled}
+        </if>
+        <if test="isExtremelyPoor!=null and isExtremelyPoor!=''">
+            and is_extremely_poor = #{isExtremelyPoor}
+        </if>
+        <if test="isSocialInsurance!=null and isSocialInsurance!=''">
+            and is_social_insurance = #{isSocialInsurance}
+        </if>
+        <if test="isEntitled!=null and isEntitled!=''">
+            and is_entitled = #{isEntitled}
+        </if>
+        <if test="medicalCategory!=null and medicalCategory!=''">
+            and medical_category = #{medicalCategory}
+        </if>
+        <if test="oldageInsuranceType!=null and oldageInsuranceType!=''">
+            and oldage_insurance_type = #{oldageInsuranceType}
+        </if>
+        <if test="abilityLevel!=null and abilityLevel!=''">
+            and ability_level = #{abilityLevel}
+        </if>
+        <if test="isDisability!=null and isDisability!=''">
+            and is_disability = #{isDisability}
+        </if>
+        <if test="disabilityLevel!=null and disabilityLevel!=''">
+            and disability_level = #{disabilityLevel}
+        </if>
+        <if test="disabilityType!=null and disabilityType!=''">
+            and disability_type = #{disabilityType}
+        </if>
+        <if test="disabilityCard!=null and disabilityCard!=''">
+            and disability_card = #{disabilityCard}
+        </if>
+        <if test="majorDiseases!=null and majorDiseases!=''">
+            and major_diseases = #{majorDiseases}
+        </if>
+        <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+            and major_diseases_name = #{majorDiseasesName}
+        </if>
+        <if test="guardianContact!=null and guardianContact!=''">
+            and guardian_contact = #{guardianContact}
+        </if>
+        <if test="guardianContactTel!=null and guardianContactTel!=''">
+            and guardian_contact_tel = #{guardianContactTel}
+        </if>
+        <if test="guardianContactRelationship!=null and guardianContactRelationship!=''">
+            and guardian_contact_relationship = #{guardianContactRelationship}
+        </if>
+        <if test="guardianContactAddress!=null and guardianContactAddress!=''">
+            and guardian_contact_address = #{guardianContactAddress}
+        </if>
+        <if test="emergencyContact!=null and emergencyContact!=''">
+            and emergency_contact = #{emergencyContact}
+        </if>
+        <if test="emergencyContactTel!=null and emergencyContactTel!=''">
+            and emergency_contact_tel = #{emergencyContactTel}
+        </if>
+        <if test="emergencyContactRelationship!=null and emergencyContactRelationship!=''">
+            and emergency_contact_relationship = #{emergencyContactRelationship}
+        </if>
+        <if test="emergencyContactAddress!=null and emergencyContactAddress!=''">
+            and emergency_contact_address = #{emergencyContactAddress}
+        </if>
+        <if test="childNum!=null and childNum!=''">
+            and child_num = #{childNum}
+        </if>
+        <if test="characterType!=null and characterType!=''">
+            and character_type = #{characterType}
+        </if>
+        <if test="hobby!=null and hobby!=''">
+            and hobby = #{hobby}
+        </if>
+        <if test="eatingHabits!=null and eatingHabits!=''">
+            and eating_habits = #{eatingHabits}
+        </if>
+        <if test="taboo!=null and taboo!=''">
+            and taboo = #{taboo}
+        </if>
+        <if test="workUnit!=null and workUnit!=''">
+            and work_unit = #{workUnit}
+        </if>
+        <if test="appPass!=null and appPass!=''">
+            and app_pass = #{appPass}
+        </if>
+        <if test="isCome!=null and isCome!=''">
+            and is_come = #{isCome}
+        </if>
+        <if test="lon!=null and lon!=''">
+            and lon = #{lon}
+        </if>
+        <if test="lat!=null and lat!=''">
+            and lat = #{lat}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditOpinion!=null and auditOpinion!=''">
+            and audit_opinion = #{auditOpinion}
+        </if>
+        <if test="isOlderAge!=null and isOlderAge!=''">
+            and is_older_age = #{isOlderAge}
+        </if>
+        <if test="isEmptyNest!=null and isEmptyNest!=''">
+            and is_empty_nest = #{isEmptyNest}
+        </if>
+        <if test="isReform!=null and isReform!=''">
+            and is_reform = #{isReform}
+        </if>
+        <if test="isBedBuild!=null and isBedBuild!=''">
+            and is_bed_build = #{isBedBuild}
+        </if>
+        <if test="isServiceSubsidy!=null and isServiceSubsidy!=''">
+            and is_service_subsidy = #{isServiceSubsidy}
+        </if>
+        <if test="isNursingSubsidy!=null and isNursingSubsidy!=''">
+            and is_nursing_subsidy = #{isNursingSubsidy}
+        </if>
+        <if test="isSelfCare!=null and isSelfCare!=''">
+            and is_self_care = #{isSelfCare}
+        </if>
+        <if test="isCentralizedCare!=null and isCentralizedCare!=''">
+            and is_centralized_care = #{isCentralizedCare}
+        </if>
+        <if test="householderName!=null and householderName!=''">
+            and householder_name = #{householderName}
+        </if>
+        <if test="householderIdCard!=null and householderIdCard!=''">
+            and householder_id_card = #{householderIdCard}
+        </if>
+        <if test="householderAge!=null and householderAge!=''">
+            and householder_age = #{householderAge}
+        </if>
+        <if test="basicServiceIds!=null and basicServiceIds!=''">
+            and basic_service_ids = #{basicServiceIds}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="guid!=null and guid!=''">
+            and guid = #{guid}
+        </if>
+        <if test="faceGuid!=null and faceGuid!=''">
+            and face_guid = #{faceGuid}
+        </if>
+        <if test="gspState!=null and gspState!=''">
+            and gsp_state = #{gspState}
+        </if>
+        <if test="fkElderId!=null and fkElderId!=''">
+            and fk_elder_id = #{fkElderId}
+        </if>
+        <if test="monthlyDisposableIncome!=null and monthlyDisposableIncome!=''">
+            and monthly_disposable_income = #{monthlyDisposableIncome}
+        </if>
+        <if test="healthCondition!=null and healthCondition!=''">
+            and health_condition = #{healthCondition}
+        </if>
+        <if test="healthId!=null and healthId!=''">
+            and health_id = #{healthId}
+        </if>
+        <if test="isWishCareBed!=null and isWishCareBed!=''">
+            and is_wish_care_bed = #{isWishCareBed}
+        </if>
+        <if test="isInstallCareBed!=null and isInstallCareBed!=''">
+            and is_install_care_bed = #{isInstallCareBed}
+        </if>
+        <if test="nfcNumber!=null and nfcNumber!=''">
+            and nfc_number = #{nfcNumber}
+        </if>
+        <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+            and major_diseases_other = #{majorDiseasesOther}
+        </if>
+        <if test="isCheck!=null">
+            and is_check = #{isCheck}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_elder_base_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="fileCode!=null and fileCode!=''">
+            and file_code = #{fileCode}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="elderCode!=null and elderCode!=''">
+            and elder_code = #{elderCode}
+        </if>
+        <if test="elderImg!=null and elderImg!=''">
+            and elder_img = #{elderImg}
+        </if>
+        <if test="elderCodeImage!=null and elderCodeImage!=''">
+            and elder_code_image = #{elderCodeImage}
+        </if>
+        <if test="elderNursingLevel!=null and elderNursingLevel!=''">
+            and elder_nursing_level = #{elderNursingLevel}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="age!=null and age!=''">
+            and age = #{age}
+        </if>
+        <if test="birthday!=null and birthday!=''">
+            and birthday = #{birthday}
+        </if>
+        <if test="traditionalBirthday!=null and traditionalBirthday!=''">
+            and traditional_birthday = #{traditionalBirthday}
+        </if>
+        <if test="bloodType!=null and bloodType!=''">
+            and blood_type = #{bloodType}
+        </if>
+        <if test="nationality!=null and nationality!=''">
+            and nationality = #{nationality}
+        </if>
+        <if test="nation!=null and nation!=''">
+            and nation = #{nation}
+        </if>
+        <if test="linkTel!=null and linkTel!=''">
+            and link_tel = #{linkTel}
+        </if>
+        <if test="homeTel!=null and homeTel!=''">
+            and home_tel = #{homeTel}
+        </if>
+        <if test="censusType!=null and censusType!=''">
+            and census_type = #{censusType}
+        </if>
+        <if test="elderType!=null and elderType!=''">
+            and elder_type = #{elderType}
+        </if>
+        <if test="documentType!=null and documentType!=''">
+            and document_type = #{documentType}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="socialCardNo!=null and socialCardNo!=''">
+            and social_card_no = #{socialCardNo}
+        </if>
+        <if test="elderState!=null and elderState!=''">
+            and elder_state = #{elderState}
+        </if>
+        <if test="pensionMode!=null and pensionMode!=''">
+            and pension_mode = #{pensionMode}
+        </if>
+        <if test="identityStatus!=null and identityStatus!=''">
+            and identity_status = #{identityStatus}
+        </if>
+        <if test="provideType!=null and provideType!=''">
+            and provide_type = #{provideType}
+        </if>
+        <if test="marryState!=null and marryState!=''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="degreeEducation!=null and degreeEducation!=''">
+            and degree_education = #{degreeEducation}
+        </if>
+        <if test="politicalStatus!=null and politicalStatus!=''">
+            and political_status = #{politicalStatus}
+        </if>
+        <if test="religionType!=null and religionType!=''">
+            and religion_type = #{religionType}
+        </if>
+        <if test="economicSources!=null and economicSources!=''">
+            and economic_sources = #{economicSources}
+        </if>
+        <if test="monthlyIncome!=null and monthlyIncome!=''">
+            and monthly_income = #{monthlyIncome}
+        </if>
+        <if test="liveState!=null and liveState!=''">
+            and live_state = #{liveState}
+        </if>
+        <if test="pesidenceType!=null and pesidenceType!=''">
+            and pesidence_type = #{pesidenceType}
+        </if>
+        <if test="pesidenceAreaCode!=null and pesidenceAreaCode!=''">
+            and pesidence_area_code = #{pesidenceAreaCode}
+        </if>
+        <if test="pesidenceAreaName!=null and pesidenceAreaName!=''">
+            and pesidence_area_name = #{pesidenceAreaName}
+        </if>
+        <if test="pesidenceAddress!=null and pesidenceAddress!=''">
+            and pesidence_address = #{pesidenceAddress}
+        </if>
+        <if test="homeAddress!=null and homeAddress!=''">
+            and home_address = #{homeAddress}
+        </if>
+        <if test="residenceId!=null and residenceId!=''">
+            and residence_id = #{residenceId}
+        </if>
+        <if test="residenceName!=null and residenceName!=''">
+            and residence_name = #{residenceName}
+        </if>
+        <if test="isProvide!=null and isProvide!=''">
+            and is_provide = #{isProvide}
+        </if>
+        <if test="isStayPesidence!=null and isStayPesidence!=''">
+            and is_stay_pesidence = #{isStayPesidence}
+        </if>
+        <if test="isAlone!=null and isAlone!=''">
+            and is_alone = #{isAlone}
+        </if>
+        <if test="isDementia!=null and isDementia!=''">
+            and is_dementia = #{isDementia}
+        </if>
+        <if test="isStayBehind!=null and isStayBehind!=''">
+            and is_stay_behind = #{isStayBehind}
+        </if>
+        <if test="isAllowance!=null and isAllowance!=''">
+            and is_allowance = #{isAllowance}
+        </if>
+        <if test="isPoor!=null and isPoor!=''">
+            and is_poor = #{isPoor}
+        </if>
+        <if test="isLonelyOld!=null and isLonelyOld!=''">
+            and is_lonely_old = #{isLonelyOld}
+        </if>
+        <if test="isLtci!=null and isLtci!=''">
+            and is_ltci = #{isLtci}
+        </if>
+        <if test="isDisabled!=null and isDisabled!=''">
+            and is_disabled = #{isDisabled}
+        </if>
+        <if test="isExtremelyPoor!=null and isExtremelyPoor!=''">
+            and is_extremely_poor = #{isExtremelyPoor}
+        </if>
+        <if test="isSocialInsurance!=null and isSocialInsurance!=''">
+            and is_social_insurance = #{isSocialInsurance}
+        </if>
+        <if test="isEntitled!=null and isEntitled!=''">
+            and is_entitled = #{isEntitled}
+        </if>
+        <if test="medicalCategory!=null and medicalCategory!=''">
+            and medical_category = #{medicalCategory}
+        </if>
+        <if test="oldageInsuranceType!=null and oldageInsuranceType!=''">
+            and oldage_insurance_type = #{oldageInsuranceType}
+        </if>
+        <if test="abilityLevel!=null and abilityLevel!=''">
+            and ability_level = #{abilityLevel}
+        </if>
+        <if test="isDisability!=null and isDisability!=''">
+            and is_disability = #{isDisability}
+        </if>
+        <if test="disabilityLevel!=null and disabilityLevel!=''">
+            and disability_level = #{disabilityLevel}
+        </if>
+        <if test="disabilityType!=null and disabilityType!=''">
+            and disability_type = #{disabilityType}
+        </if>
+        <if test="disabilityCard!=null and disabilityCard!=''">
+            and disability_card = #{disabilityCard}
+        </if>
+        <if test="majorDiseases!=null and majorDiseases!=''">
+            and major_diseases = #{majorDiseases}
+        </if>
+        <if test="majorDiseasesName!=null and majorDiseasesName!=''">
+            and major_diseases_name = #{majorDiseasesName}
+        </if>
+        <if test="guardianContact!=null and guardianContact!=''">
+            and guardian_contact = #{guardianContact}
+        </if>
+        <if test="guardianContactTel!=null and guardianContactTel!=''">
+            and guardian_contact_tel = #{guardianContactTel}
+        </if>
+        <if test="guardianContactRelationship!=null and guardianContactRelationship!=''">
+            and guardian_contact_relationship = #{guardianContactRelationship}
+        </if>
+        <if test="guardianContactAddress!=null and guardianContactAddress!=''">
+            and guardian_contact_address = #{guardianContactAddress}
+        </if>
+        <if test="emergencyContact!=null and emergencyContact!=''">
+            and emergency_contact = #{emergencyContact}
+        </if>
+        <if test="emergencyContactTel!=null and emergencyContactTel!=''">
+            and emergency_contact_tel = #{emergencyContactTel}
+        </if>
+        <if test="emergencyContactRelationship!=null and emergencyContactRelationship!=''">
+            and emergency_contact_relationship = #{emergencyContactRelationship}
+        </if>
+        <if test="emergencyContactAddress!=null and emergencyContactAddress!=''">
+            and emergency_contact_address = #{emergencyContactAddress}
+        </if>
+        <if test="childNum!=null and childNum!=''">
+            and child_num = #{childNum}
+        </if>
+        <if test="characterType!=null and characterType!=''">
+            and character_type = #{characterType}
+        </if>
+        <if test="hobby!=null and hobby!=''">
+            and hobby = #{hobby}
+        </if>
+        <if test="eatingHabits!=null and eatingHabits!=''">
+            and eating_habits = #{eatingHabits}
+        </if>
+        <if test="taboo!=null and taboo!=''">
+            and taboo = #{taboo}
+        </if>
+        <if test="workUnit!=null and workUnit!=''">
+            and work_unit = #{workUnit}
+        </if>
+        <if test="appPass!=null and appPass!=''">
+            and app_pass = #{appPass}
+        </if>
+        <if test="isCome!=null and isCome!=''">
+            and is_come = #{isCome}
+        </if>
+        <if test="lon!=null and lon!=''">
+            and lon = #{lon}
+        </if>
+        <if test="lat!=null and lat!=''">
+            and lat = #{lat}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditOpinion!=null and auditOpinion!=''">
+            and audit_opinion = #{auditOpinion}
+        </if>
+        <if test="isOlderAge!=null and isOlderAge!=''">
+            and is_older_age = #{isOlderAge}
+        </if>
+        <if test="isEmptyNest!=null and isEmptyNest!=''">
+            and is_empty_nest = #{isEmptyNest}
+        </if>
+        <if test="isReform!=null and isReform!=''">
+            and is_reform = #{isReform}
+        </if>
+        <if test="isBedBuild!=null and isBedBuild!=''">
+            and is_bed_build = #{isBedBuild}
+        </if>
+        <if test="isServiceSubsidy!=null and isServiceSubsidy!=''">
+            and is_service_subsidy = #{isServiceSubsidy}
+        </if>
+        <if test="isNursingSubsidy!=null and isNursingSubsidy!=''">
+            and is_nursing_subsidy = #{isNursingSubsidy}
+        </if>
+        <if test="isSelfCare!=null and isSelfCare!=''">
+            and is_self_care = #{isSelfCare}
+        </if>
+        <if test="isCentralizedCare!=null and isCentralizedCare!=''">
+            and is_centralized_care = #{isCentralizedCare}
+        </if>
+        <if test="householderName!=null and householderName!=''">
+            and householder_name = #{householderName}
+        </if>
+        <if test="householderIdCard!=null and householderIdCard!=''">
+            and householder_id_card = #{householderIdCard}
+        </if>
+        <if test="householderAge!=null and householderAge!=''">
+            and householder_age = #{householderAge}
+        </if>
+        <if test="basicServiceIds!=null and basicServiceIds!=''">
+            and basic_service_ids = #{basicServiceIds}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        <if test="guid!=null and guid!=''">
+            and guid = #{guid}
+        </if>
+        <if test="faceGuid!=null and faceGuid!=''">
+            and face_guid = #{faceGuid}
+        </if>
+        <if test="gspState!=null and gspState!=''">
+            and gsp_state = #{gspState}
+        </if>
+        <if test="fkElderId!=null and fkElderId!=''">
+            and fk_elder_id = #{fkElderId}
+        </if>
+        <if test="monthlyDisposableIncome!=null and monthlyDisposableIncome!=''">
+            and monthly_disposable_income = #{monthlyDisposableIncome}
+        </if>
+        <if test="healthCondition!=null and healthCondition!=''">
+            and health_condition = #{healthCondition}
+        </if>
+        <if test="healthId!=null and healthId!=''">
+            and health_id = #{healthId}
+        </if>
+        <if test="isWishCareBed!=null and isWishCareBed!=''">
+            and is_wish_care_bed = #{isWishCareBed}
+        </if>
+        <if test="isInstallCareBed!=null and isInstallCareBed!=''">
+            and is_install_care_bed = #{isInstallCareBed}
+        </if>
+        <if test="nfcNumber!=null and nfcNumber!=''">
+            and nfc_number = #{nfcNumber}
+        </if>
+        <if test="majorDiseasesOther!=null and majorDiseasesOther!=''">
+            and major_diseases_other = #{majorDiseasesOther}
+        </if>
+        <if test="isCheck!=null">
+            and is_check = #{isCheck}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,187 @@
+{
+	"pages": [{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "custom-tab-bar/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/merchant/merchant",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"subPackages": [{
+		"root": "subPages",
+		"pages": [{
+				"path": "register/register",
+				"style": {
+					"navigationBarTitleText": "商家中心"
+				}
+			},
+			{
+				"path": "userSetting/userSetting",
+				"style": {
+					"navigationBarTitleText": "设置中心"
+				}
+			},
+			{
+				"path": "cardTransaction/cardTransaction",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"navigationBarTextStyle": "white"
+				}
+
+			},
+			{
+				"path": "myMessage/myMessage",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"navigationBarTextStyle": "white"
+				}
+
+			},
+			{
+				"path": "merchantaudit/merchantaudit",
+				"style": {
+					"navigationBarTitleText": "商家审核"
+				}
+
+			},
+			{
+				"path": "merchantaudit/merchantAuditList",
+				"style": {
+					"navigationBarTitleText": "商家审核列表",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "areaList/areaList",
+				"style": {
+					"navigationBarTitleText": "选择定位"
+				}
+			},
+			{
+				"path": "myMessageDetail/myMessageDetail",
+				"style": {
+					"navigationBarTitleText": ""
+				}
+			},
+			{
+				"path": "myInvitCode/myInvitCode",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationStyle": "custom"
+				}
+			},
+			{
+				"path": "cardDetail/cardDetail",
+				"style": {
+					"navigationBarTitleText": "",
+					"navigationBarBackgroundColor": "#fff",
+					"navigationBarTextStyle": "black"
+				}
+			},
+			{
+				"path": "merchantCenter/merchantCenter",
+				"style": {
+					"navigationBarTitleText": "商家中心"
+				}
+			},
+			{
+				"path": "merchantCenter/merchantCenterList",
+				"style": {
+					"navigationBarTitleText": "商家中心列表",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "merchantDetail/merchantDetail",
+				"style": {
+					"navigationBarTitleText": "商家详情"
+				}
+			},
+			{
+				"path": "welfareCenter/welfareCenter",
+				"style": {
+					"navigationBarTitleText": "福利中心"
+				}
+			},
+			{
+				"path": "userSettingOther/userSettingOther",
+				"style": {
+					"navigationBarTitleText": "个人中心"
+				}
+			},
+			{
+				"path": "wechatSetting/wechatSetting",
+				"style": {
+					"navigationBarTitleText": "关注公众号"
+				}
+			},
+			{
+				"path": "service/service",
+				"style": {
+					"navigationBarTitleText": ""
+				}
+			},
+			{
+				"path": "cardUrl/cardUrl",
+				"style": {
+					"navigationBarTitleText": "猫卡海报"
+				}
+			}
+		]
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "签到猫",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"custom": true,
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/home/home",
+			"iconPath": "static/c1.png",
+			"selectedIconPath": "static/c1.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/merchant/merchant",
+			"iconPath": "static/c1.png",
+			"selectedIconPath": "static/c1.png",
+			"text": "附近"
+		}, {
+			"pagePath": "pages/my/my",
+			"iconPath": "static/c1.png",
+			"selectedIconPath": "static/c1.png",
+			"text": "我的"
+		}]
+	}
+
+}

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthDiseaseEncyclopediaMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    title,
+    disease_id,
+    disease_name,
+    content_type,
+    source,
+    content,
+    cover_image,
+    video_url,
+    publish_time,
+    view_count,
+    collect_count,
+    is_recommend,
+    content_status,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo,
+    keywords,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.title},
+    #{item.diseaseId},
+    #{item.diseaseName},
+    #{item.contentType},
+    #{item.source},
+    #{item.content},
+    #{item.coverImage},
+    #{item.videoUrl},
+    #{item.publishTime},
+    #{item.viewCount},
+    #{item.collectCount},
+    #{item.isRecommend},
+    #{item.contentStatus},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo},
+    #{item.keywords},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_disease_encyclopedia
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthDiseaseEncyclopedia">
+        SELECT * from  tb_jiangyukeji_health_disease_encyclopedia
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="title!=null and title!=''">
+            and title = #{title}
+        </if>
+        <if test="diseaseId!=null and diseaseId!=''">
+            and disease_id = #{diseaseId}
+        </if>
+        <if test="diseaseName!=null and diseaseName!=''">
+            and disease_name = #{diseaseName}
+        </if>
+        <if test="contentType!=null and contentType!=''">
+            and content_type = #{contentType}
+        </if>
+        <if test="source!=null and source!=''">
+            and source = #{source}
+        </if>
+        <if test="content!=null and content!=''">
+            and content = #{content}
+        </if>
+        <if test="coverImage!=null and coverImage!=''">
+            and cover_image = #{coverImage}
+        </if>
+        <if test="videoUrl!=null and videoUrl!=''">
+            and video_url = #{videoUrl}
+        </if>
+        <if test="publishTime!=null and publishTime!=''">
+            and publish_time = #{publishTime}
+        </if>
+        <if test="viewCount!=null and viewCount!=''">
+            and view_count = #{viewCount}
+        </if>
+        <if test="collectCount!=null and collectCount!=''">
+            and collect_count = #{collectCount}
+        </if>
+        <if test="isRecommend!=null and isRecommend!=''">
+            and is_recommend = #{isRecommend}
+        </if>
+        <if test="contentStatus!=null and contentStatus!=''">
+            and content_status = #{contentStatus}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="keywords!=null and keywords!=''">
+            and keywords = #{keywords}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_disease_encyclopedia
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="title!=null and title!=''">
+            and title = #{title}
+        </if>
+        <if test="diseaseId!=null and diseaseId!=''">
+            and disease_id = #{diseaseId}
+        </if>
+        <if test="diseaseName!=null and diseaseName!=''">
+            and disease_name = #{diseaseName}
+        </if>
+        <if test="contentType!=null and contentType!=''">
+            and content_type = #{contentType}
+        </if>
+        <if test="source!=null and source!=''">
+            and source = #{source}
+        </if>
+        <if test="content!=null and content!=''">
+            and content = #{content}
+        </if>
+        <if test="coverImage!=null and coverImage!=''">
+            and cover_image = #{coverImage}
+        </if>
+        <if test="videoUrl!=null and videoUrl!=''">
+            and video_url = #{videoUrl}
+        </if>
+        <if test="publishTime!=null and publishTime!=''">
+            and publish_time = #{publishTime}
+        </if>
+        <if test="viewCount!=null and viewCount!=''">
+            and view_count = #{viewCount}
+        </if>
+        <if test="collectCount!=null and collectCount!=''">
+            and collect_count = #{collectCount}
+        </if>
+        <if test="isRecommend!=null and isRecommend!=''">
+            and is_recommend = #{isRecommend}
+        </if>
+        <if test="contentStatus!=null and contentStatus!=''">
+            and content_status = #{contentStatus}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="keywords!=null and keywords!=''">
+            and keywords = #{keywords}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

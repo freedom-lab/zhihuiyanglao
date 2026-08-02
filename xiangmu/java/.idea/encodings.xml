@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-api-page/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-api-page/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-common-bundle/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-common-bundle/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-dao-bundle/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-dao-bundle/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-iot-page/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-model-bundle/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pluss8.0/pluss-service-bundle/src/main/java" charset="UTF-8" />
+  </component>
+</project>

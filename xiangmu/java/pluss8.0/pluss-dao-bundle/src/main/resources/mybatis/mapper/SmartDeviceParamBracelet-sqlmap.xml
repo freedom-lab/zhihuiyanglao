@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.SmartDeviceParamBraceletMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    grant_id,
+    device_name,
+    device_serial,
+    sos_number_one,
+    sos_number_two,
+    sos_number_three,
+    family_name_one,
+    family_name_two,
+    family_name_three,
+    family_name_four,
+    family_number_one,
+    family_number_two,
+    family_number_three,
+    family_number_four,
+    location_interval,
+    heart_interval,
+    step_interval,
+    need_update,
+    battery_alert,
+    sos_alert,
+    center_tel,
+    remote_shutdowm,
+    update_state,
+    remark,
+    create_user,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.grantId},
+    #{item.deviceName},
+    #{item.deviceSerial},
+    #{item.sosNumberOne},
+    #{item.sosNumberTwo},
+    #{item.sosNumberThree},
+    #{item.familyNameOne},
+    #{item.familyNameTwo},
+    #{item.familyNameThree},
+    #{item.familyNameFour},
+    #{item.familyNumberOne},
+    #{item.familyNumberTwo},
+    #{item.familyNumberThree},
+    #{item.familyNumberFour},
+    #{item.locationInterval},
+    #{item.heartInterval},
+    #{item.stepInterval},
+    #{item.needUpdate},
+    #{item.batteryAlert},
+    #{item.sosAlert},
+    #{item.centerTel},
+    #{item.remoteShutdowm},
+    #{item.updateState},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_smart_device_param_bracelet
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.SmartDeviceParamBracelet">
+        SELECT * from  tb_jiangyukeji_smart_device_param_bracelet
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="sosNumberOne!=null and sosNumberOne!=''">
+            and sos_number_one = #{sosNumberOne}
+        </if>
+        <if test="sosNumberTwo!=null and sosNumberTwo!=''">
+            and sos_number_two = #{sosNumberTwo}
+        </if>
+        <if test="sosNumberThree!=null and sosNumberThree!=''">
+            and sos_number_three = #{sosNumberThree}
+        </if>
+        <if test="familyNameOne!=null and familyNameOne!=''">
+            and family_name_one = #{familyNameOne}
+        </if>
+        <if test="familyNameTwo!=null and familyNameTwo!=''">
+            and family_name_two = #{familyNameTwo}
+        </if>
+        <if test="familyNameThree!=null and familyNameThree!=''">
+            and family_name_three = #{familyNameThree}
+        </if>
+        <if test="familyNameFour!=null and familyNameFour!=''">
+            and family_name_four = #{familyNameFour}
+        </if>
+        <if test="familyNumberOne!=null and familyNumberOne!=''">
+            and family_number_one = #{familyNumberOne}
+        </if>
+        <if test="familyNumberTwo!=null and familyNumberTwo!=''">
+            and family_number_two = #{familyNumberTwo}
+        </if>
+        <if test="familyNumberThree!=null and familyNumberThree!=''">
+            and family_number_three = #{familyNumberThree}
+        </if>
+        <if test="familyNumberFour!=null and familyNumberFour!=''">
+            and family_number_four = #{familyNumberFour}
+        </if>
+        <if test="locationInterval!=null and locationInterval!=''">
+            and location_interval = #{locationInterval}
+        </if>
+        <if test="heartInterval!=null and heartInterval!=''">
+            and heart_interval = #{heartInterval}
+        </if>
+        <if test="stepInterval!=null and stepInterval!=''">
+            and step_interval = #{stepInterval}
+        </if>
+        <if test="needUpdate!=null and needUpdate!=''">
+            and need_update = #{needUpdate}
+        </if>
+        <if test="batteryAlert!=null and batteryAlert!=''">
+            and battery_alert = #{batteryAlert}
+        </if>
+        <if test="sosAlert!=null and sosAlert!=''">
+            and sos_alert = #{sosAlert}
+        </if>
+        <if test="centerTel!=null and centerTel!=''">
+            and center_tel = #{centerTel}
+        </if>
+        <if test="remoteShutdowm!=null and remoteShutdowm!=''">
+            and remote_shutdowm = #{remoteShutdowm}
+        </if>
+        <if test="updateState!=null and updateState!=''">
+            and update_state = #{updateState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_smart_device_param_bracelet
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="grantId!=null and grantId!=''">
+            and grant_id = #{grantId}
+        </if>
+        <if test="deviceName!=null and deviceName!=''">
+            and device_name = #{deviceName}
+        </if>
+        <if test="deviceSerial!=null and deviceSerial!=''">
+            and device_serial = #{deviceSerial}
+        </if>
+        <if test="sosNumberOne!=null and sosNumberOne!=''">
+            and sos_number_one = #{sosNumberOne}
+        </if>
+        <if test="sosNumberTwo!=null and sosNumberTwo!=''">
+            and sos_number_two = #{sosNumberTwo}
+        </if>
+        <if test="sosNumberThree!=null and sosNumberThree!=''">
+            and sos_number_three = #{sosNumberThree}
+        </if>
+        <if test="familyNameOne!=null and familyNameOne!=''">
+            and family_name_one = #{familyNameOne}
+        </if>
+        <if test="familyNameTwo!=null and familyNameTwo!=''">
+            and family_name_two = #{familyNameTwo}
+        </if>
+        <if test="familyNameThree!=null and familyNameThree!=''">
+            and family_name_three = #{familyNameThree}
+        </if>
+        <if test="familyNameFour!=null and familyNameFour!=''">
+            and family_name_four = #{familyNameFour}
+        </if>
+        <if test="familyNumberOne!=null and familyNumberOne!=''">
+            and family_number_one = #{familyNumberOne}
+        </if>
+        <if test="familyNumberTwo!=null and familyNumberTwo!=''">
+            and family_number_two = #{familyNumberTwo}
+        </if>
+        <if test="familyNumberThree!=null and familyNumberThree!=''">
+            and family_number_three = #{familyNumberThree}
+        </if>
+        <if test="familyNumberFour!=null and familyNumberFour!=''">
+            and family_number_four = #{familyNumberFour}
+        </if>
+        <if test="locationInterval!=null and locationInterval!=''">
+            and location_interval = #{locationInterval}
+        </if>
+        <if test="heartInterval!=null and heartInterval!=''">
+            and heart_interval = #{heartInterval}
+        </if>
+        <if test="stepInterval!=null and stepInterval!=''">
+            and step_interval = #{stepInterval}
+        </if>
+        <if test="needUpdate!=null and needUpdate!=''">
+            and need_update = #{needUpdate}
+        </if>
+        <if test="batteryAlert!=null and batteryAlert!=''">
+            and battery_alert = #{batteryAlert}
+        </if>
+        <if test="sosAlert!=null and sosAlert!=''">
+            and sos_alert = #{sosAlert}
+        </if>
+        <if test="centerTel!=null and centerTel!=''">
+            and center_tel = #{centerTel}
+        </if>
+        <if test="remoteShutdowm!=null and remoteShutdowm!=''">
+            and remote_shutdowm = #{remoteShutdowm}
+        </if>
+        <if test="updateState!=null and updateState!=''">
+            and update_state = #{updateState}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

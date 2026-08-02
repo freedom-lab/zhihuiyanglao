@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsLogisticsOutboundInfoDetailMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    outbound_id,
+    goods_id,
+    goods_name,
+    goods_code,
+    type_id,
+    type_name,
+    goods_unit,
+    goods_standards,
+    bar_code,
+    manufactor_name,
+    out_price,
+    out_num,
+    out_amount,
+    inventory_id,
+    is_recovery,
+    recovery_time,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.outboundId},
+    #{item.goodsId},
+    #{item.goodsName},
+    #{item.goodsCode},
+    #{item.typeId},
+    #{item.typeName},
+    #{item.goodsUnit},
+    #{item.goodsStandards},
+    #{item.barCode},
+    #{item.manufactorName},
+    #{item.outPrice},
+    #{item.outNum},
+    #{item.outAmount},
+    #{item.inventoryId},
+    #{item.isRecovery},
+    #{item.recoveryTime},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_logistics_outbound_info_detail
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsLogisticsOutboundInfoDetail">
+        SELECT * from  tb_jiangyukeji_ins_logistics_outbound_info_detail
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="outboundId!=null and outboundId!=''">
+            and outbound_id = #{outboundId}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="goodsCode!=null and goodsCode!=''">
+            and goods_code = #{goodsCode}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="goodsUnit!=null and goodsUnit!=''">
+            and goods_unit = #{goodsUnit}
+        </if>
+        <if test="goodsStandards!=null and goodsStandards!=''">
+            and goods_standards = #{goodsStandards}
+        </if>
+        <if test="barCode!=null and barCode!=''">
+            and bar_code = #{barCode}
+        </if>
+        <if test="manufactorName!=null and manufactorName!=''">
+            and manufactor_name = #{manufactorName}
+        </if>
+        <if test="outPrice!=null and outPrice!=''">
+            and out_price = #{outPrice}
+        </if>
+        <if test="outNum!=null and outNum!=''">
+            and out_num = #{outNum}
+        </if>
+        <if test="outAmount!=null and outAmount!=''">
+            and out_amount = #{outAmount}
+        </if>
+        <if test="inventoryId!=null and inventoryId!=''">
+            and inventory_id = #{inventoryId}
+        </if>
+        <if test="isRecovery!=null and isRecovery!=''">
+            and is_recovery = #{isRecovery}
+        </if>
+        <if test="recoveryTime!=null and recoveryTime!=''">
+            and recovery_time = #{recoveryTime}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_logistics_outbound_info_detail
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="outboundId!=null and outboundId!=''">
+            and outbound_id = #{outboundId}
+        </if>
+        <if test="goodsId!=null and goodsId!=''">
+            and goods_id = #{goodsId}
+        </if>
+        <if test="goodsName!=null and goodsName!=''">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="goodsCode!=null and goodsCode!=''">
+            and goods_code = #{goodsCode}
+        </if>
+        <if test="typeId!=null and typeId!=''">
+            and type_id = #{typeId}
+        </if>
+        <if test="typeName!=null and typeName!=''">
+            and type_name = #{typeName}
+        </if>
+        <if test="goodsUnit!=null and goodsUnit!=''">
+            and goods_unit = #{goodsUnit}
+        </if>
+        <if test="goodsStandards!=null and goodsStandards!=''">
+            and goods_standards = #{goodsStandards}
+        </if>
+        <if test="barCode!=null and barCode!=''">
+            and bar_code = #{barCode}
+        </if>
+        <if test="manufactorName!=null and manufactorName!=''">
+            and manufactor_name = #{manufactorName}
+        </if>
+        <if test="outPrice!=null and outPrice!=''">
+            and out_price = #{outPrice}
+        </if>
+        <if test="outNum!=null and outNum!=''">
+            and out_num = #{outNum}
+        </if>
+        <if test="outAmount!=null and outAmount!=''">
+            and out_amount = #{outAmount}
+        </if>
+        <if test="inventoryId!=null and inventoryId!=''">
+            and inventory_id = #{inventoryId}
+        </if>
+        <if test="isRecovery!=null and isRecovery!=''">
+            and is_recovery = #{isRecovery}
+        </if>
+        <if test="recoveryTime!=null and recoveryTime!=''">
+            and recovery_time = #{recoveryTime}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

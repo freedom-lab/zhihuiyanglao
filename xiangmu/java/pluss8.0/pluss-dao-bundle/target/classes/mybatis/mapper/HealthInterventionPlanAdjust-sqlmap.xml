@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.HealthInterventionPlanAdjustMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    plan_id,
+    adjust_time,
+    adjust_reason,
+    adjust_content,
+    before_adjustment,
+    after_adjustment,
+    adjust_doctor_id,
+    adjust_doctor_name,
+    effect_evaluation,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.planId},
+    #{item.adjustTime},
+    #{item.adjustReason},
+    #{item.adjustContent},
+    #{item.beforeAdjustment},
+    #{item.afterAdjustment},
+    #{item.adjustDoctorId},
+    #{item.adjustDoctorName},
+    #{item.effectEvaluation},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_health_intervention_plan_adjust
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.HealthInterventionPlanAdjust">
+        SELECT * from  tb_jiangyukeji_health_intervention_plan_adjust
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="planId!=null and planId!=''">
+            and plan_id = #{planId}
+        </if>
+        <if test="adjustTime!=null and adjustTime!=''">
+            and adjust_time = #{adjustTime}
+        </if>
+        <if test="adjustReason!=null and adjustReason!=''">
+            and adjust_reason = #{adjustReason}
+        </if>
+        <if test="adjustContent!=null and adjustContent!=''">
+            and adjust_content = #{adjustContent}
+        </if>
+        <if test="beforeAdjustment!=null and beforeAdjustment!=''">
+            and before_adjustment = #{beforeAdjustment}
+        </if>
+        <if test="afterAdjustment!=null and afterAdjustment!=''">
+            and after_adjustment = #{afterAdjustment}
+        </if>
+        <if test="adjustDoctorId!=null and adjustDoctorId!=''">
+            and adjust_doctor_id = #{adjustDoctorId}
+        </if>
+        <if test="adjustDoctorName!=null and adjustDoctorName!=''">
+            and adjust_doctor_name = #{adjustDoctorName}
+        </if>
+        <if test="effectEvaluation!=null and effectEvaluation!=''">
+            and effect_evaluation = #{effectEvaluation}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_health_intervention_plan_adjust
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="planId!=null and planId!=''">
+            and plan_id = #{planId}
+        </if>
+        <if test="adjustTime!=null and adjustTime!=''">
+            and adjust_time = #{adjustTime}
+        </if>
+        <if test="adjustReason!=null and adjustReason!=''">
+            and adjust_reason = #{adjustReason}
+        </if>
+        <if test="adjustContent!=null and adjustContent!=''">
+            and adjust_content = #{adjustContent}
+        </if>
+        <if test="beforeAdjustment!=null and beforeAdjustment!=''">
+            and before_adjustment = #{beforeAdjustment}
+        </if>
+        <if test="afterAdjustment!=null and afterAdjustment!=''">
+            and after_adjustment = #{afterAdjustment}
+        </if>
+        <if test="adjustDoctorId!=null and adjustDoctorId!=''">
+            and adjust_doctor_id = #{adjustDoctorId}
+        </if>
+        <if test="adjustDoctorName!=null and adjustDoctorName!=''">
+            and adjust_doctor_name = #{adjustDoctorName}
+        </if>
+        <if test="effectEvaluation!=null and effectEvaluation!=''">
+            and effect_evaluation = #{effectEvaluation}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

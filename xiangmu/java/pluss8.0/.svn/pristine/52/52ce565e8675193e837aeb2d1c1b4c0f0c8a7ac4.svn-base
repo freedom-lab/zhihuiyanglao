@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsElderLeaveRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    check_id,
+    check_date,
+    elder_id,
+    elder_name,
+    id_card,
+    sex,
+    leave_state,
+    start_time,
+    reality_time,
+    leave_day,
+    leave_memo,
+    accompany_name,
+    accompany_tel,
+    relationship_type,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo,
+    is_bed_fee,
+    refund_state,
+    calculate_state,
+    nursing_state,
+    nursing_staff_id,
+    nursing_staff_name,
+    check_time,
+    area_code,
+    area_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.checkId},
+    #{item.checkDate},
+    #{item.elderId},
+    #{item.elderName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.leaveState},
+    #{item.startTime},
+    #{item.realityTime},
+    #{item.leaveDay},
+    #{item.leaveMemo},
+    #{item.accompanyName},
+    #{item.accompanyTel},
+    #{item.relationshipType},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo},
+    #{item.isBedFee},
+    #{item.refundState},
+    #{item.calculateState},
+    #{item.nursingState},
+    #{item.nursingStaffId},
+    #{item.nursingStaffName},
+    #{item.checkTime},
+    #{item.areaCode},
+    #{item.areaName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_elder_leave_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsElderLeaveRecord">
+        SELECT * from  tb_jiangyukeji_ins_elder_leave_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="leaveState!=null and leaveState!=''">
+            and leave_state = #{leaveState}
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            and start_time = #{startTime}
+        </if>
+        <if test="realityTime!=null and realityTime!=''">
+            and reality_time = #{realityTime}
+        </if>
+        <if test="leaveDay!=null and leaveDay!=''">
+            and leave_day = #{leaveDay}
+        </if>
+        <if test="leaveMemo!=null and leaveMemo!=''">
+            and leave_memo = #{leaveMemo}
+        </if>
+        <if test="accompanyName!=null and accompanyName!=''">
+            and accompany_name = #{accompanyName}
+        </if>
+        <if test="accompanyTel!=null and accompanyTel!=''">
+            and accompany_tel = #{accompanyTel}
+        </if>
+        <if test="relationshipType!=null and relationshipType!=''">
+            and relationship_type = #{relationshipType}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="isBedFee!=null and isBedFee!=''">
+            and is_bed_fee = #{isBedFee}
+        </if>
+        <if test="refundState!=null and refundState!=''">
+            and refund_state = #{refundState}
+        </if>
+        <if test="calculateState!=null and calculateState!=''">
+            and calculate_state = #{calculateState}
+        </if>
+        <if test="nursingState!=null and nursingState!=''">
+            and nursing_state = #{nursingState}
+        </if>
+        <if test="nursingStaffId!=null and nursingStaffId!=''">
+            and nursing_staff_id = #{nursingStaffId}
+        </if>
+        <if test="nursingStaffName!=null and nursingStaffName!=''">
+            and nursing_staff_name = #{nursingStaffName}
+        </if>
+        <if test="checkTime!=null and checkTime!=''">
+            and check_time = #{checkTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_elder_leave_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="checkId!=null and checkId!=''">
+            and check_id = #{checkId}
+        </if>
+        <if test="checkDate!=null and checkDate!=''">
+            and check_date = #{checkDate}
+        </if>
+        <if test="elderId!=null and elderId!=''">
+            and elder_id = #{elderId}
+        </if>
+        <if test="elderName!=null and elderName!=''">
+            and elder_name = #{elderName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="leaveState!=null and leaveState!=''">
+            and leave_state = #{leaveState}
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            and start_time = #{startTime}
+        </if>
+        <if test="realityTime!=null and realityTime!=''">
+            and reality_time = #{realityTime}
+        </if>
+        <if test="leaveDay!=null and leaveDay!=''">
+            and leave_day = #{leaveDay}
+        </if>
+        <if test="leaveMemo!=null and leaveMemo!=''">
+            and leave_memo = #{leaveMemo}
+        </if>
+        <if test="accompanyName!=null and accompanyName!=''">
+            and accompany_name = #{accompanyName}
+        </if>
+        <if test="accompanyTel!=null and accompanyTel!=''">
+            and accompany_tel = #{accompanyTel}
+        </if>
+        <if test="relationshipType!=null and relationshipType!=''">
+            and relationship_type = #{relationshipType}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="isBedFee!=null and isBedFee!=''">
+            and is_bed_fee = #{isBedFee}
+        </if>
+        <if test="refundState!=null and refundState!=''">
+            and refund_state = #{refundState}
+        </if>
+        <if test="calculateState!=null and calculateState!=''">
+            and calculate_state = #{calculateState}
+        </if>
+        <if test="nursingState!=null and nursingState!=''">
+            and nursing_state = #{nursingState}
+        </if>
+        <if test="nursingStaffId!=null and nursingStaffId!=''">
+            and nursing_staff_id = #{nursingStaffId}
+        </if>
+        <if test="nursingStaffName!=null and nursingStaffName!=''">
+            and nursing_staff_name = #{nursingStaffName}
+        </if>
+        <if test="checkTime!=null and checkTime!=''">
+            and check_time = #{checkTime}
+        </if>
+        <if test="areaCode!=null and areaCode!=''">
+            and area_code = #{areaCode}
+        </if>
+        <if test="areaName!=null and areaName!=''">
+            and area_name = #{areaName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.coding.SrobotMapper">
+
+	<update id="createTable" parameterType="cn.pluss.platform.model.coding.Table">
+		create  table ${tableName}(
+		<foreach collection="tableColumnList" item="tableColumn" open="" separator="," close="">
+			${tableColumn.columnName}
+			<choose>
+				<when test="tableColumn.columnType =='varchar'">
+					varchar(${tableColumn.columnLength})
+				</when>
+				<when test="tableColumn.columnType =='int'||tableColumn.columnType =='integer'">
+					int
+				</when>
+				<otherwise>
+					${tableColumn.columnType}
+				</otherwise>
+			</choose>
+
+
+			<if test='tableColumn.defaultValue !=null and tableColumn.defaultValue!=""'>
+				DEFAULT ${tableColumn.defaultValue}
+			</if>
+			<if test='tableColumn.isNotNull '>
+				 NOT NULL
+			</if>
+			<if test='tableColumn.autoIncrement '>
+				AUTO_INCREMENT
+			</if>
+
+		</foreach>
+		<if test='keyColumn!=null and keyColumn!=""'>
+			, PRIMARY KEY (${keyColumn})
+		</if>
+		)
+	</update>
+
+	<update id="dropTable" parameterType="cn.pluss.platform.model.coding.Table">
+		drop  table if exists ${tableName}
+	</update>
+
+	<update id="alterTableName">
+		alter table ${originalTableName} rename ${newTableName}
+	</update>
+
+	<select id="isTargetTableExistInDB" resultType="string">
+		SELECT table_name FROM information_schema.tables WHERE table_schema = #{dataBaseName} and TABLE_NAME = #{tableName}
+	</select>
+
+
+	<select id="queryTableField" resultType="cn.pluss.platform.model.coding.TableField" parameterType="cn.pluss.platform.model.coding.TableField">
+		SELECT COLUMN_NAME fieldName,DATA_TYPE fieldType,COLUMN_COMMENT fieldComment FROM information_schema.COLUMNS WHERE table_schema = #{schema} and TABLE_NAME = #{tableName}
+	</select>
+
+
+</mapper>

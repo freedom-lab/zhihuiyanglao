@@ -1,0 +1,245 @@
+<template>
+  <!-- <div id="index" class="insScreen-container" style="transform: scale(0.86296, 0.86296) translate(-50%, -50%);"> -->
+    <div id="index" class="insScreen-container" style="transform: scale(0.86019, 0.86019) translate(-50%, -50%);">
+    <div class="body">
+      <div class="login">退出</div>
+      <div class="date">
+        <div class="time">2026-06-11</div>
+        <div class="day">10: 57: 52</div>
+        <div class="week">星期四</div>
+        <div class="qp" style="z-index: 999;">
+          <img src="ddimg" alt="">
+          <div>
+            <div class="button"> 全屏 </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="top">
+        <div class="title">机构养老服务监控可视化平台</div>
+        <div class="menu">
+          <div class="menu1 menu-left">
+            <div> 机构总览 </div>
+            <div> 运营分析 </div>
+            <div> 健康监测 </div>
+            <div> 睡眠监测 </div>
+            <div> 跌倒监测 </div>
+          </div>
+          <div class="menu1 menu-right">
+            <div> 视频监控 </div>
+            <div class="active"> 服务监管 </div>
+            <div> 评估监管 </div>
+            <div> 人员管理 </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'insScreen',
+  data() {
+    return {}
+  },
+  methods: {}
+}
+</script>
+
+<style lang="scss" scoped>
+#index {
+    background-color: #000;
+    color: #d3d6dd;
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    overflow: hidden
+}
+
+.body {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden
+}
+
+.body.bg,.body {
+    background-image: url('../../../assets/images/visualization/insScreen/img/bg2.png');
+    background-size: 100% 100%;
+    background-position: 50%
+}
+
+.body .logo {
+    position: absolute;
+    top: 20px;
+    left: 10px
+}
+
+.body .logo img {
+    width: 109px;
+    height: 36px
+}
+
+.body .login {
+    position: absolute;
+    top: 35px;
+    right: 13px;
+    z-index: 100;
+    font-size: 18px;
+    // font-family: dy;
+    cursor: pointer;
+    padding: 1px 2px;
+    border-radius: 5px;
+    // color: #fff;
+}
+
+.body .login:hover {
+    -webkit-box-shadow: 0 0 1.5px 1.5px #26a8ff;
+    box-shadow: 0 0 1.5px 1.5px #26a8ff
+}
+
+.body .date {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 14px;
+    color: #fff
+}
+
+.body .date .qp,.body .date {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.body .date .qp {
+    cursor: pointer;
+    color: #0ff
+}
+
+.body .date .qp img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px
+}
+
+.body .date .time {
+    margin-left: 30px;
+    font-size: 16px;
+    font-family: Source Han Sans CN;
+    font-weight: 500;
+    color: #fff
+}
+
+.body .date .week {
+    color: #0ff;
+    margin-right: 10px
+}
+
+.body .date .day,.body .date .week {
+    margin-left: 10px;
+    font-size: 16px;
+    font-family: Source Han Sans CN;
+    font-weight: 500
+}
+
+.body .date .day {
+    color: #fff
+}
+
+.body .top {
+    position: relative;
+    width: 100%;
+    height: 111px;
+    background-image: url('../../../assets/images/visualization/insScreen/img/top-bg.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    z-index: 99
+}
+
+.body .top .title {
+    line-height: 70px;
+    font-size: 45px;
+    color: #fff;
+    letter-spacing: 2px;
+    text-align: center;
+    font-family: dy
+}
+
+.body .top .menu {
+    position: absolute;
+    width: 100%;
+    top: 50px
+}
+
+.body .top .menu .menu-left {
+    position: absolute;
+    left: 10px
+}
+
+.body .top .menu .menu-right {
+    position: absolute;
+    right: 150px
+}
+
+.body .top .menu .menu1 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.body .top .menu .menu1>div {
+    position: relative;
+    width: 100px;
+    height: 41px;
+    line-height: 41px;
+    background-size: 100% 100%;
+    background-position: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    cursor: pointer
+}
+
+.body .top .menu .menu1>div.active {
+    background-image: url('../../../assets/images/visualization/insScreen/img/nav-bg-h.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    color: #0ff
+}
+
+.body .top .menu .menu1>div:after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    top: -2px;
+    width: 15px;
+    height: 45px;
+    background-image: url('../../../assets/images/visualization/insScreen/img/menu-gap.png');
+    background-size: 100% 100%;
+    background-position: 50%
+}
+
+.body .top .menu .menu2 {
+    width: 840px
+}
+
+.main[data-v-4cf45fc9] {
+    height: calc(100% - 111px)
+}
+</style>

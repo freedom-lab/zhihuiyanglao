@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsSchedulingHandoverRecordMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    table_id,
+    table_name,
+    detail_id,
+    classes_id,
+    classes_name,
+    submit_time,
+    staff_id,
+    staff_name,
+    id_card,
+    sex,
+    handover_content,
+    img_path,
+    takeover_id,
+    takeover_name,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.tableId},
+    #{item.tableName},
+    #{item.detailId},
+    #{item.classesId},
+    #{item.classesName},
+    #{item.submitTime},
+    #{item.staffId},
+    #{item.staffName},
+    #{item.idCard},
+    #{item.sex},
+    #{item.handoverContent},
+    #{item.imgPath},
+    #{item.takeoverId},
+    #{item.takeoverName},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_scheduling_handover_record
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsSchedulingHandoverRecord">
+        SELECT * from  tb_jiangyukeji_ins_scheduling_handover_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="tableId!=null and tableId!=''">
+            and table_id = #{tableId}
+        </if>
+        <if test="tableName!=null and tableName!=''">
+            and table_name = #{tableName}
+        </if>
+        <if test="detailId!=null and detailId!=''">
+            and detail_id = #{detailId}
+        </if>
+        <if test="classesId!=null and classesId!=''">
+            and classes_id = #{classesId}
+        </if>
+        <if test="classesName!=null and classesName!=''">
+            and classes_name = #{classesName}
+        </if>
+        <if test="submitTime!=null and submitTime!=''">
+            and submit_time = #{submitTime}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="handoverContent!=null and handoverContent!=''">
+            and handover_content = #{handoverContent}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="takeoverId!=null and takeoverId!=''">
+            and takeover_id = #{takeoverId}
+        </if>
+        <if test="takeoverName!=null and takeoverName!=''">
+            and takeover_name = #{takeoverName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_scheduling_handover_record
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="tableId!=null and tableId!=''">
+            and table_id = #{tableId}
+        </if>
+        <if test="tableName!=null and tableName!=''">
+            and table_name = #{tableName}
+        </if>
+        <if test="detailId!=null and detailId!=''">
+            and detail_id = #{detailId}
+        </if>
+        <if test="classesId!=null and classesId!=''">
+            and classes_id = #{classesId}
+        </if>
+        <if test="classesName!=null and classesName!=''">
+            and classes_name = #{classesName}
+        </if>
+        <if test="submitTime!=null and submitTime!=''">
+            and submit_time = #{submitTime}
+        </if>
+        <if test="staffId!=null and staffId!=''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="staffName!=null and staffName!=''">
+            and staff_name = #{staffName}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and id_card = #{idCard}
+        </if>
+        <if test="sex!=null and sex!=''">
+            and sex = #{sex}
+        </if>
+        <if test="handoverContent!=null and handoverContent!=''">
+            and handover_content = #{handoverContent}
+        </if>
+        <if test="imgPath!=null and imgPath!=''">
+            and img_path = #{imgPath}
+        </if>
+        <if test="takeoverId!=null and takeoverId!=''">
+            and takeover_id = #{takeoverId}
+        </if>
+        <if test="takeoverName!=null and takeoverName!=''">
+            and takeover_name = #{takeoverName}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

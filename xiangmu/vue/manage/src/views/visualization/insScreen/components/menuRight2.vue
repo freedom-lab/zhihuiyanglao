@@ -1,0 +1,1239 @@
+<template>
+  <div class="insScreen-main">
+    <div class="page">
+      <!-- 左侧区域 -->
+      <div class="page-left">
+        <!-- 今日服务监管统计 -->
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>今日服务监管统计</span>
+            </h4>
+          </div>
+          <div class="oneCon">
+            <div class="task-stats-container">
+              <div class="total-section">
+                <div class="icon-wrapper">
+                  <img :src="JRHL" alt="护理任务总数" class="icon-pic">
+                </div>
+                <div class="total-info">
+                  <div class="total-num">6</div>
+                  <div class="total-label">护理任务总数</div>
+                </div>
+              </div>
+              <div class="status-grid">
+                <div class="status-sub-card sub-card-green">
+                  <div class="sub-num num-green">0</div>
+                  <div class="sub-label">已完成</div>
+                </div>
+                <div class="status-sub-card sub-card-orange">
+                  <div class="sub-num num-orange">6</div>
+                  <div class="sub-label">未完成</div>
+                </div>
+                <div class="status-sub-card sub-card-blue">
+                  <div class="sub-num num-blue">0%</div>
+                  <div class="sub-label">完成率</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 护理人员排行榜【左侧红框 - 补全el-table】 -->
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>护理人员排行榜</span>
+            </h4>
+            <div role="radiogroup" class="el-radio-group radioA">
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="1">
+                <span class="el-radio-button__inner">从高到低</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="2">
+                <span class="el-radio-button__inner">从低到高</span>
+              </label>
+            </div>
+          </div>
+          <div class="twoCon">
+            <div class="warning1">
+              <div style="width: 100%; height: 100%;">
+                <el-table class="tableView" :data="staffRankTableData" border fit height="100%" :header-cell-style="{'color': 'rgb(160, 223, 255)',
+                  'background-color': 'rgba(12, 33, 74, 0.4)',
+                  'border-bottom': '1px solid rgba(75, 159, 255, 0.15)',
+                  'padding': '12px 0px',
+                  'background-size': '100% 100%',}">
+                  <el-table-column label="姓名" align="center"></el-table-column>
+                  <el-table-column label="任务数" align="center"></el-table-column>
+                  <el-table-column label="已完成" align="center"></el-table-column>
+                  <el-table-column label="完成率" align="center"></el-table-column>
+                  <!-- 暂无数据时显示空提示 -->
+                  <div slot="empty" class="empty-tip">暂无数据</div>
+                </el-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中间区域 -->
+      <div class="page-center">
+        <div class="topNum">
+          <div class="li">
+            <img :src="fwlrs">
+            <div class="con">
+              <h4>
+                <span class="count">4</span>
+              </h4>
+              <p>在住老人数</p>
+            </div>
+          </div>
+          <div class="li">
+            <img :src="hlrys">
+            <div class="con">
+              <h4>
+                <span class="count">81</span>
+              </h4>
+              <p>护理人员数</p>
+            </div>
+          </div>
+          <div class="li">
+            <img :src="fwpb">
+            <div class="con">
+              <h4>
+                <span> 1:2025 </span>
+              </h4>
+              <p>服务配比</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map">
+          <div class="nomap">
+            <!-- <img :src="ch"> -->
+          </div>
+        </div>
+
+        <div style="display: flex;">
+          <!-- 自选服务实时工单【中间底部红框 - 补全表格+测试数据】 -->
+          <div class="oldBox">
+            <div class="tit">
+              <img :src="titico">
+              <h4>
+                <span>自选服务实时工单</span>
+              </h4>
+            </div>
+            <div class="fourCon">
+              <div class="warning2">
+                <div style="width:100%;height:100%;">
+                  <el-table ref="scrollTable" class="tableView" :data="serviceOrderTableData" border fit max-height="260px"
+                    @mouseenter.native="autoScroll(false)"
+                    @mouseleave.native="autoScroll(true)"
+                  >
+                    <el-table-column label="序号" align="center" prop="num" width="80"></el-table-column>
+                    <el-table-column label="姓名" align="center" prop="name" width="110"></el-table-column>
+                    <el-table-column label="床位" align="center" prop="bed" width="140"></el-table-column>
+                    <el-table-column label="项目" align="center" prop="project" width="120"></el-table-column>
+                    <el-table-column label="状态" align="center" prop="state" width="90">
+                      <template slot-scope="scope">
+                        <span class="state-finish">{{ scope.row.state }}</span>
+                      </template>
+                    </el-table-column>
+                    <el-table-column label="人员" align="center" prop="worker" width="110"></el-table-column>
+                    <el-table-column label="服务时长" align="center" prop="duration" width="100"></el-table-column>
+                    <el-table-column label="服务时间" align="center" prop="serviceTime" width="170"></el-table-column>
+                  </el-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧区域 -->
+      <div class="page-right">
+        <!-- 自选服务概况统计 -->
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>自选服务概况统计</span>
+            </h4>
+            <div role="radiogroup" class="el-radio-group radioA">
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="0">
+                <span class="el-radio-button__inner">全部</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="1">
+                <span class="el-radio-button__inner">今日</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="2">
+                <span class="el-radio-button__inner">本周</span>
+              </label>
+              <label role="radio" tabindex="-1" class="el-radio-button el-radio-button--small">
+                <input type="radio" tabindex="-1" autocomplete="off" class="el-radio-button__orig-radio" value="3">
+                <span class="el-radio-button__inner">本月</span>
+              </label>
+            </div>
+          </div>
+          <div class="fireCon">
+            <div class="service-card-container">
+              <div class="left-icon-box">
+                <span class="icon-title">自选服务</span>
+              </div>
+              <div class="right-data-box">
+                <div class="data-item count-item">
+                  <div class="text-content">
+                    <span class="label">服务单量</span>
+                    <span class="value">6</span>
+                  </div>
+                </div>
+                <div class="data-item amount-item">
+                  <div class="text-content">
+                    <span class="label">服务金额</span>
+                    <span class="value">48.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 自选服务工单统计【右上第二个红框 - ECharts双轴图】 -->
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>自选服务工单统计</span>
+            </h4>
+          </div>
+          <div class="serveCon">
+            <div>
+              <!-- ECharts挂载容器，固定宽高 -->
+              <div ref="orderChartRef" class="chart-content chart-content1"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 自选服务类别统计【右下第一个红框 - ECharts环形饼图】 -->
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>自选服务类别统计</span>
+            </h4>
+          </div>
+          <div class="sexCon">
+            <div>
+              <!-- ECharts饼图挂载容器 -->
+              <div ref="typeChartRef" class="chart-content chart-content2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 自选服务项目排行榜【最右下红框 - 补全表格】 -->
+        <div class="oldBox">
+          <div class="tit">
+            <img :src="titico">
+            <h4>
+              <span>自选服务项目排行榜</span>
+            </h4>
+          </div>
+          <div class="fireCon">
+            <div class="warning3">
+              <div style="width: 100%; height: 100%;">
+                <el-table class="tableView" :data="projectRankTableData" border fit height="100%">
+                  <el-table-column label="项目名称" align="center"></el-table-column>
+                  <el-table-column label="服务订单" align="center"></el-table-column>
+                  <el-table-column label="服务时长" align="center"></el-table-column>
+                  <el-table-column label="服务总价" align="center"></el-table-column>
+                </el-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// 引入echarts
+import * as echarts from 'echarts'
+export default {
+  name: 'menuRight2',
+  data() {
+    return {
+        qpimg: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/icon/qp.png',
+        titico: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/tit-ico.png',
+        JRHL: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/JRHL.png',
+        fwlrs: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/fwlrs.png',
+        hlrys: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/hlrys.png',
+        fwpb: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/fwpb.png',
+        ch: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/ch.png',
+        // bg: 'https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/ch.png',
+
+        // 1.护理人员排行榜表格数据（暂无数据为空数组）
+        staffRankTableData: [],
+        // 2.自选服务实时工单模拟数据（和截图一致）
+        serviceOrderTableData: [
+          { num: 1, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+          { num: 2, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 3, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 4, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-09' },
+          { num: 5, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 6, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+          { num: 1, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+          { num: 2, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 3, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 4, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-09' },
+          { num: 5, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-08' },
+          { num: 6, name: '李测试', bed: '1号楼-1F-101-2', project: '助餐', state: '已完成', worker: '', duration: '-分钟', serviceTime: '2026-06-10' },
+        ],
+        // 3.自选服务项目排行榜数据
+        projectRankTableData: [
+          { projectName: '助餐', orderCount: 6, duration: '-分钟', totalPrice: '48.00' }
+        ],
+
+        // echarts实例缓存
+        orderChart: null,
+        typeChart: null,
+
+        scrollTimer: null, // 滚动定时器
+        scrollSpeed: 1,    // 每次滚动像素
+        scrollInterval: 30 // 滚动间隔ms，越小越快
+    }
+  },
+  mounted() {
+    // 等待dom渲染完成初始化图表
+    this.$nextTick(() => {
+      this.initOrderChart()
+      this.initTypeChart()
+    })
+    // 窗口缩放自适应图表
+    window.addEventListener('resize', this.resizeAllChart)
+    this.autoScroll(true) // 页面加载自动开启滚动
+  },
+  beforeDestroy() {
+    // 销毁清除定时器，防止内存泄漏
+    if(this.scrollTimer){
+      try{
+        clearInterval(this.scrollTimer)
+        cancelAnimationFrame(this.scrollTimer)
+      }catch(e){}
+    }
+    window.removeEventListener('resize', this.resizeAllChart)
+    // 销毁echarts实例释放内存
+    if(this.orderChart) this.orderChart.dispose()
+    if(this.typeChart) this.typeChart.dispose()
+  },
+  methods: {
+    // autoScroll(isRun) {
+    //   // 先清定时器
+    //   clearInterval(this.scrollTimer)
+    //   if(!isRun) return
+
+    //   const tableDom = this.$refs.scrollTable.$el
+    //   // 核心滚动容器：el-table__body-wrapper
+    //   const scrollBox = tableDom.querySelector('.el-table__body-wrapper')
+    //   if(!scrollBox) return
+
+    //   this.scrollTimer = setInterval(()=>{
+    //     // 持续上滚
+    //     scrollBox.scrollTop += this.scrollSpeed
+    //     // 判断触底：回到顶部循环
+    //     if(scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight){
+    //       scrollBox.scrollTop = 0
+    //     }
+    //   }, this.scrollInterval)
+    // },
+    autoScroll(isRun) {
+      cancelAnimationFrame(this.scrollTimer)
+      if(!isRun) return
+      const scrollBox = this.$refs.scrollTable.$el.querySelector('.el-table__body-wrapper')
+      const animate = ()=>{
+        scrollBox.scrollTop += 1
+        if(scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight){
+          scrollBox.scrollTop = 0
+        }
+        this.scrollTimer = requestAnimationFrame(animate)
+      }
+      animate()
+    },
+    // 工单统计 双轴柱状折线图
+    initOrderChart() {
+      const dom = this.$refs.orderChartRef
+      this.orderChart = echarts.init(dom)
+      const option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'cross', crossStyle: { color: '#0ff' } }
+        },
+        legend: {
+          data: ['服务工单', '服务金额'],
+          textStyle: { color: '#a0dfff' },
+          right: 10
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['01月','02月','03月','04月','05月','06月','07月','08月','09月','10月','11月','12月'],
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' }
+          }
+        ],
+        yAxis: [
+          {
+            name: '单位：单',
+            type: 'value',
+            max: 500,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { lineStyle: { color: 'rgba(75,159,255,0.1)' } }
+          },
+          {
+            name: '单位：元',
+            type: 'value',
+            max: 50,
+            axisLine: { lineStyle: { color: 'rgba(75,159,255,0.3)' } },
+            axisLabel: { color: '#a0dfff' },
+            splitLine: { show: false }
+          }
+        ],
+        series: [
+          {
+            name: '服务工单',
+            type: 'line',
+            yAxisIndex: 0,
+            data: [0,0,0,0,0,6,0,0,0,0,0,0],
+            itemStyle: { color: '#ff9900' }
+          },
+          {
+            name: '服务金额',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [0,0,0,0,0,48,0,0,0,0,0,0],
+            itemStyle: { color: '#00ccff' }
+          }
+        ]
+      }
+      this.orderChart.setOption(option)
+    },
+    // 服务类别统计 环形饼图
+    initTypeChart() {
+      const dom = this.$refs.typeChartRef
+      this.typeChart = echarts.init(dom)
+      const option = {
+        tooltip: { trigger: 'item' },
+        series: [
+          {
+            name: '服务类别',
+            type: 'pie',
+            radius: ['60%', '85%'], // 环形
+            legend: {
+              orient: 'vertical',
+              left: '0',
+              top: 'center',
+              textStyle: { color: '#a0dfff' }
+            },
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'outside',
+              color: '#a0dfff',
+              formatter: '{b} {c}项 {d}%'
+            },
+            data: [
+              { value: 6, name: '生活护理' }
+            ],
+            itemStyle: {
+              color: '#00ccff',
+              borderColor: '#06214a',
+              borderWidth: 3
+            }
+          }
+        ]
+      }
+      this.typeChart.setOption(option)
+    },
+    // 窗口缩放所有图表自适应
+    resizeAllChart() {
+      if(this.orderChart) this.orderChart.resize()
+      if(this.typeChart) this.typeChart.resize()
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+@font-face {
+    font-family: dy;
+    src: url('../../../../assets/fonts/dy.TTF') format("truetype");
+}
+.task-stats-container {
+    width: 100%
+}
+
+.total-section {
+    gap: 30px;
+    margin-bottom: 35px;
+    padding-top: 10px;
+    background-image: -webkit-gradient(linear,right top,left top,from(transparent),color-stop(10%,rgba(53,148,255,.1)),to(transparent));
+    background-image: linear-gradient(270deg,transparent 0,rgba(53,148,255,.1) 10%,transparent)
+}
+
+.icon-wrapper,.total-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.icon-wrapper {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-negative: 0;
+    flex-shrink: 0
+}
+
+.icon-wrapper .icon-pic {
+    width: 100%;
+    height: auto;
+    -webkit-animation: floatMove-42f95c90 3s ease-in-out infinite;
+    animation: floatMove-42f95c90 3s ease-in-out infinite
+}
+
+.total-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start
+}
+
+.total-num {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    font-family: Arial,sans-serif;
+    letter-spacing: 1px
+}
+
+.total-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #00f6ff;
+    margin-top: 8px;
+    letter-spacing: 1px
+}
+
+.status-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    gap: 15px
+}
+
+.status-sub-card {
+    width: 25%;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    height: 130px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-bottom: 15px
+}
+
+.sub-card-green {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/sub-card-green.png');
+}
+
+.sub-card-orange {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/sub-card-orange.png');
+}
+
+.sub-card-blue {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/sub-card-blue.png');
+}
+
+.sub-num {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: Arial,sans-serif;
+    margin-bottom: 10px
+}
+
+.num-green {
+    color: #7aff39
+}
+
+.num-orange {
+    color: #f90
+}
+
+.num-blue {
+    color: #00f6ff
+}
+
+.sub-label {
+    font-size: 14px;
+    color: #fff;
+    opacity: .8;
+    letter-spacing: .5px
+}
+
+@-webkit-keyframes floatMove-42f95c90 {
+    0%,to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+
+    50% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px)
+    }
+}
+
+@keyframes floatMove-42f95c90 {
+    0%,to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+
+    50% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px)
+    }
+}
+
+.warning1 {
+    height: 528px;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.warning1 .el-table__row {
+  // tw
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/el-table__row-bg.png');
+    background-size: 100% 100%
+}
+
+.warning1 .el-table thead {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/table-thead-bgl.png');
+    background-size: 100% 100%
+}
+
+.rank-medal {
+    width: 25px;
+    height: 30px;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    font-weight: 700;
+    font-size: 16px;
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,.4);
+    box-shadow: 0 0 6px rgba(0,0,0,.4)
+}
+
+.rank-medal .rank-num {
+    position: relative;
+    z-index: 2;
+    color: #172531;
+    padding-top: 5px
+}
+
+.rank-medal.medal-1 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAeCAYAAADZ7LXbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjlBOTk3QzBCNUQ3RjExRjE5QkU2RThDRkZFRkQyODA2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjlBOTk3QzBDNUQ3RjExRjE5QkU2RThDRkZFRkQyODA2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUE5OTdDMDk1RDdGMTFGMTlCRTZFOENGRkVGRDI4MDYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUE5OTdDMEE1RDdGMTFGMTlCRTZFOENGRkVGRDI4MDYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz55Q93CAAADXklEQVR42qyWe2iOURzHz/PsFS/KRv5AbgmJUhvaH2obK4kolviDXP5A2OQut0WS2P6YSy6xaKVEMw2Re7kWEUq8JumlZjVzG6vt8Tnv+33fzdueMXt/9XnOec55zvf3nHN+5+LU7FlmsEOw2LRuc6HM+NtkuOhTdxiWuMZzDBSDp3wia3zKY6z1Kfeka1xjKDDOK6hQPpHRkOtTNwZyfOoqpGvcFp73tvG3q33K17XRJq6HEzoT5Q7ca/Eeoxq+QDChvBM0qj6xzT3pRd4D0a7FrQjOKH8JiuEWjIQ50B96QB28h90wD7JglYIgphO3QMRbs5VDpRq/gXw4CX3aiK6PcAIWwRBYL524uQndbILpkAkh2KDh2AzZ0B/SlGarvFrfhdRuunRM83B5fwxXdzitbj/VEFyHgTARpkBX+AEvtX52wgQN7R7lZ8G31oarq+ZhPOyD1ZAOV+XAz67BJhiruVghnUn6GZw0xZ0ckIPtUCi2mITIaMUm6u93QAHUwlbpLWjZk6kwH87CNtgPy8y/myPhXrBc0RjTq3RqCrdZL8+hLwzVuJea/zf79xfgNXyAUa6iZASUQD0UtbK42kORdEqkm22dzFRlKSyEnh100lM6pXqfaSfeTnYVW+ZbxzjTTHJsGnol6FXZYAo4njuMzGVcMntORpKcZEjvmQ1lG11dyHy2hQRJapKcpEoPXdMlFsIBFTbySEmCk0bpBbROUsKkg1QY4jE8CU5C0kPXhG1PntgVy2rqTHozSU5uSs9uS9ddousKBGEyHI9sMx3nuPSs7hW7Tk7BT1jpec5D0nMdXCfnpLNSuqdczzOf2O6PQBbhPJt0KYT/ckPxw7ZbKp0sq2v1nZpVB208pzF2LyAI42zYabvu1455COsc+gkPod5ulCzK2sjJSPdqTcS72w1uQANkQPk/DlG5vm9Qe6szW7rxe5cNuNukedAbHti7FmUzSDPhqIlsEX/cq6pUnqnvctXOts+TntG9q/mP8HyeNAfqoMzxUu6TDoB86oboWmTP+KDe8229vitTuxzp+J7xtkd3maNRZDfqtmLP/F+UPSJ9G92CTCrvg6N7VGQ9fIddFubga+Jh6tQUHGvjuHPsHStPE5quC4Xdh5rgHTxWgJxBvM5P57cAAwB3wPNbq5e3xwAAAABJRU5ErkJggg==);
+    // background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/tw.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.rank-medal.medal-2 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAfCAYAAAASsGZ+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkExRDM2NERGNUQ3RjExRjFCMTc1REQ3M0I0OTY3QzFFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkExRDM2NEUwNUQ3RjExRjFCMTc1REQ3M0I0OTY3QzFFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QTFEMzY0REQ1RDdGMTFGMUIxNzVERDczQjQ5NjdDMUUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QTFEMzY0REU1RDdGMTFGMUIxNzVERDczQjQ5NjdDMUUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6r13YzAAADmElEQVR42rSWe2iOURjAz3lNNiO3KJZbcotMZoaUjWUtl7DRFOXyB3JtK5KYyx9S5o+xwmqLlHJpZIiYSy5NEaHkMqFR/DGX2eXb5fV7vu/ZejffN5d9Tv3ec95znst7znPOeV5b+2iYsdYcMsasNMHLEtc1x0OMiW4q1cUQw4fRXWVrHw4XwWF0PBedIIKPERzbhpMSqqQgQy6MQPeFYxqscevtC+pz0g5CrG20ycHG6B9PnRRC75zaNY6nc18IYSErRP+mNnSa7UX4G4G53WHq92hOajXtT/ANqSimXu1Zpo5UDTrep5XOPWTvNMv6bo7yrm8a1Wl9vQT74SaI0DjoD93gK7yHh/AMpkImpKpuOk7ONNmNMPWeWFtTxLMY9sJrWA/HoK8JXT7CUVgBQ2AzFPnD3jyTy2Na7xZHv2ondJbdBafgtjquhC5qcAosgFiogmyZPbNobGHTVxzrdSDKJ3XaYjwThRL6B9KeLltSHVfplr/G+FvGp+nSxuoyL6S/0rNcTpODziogX3cAsiQOLOZVdRD8nOCIaivEQw6sEzv0p+CoKuCkzjZJ56mDXbBD2RbigHqLfIDMZDdsgArYDnnEZZnfia1zZBazaC+FM3jP5v0g7TXmz4tVw73QX4u+7MalNmCv2NYfi5f1egr9YCjMhELz70W+/gK8hA8w2jF1TiKMhFyohhww7SBH7eSq3URi4qTpF8jXL4eepn2lp9op1JimRRifI8EuY+3esJZzTHjKHOzlYq9MNhOBt3LNX9YtFBcmJ3Fq7wmkyHJF0viig93D5KTJjtiNjPAHS85LoMit2iEMThqaD7sexnLqQdr5CoaHwckrrcVuuRzGR3piO8GNMDm5ofYkPZRwTuwViIJUKPBfM+2nQO2J3Su2ceOM3nh7B6WQ6M8FxsxtxyzOwjydTQIMkJh8pnFEE1QGrNYbNeYfHJSrfoZmy1z4bBtX+jNmD02jUTBBtp1e+zF/6UCM1cB9qNa0XeH402+9rYAMiIbr4IM4KNLx31Gk8j7Vj1Z7Ytc4lodyC9KhN5RCMsyHiZAPZR5Zo+/5Oj5f5UtVP13tBWTdxbNaT3synJCA6WaQbHdelyFSqfG8z9YsmqAbaBHcbZFs3EWzg61vV9iimyEaauEBvNGrQq6NwXrXyXn4oUHeA99/yWjuwjYvXvnHSteAysGSHwq5h+Rv5K3+d13Sf7WvIdOm67rmf5efAgwA1p2KWb0vi3IAAAAASUVORK5CYII=);
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.rank-medal.medal-3 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAfCAYAAAASsGZ+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkE1NzVDRUE0NUQ3RjExRjE5QjUyREMxMEI4NDQ3NjcwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkE1NzVDRUE1NUQ3RjExRjE5QjUyREMxMEI4NDQ3NjcwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QTU3NUNFQTI1RDdGMTFGMTlCNTJEQzEwQjg0NDc2NzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QTU3NUNFQTM1RDdGMTFGMTlCNTJEQzEwQjg0NDc2NzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7WwVT0AAADT0lEQVR42rTWeUgUURwH8LfjRKZBZRSUREVUREKgnSCkKYRmB2phfxQd0EFp0R3RQRERqZAlVIJSBIIYZliRlFlUomAkFUSZXViQf2inutf0/e1+x3bVnTy2Bx99O8fv997MO8ZWYn+vUC7AZtV7WQNXVeCSBLcCnLsIWzSXMhTkgsF6d3sCHDftDXDcYFylOfEHXkM5693NgsQA52ZDfIBz5YyrdIdym13LhhUBur0b7vZyfJ/FY8w2K7odmVgeQw0s6HbxV/gOw6Dd5/gQcPH82G731DCeN4lPT6TkQCnrtyEXHsBMWA0TYAR8g09wGtbCQtjFQWDG6Sp6p3+SMqjgzW8hC67AOIvH8gUuw0aYAvsZR/k8Lr8k8mM5W3UHwqAB8uERE/+E4QwYCyvhABt0lPe7rXoiN5ew2w1MVgUTIQGWMPFveMX5cxIW8dGeYX0VG9OjJ2F8D9K6cxxR0RxVCRaP6x4cgjl8F5mMs5iNQU+MrtGVzwTH4RgdBpuyLgls/QnYAa1whPHWe3tieHqSAuvgGp/redim+l5sDDwatnM0mvEqbJva6zVUXsB4mMrnXqQGXqT1N+ENfIYozWEYcTAD8qAdckANQg7j5DFunO50qzS2QFq/ASLU4EoE4xTxnaZJEnnZTfAOlqngFImTx7ixustlm8aJJyUmSEnMOM9lKOtuly0UlTYeHBmkJGYciRuqu52aZyjzoKyqIUFI4jInu+eP26E14/8kHmyE6UFI0sj/ErdZNxzaM87YoVAdpCTVjCfLUhWShFRyAsqiWGjxQdGfUsh4stFVSk+KuX/shDi4brEN96XI/XXsTQcUS09aULnE/SADtnJFjRxAgmben8HdUuZKiy2lTuagGgUv2b25Muy4XEf2M0ESW1/H7wFZKFs19ERBK2RAONwHO8RAGc//Sxmvt/P+cMaTuEpTDswTr4eQDmOgFhIhFeZDATT5XKv4u4DnU3l9Le9PZzzPtbpy+s29GxAvL4tbayZ3uyw+hlDq8Pm9FM7CPPgIyfDEb49X3hnvW+SCKDjI4LLnd0I9F9E2LhuTuUbJfPgFp+hHjx0t+WaL1cuUb6x0vtBoflBo/Br5AE85QEr5Ldb7tmn83eP/W/kjwAC/k9yiGtVrlQAAAABJRU5ErkJggg==);
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.rank-medal[class*=medal-]:not(.medal-1):not(.medal-2):not(.medal-3) {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAfCAYAAAASsGZ+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkE4RjdBMzYwNUQ3RjExRjFCNjc2QjVFMjE5ODI3RUI4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkE4RjdBMzYxNUQ3RjExRjFCNjc2QjVFMjE5ODI3RUI4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QThGN0EzNUU1RDdGMTFGMUI2NzZCNUUyMTk4MjdFQjgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QThGN0EzNUY1RDdGMTFGMUI2NzZCNUUyMTk4MjdFQjgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5saH9GAAADNUlEQVR42rTWW0gUUQDG8d3VkiQQoRtZaqE9RL3Yg0KXl9BKCLHClNoupBBZdnsJgqBeMrAyooIuL2ZbdqHCKEOklwgliugiGkEXtoiKSuyGq07/s/tN7a6zkq4N/JjdmXO+mXPmnJnjtizL9b+3xLHNvWZ/HqUO539gKj7HqD8GbzDO4dwFlH3LT3R53DQEtdpHS0Z5jHPGaoyLcS6YaTYuYnHAakOrfkerRKLDcTe2xajTqszQRTzspTbsd7h0FDkcL8DMGHX+ZIVa0k/TQq7AH/bf9hgTHI6n6Vz0cb+ygv+DD97zd3SZEXAM+xHACRzHW8zFDoxX2Y94puNpqMRGjFJGb8Tosq+m7STmYwtSsBfFGB1jdPXgKg6gFkeVETmEPf0R88QM1RIcRgX60IjreIh3KjcZOSjCCqzEKdX97nCRiP9TcBOzcRk74Ve3LFHXuNSF97BcdQ7qpvJQqDqOLTETqgXTVeEM1mMPMmJ012vsUws26Dm26KY+RbfEjXpkq+lNuKG7GmzL0M2YFpWhCw3KMi23QvOElsCLRahGI26hUOf+hSl7U3WrleW1e8md6fueyP657mwmqrF1mO/CI9iFdv2f8bIsuZeWMHP7XdNQg0xsNl04TFuUUaPMAru7itEHHzYhYQjdFM2jDJ8yi4MPPqHPMsPuAb5i6Qh8PkxGlTLz1BJXNtqRoqa64pSpLJOZbc+TJA291BH8GKYqMyl8niREv9Ti3HqVGZqMCf2WeR+l6730U5/UeLafyrIzg931hH2uZudd5Md5kbvKMpmP7AffjInIRd0IPPg6ZZnMZnueNGhMV+l3ZxzzpFMZVcpssFviRz1KkYN1CAyjBQHVzVGWyfSHvyB3oxucsDpQgsAQWhBQnQ5ldCszYiHxFuXIQhPuYAE6HRYK0TpV9o7qmowKZdpLIu4k5BK2Ixdt6MEseHEb3WFlu3XMqzI9qpOrjIt2WaeFhFkMfND3+j7OanGwWOdTtO/Sfg5Ow4tfWAXfwG/8wPW2T9/vQ1iDtfqmm4XEe5WZpIVEmubENS2ZXjkuuN3Oq3pTeBmydHcLMS/s/fYFT9Xic3gx2Oz8LcAAa4SucLW6hJYAAAAASUVORK5CYII=);
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.service-card-container {
+    padding-top: 10px;
+    width: 100%;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.left-icon-box {
+    position: relative;
+    width: 100px;
+    height: 130px;
+    border: 1px solid rgba(0,102,204,.3);
+    background: rgba(0,40,90,.2);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-right: 20px;
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/zxfw-s.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.left-icon-box .icon-title {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #8ca4ba
+}
+
+.main-icon {
+    width: 45px;
+    height: 45px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    background: transparent;
+    margin-bottom: 4px
+}
+
+.right-data-box {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 12px
+}
+
+.data-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 280px;
+    height: 60px;
+    border-radius: 19px;
+    padding: 0 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.count-item {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/count-item-bg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.amount-item {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/amount-item-bg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat
+}
+
+.text-content {
+    margin-left: 40px;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.text-content .label {
+    color: #a5c7eb;
+    font-size: 14px;
+    margin-right: 20px
+}
+
+.text-content .value {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700
+}
+
+
+.warning2 {
+    height: 260px;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.warning2 .el-table__row {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA6wAAAAyCAYAAABYv1bqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJCRDQ2NkU0NUZERDExRjFBOTBDQjY2QUNFNDkwOTAxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJCRDQ2NkU1NUZERDExRjFBOTBDQjY2QUNFNDkwOTAxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkJENDY2RTI1RkREMTFGMUE5MENCNjZBQ0U0OTA5MDEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkJENDY2RTM1RkREMTFGMUE5MENCNjZBQ0U0OTA5MDEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5Kqh1nAAAGHklEQVR42uzdzYscRRgH4J5kE5UIgigiGvAaEEUNCuJBDyLqv+V/5E0E9SDqRQOiBz3oQUI8+BEkEJM4rzU7HTK7me6u6o+Z3t3ngTfRnf6orqru6V96d3ZRfRRVuyOvL1JdTF86n7l8hihYJTJfjv7bij7HExmLx8C+yDn2rLGM7ZvMnAfF7esa36ZxiAF9Hj2OYaR1InN72e0u2n+0910U9nMUnltRMK+i7Zgib25HQd9HWZ8XjXdM0B8t/fzQmJWcQ61jGr3bHzFgvhWOY9bYZC6XM7eiYz+519OIvDediBHOx8iY61nnRIwzx6eYS0PP9aHXqx5tah+/6Peek3m9zxnHkvew3PfdovEs7b8RruEPtzH69+OAe5PSe6u89+4ofv8e9R5ppHu84vv86PhSwX1973vyATmkOM90T9uyjoiCQy3IfFG4/LHtHxSstQqpL6d6P9Xjqe712uM068TI+x5j3cIkuLdtjzU2sePxj5nMnxgwdjHyPmPC440J5ujma8sZz7eYsA9j4HkaOzy2sbazHDA2Q6+XsaP5ta3NY83ZrvGJashdQXl/xwjzNEbq4z5tGHpuxcjnX+7XlwPnS7WjeRIDxzwmvj7ESOMVPfs2Jhy/5YTbHuO9JwbOx13f98ZE/bSLe7sp75PHundqfT03sF5I9Xqqt1J9l+q3eqOLiULePoLl3PYXp6Sv5tDOOW5rLts5Le2IEzxX4wSuO9U/YpzGNp+leRHOoRP1fnwajv20tOOs3Pu4dz5bWaZkn4u6om9gfaQOqldTfZvqxsaGAQAAoCOTtn6/cmNo7Qqsl1K9k+pKqq9T/SmsAgAAUB5aq6rlh6W3hta2wPpEqvdSXU71VaqbwioAAADDgmt+aG0KrE9W6w9XejrVl6luCaoAAADsKLQe/v+2wPpUqg+r9bcDr8LqbWEVAACAHYbWw4WOB9Zn6rC6+hU236S6I6wCAACwj9C6GVifS/VBqn9TXUt1V1gFAABgD2IzsL5QrT9g6e9UP9Vh9Zw+AgAAYDqtv/LmMLDeD6Y/VOunq/eEVQAAAPbt/hPW1RPVm3VQ9W3AAAAA7EjzU1ZPUgEAAJglgRUAAIA9WwisAAAAnBwCKwAAADOwEFgBAAA4GQRWAAAAZmJRbT5pFVgBAACYJYEVAACAGXnwlFVgBQAAYJYOdAEAAADzsn7K6gkrAAAAsySwAgAAILACAACAwAoAAIDACgAAAAIrAAAAZ4JfawMAAMDMxGF5wgoAAMAsCawAAADMSNQlsAIAADBTAisAAAAz8eDpqsAKAADAbAmsAAAAzMDRp6sCKwAAALN1TnAFAABgv6IxsD6b6u367/8alwQAAIAdWgXWG6m+T/V8qsut8RYAAABG1Rw/D6r1U9Vrqe6keiPVhVS/1GstdB4AAAD7cLDx3z+mupvqzTq0/iy0AgAAMJ32b+49/mFLq5D6RapHU12pfBgTAAAAuw+rqweni22B9NdUn9UbeDH9cV5HAgAAsMOwerhQ0xPU66k+T3Uv1Ut1aPVBTAAAAOwkrK7+OLf+e2v9XofW26leSXUx1VLnAgAAMFFYjc2Fun5GdRVaP011K9Wr1fpnW4VWAAAACoNqVlg9IudDlf5I9UkdWq+mulStfxUOAAAAZITVqjisrhxk7uGvVB+nejdt5rVq/ZR12aMhx5eP/FWifQfbX46CDovs1Zt2HH0HKI4vFkXrR92XJZMktu94+4pROgGjY9XoGJ6SY4nsthQfX5SMaXRM0aMbi4dei/x+bXktIv9Acscmsidh+9A0z/DmMYqmQYjYvuWWBkTmBI7MEy/arktRcB5H9gLHDjt6XG5iyy6jZTyj87yLjPHJ6dfOQ4vIvvhnzdmmbXaO6bKjvyN/UKLw2te4TLS+t3U3KQqvxLH9/I7smdf75qH1XI+CPiloQxQu32vwu/o98k+JxutjR1si81giuyGFN4ZRfMKU32gVta/vNqfdR0yyn9JVM67oUU3QnjH6K+/mPiZqzx7T4LFlFwVbjH0fw0HBRv6pQ+tj1frJ7Fn4ECYfNOWfghyXY9B2bdbm03Ueem/X747HOeL4T1Af/i/AAHGo+0UuaEFtAAAAAElFTkSuQmCC);
+    background-size: 100% 100%
+}
+
+.warning2 .el-table thead {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA7AAAAAyCAYAAABlLTeMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjI0M0RGODBENUZERDExRjFCOEFDQTdBODAxMTM3NkFDIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjI0M0RGODBFNUZERDExRjFCOEFDQTdBODAxMTM3NkFDIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MjQzREY4MEI1RkREMTFGMUI4QUNBN0E4MDExMzc2QUMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjQzREY4MEM1RkREMTFGMUI4QUNBN0E4MDExMzc2QUMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6gcZv+AAAEnElEQVR42uzde2/bVBgH4OM268bGVQWJsT8mxFWAQFwlvj1fAGkgNIkJNqENpsEu1bqWdW1n3lOfigila5zYnoOeR3qbaj4+cRw33k/nxK7Sd0/SXOqjn1XUpDy2V6fl1Et0Xg+0vWNdp26xoO5hG/po21m7uvvnHVWbupvXNtT2nrq87n876qH6r3vcT2mAvusV3vYZjTvquxpkn9QruL//D9ve4pzR9+dhJ/3X/b+Gvt/nNueGlTyHT7erO+7vObRbqm3H/9cfW/teskHd/7Yuv/7TqIM2fUxadP5C1NdRl6LWypMBAABAW+tRO1HfR92cNwrPG2BfLuE1h9gbUXnYtrLPAQAAaKkueTLnzC+jNqKupzkGSecJsJtRX5W2f6Y8xCu8AgAAsJjjPPkw6jDq0xJir5W8uXCAfSvqi9LpnZKIhVcAAAC6sFPy5odRZ6OuRu0tEmDfLkn4cdTd/yRlAAAA6ELOnLdLBs0h9seo3TYB9v2oj0oavm9/AgAA0KN8naU/UjMLOF80+MqsELs2Y8VPoj6O2o66Zz8CAAAwgP2oW1FvRH2emosInxhg8/Tg/H3X96K2oh4kU4YBAAAYTr6IU55O/GpqrlB8flaAzffg+SbqcmpGXbeEVwAAAAZWlRD7VwmveST2wnSAPRf1bdTF0mg7zZ5aDAAAAEOF2DwrOF/U6bPU3DP2KKieSc3tcXJ43RVeAQAAGEGIPSwZNYfZPBpbrZXwmkdd95NpwwAAAIwnxB6U2jgOsAAAADB6AiwAAAACLAAAAAiwAAAACLAAAAAgwAIAAIAACwAAgAALAAAAAiwAAAAIsAAAAAiwAAAAIMACAACAAAsAAIAACwAAAAIsAAAAAiwAAAAIsAAAACDAAgAAIMACAACAAAsAAAACLAAAAAIsAAAACLAAAAAgwAIAALDCAbYqv9d2BwAAACNUHQfYN6NeKb8LsQAAAIzJuajNqAs5tN6KehB1PuqsEAsAAMAI5FHXM1F7UTejHk3ix+Ooa6kZgb1YHv9O/04tBgAAgKHD60bJpr9F3c//OCkL96OulvB6qTTeFWIBAAB4TuF1p4TXreMFk6lGh1E/lMaXy+OOEAsAAMBA8qBqnjb8sITX7emFkxkrXIk6iHqnhNdHQiwAAAADhNd8waY8XfhGamYFp9MCbPZTauYaf1A62bYvAQAA6DG8vhh1N+p6yaMzG53k19RMKV6Pesn+BAAAoAc5c74WdS/ql5PC62kBNvs9NaOxT1Nzmx1TiQEAAOhCvoXrJFLm6/F4J+rnZ4XXlE6eQjwtd5S/E/tuau4Tu5fcKxYAAIDlwmu+0vBm1O0SXvdOW2kyZ+d5KDePwuarE68LsM9Q2TuM8KCs6uWPy3mO7SGO/yqepK5X+++8mvrYHuP2z73cB96s/VKnHqYrLbOrl3m/OztWVvk4X/BFdfHal3lvutpHaYD3uIvjqMtzQ1fnuy7Pm0ft5mjcqr+O26We2tZzbkzbY3GR9m3O3UOf62e+noE+rxZfP6+ZB0rzV1fzd16fzLPSpMUT5Hvv5CsSryUAAABYTo6++20i8D8CDACaWjDzYJT//AAAAABJRU5ErkJggg==);
+    background-size: 100% 100%
+}
+
+.warning3 {
+    height: 190px;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.warning3 .el-table__row {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAAAmCAYAAAAWYiSfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjM3OEEzRjhDNUZERDExRjFBN0Y4QzUyMkREQzA4MTQwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjM3OEEzRjhENUZERDExRjFBN0Y4QzUyMkREQzA4MTQwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Mzc4QTNGOEE1RkREMTFGMUE3RjhDNTIyRERDMDgxNDAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Mzc4QTNGOEI1RkREMTFGMUE3RjhDNTIyRERDMDgxNDAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7w7bSYAAAEPUlEQVR42uxdSY7bMBB06f8vyucqyCWHICPT7KWqaREYYCzJJtn7xhZev4jX6/Xn79+Bxc93z+HN86v3M65F71XMG4XLzv87n3+6xoVrd59X7/HN81y8tvqdlXvRZ3Z/s2LfO/+/u/ffa9fNw3cDbyaaOrDwDIPfz15PxxwYhJ9Pn6UhHfFQ3vkrcJwGizcPo7VDwAzfPOjIhAfu+8d1OAocFAOMgxgAB+45a3/cuI/EORCEt0opKgUoriYCRpBQMk3SbmQ+VsoabNhA/GxmsMdCTHKpkOSvUoDkSWY1TYiIhnCieA4OolEbwXkZAocJQNy9x1MQO2TA/Lcr3Z5Oa4suML3ERKYAIsVIe4aXS7CrgGiw9lWhYBO8voYwHwzmgQAuMIfttHT5pwmJSgun6redXT10xXCc4hIQr82NIZnI0Ko90QyXborLhq4zLJxsX3RVC6EA+BWM5YBsV0HKwu8iiR6rXPNP6dBB6MtiOJUWDocz0WlC4W5tyiD7TtHkp5YQm5m3yvq2qee6BjOKY5aqM76gILjpQhbm+6I5DkdmqTqQGi0KnFgF6mo9VZ1p4gQGG+J+2ls4DCBlJ4bTdRBvxb/+VAs5uIgwZRQ005HDmFyrZRHDydZMkYxD1EKpKOaKuFQ4nEkqtXZ15irqtnMg/ixiOE7AiVooztqrijkjaVoMo5NMod4dMH8qjQ0JJdrbhQVCIUtQVGV0qmMDKqEUccNPoyMHpRcSOBFGUJvCU9PpyqAhvgze6jVPbOS2BDNFDCcr2KdKYU8M+lUdNMQARnATPBDDCkoaU5ylogDJmfvKqBDdOYintDLQ6Do4xCVgIhyiNJMNt7DiugQTv7OOIERql+++25D8GT3WUaUgZfF+xx7erMr0sJBoOjTunWA44eR1JxG7uwnTBKWj17DsUrlX21Z0C4xaLxEr5d1+nkpcb9csg4464itKpSjvh8MNxnMUiFXd5WhAZK6ac+o5s8x0unOx6McWjpPJSQOEQ7Cfp2WpL2wqzvJVWc8uSgKXIbJZ9BuqjErE9cuKd7nGYCYXs7mGHCpfPVRa+FcVNK5M9a5YKN/6MrSTXapsK1IlSDOEmHNjesmL8DrqJ+7mnfpeqhNT5N3lFRlNuVSK64TGdHKXSpFdoHjPJwkUmOA/+0S+o+LKgr+UznbT4hMzBE7xhp24zrST2WoLpwrXTvFLmtFJSOCoLJyJjZM6GmI7pqC/sRJa1d7kiFigog4HIoRWtlLIsAYrhe/T03i+Fa3KdqbSjjponF316GgKwwBWVYc3Tz1dH4VzV8fJnUxcxG2T9cNxcKkyX9vqoHHRifhGgcUhQsLdwnFYY2nHPx5AAJOI4ZOCLZeMWdRNPc1lrGjCn4G7rBdXllo47u+1dhKSp70+GAfgpFvoObvmDm59yKX6xmI257M7U+HW5arxADrKOn8npePfAgwAGpB2EtnfN3gAAAAASUVORK5CYII=);
+    background-size: 100% 100%
+}
+
+.warning3 .el-table thead {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaEAAAAoCAYAAABXYEVmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjBDOUE4NDgzNUZERDExRjFCMkQwRUZDMjczRDQzQ0JEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjBDOUE4NDg0NUZERDExRjFCMkQwRUZDMjczRDQzQ0JEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEM5QTg0ODE1RkREMTFGMUIyRDBFRkMyNzNENDNDQkQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEM5QTg0ODI1RkREMTFGMUIyRDBFRkMyNzNENDNDQkQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4HKTfZAAABAElEQVR42uzYsQnCQBiGYaOHYG+lpY6gC+gSjqCVs7iFMwhOYEawtkofEOVMIJWKNiHXPE9z8Jdf85Jks9U29gAggdC8mSkA6Fjs2wCAVEQIgGTC++ExGi9CWVxMA0Cbqr4sq77kPyNUi4Ph9bY+bEwGQBsm5/3x293vOACSESEARAgAEQIAEQJAhABAhAAQIQAQIQBECABECAARAgARAkCEAECEABAhABAhAEQIABECABECQIQAQIQAECEAECEARAgARAgAEQIAEQJAhADgv/DtmD3v8+lpl5sHgE4jFMqijk9mGgBaDU5ZfNz8jgMgGRECIN3XUfNGUwDQtZcAAwDl3BrMKzauDAAAAABJRU5ErkJggg==);
+    background-size: 100% 100%
+}
+
+.service-state-color {
+    font-weight: 400;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 10px
+}
+
+.medal-1 {
+    color: #ff7200;
+    background-color: rgba(255,114,0,.2)
+}
+
+.medal-2 {
+    color: #24d3ff;
+    background-color: rgba(36,211,255,.2)
+}
+
+.medal-3 {
+    color: #00c513;
+    background-color: rgba(0,197,19,.2)
+}
+
+.medal--1 {
+    color: red;
+    background-color: rgba(255,0,0,.2)
+}
+
+.nomap {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 100px;
+    height: 650px
+}
+
+.nomap,.page {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.page {
+    position: relative;
+    padding: 0 20px
+}
+
+.page .page-left {
+    width: 440px
+}
+
+.page .page-center {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0 20px
+}
+
+.page .page-right {
+    width: 440px
+}
+
+.oldBox {
+    margin-top: 10px;
+    flex: 1;
+}
+
+.oldBox .tit {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.oldBox .tit img {
+    width: 30px;
+    height: 30px
+}
+h4{
+  height: 20px;
+  overflow: visible;
+}
+.oldBox .tit h4 {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 46px;
+    line-height: 46px;
+    padding-left: 15px;
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/line1.png');
+    background-size: 100% 100%;
+    background-position: 50%;
+    font-size: 20px;
+    font-family: dy;
+    font-weight: 400;
+    color: #fff;
+}
+
+.oldBox .tit h4 span {
+    background: -webkit-gradient(linear,left top,right top,from(#8bc7ff),to(#fff));
+    background: linear-gradient(90deg,#8bc7ff,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.oldBox .tit .radioA {
+    position: absolute;
+    top: 8px;
+    right: 0
+}
+
+.twoCon .ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 10px
+}
+
+.twoCon .ul .li {
+    position: relative;
+    width: 33.3%;
+    height: 46px;
+    padding-left: 14px;
+    padding-top: 5px
+}
+
+.twoCon .ul .li .h3 {
+    font-size: 20px;
+    font-family: dy
+}
+
+.twoCon .ul .li .p {
+    font-size: 16px;
+    font-family: dy
+}
+
+.twoCon .ul .li.li1:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #fc0;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li1 {
+    background: -webkit-gradient(linear,left top,right top,color-stop(64%,rgba(255,204,0,.36)),to(transparent));
+    background: linear-gradient(90deg,rgba(255,204,0,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li1 .h3 {
+    color: #ffcc30
+}
+
+.twoCon .ul .li.li2:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #00cbff;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li2 {
+    background: -webkit-gradient(linear,left top,right top,color-stop(64%,rgba(0,203,255,.36)),to(transparent));
+    background: linear-gradient(90deg,rgba(0,203,255,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li2 .h3 {
+    color: #00ccfd
+}
+
+.twoCon .ul .li.li3:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 46px;
+    background: #00cbff;
+    opacity: .6;
+    border-right: 2px solid #001869
+}
+
+.twoCon .ul .li.li3 {
+    background: -webkit-gradient(linear,left top,right top,color-stop(64%,rgba(0,203,255,.36)),to(transparent));
+    background: linear-gradient(90deg,rgba(0,203,255,.36) 64%,transparent)
+}
+
+.twoCon .ul .li.li3 .h3 {
+    color: #00ccfd
+}
+
+.twoCon .title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 30px;
+    background: -webkit-gradient(linear,right top,left top,from(rgba(0,19,38,0)),color-stop(43%,rgba(0,86,163,.55)),color-stop(87%,rgba(0,86,163,.59)),to(rgba(129,189,255,0)));
+    background: linear-gradient(-90deg,rgba(0,19,38,0),rgba(0,86,163,.55) 43%,rgba(0,86,163,.59) 87%,rgba(129,189,255,0));
+    font-size: 16px;
+    color: #d9eaf5
+}
+
+.twoCon .title:before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: -webkit-gradient(linear,left bottom,left top,from(#015eea),to(#00c0fa));
+    background: linear-gradient(0deg,#015eea,#00c0fa);
+    border-radius: 2px;
+    margin-right: 10px
+}
+
+.topNum {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly
+}
+
+.topNum .li {
+    width: 20%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.topNum .li img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px
+}
+
+.topNum .li .con {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+.topNum .li .con h4 {
+    margin-top: 5px;
+    font-size: 28px;
+    font-family: dy;
+    background: -webkit-gradient(linear,left bottom,left top,from(#61dffe),to(#44a5ff));
+    background: linear-gradient(0deg,#61dffe,#44a5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    span{
+      display: block;
+      line-height: 15px;
+    }
+}
+
+.topNum .li .con p {
+    // margin-top: 8px;
+    line-height: 1.5;
+    font-size: 16px;
+    color: #fff
+}
+
+.serveCon .li {
+    width: 365px;
+    height: 54px;
+    padding-left: 70px;
+    padding-top: 6px;
+    margin: 14px auto 0
+}
+
+.serveCon .li.li1 {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/yh-bg1.png');
+    background-size: 100% 100%
+}
+
+.serveCon .li.li1 .h3 {
+    font-size: 16px;
+    color: #3f8afc;
+    background: -webkit-gradient(linear,left bottom,left top,from(#5bb8ed),to(#fff));
+    background: linear-gradient(0deg,#5bb8ed,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li1 .p {
+    font-family: dy;
+    font-size: 24px;
+    color: #fff;
+    background: -webkit-gradient(linear,left bottom,left top,from(#d5f6ff),to(#6ac5ff));
+    background: linear-gradient(0deg,#d5f6ff,#6ac5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li2 {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/yh-bg2.png');
+    background-size: 100% 100%
+}
+
+.serveCon .li.li2 .h3 {
+    font-size: 16px;
+    color: #3f8afc;
+    background: -webkit-gradient(linear,left bottom,left top,from(#46e87b),to(#fff));
+    background: linear-gradient(0deg,#46e87b,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li2 .p {
+    font-family: dy;
+    font-size: 24px;
+    color: #fff;
+    background: -webkit-gradient(linear,left bottom,left top,from(#8bffb1),to(#33e26c));
+    background: linear-gradient(0deg,#8bffb1,#33e26c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li3 {
+    background-image: url('https://zhky.ahjykjxx.com/resources/visualization/insScreen/img/yh-bg3.png');
+    background-size: 100% 100%
+}
+
+.serveCon .li.li3 .h3 {
+    font-size: 16px;
+    color: #3f8afc;
+    background: -webkit-gradient(linear,left bottom,left top,from(#ffd791),to(#fff));
+    background: linear-gradient(0deg,#ffd791,#fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.serveCon .li.li3 .p {
+    font-family: dy;
+    font-size: 24px;
+    color: #fff;
+    background: -webkit-gradient(linear,left bottom,left top,from(#fff3d5),to(#ffb640));
+    background: linear-gradient(0deg,#fff3d5,#ffb640);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.sexCon {
+    position: relative
+}
+
+.sexCon img {
+    position: absolute;
+    top: 26px;
+    left: 61px
+}
+
+</style>

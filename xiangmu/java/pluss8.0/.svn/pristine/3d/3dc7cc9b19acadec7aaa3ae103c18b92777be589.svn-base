@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.InsLogisticsProcureInfoMapper">
+    <sql id="tableFieldNames">
+    (
+    id,
+    tenant_id,
+    corp_id,
+    corp_name,
+    institution_id,
+    institution_name,
+    procure_date,
+    procure_code,
+    rk_type,
+    supplier_id,
+    supplier_name,
+    warehouse_id,
+    warehouse_name,
+    procure_user,
+    procure_amount,
+    rk_state,
+    audit_state,
+    audit_id,
+    audit_name,
+    audit_time,
+    audit_memo,
+    remark,
+    create_user,
+    create_name,
+    create_dept,
+    create_time,
+    update_user,
+    update_time,
+    is_deleted,
+    status
+    )
+    </sql>
+    <sql id="tableFiledUpcaseNames">
+    (
+    #{item.id},
+    #{item.tenantId},
+    #{item.corpId},
+    #{item.corpName},
+    #{item.institutionId},
+    #{item.institutionName},
+    #{item.procureDate},
+    #{item.procureCode},
+    #{item.rkType},
+    #{item.supplierId},
+    #{item.supplierName},
+    #{item.warehouseId},
+    #{item.warehouseName},
+    #{item.procureUser},
+    #{item.procureAmount},
+    #{item.rkState},
+    #{item.auditState},
+    #{item.auditId},
+    #{item.auditName},
+    #{item.auditTime},
+    #{item.auditMemo},
+    #{item.remark},
+    #{item.createUser},
+    #{item.createName},
+    #{item.createDept},
+    #{item.createTime},
+    #{item.updateUser},
+    #{item.updateTime},
+    #{item.isDeleted},
+    #{item.status}
+    )
+    </sql>
+    <insert id="insertBatch">
+        insert into tb_jiangyukeji_ins_logistics_procure_info
+        <include refid="tableFieldNames"/>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <include refid="tableFiledUpcaseNames"/>
+        </foreach>
+    </insert>
+
+    <select id="queryPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.entity.InsLogisticsProcureInfo">
+        SELECT * from  tb_jiangyukeji_ins_logistics_procure_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="procureDate!=null and procureDate!=''">
+            and procure_date = #{procureDate}
+        </if>
+        <if test="procureCode!=null and procureCode!=''">
+            and procure_code = #{procureCode}
+        </if>
+        <if test="rkType!=null and rkType!=''">
+            and rk_type = #{rkType}
+        </if>
+        <if test="supplierId!=null and supplierId!=''">
+            and supplier_id = #{supplierId}
+        </if>
+        <if test="supplierName!=null and supplierName!=''">
+            and supplier_name = #{supplierName}
+        </if>
+        <if test="warehouseId!=null and warehouseId!=''">
+            and warehouse_id = #{warehouseId}
+        </if>
+        <if test="warehouseName!=null and warehouseName!=''">
+            and warehouse_name = #{warehouseName}
+        </if>
+        <if test="procureUser!=null and procureUser!=''">
+            and procure_user = #{procureUser}
+        </if>
+        <if test="procureAmount!=null and procureAmount!=''">
+            and procure_amount = #{procureAmount}
+        </if>
+        <if test="rkState!=null and rkState!=''">
+            and rk_state = #{rkState}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+        order by id desc limit #{pageSize} offset #{offset}
+    </select>
+
+    <select id="queryPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_jiangyukeji_ins_logistics_procure_info
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="corpId!=null and corpId!=''">
+            and corp_id = #{corpId}
+        </if>
+        <if test="corpName!=null and corpName!=''">
+            and corp_name = #{corpName}
+        </if>
+        <if test="institutionId!=null and institutionId!=''">
+            and institution_id = #{institutionId}
+        </if>
+        <if test="institutionName!=null and institutionName!=''">
+            and institution_name = #{institutionName}
+        </if>
+        <if test="procureDate!=null and procureDate!=''">
+            and procure_date = #{procureDate}
+        </if>
+        <if test="procureCode!=null and procureCode!=''">
+            and procure_code = #{procureCode}
+        </if>
+        <if test="rkType!=null and rkType!=''">
+            and rk_type = #{rkType}
+        </if>
+        <if test="supplierId!=null and supplierId!=''">
+            and supplier_id = #{supplierId}
+        </if>
+        <if test="supplierName!=null and supplierName!=''">
+            and supplier_name = #{supplierName}
+        </if>
+        <if test="warehouseId!=null and warehouseId!=''">
+            and warehouse_id = #{warehouseId}
+        </if>
+        <if test="warehouseName!=null and warehouseName!=''">
+            and warehouse_name = #{warehouseName}
+        </if>
+        <if test="procureUser!=null and procureUser!=''">
+            and procure_user = #{procureUser}
+        </if>
+        <if test="procureAmount!=null and procureAmount!=''">
+            and procure_amount = #{procureAmount}
+        </if>
+        <if test="rkState!=null and rkState!=''">
+            and rk_state = #{rkState}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            and audit_state = #{auditState}
+        </if>
+        <if test="auditId!=null and auditId!=''">
+            and audit_id = #{auditId}
+        </if>
+        <if test="auditName!=null and auditName!=''">
+            and audit_name = #{auditName}
+        </if>
+        <if test="auditTime!=null and auditTime!=''">
+            and audit_time = #{auditTime}
+        </if>
+        <if test="auditMemo!=null and auditMemo!=''">
+            and audit_memo = #{auditMemo}
+        </if>
+        <if test="remark!=null and remark!=''">
+            and remark = #{remark}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            and create_user = #{createUser}
+        </if>
+        <if test="createName!=null and createName!=''">
+            and create_name = #{createName}
+        </if>
+        <if test="createDept!=null and createDept!=''">
+            and create_dept = #{createDept}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            and create_time = #{createTime}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            and update_user = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            and update_time = #{updateTime}
+        </if>
+        <if test="isDeleted!=null and isDeleted!=''">
+            and is_deleted = #{isDeleted}
+        </if>
+        <if test="status!=null and status!=''">
+            and status = #{status}
+        </if>
+        </where>
+    </select>
+
+</mapper>
+

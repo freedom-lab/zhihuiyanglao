@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.pluss.platform.mapper.base.coding.TableColumnMapper">
+
+    <insert id="saveTableColumn" parameterType="cn.pluss.platform.model.coding.TableColumn">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_yunlankeji_table_column(id,tableName,columnName,columnDesc,columnLength,defaultValue,columnType,isKey,isNotNull,autoIncrement,tableCode,seq,tableColumnCode,preColumn)VALUES(#{id},#{tableName},#{columnName},#{columnDesc},#{columnLength},#{defaultValue},#{columnType},#{isKey},#{isNotNull},#{autoIncrement},#{tableCode},#{seq},#{tableColumnCode},#{preColumn})
+    </insert>
+
+    <insert id="saveTableColumnBatch">
+        insert into tb_yunlankeji_table_column(id,tableName,columnName,columnDesc,columnLength,defaultValue,columnType,isKey,isNotNull,autoIncrement,tableCode,seq,tableColumnCode,preColumn)VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.tableName},#{item.columnName},#{item.columnDesc},#{item.columnLength},#{item.defaultValue},#{item.columnType},#{item.isKey},#{item.isNotNull},#{item.autoIncrement},#{item.tableCode},#{item.seq},#{item.tableColumnCode},#{item.preColumn})
+        </foreach>
+    </insert>
+
+
+    <select id="queryTableColumn" parameterType="cn.pluss.platform.model.coding.TableColumn" resultType="cn.pluss.platform.model.coding.TableColumn">
+        SELECT * from  tb_yunlankeji_table_column
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="columnName!= null and columnName!='' ">
+                    and  columnName = #{ columnName}
+                </if>
+                <if test="columnDesc!= null and columnDesc!='' ">
+                    and  columnDesc = #{ columnDesc}
+                </if>
+                <if test="columnLength!= null and columnLength!='' ">
+                    and  columnLength = #{ columnLength}
+                </if>
+                <if test="defaultValue!= null and defaultValue!='' ">
+                    and  defaultValue = #{ defaultValue}
+                </if>
+                <if test="columnType!= null and columnType!='' ">
+                    and  columnType = #{ columnType}
+                </if>
+                <if test="isKey!= null and isKey!='' ">
+                    and  isKey = #{ isKey}
+                </if>
+                <if test="isNotNull!= null and isNotNull!='' ">
+                    and  isNotNull = #{ isNotNull}
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                    and  autoIncrement = #{ autoIncrement}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+            <if test="tableColumnCode!= null and tableColumnCode!='' ">
+                and  tableColumnCode = #{tableColumnCode}
+            </if>
+            <if test="preColumn!= null and preColumn!='' ">
+                and  preColumn = #{preColumn}
+            </if>
+
+        </where>
+		limit 1
+    </select>
+
+    <select id="queryTableColumnList" parameterType="cn.pluss.platform.model.coding.TableColumn" resultType="cn.pluss.platform.model.coding.TableColumn">
+        SELECT * from  tb_yunlankeji_table_column
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="columnName!= null and columnName!='' ">
+                    and  columnName = #{ columnName}
+                </if>
+                <if test="columnDesc!= null and columnDesc!='' ">
+                    and  columnDesc = #{ columnDesc}
+                </if>
+                <if test="columnLength!= null and columnLength!='' ">
+                    and  columnLength = #{ columnLength}
+                </if>
+                <if test="defaultValue!= null and defaultValue!='' ">
+                    and  defaultValue = #{ defaultValue}
+                </if>
+                <if test="columnType!= null and columnType!='' ">
+                    and  columnType = #{ columnType}
+                </if>
+                <if test="isKey!= null and isKey!='' ">
+                    and  isKey = #{ isKey}
+                </if>
+                <if test="isNotNull!= null and isNotNull!='' ">
+                    and  isNotNull = #{ isNotNull}
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                    and  autoIncrement = #{ autoIncrement}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+            <if test="tableColumnCode!= null and tableColumnCode!='' ">
+                and  tableColumnCode = #{tableColumnCode}
+            </if>
+            <if test="preColumn!= null and preColumn!='' ">
+                and  preColumn = #{preColumn}
+            </if>
+        </where>
+		order by seq desc
+    </select>
+
+    <update id="updateTableColumn" parameterType="cn.pluss.platform.model.coding.TableColumn" >
+        update tb_yunlankeji_table_column
+        <set>
+				 <if test="id!= null  and id!='' ">
+				 id= #{id},
+				 </if>
+				 <if test="tableName!= null  and tableName!='' ">
+				 tableName= #{tableName},
+				 </if>
+				 <if test="columnName!= null  and columnName!='' ">
+				 columnName= #{columnName},
+				 </if>
+				 <if test="columnDesc!= null  and columnDesc!='' ">
+				 columnDesc= #{columnDesc},
+				 </if>
+				 <if test="columnLength!= null  and columnLength!='' ">
+				 columnLength= #{columnLength},
+				 </if>
+				 <if test="defaultValue!= null  and defaultValue!='' ">
+				 defaultValue= #{defaultValue},
+				 </if>
+				 <if test="columnType!= null  and columnType!='' ">
+				 columnType= #{columnType},
+				 </if>
+				 <if test="isKey!= null  and isKey!='' ">
+				 isKey= #{isKey},
+				 </if>
+				 <if test="isNotNull!= null  and isNotNull!='' ">
+				 isNotNull= #{isNotNull},
+				 </if>
+				 <if test="autoIncrement!= null  and autoIncrement!='' ">
+				 autoIncrement= #{autoIncrement},
+				 </if>
+				 <if test="tableCode!= null  and tableCode!='' ">
+				 tableCode= #{tableCode},
+				 </if>
+				 <if test="seq!= null  and seq!='' ">
+				 seq= #{seq},
+				 </if>
+                  <if test="tableColumnCode!= null and tableColumnCode!='' ">
+                  tableColumnCode = #{tableColumnCode},
+                 </if>
+                <if test="preColumn!= null and preColumn!='' ">
+                      preColumn = #{preColumn}
+                </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteTableColumn" parameterType="cn.pluss.platform.model.coding.TableColumn" >
+        DELETE FROM tb_yunlankeji_table_column where id=#{id}
+    </delete>
+
+    <delete id="deleteTableColumnBatch" parameterType="java.util.List" >
+        DELETE FROM tb_yunlankeji_table_column where  1>2 or id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteTableColumnByTableCode" parameterType="cn.pluss.platform.model.coding.TableColumn">
+        DELETE FROM tb_yunlankeji_table_column where  tableCode= #{tableCode}
+    </delete>
+
+
+    <select id="queryTableColumnPage" parameterType="java.util.Map" resultType="cn.pluss.platform.model.coding.TableColumn">
+        SELECT * from  tb_yunlankeji_table_column
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="columnName!= null and columnName!='' ">
+                    and  columnName = #{ columnName}
+                </if>
+                <if test="columnDesc!= null and columnDesc!='' ">
+                    and  columnDesc = #{ columnDesc}
+                </if>
+                <if test="columnLength!= null and columnLength!='' ">
+                    and  columnLength = #{ columnLength}
+                </if>
+                <if test="defaultValue!= null and defaultValue!='' ">
+                    and  defaultValue = #{ defaultValue}
+                </if>
+                <if test="columnType!= null and columnType!='' ">
+                    and  columnType = #{ columnType}
+                </if>
+                <if test="isKey!= null and isKey!='' ">
+                    and  isKey = #{ isKey}
+                </if>
+                <if test="isNotNull!= null and isNotNull!='' ">
+                    and  isNotNull = #{ isNotNull}
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                    and  autoIncrement = #{ autoIncrement}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+            <if test="tableColumnCode!= null and tableColumnCode!='' ">
+                and  tableColumnCode = #{tableColumnCode}
+            </if>
+            <if test="preColumn!= null and preColumn!='' ">
+                and  preColumn = #{preColumn}
+            </if>
+        </where>
+        order by id desc  limit #{pageSize}  offset  #{offset}
+    </select>
+
+    <select id="queryTableColumnPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*) from tb_yunlankeji_table_column
+        <where>
+                <if test="id!= null and id!='' ">
+                    and  id = #{ id}
+                </if>
+                <if test="tableName!= null and tableName!='' ">
+                    and  tableName = #{ tableName}
+                </if>
+                <if test="columnName!= null and columnName!='' ">
+                    and  columnName = #{ columnName}
+                </if>
+                <if test="columnDesc!= null and columnDesc!='' ">
+                    and  columnDesc = #{ columnDesc}
+                </if>
+                <if test="columnLength!= null and columnLength!='' ">
+                    and  columnLength = #{ columnLength}
+                </if>
+                <if test="defaultValue!= null and defaultValue!='' ">
+                    and  defaultValue = #{ defaultValue}
+                </if>
+                <if test="columnType!= null and columnType!='' ">
+                    and  columnType = #{ columnType}
+                </if>
+                <if test="isKey!= null and isKey!='' ">
+                    and  isKey = #{ isKey}
+                </if>
+                <if test="isNotNull!= null and isNotNull!='' ">
+                    and  isNotNull = #{ isNotNull}
+                </if>
+                <if test="autoIncrement!= null and autoIncrement!='' ">
+                    and  autoIncrement = #{ autoIncrement}
+                </if>
+                <if test="tableCode!= null and tableCode!='' ">
+                    and  tableCode = #{ tableCode}
+                </if>
+                <if test="seq!= null and seq!='' ">
+                    and  seq = #{ seq}
+                </if>
+            <if test="tableColumnCode!= null and tableColumnCode!='' ">
+                and  tableColumnCode = #{tableColumnCode}
+            </if>
+            <if test="preColumn!= null and preColumn!='' ">
+                and  preColumn = #{preColumn}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
+
